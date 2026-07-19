@@ -1,0 +1,33 @@
+{
+  "name": "obsidian-bible-reference-index",
+  "version": "0.2.1",
+  "description": "Índice leve de referências bíblicas para o Obsidian.",
+  "main": "main.js",
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs",
+    "test": "vitest run",
+    "lint": "eslint src tests",
+    "check": "tsc --noEmit && npm run lint && npm test && npm run build"
+  },
+  "keywords": [
+    "obsidian",
+    "bible",
+    "references",
+    "index"
+  ],
+  "author": "the_nights",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@typescript-eslint/parser": "^8.64.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-obsidianmd": "^0.4.1",
+    "obsidian": "^1.8.7",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}

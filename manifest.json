@@ -1,0 +1,9 @@
+{
+  "id": "bible-reference-index",
+  "name": "Bible Reference Index",
+  "version": "0.2.1",
+  "minAppVersion": "1.6.0",
+  "description": "Creates a lightweight index of Bible references and related notes.",
+  "author": "the_nights",
+  "isDesktopOnly": false
+}
