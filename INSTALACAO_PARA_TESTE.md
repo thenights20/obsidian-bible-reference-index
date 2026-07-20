@@ -1,7 +1,7 @@
 # Instalação para teste no Windows
 
 1. Feche o Obsidian.
-2. Extraia o arquivo `Indice_Nights_Instalacao_v0.5.1.zip`.
+2. Extraia o arquivo `Indice_Nights_Instalacao_v0.5.2.zip`.
 3. Copie a pasta `bible-reference-index` para:
 
    ```text

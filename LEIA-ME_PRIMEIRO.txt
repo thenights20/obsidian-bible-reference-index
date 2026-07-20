@@ -1,4 +1,4 @@
-INDICE NIGHTS — TESTE 0.5.1
+INDICE NIGHTS — TESTE 0.5.2
 
 O arquivo de instalação contém uma pasta chamada:
 

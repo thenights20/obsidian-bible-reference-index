@@ -1,7 +1,7 @@
 {
   "id": "bible-reference-index",
   "name": "Indice Nights",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "minAppVersion": "1.6.0",
   "description": "Cria um índice bíblico e organiza uma biblioteca pessoal de transcrições em português.",
   "author": "the_nights",

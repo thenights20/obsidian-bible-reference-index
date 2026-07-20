@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 0.5.2
+
+- Corrige a publicação pelo navegador quando arquivos antigos permanecem no repositório.
+- Publicação automática do release ao enviar alterações para a branch principal.
+
 ## 0.5.1
 
 - Documentação, descrições e interface tornadas neutras e voltadas ao uso pessoal.
