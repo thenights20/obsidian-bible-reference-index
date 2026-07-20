@@ -3,7 +3,10 @@ import type { BlockConfig, PluginSettings } from "./types";
 export const DEFAULT_SETTINGS: PluginSettings = {
   defaultFolder: "Discursos",
   defaultProperty: "textos",
-  pageSize: 75
+  pageSize: 75,
+  jwCatalog: [],
+  jwCatalogUpdatedAt: 0,
+  jwCategorySettings: {}
 };
 
 function cleanPath(value: string): string {

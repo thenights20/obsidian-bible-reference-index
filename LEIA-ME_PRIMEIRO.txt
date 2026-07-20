@@ -1,0 +1,46 @@
+ÍNDICE DE REFERÊNCIAS BÍBLICAS — TESTE 0.4.2
+
+O arquivo de instalação contém uma pasta chamada:
+
+    bible-reference-index
+
+COMO INSTALAR NO WINDOWS
+
+1. No Obsidian, desative temporariamente o plugin antigo.
+2. Feche completamente o Obsidian.
+3. Abra a pasta do seu cofre.
+4. Entre em .obsidian e depois em plugins.
+5. Copie para lá a pasta bible-reference-index deste pacote.
+6. Se o Windows perguntar, escolha substituir os três arquivos existentes.
+7. Abra o Obsidian novamente.
+8. Entre em Configurações > Plugins comunitários.
+9. Ative Índice de Referências Bíblicas.
+
+PRIMEIRO TESTE DAS TRANSCRIÇÕES
+
+1. Abra Configurações > Índice de Referências Bíblicas.
+2. Aguarde a lista de categorias aparecer.
+3. Marque somente uma subcategoria pequena no primeiro teste.
+4. Deixe a opção de pasta automática ou escolha outra pasta do seu cofre.
+5. Clique em Verificar e baixar.
+6. Abra a nota criada e confira título, propriedades, mini-índice e transcrição.
+7. Clique novamente em Verificar e baixar. A mesma nota deve ser ignorada.
+
+TESTE DA ATUALIZAÇÃO AUTOMÁTICA
+
+1. Abra uma transcrição e escreva uma referência bíblica em um parágrafo.
+2. Aguarde cerca de um segundo depois de terminar a edição.
+3. Confirme que a referência entrou na propriedade textos e no mini-índice.
+4. Abra a nota em modo de leitura e clique na referência para testar o JW Library.
+5. No índice geral, marque Pesquisar dentro do conteúdo das notas e pesquise uma palavra.
+
+O índice geral será criado automaticamente em:
+
+    00 - Índice Geral/Índice Geral de Textos Bíblicos.md
+
+Ao verificar uma coleção, o plugin também acrescenta o mini-índice às notas
+antigas daquela coleção que ainda não tenham esse recurso.
+
+O plugin não baixa vídeos. Ele baixa apenas as legendas disponíveis e cria
+notas Markdown locais. Esta versão ainda é de teste e não foi enviada ao
+GitHub.

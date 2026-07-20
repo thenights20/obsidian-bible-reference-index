@@ -12,11 +12,13 @@ interface SelectionStore {
 export class BibleIndexView extends MarkdownRenderChild {
   private selectedBook: string;
   private search = "";
+  private contentSearch = false;
   private visibleCount: number;
   private unsubscribe: (() => void) | null = null;
   private searchTimer: number | null = null;
   private summaryEl: HTMLElement | null = null;
   private resultsEl: HTMLElement | null = null;
+  private contentSearchRequest = 0;
 
   constructor(
     containerEl: HTMLElement,
@@ -92,6 +94,25 @@ export class BibleIndexView extends MarkdownRenderChild {
       }, 180);
     });
 
+    const mode = controls.createDiv({ cls: "bri-search-mode" });
+    const modeCheckbox = mode.createEl("input", {
+      attr: { id: `${this.selectionKey}-content-search`, type: "checkbox" }
+    });
+    const modeLabel = mode.createEl("label", {
+      text: "Pesquisar dentro do conteúdo das notas",
+      attr: { for: `${this.selectionKey}-content-search` }
+    });
+    modeLabel.createEl("small", { text: "Mostra uma frase de contexto para cada nota encontrada." });
+    modeCheckbox.addEventListener("change", () => {
+      this.contentSearch = modeCheckbox.checked;
+      this.visibleCount = this.config.pageSize;
+      select.disabled = this.contentSearch;
+      searchInput.placeholder = this.contentSearch
+        ? "Digite uma palavra ou expressão encontrada nas notas…"
+        : "Referência, discurso ou pasta em qualquer livro…";
+      this.refreshData();
+    });
+
     this.resultsEl = this.containerEl.createDiv({ cls: "bri-results" });
     this.refreshData();
   }
@@ -105,7 +126,7 @@ export class BibleIndexView extends MarkdownRenderChild {
   private renderSummary(): void {
     if (!this.summaryEl) return;
     const searching = this.search.trim().length > 0;
-    const snapshot = searching ? this.index.snapshotAll() : this.index.snapshot(this.selectedBook);
+    const snapshot = searching || this.contentSearch ? this.index.snapshotAll() : this.index.snapshot(this.selectedBook);
     this.summaryEl.empty();
     this.summaryEl.createEl("strong", { text: "Resumo do acervo" });
     const stats = this.summaryEl.createDiv({ cls: "bri-summary-stats" });
@@ -113,7 +134,9 @@ export class BibleIndexView extends MarkdownRenderChild {
     stats.createSpan({ text: `${snapshot.totalReferences} referências diferentes` });
     stats.createSpan({
       text: searching
-        ? `${searchReferences(snapshot.references, this.search).length} referências encontradas`
+        ? this.contentSearch
+          ? "pesquisa no conteúdo das notas"
+          : `${searchReferences(snapshot.references, this.search).length} referências encontradas`
         : `${snapshot.references.length} em ${this.selectedBook}`
     });
   }
@@ -129,6 +152,11 @@ export class BibleIndexView extends MarkdownRenderChild {
 
   private renderResults(): void {
     if (!this.resultsEl) return;
+    if (this.contentSearch) {
+      void this.renderContentResults();
+      return;
+    }
+    this.contentSearchRequest += 1;
     const searching = this.search.trim().length > 0;
     const snapshot = searching ? this.index.snapshotAll() : this.index.snapshot(this.selectedBook);
     const visible = searchReferences(snapshot.references, this.search);
@@ -163,6 +191,49 @@ export class BibleIndexView extends MarkdownRenderChild {
         this.visibleCount += this.config.pageSize;
         this.renderResults();
       });
+    }
+  }
+
+  private async renderContentResults(): Promise<void> {
+    if (!this.resultsEl) return;
+    const request = ++this.contentSearchRequest;
+    const query = this.search.trim();
+    this.resultsEl.empty();
+    if (!query) {
+      this.resultsEl.createEl("p", {
+        text: "Digite uma palavra ou expressão para pesquisar dentro das notas.",
+        cls: "bri-empty"
+      });
+      return;
+    }
+
+    this.resultsEl.createEl("p", { text: "Pesquisando no conteúdo das notas…", cls: "bri-empty" });
+    const matches = await this.index.searchNoteContents(query, 100);
+    if (request !== this.contentSearchRequest || !this.resultsEl) return;
+    this.resultsEl.empty();
+    this.resultsEl.createDiv({
+      text: `📝 ${matches.length} nota(s) encontrada(s) para “${query}”`,
+      cls: "bri-search-status"
+    });
+    if (matches.length === 0) {
+      this.resultsEl.createEl("p", { text: "Nenhuma frase correspondente foi encontrada.", cls: "bri-empty" });
+      return;
+    }
+
+    const list = this.resultsEl.createDiv({ cls: "bri-content-results" });
+    for (const match of matches) {
+      const card = list.createDiv({ cls: "bri-content-result" });
+      card.createSpan({ text: match.section, cls: "bri-content-section" });
+      const link = card.createEl("a", {
+        text: match.title,
+        cls: "internal-link bri-content-title",
+        attr: { href: match.path, "data-href": match.path }
+      });
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        void this.app.workspace.openLinkText(match.path, this.sourcePath, Keymap.isModEvent(event));
+      });
+      card.createEl("p", { text: match.sentence, cls: "bri-content-sentence" });
     }
   }
 

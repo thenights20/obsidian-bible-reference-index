@@ -19,6 +19,12 @@ const REFERENCE_PATTERN = new RegExp(
 
 const SINGLE_CHAPTER_BOOKS = new Set(["Obadias", "Filêmon", "2 João", "3 João", "Judas"]);
 
+export interface LocatedReference {
+  readonly reference: ParsedReference;
+  readonly start: number;
+  readonly end: number;
+}
+
 function flattenValues(value: unknown, output: string[], depth = 0): void {
   if (value == null || depth > 4) return;
   if (typeof value === "string" || typeof value === "number") {
@@ -39,41 +45,54 @@ function normalizeSuffix(value: string): string {
     .trim();
 }
 
+function parseMatch(match: RegExpMatchArray): ParsedReference | null {
+  const rawBook = match[1];
+  const firstNumber = match[2];
+  const secondNumber = match[3];
+  if (!rawBook || !firstNumber) return null;
+
+  const book = BOOK_BY_NORMALIZED_NAME.get(normalizeText(rawBook));
+  if (!book) return null;
+  if (!secondNumber && !SINGLE_CHAPTER_BOOKS.has(book.name)) return null;
+
+  const chapter = secondNumber ? Number.parseInt(firstNumber, 10) : 1;
+  const verse = Number.parseInt(secondNumber ?? firstNumber, 10);
+  if (!Number.isFinite(chapter) || !Number.isFinite(verse) || chapter < 1 || verse < 1) return null;
+
+  const suffix = normalizeSuffix(match[4] ?? "");
+  const display = secondNumber
+    ? `${book.name} ${chapter}:${verse}${suffix}`
+    : `${book.name} ${verse}${suffix}`;
+  const key = normalizeText(display).replace(/\s/g, "");
+  return { display, key, book: book.name, bookOrder: book.order, chapter, verse };
+}
+
+export function findReferencesInText(text: string): LocatedReference[] {
+  const locations: LocatedReference[] = [];
+  REFERENCE_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(REFERENCE_PATTERN)) {
+    const reference = parseMatch(match);
+    const rawBook = match[1];
+    if (!reference || !rawBook || match.index == null) continue;
+    const relativeStart = match[0].indexOf(rawBook);
+    if (relativeStart < 0) continue;
+    locations.push({
+      reference,
+      start: match.index + relativeStart,
+      end: match.index + match[0].length
+    });
+  }
+  return locations;
+}
+
 export function extractReferences(value: unknown): ParsedReference[] {
   const values: string[] = [];
   flattenValues(value, values);
   const found = new Map<string, ParsedReference>();
 
   for (const rawValue of values) {
-    REFERENCE_PATTERN.lastIndex = 0;
-    for (const match of rawValue.matchAll(REFERENCE_PATTERN)) {
-      const rawBook = match[1];
-      const firstNumber = match[2];
-      const secondNumber = match[3];
-      if (!rawBook || !firstNumber) continue;
-
-      const book = BOOK_BY_NORMALIZED_NAME.get(normalizeText(rawBook));
-      if (!book) continue;
-
-      if (!secondNumber && !SINGLE_CHAPTER_BOOKS.has(book.name)) continue;
-      const chapter = secondNumber ? Number.parseInt(firstNumber, 10) : 1;
-      const verse = Number.parseInt(secondNumber ?? firstNumber, 10);
-      if (!Number.isFinite(chapter) || !Number.isFinite(verse) || chapter < 1 || verse < 1) continue;
-
-      const suffix = normalizeSuffix(match[4] ?? "");
-      const display = secondNumber
-        ? `${book.name} ${chapter}:${verse}${suffix}`
-        : `${book.name} ${verse}${suffix}`;
-      const key = normalizeText(display).replace(/\s/g, "");
-
-      found.set(key, {
-        display,
-        key,
-        book: book.name,
-        bookOrder: book.order,
-        chapter,
-        verse
-      });
+    for (const location of findReferencesInText(rawValue)) {
+      found.set(location.reference.key, location.reference);
     }
   }
 

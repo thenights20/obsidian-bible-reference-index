@@ -21,6 +21,10 @@ export interface IndexedNote {
   readonly section: string;
 }
 
+export interface NoteContentMatch extends IndexedNote {
+  readonly sentence: string;
+}
+
 export interface ReferenceEntry extends ParsedReference {
   readonly notes: ReadonlyMap<string, IndexedNote>;
 }
@@ -52,4 +56,35 @@ export interface PluginSettings {
   defaultFolder: string;
   defaultProperty: string;
   pageSize: number;
+  jwCatalog: JwCatalogItem[];
+  jwCatalogUpdatedAt: number;
+  jwCategorySettings: Record<string, JwCategorySetting>;
+}
+
+export interface JwCategorySetting {
+  enabled: boolean;
+  folder: string;
+}
+
+export interface JwCatalogItem {
+  key: string;
+  name: string;
+  type: "container" | "ondemand";
+  parentKey: string | null;
+  path: string[];
+}
+
+export interface JwMediaFile {
+  label: string | null;
+  subtitles?: {
+    url: string;
+  };
+}
+
+export interface JwMediaItem {
+  naturalKey: string;
+  languageAgnosticNaturalKey: string;
+  title: string;
+  firstPublished?: string;
+  files: JwMediaFile[];
 }

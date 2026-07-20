@@ -1,6 +1,15 @@
 import type { App, TFile } from "obsidian";
+import { normalizeText } from "./books";
 import { extractReferences } from "./references";
-import type { IndexConfig, IndexedNote, IndexSnapshot, NoteRecord, ParsedReference, ReferenceEntry } from "./types";
+import type {
+  IndexConfig,
+  IndexedNote,
+  IndexSnapshot,
+  NoteContentMatch,
+  NoteRecord,
+  ParsedReference,
+  ReferenceEntry
+} from "./types";
 
 interface MutableReference extends ParsedReference {
   notes: Map<string, IndexedNote>;
@@ -24,6 +33,7 @@ class BibleIndex {
   private readonly notes = new Map<string, NoteRecord>();
   private readonly referencesByBook = new Map<string, Map<string, MutableReference>>();
   private readonly listeners = new Set<() => void>();
+  private readonly contentCache = new Map<string, readonly string[]>();
   private initialized = false;
 
   constructor(private readonly app: App, readonly config: IndexConfig) {}
@@ -51,6 +61,7 @@ class BibleIndex {
   }
 
   updateFile(file: TFile): boolean {
+    this.contentCache.delete(file.path);
     const existed = this.notes.has(file.path);
     if (!this.accepts(file.path)) {
       if (existed) this.removePath(file.path);
@@ -63,6 +74,7 @@ class BibleIndex {
   }
 
   removePath(path: string): boolean {
+    this.contentCache.delete(path);
     const record = this.notes.get(path);
     if (!record) return false;
 
@@ -105,6 +117,30 @@ class BibleIndex {
     );
 
     return this.createSnapshot(references);
+  }
+
+  async searchNoteContents(search: string, limit = 100): Promise<NoteContentMatch[]> {
+    this.ensureInitialized();
+    const query = normalizeText(search);
+    if (!query) return [];
+
+    const records = [...this.notes.values()];
+    const matches: NoteContentMatch[] = [];
+    const batchSize = 24;
+    for (let start = 0; start < records.length && matches.length < limit; start += batchSize) {
+      const batch = records.slice(start, start + batchSize);
+      const contents = await Promise.all(batch.map((record) => this.sentencesFor(record.file)));
+      for (let index = 0; index < batch.length && matches.length < limit; index += 1) {
+        const record = batch[index];
+        const sentences = contents[index];
+        if (!record || !sentences) continue;
+        const sentence = sentences.find((item) => normalizeText(item).includes(query));
+        if (sentence) matches.push({ ...record.note, sentence });
+      }
+    }
+    return matches.sort((a, b) =>
+      a.section.localeCompare(b.section, "pt-BR") || a.title.localeCompare(b.title, "pt-BR")
+    );
   }
 
   private sortedReferences(references: Iterable<MutableReference>): ReferenceEntry[] {
@@ -163,6 +199,32 @@ class BibleIndex {
       }
       entry.notes.set(file.path, note);
     }
+  }
+
+  private async sentencesFor(file: TFile): Promise<readonly string[]> {
+    const cached = this.contentCache.get(file.path);
+    if (cached) return cached;
+    const markdown = await this.app.vault.cachedRead(file);
+    const plainText = markdown
+      .replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "")
+      .replace(/<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->/g, "")
+      .replace(/```[\s\S]*?```/g, " ")
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/\[\[[^\]|]+\|([^\]]+)\]\]/g, "$1")
+      .replace(/\[\[([^\]]+)\]\]/g, "$1")
+      .replace(/^\^[-\w]+\s*$/gm, "")
+      .replace(/^#{1,6}\s+/gm, "")
+      .replace(/^>\s?/gm, "")
+      .replace(/[*_~`]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const sentences = (plainText.match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g) ?? [])
+      .map((sentence) => sentence.trim())
+      .filter(Boolean)
+      .map((sentence) => sentence.length > 320 ? `${sentence.slice(0, 317).trimEnd()}…` : sentence);
+    this.contentCache.set(file.path, sentences);
+    return sentences;
   }
 }
 

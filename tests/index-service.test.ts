@@ -9,20 +9,23 @@ beforeAll(() => {
 interface FakeNote {
   file: TFile;
   frontmatter: Record<string, unknown>;
+  content: string;
 }
 
-function fakeNote(path: string, textos?: unknown): FakeNote {
+function fakeNote(path: string, textos?: unknown, content = ""): FakeNote {
   const basename = path.split("/").at(-1)?.replace(/\.md$/i, "") ?? path;
   return {
     file: { path, basename } as TFile,
-    frontmatter: textos === undefined ? {} : { textos }
+    frontmatter: textos === undefined ? {} : { textos },
+    content
   };
 }
 
 function fakeApp(notes: FakeNote[]): App {
   return {
     vault: {
-      getMarkdownFiles: () => notes.map((note) => note.file)
+      getMarkdownFiles: () => notes.map((note) => note.file),
+      cachedRead: (file: TFile) => Promise.resolve(notes.find((note) => note.file.path === file.path)?.content ?? "")
     },
     metadataCache: {
       getFileCache: (file: TFile) => {
@@ -66,5 +69,20 @@ describe("BibleIndexManager", () => {
     note.frontmatter.textos = ["Rute 2:2"];
     manager.updateFile(note.file);
     expect(index.snapshot("Rute").references.map((reference) => reference.display)).toEqual(["Rute 2:2"]);
+  });
+
+  it("pesquisa dentro das notas e retorna somente uma frase de contexto", async () => {
+    const notes = [
+      fakeNote(
+        "Discursos/Adoração/A.md",
+        ["João 3:16"],
+        "# Discurso\n\nA primeira frase não interessa. Jesus demonstrou profundo amor pelas pessoas. Esta é outra frase."
+      )
+    ];
+    const manager = new BibleIndexManager(fakeApp(notes));
+    const index = manager.get({ folder: "Discursos", property: "textos" });
+    const matches = await index.searchNoteContents("profundo amor");
+    expect(matches).toHaveLength(1);
+    expect(matches[0]?.sentence).toBe("Jesus demonstrou profundo amor pelas pessoas.");
   });
 });

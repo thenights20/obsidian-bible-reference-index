@@ -48,6 +48,32 @@
   min-height: var(--input-height);
 }
 
+.bri-search-mode {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 0.7rem 0.8rem;
+}
+
+.bri-search-mode input {
+  margin-top: 0.2rem;
+}
+
+.bri-search-mode label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  cursor: pointer;
+}
+
+.bri-search-mode small {
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
 .bri-results h2 {
   margin-block: 0.75rem;
 }
@@ -89,6 +115,99 @@
   font-style: italic;
 }
 
+.bri-content-results {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.bri-content-result {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+  padding: 0.85rem 1rem;
+}
+
+.bri-content-section {
+  display: block;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  margin-bottom: 0.2rem;
+}
+
+.bri-content-title {
+  font-weight: var(--font-semibold);
+}
+
+.bri-content-sentence {
+  margin: 0.5rem 0 0;
+  color: var(--text-normal);
+  line-height: 1.5;
+}
+
+.bri-catalog-status {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  margin-block: 0.75rem;
+}
+
+.bri-catalog-settings {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: 0.5rem 1rem;
+}
+
+.bri-catalog-settings .setting-item {
+  align-items: center;
+}
+
+.bri-catalog-settings .setting-item-control {
+  flex-wrap: wrap;
+}
+
+.bri-catalog-settings select {
+  max-width: min(24rem, 100%);
+}
+
+.callout[data-callout="bible-index"] {
+  --callout-color: var(--interactive-accent-rgb);
+  --callout-icon: lucide-book-open-text;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary-alt);
+  box-shadow: none;
+  margin-block: 1rem 1.25rem;
+}
+
+.callout[data-callout="bible-index"] .callout-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-semibold);
+}
+
+.callout[data-callout="bible-index"] .callout-content {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  line-height: 1.8;
+}
+
+.callout[data-callout="bible-index"] .callout-content p {
+  margin: 0;
+}
+
+.callout[data-callout="bible-index"] .internal-link {
+  color: var(--text-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.callout[data-callout="bible-index"] .internal-link:hover {
+  text-decoration: underline;
+}
+
+.bri-category-heading {
+  margin-block: 1rem 0.35rem;
+}
+
 @media (max-width: 600px) {
   .bri-controls {
     grid-template-columns: 1fr;
@@ -102,5 +221,19 @@
   .bri-reference-list,
   .bri-note-list {
     padding-inline-start: 1.15rem;
+  }
+
+  .bri-catalog-settings {
+    padding-inline: 0.65rem;
+  }
+
+  .bri-catalog-settings .setting-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .bri-catalog-settings .setting-item-control {
+    justify-content: flex-start;
+    width: 100%;
   }
 }

@@ -1,20 +1,69 @@
-# Bible Reference Index
+# Índice de Referências Bíblicas
 
-Plugin comunitário para o Obsidian que cria um índice leve das referências bíblicas cadastradas nas propriedades das notas.
+Plugin comunitário para o Obsidian que cria um índice leve das referências bíblicas e uma biblioteca local de transcrições em português do Brasil.
 
 ## Recursos
 
 - Menu com os 66 livros em ordem bíblica.
-- Pesquisa por referência, nome do discurso ou subpasta.
-- Pesquisa global integrada em todos os 66 livros.
+- Pesquisa global por referência, nome do discurso ou subpasta.
 - Links internos para as notas relacionadas.
-- Atualização automática ao criar, alterar, renomear ou excluir notas.
+- Atualização automática do índice ao criar, alterar, renomear ou excluir notas.
 - Seleção do livro armazenada localmente em cada aparelho.
-- Renderização progressiva para acervos grandes e dispositivos móveis.
-- Interface responsiva projetada para desktop e dispositivos móveis.
-- Não depende de Dataview ou Meta Bind.
+- Sete coleções organizadas: Discursos de Nosso Estúdio, Adorações Matinais, Formaturas de Gileade, Reuniões Anuais e Congressos de 2020, 2021 e 2022.
+- Escolha das coleções e, opcionalmente, das pastas de destino em cada aparelho.
+- Download somente das transcrições novas; notas existentes são reconhecidas por `id_jw`.
+- Criação de notas em Markdown com propriedades prontas.
+- Mini-índice em ordem bíblica dentro da transcrição, com links para os parágrafos citados.
+- Pasta e nota do índice geral criadas automaticamente.
+- Referências escritas no conteúdo transformadas em links para o JW Library.
+- Propriedade `textos` e mini-índice atualizados automaticamente ao editar a nota.
+- Pesquisa no conteúdo completo das notas, com uma frase de contexto por resultado.
+- Compatível com computador e dispositivos móveis.
+- Não depende de Dataview nem Meta Bind.
 
-## Como usar
+## Propriedades das transcrições
+
+Uma nota baixada pode conter:
+
+```yaml
+---
+id_jw: "jwb-139_T_2"
+orador: "Robert Luccioni"
+data_publicacao: 2026-07-07
+textos:
+  - "João 3:16"
+---
+```
+
+`orador` só é incluído quando o nome puder ser identificado com segurança. `data_publicacao` só é incluída quando o servidor oficial fornecer uma data válida. As propriedades `categoria` e `subcategoria` não são utilizadas, pois a organização já está representada pelas pastas.
+
+Quando uma referência é escrita ou apagada no corpo da nota, o plugin sincroniza automaticamente a propriedade `textos` e o mini-índice. Referências duplicadas são eliminadas.
+
+## Como baixar transcrições
+
+1. Abra `Configurações → Índice de Referências Bíblicas`.
+2. Ative apenas as coleções desejadas.
+3. Se quiser, escolha uma pasta personalizada. Se não escolher, o plugin cria a pasta automaticamente.
+4. Confira a organização indicada abaixo do nome de cada coleção.
+5. Clique em **Verificar e baixar**.
+
+O plugin não baixa vídeos. Ele baixa somente a legenda disponível e cria uma nota local. Uma transcrição já existente não é baixada novamente.
+
+Ao verificar uma coleção, notas antigas que ainda não possuem mini-índice recebem os links internos sem que as palavras da transcrição sejam reescritas.
+
+## Índice geral automático
+
+O plugin cria automaticamente:
+
+```text
+00 - Índice Geral/Índice Geral de Textos Bíblicos.md
+```
+
+Essa nota contém o índice interativo completo, com os 66 livros em ordem bíblica, pesquisa global, pesquisa dentro das notas, contagem de notas, referências e links para os discursos relacionados.
+
+Na pesquisa do conteúdo, marque **Pesquisar dentro do conteúdo das notas**. Cada resultado mostra o título e somente uma frase em que a palavra foi encontrada.
+
+## Como criar outro índice manualmente
 
 Crie uma nota e adicione:
 
@@ -27,18 +76,7 @@ propriedade: textos
 ```
 ````
 
-O plugin procura arquivos Markdown dentro da pasta informada, incluindo todas as subpastas. A propriedade pode ser uma lista YAML:
-
-```yaml
----
-textos:
-  - João 3:16
-  - Salmos 119:160
-  - 1 Tessalonicenses 5:21
----
-```
-
-Também é possível personalizar o título e a quantidade inicial de referências:
+Também é possível personalizar:
 
 ````markdown
 ```indice-biblico
@@ -50,21 +88,11 @@ quantidade: 75
 ```
 ````
 
-O título interno fica oculto por padrão para não duplicar o título da nota. Para exibi-lo, adicione `exibir-titulo: sim` ao bloco.
+## Seleção independente por aparelho
 
-## Seleção por aparelho
+Escolher um livro não modifica a nota nem suas propriedades. A seleção fica guardada no próprio aparelho. Assim, duas pessoas podem consultar livros diferentes sem criar conflito de sincronização.
 
-Escolher um livro não modifica a nota nem o frontmatter. A seleção fica armazenada no próprio aparelho. Dessa forma, dois aparelhos podem abrir a mesma nota e consultar livros diferentes sem gerar conflitos de sincronização.
-
-## Instalação para testes com BRAT
-
-1. Instale e ative o plugin comunitário **BRAT**.
-2. Abra a paleta de comandos.
-3. Execute `BRAT: Add a beta plugin for testing`.
-4. Informe o endereço do repositório deste plugin.
-5. Ative **Bible Reference Index** em `Configurações → Plugins comunitários`.
-
-## Instalação manual
+## Instalação manual para teste
 
 Copie `main.js`, `manifest.json` e `styles.css` para:
 
@@ -72,11 +100,11 @@ Copie `main.js`, `manifest.json` e `styles.css` para:
 SEU_COFRE/.obsidian/plugins/bible-reference-index/
 ```
 
-Reinicie o Obsidian e ative o plugin.
+Reinicie o Obsidian e ative **Índice de Referências Bíblicas** em `Configurações → Plugins comunitários`.
 
 ## Privacidade
 
-O plugin funciona inteiramente dentro do Obsidian. Ele não envia notas, propriedades ou pesquisas para serviços externos.
+As notas e escolhas permanecem no cofre local. Ao atualizar categorias ou baixar uma transcrição, o plugin consulta os servidores públicos usados pelo JW.ORG.
 
 ## Licença
 

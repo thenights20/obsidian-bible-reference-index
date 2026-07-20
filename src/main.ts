@@ -3,6 +3,9 @@ import { DEFAULT_SETTINGS, parseBlockConfig } from "./config";
 import { BibleIndexManager } from "./index-service";
 import { BibleIndexView, type SelectionStore } from "./index-view";
 import { BibleIndexSettingTab } from "./settings";
+import { JwTranscriptService } from "./jw-service";
+import { NoteSyncService } from "./note-sync";
+import { linkBibleReferences } from "./scripture-links";
 import type { PluginSettings } from "./types";
 
 const STORAGE_PREFIX = "bible-reference-index:selection:";
@@ -31,12 +34,29 @@ class DeviceSelectionStore implements SelectionStore {
 export default class BibleReferenceIndexPlugin extends Plugin {
   settings: PluginSettings = { ...DEFAULT_SETTINGS };
   private indexManager!: BibleIndexManager;
+  transcriptService!: JwTranscriptService;
+  private noteSyncService!: NoteSyncService;
   private readonly selections = new DeviceSelectionStore();
 
   async onload(): Promise<void> {
     await this.loadSettings();
     this.indexManager = new BibleIndexManager(this.app);
+    this.noteSyncService = new NoteSyncService(this.app);
+    this.transcriptService = new JwTranscriptService(
+      this.app,
+      this.settings,
+      (file) => this.noteSyncService.syncFile(file)
+    );
     this.addSettingTab(new BibleIndexSettingTab(this.app, this));
+    await this.transcriptService.ensureGeneralIndex();
+
+    this.addCommand({
+      id: "baixar-novas-transcricoes",
+      name: "Baixar novas transcrições selecionadas",
+      callback: () => {
+        void this.transcriptService.downloadEnabled();
+      }
+    });
 
     this.registerMarkdownCodeBlockProcessor("indice-biblico", (source, el, context) => {
       const config = parseBlockConfig(source, this.settings);
@@ -55,8 +75,16 @@ export default class BibleReferenceIndexPlugin extends Plugin {
       ));
     });
 
+    this.registerMarkdownPostProcessor((element) => {
+      linkBibleReferences(element);
+    });
+
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
       this.indexManager.updateFile(file);
+    }));
+
+    this.registerEvent(this.app.vault.on("modify", (file) => {
+      if (file instanceof TFile) this.noteSyncService.schedule(file);
     }));
 
     this.registerEvent(this.app.vault.on("delete", (file) => {
@@ -66,6 +94,17 @@ export default class BibleReferenceIndexPlugin extends Plugin {
     this.registerEvent(this.app.vault.on("rename", (file, oldPath) => {
       if (file instanceof TFile) this.indexManager.renameFile(file, oldPath);
     }));
+
+    this.registerEvent(this.app.workspace.on("file-open", (file) => {
+      if (file) this.noteSyncService.schedule(file);
+    }));
+
+    const activeFile = this.app.workspace.getActiveFile();
+    if (activeFile) this.noteSyncService.schedule(activeFile);
+  }
+
+  onunload(): void {
+    this.noteSyncService?.unload();
   }
 
   async saveSettings(): Promise<void> {

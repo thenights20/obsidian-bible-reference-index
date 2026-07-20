@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { BIBLE_BOOKS } from "../src/books";
-import { extractReferences } from "../src/references";
+import { extractReferences, findReferencesInText } from "../src/references";
 
 describe("extractReferences", () => {
   it("recognizes full Portuguese book names", () => {
@@ -55,5 +55,12 @@ describe("extractReferences", () => {
   it("recognizes verse-only references in single-chapter books", () => {
     const refs = extractReferences(["Obadias 3", "2 João 5", "Judas 3-5"]);
     expect(refs.map((ref) => ref.display)).toEqual(["Obadias 3", "2 João 5", "Judas 3–5"]);
+  });
+
+  it("localiza exatamente o trecho que deve se tornar link", () => {
+    const text = "Leia João 3:16 e depois continue.";
+    const location = findReferencesInText(text)[0];
+    expect(text.slice(location?.start, location?.end)).toBe("João 3:16");
+    expect(location?.reference.bookOrder).toBe(42);
   });
 });

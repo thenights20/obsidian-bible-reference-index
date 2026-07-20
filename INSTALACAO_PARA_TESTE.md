@@ -1,7 +1,7 @@
 # Instalação para teste no Windows
 
 1. Feche o Obsidian.
-2. Extraia o arquivo `Indice_Biblico_Instalacao_v0.2.1.zip`.
+2. Extraia o arquivo `Indice_Transcricoes_Instalacao_v0.4.2.zip`.
 3. Copie a pasta `bible-reference-index` para:
 
    ```text
@@ -10,7 +10,7 @@
 
 4. Abra o Obsidian.
 5. Entre em `Configurações → Plugins comunitários`.
-6. Ative **Bible Reference Index**.
+6. Ative **Índice de Referências Bíblicas**.
 7. Copie `Exemplo_Indice_Biblico.md` para qualquer pasta do cofre e abra a nota.
 
 Se a pasta `.obsidian` não aparecer no Explorador de Arquivos, ative a exibição de itens ocultos no Windows.
@@ -22,6 +22,9 @@ Se a pasta `.obsidian` não aparecer no Explorador de Arquivos, ative a exibiç�
 - Abra alguns discursos pelos links exibidos.
 - Adicione uma referência à propriedade `textos` de uma nota e confirme a atualização automática.
 - Feche e abra o Obsidian para confirmar que o último livro selecionado foi mantido.
+- Abra as configurações do plugin e aguarde a lista automática de categorias.
+- Marque uma subcategoria, escolha uma pasta e clique em **Verificar e baixar**.
+- Confirme que uma nota já baixada não é baixada novamente.
 
 ## Antes do teste no iPad
 

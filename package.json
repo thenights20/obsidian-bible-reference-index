@@ -1,7 +1,7 @@
 {
   "name": "obsidian-bible-reference-index",
-  "version": "0.2.1",
-  "description": "Índice leve de referências bíblicas para o Obsidian.",
+  "version": "0.4.2",
+  "description": "Índice bíblico e biblioteca local de transcrições em português para o Obsidian.",
   "main": "main.js",
   "scripts": {
     "build": "node esbuild.config.mjs production",
@@ -12,9 +12,10 @@
   },
   "keywords": [
     "obsidian",
-    "bible",
-    "references",
-    "index"
+    "biblia",
+    "referencias",
+    "indice",
+    "transcricoes"
   ],
   "author": "the_nights",
   "license": "MIT",
