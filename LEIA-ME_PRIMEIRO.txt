@@ -14,11 +14,11 @@ COMO INSTALAR NO WINDOWS
 6. Se o Windows perguntar, escolha substituir os três arquivos existentes.
 7. Abra o Obsidian novamente.
 8. Entre em Configurações > Plugins comunitários.
-9. Ative Indice Nights.
+9. Ative Índice Nights.
 
 PRIMEIRO TESTE DAS TRANSCRIÇÕES
 
-1. Abra Configurações > Indice Nights.
+1. Abra Configurações > Índice Nights.
 2. Aguarde a lista de categorias aparecer.
 3. Marque somente uma subcategoria pequena no primeiro teste.
 4. Deixe a opção de pasta automática ou escolha outra pasta do seu cofre.
@@ -47,7 +47,7 @@ notas Markdown locais.
 TESTE DA PASTA PÚBLICA
 
 1. No Google Drive, deixe a pasta como Qualquer pessoa com o link > Leitor.
-2. Em Configurações > Indice Nights, cole o link da pasta pública.
+2. Em Configurações > Índice Nights, cole o link da pasta pública.
 3. Escolha uma pasta de destino ou mantenha Discursos/Importados.
 4. Clique em Verificar e baixar.
 5. O plugin aceita TXT, Markdown e Documentos Google, inclusive em subpastas.

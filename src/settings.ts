@@ -42,6 +42,20 @@ export class IndiceNightsSettingTab extends PluginSettingTab {
       .setName("Transcrições de uma pasta pública")
       .setHeading();
 
+    new Setting(containerEl)
+      .setName("Miniaturas ausentes")
+      .setDesc("Baixa e acrescenta a imagem de apresentação às transcrições já existentes das coleções ativadas.")
+      .addButton((button) => button
+        .setButtonText("Atualizar miniaturas")
+        .onClick(async () => {
+          button.setDisabled(true);
+          try {
+            await this.plugin.transcriptService.updateMissingThumbnails();
+          } finally {
+            button.setDisabled(false);
+          }
+        }));
+
     containerEl.createEl("p", {
       text: "Cole o link de uma pasta pública do Google Drive. O plugin lê arquivos TXT, Markdown e Documentos Google sem login e mantém as subpastas.",
       cls: "setting-item-description"
@@ -96,6 +110,17 @@ export class IndiceNightsSettingTab extends PluginSettingTab {
         .setButtonText("Criar ou localizar índice")
         .onClick(async () => {
           await this.plugin.transcriptService.ensureGeneralIndex(true, true);
+        }));
+
+    new Setting(containerEl)
+      .setName("Modo de consulta")
+      .setDesc("Mantém Discursos em leitura, com um botão flutuante para editar. O Índice Geral permanece sempre bloqueado.")
+      .addToggle((toggle) => toggle
+        .setValue(this.plugin.settings.consultationMode)
+        .onChange(async (enabled) => {
+          this.plugin.settings.consultationMode = enabled;
+          await this.plugin.saveSettings();
+          this.plugin.refreshConsultationMode();
         }));
   }
 

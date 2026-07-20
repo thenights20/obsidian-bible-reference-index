@@ -1,4 +1,4 @@
-# Indice Nights
+# Índice Nights
 
 Plugin comunitário para o Obsidian que cria um índice leve das referências bíblicas e uma biblioteca local de transcrições em português do Brasil.
 
@@ -43,7 +43,7 @@ Quando uma referência é escrita ou apagada no corpo da nota, o plugin sincroni
 
 ## Como baixar transcrições
 
-1. Abra `Configurações → Indice Nights`.
+1. Abra `Configurações → Índice Nights`.
 2. Ative apenas as coleções desejadas.
 3. Se quiser, escolha uma pasta personalizada. Se não escolher, o plugin cria a pasta automaticamente.
 4. Confira a organização indicada abaixo do nome de cada coleção.
@@ -56,7 +56,7 @@ Ao verificar uma coleção, notas antigas que ainda não possuem mini-índice re
 ## Como importar uma pasta pública
 
 1. No Google Drive, compartilhe a pasta como **Qualquer pessoa com o link → Leitor**.
-2. Abra `Configurações → Indice Nights`.
+2. Abra `Configurações → Índice Nights`.
 3. Cole o link em **Transcrições de uma pasta pública**.
 4. Escolha uma pasta de destino ou deixe a opção automática `Discursos/Importados`.
 5. Clique em **Verificar e baixar**.
@@ -112,7 +112,7 @@ Copie `main.js`, `manifest.json` e `styles.css` para:
 SEU_COFRE/.obsidian/plugins/bible-reference-index/
 ```
 
-Reinicie o Obsidian e ative **Indice Nights** em `Configurações → Plugins comunitários`.
+Reinicie o Obsidian e ative **Índice Nights** em `Configurações → Plugins comunitários`.
 
 O identificador técnico e a pasta de instalação continuam sendo `bible-reference-index`. Isso preserva as atualizações das instalações existentes; mudar esse identificador faria o Obsidian tratar a atualização como outro plugin.
 

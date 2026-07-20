@@ -24,7 +24,7 @@ __export(main_exports, {
   default: () => IndiceNightsPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian5 = require("obsidian");
+var import_obsidian7 = require("obsidian");
 
 // src/config.ts
 var DEFAULT_SETTINGS = {
@@ -33,7 +33,8 @@ var DEFAULT_SETTINGS = {
   pageSize: 75,
   remoteDriveUrl: "",
   remoteDriveFolder: "",
-  categorySettings: {}
+  categorySettings: {},
+  consultationMode: true
 };
 function cleanPath(value) {
   return value.trim().replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
@@ -765,6 +766,14 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
       }
     }));
     new import_obsidian2.Setting(containerEl).setName("Transcri\xE7\xF5es de uma pasta p\xFAblica").setHeading();
+    new import_obsidian2.Setting(containerEl).setName("Miniaturas ausentes").setDesc("Baixa e acrescenta a imagem de apresenta\xE7\xE3o \xE0s transcri\xE7\xF5es j\xE1 existentes das cole\xE7\xF5es ativadas.").addButton((button) => button.setButtonText("Atualizar miniaturas").onClick(async () => {
+      button.setDisabled(true);
+      try {
+        await this.plugin.transcriptService.updateMissingThumbnails();
+      } finally {
+        button.setDisabled(false);
+      }
+    }));
     containerEl.createEl("p", {
       text: "Cole o link de uma pasta p\xFAblica do Google Drive. O plugin l\xEA arquivos TXT, Markdown e Documentos Google sem login e mant\xE9m as subpastas.",
       cls: "setting-item-description"
@@ -795,6 +804,11 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
     }));
     new import_obsidian2.Setting(containerEl).setName("\xCDndice geral").setDesc("O plugin cria automaticamente a nota \u201C00 - \xCDndice Geral/\xCDndice Geral de Textos B\xEDblicos\u201D. O prefixo mant\xE9m a pasta no topo do Explorador.").addButton((button) => button.setButtonText("Criar ou localizar \xEDndice").onClick(async () => {
       await this.plugin.transcriptService.ensureGeneralIndex(true, true);
+    }));
+    new import_obsidian2.Setting(containerEl).setName("Modo de consulta").setDesc("Mant\xE9m Discursos em leitura, com um bot\xE3o flutuante para editar. O \xCDndice Geral permanece sempre bloqueado.").addToggle((toggle) => toggle.setValue(this.plugin.settings.consultationMode).onChange(async (enabled) => {
+      this.plugin.settings.consultationMode = enabled;
+      await this.plugin.saveSettings();
+      this.plugin.refreshConsultationMode();
     }));
   }
   renderCatalog(container) {
@@ -830,49 +844,6 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
 
 // src/transcript-source-service.ts
 var import_obsidian3 = require("obsidian");
-
-// src/scripture-links.ts
-function bibleAppUrl(reference) {
-  const book = String(reference.bookOrder + 1).padStart(2, "0");
-  const chapter = String(reference.chapter).padStart(3, "0");
-  const verse = String(reference.verse).padStart(3, "0");
-  return `jwlibrary:///finder?wtlocale=T&bible=${book}${chapter}${verse}`;
-}
-function shouldIgnore(node) {
-  const parent = node.parentElement;
-  return !parent || Boolean(parent.closest(
-    "a, code, pre, script, style, textarea, .bri-root, .metadata-container, .frontmatter"
-  ));
-}
-function linkBibleReferences(container) {
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
-  const nodes = [];
-  let current = walker.nextNode();
-  while (current) {
-    if (current.instanceOf(Text) && !shouldIgnore(current)) nodes.push(current);
-    current = walker.nextNode();
-  }
-  for (const node of nodes) {
-    const text = node.data;
-    const locations = findReferencesInText(text);
-    if (locations.length === 0) continue;
-    const fragment = createFragment();
-    let cursor = 0;
-    for (const location of locations) {
-      if (location.start < cursor) continue;
-      fragment.append(text.slice(cursor, location.start));
-      const link = createEl("a");
-      link.className = "bri-scripture-link";
-      link.href = bibleAppUrl(location.reference);
-      link.textContent = text.slice(location.start, location.end);
-      link.title = `Abrir ${location.reference.display} no aplicativo da B\xEDblia`;
-      fragment.append(link);
-      cursor = location.end;
-    }
-    fragment.append(text.slice(cursor));
-    node.replaceWith(fragment);
-  }
-}
 
 // src/transcript.ts
 var INVALID_FILE_CHARS = /[<>:"/\\|?*]/g;
@@ -962,23 +933,6 @@ function canContainSpokenReference(block) {
 function protectedMiniIndexLabel(display) {
   return display.replace(/^((?:[123]\s+)?\p{L})/u, "$1\u2060");
 }
-function linkReferencesInMarkdown(block) {
-  const protectedRanges = [...block.matchAll(/\[[^\]]+\]\([^)]+\)|\[\[[^\]]+\]\]|`[^`]*`/g)].filter((match) => match.index != null).map((match) => ({ start: match.index, end: match.index + match[0].length }));
-  const locations = findReferencesInText(block);
-  if (locations.length === 0) return block;
-  let output = "";
-  let cursor = 0;
-  for (const location of locations) {
-    const alreadyLinked = protectedRanges.some((range) => location.start >= range.start && location.end <= range.end);
-    if (alreadyLinked || location.start < cursor) continue;
-    output += block.slice(cursor, location.start);
-    const original = block.slice(location.start, location.end);
-    output += `[${original}](${bibleAppUrl(location.reference)})`;
-    cursor = location.end;
-  }
-  if (cursor === 0) return block;
-  return output + block.slice(cursor);
-}
 function synchronizeMiniIndex(content) {
   var _a, _b;
   const frontmatterMatch = /^---\s*\n[\s\S]*?\n---\s*\n?/.exec(content);
@@ -997,7 +951,7 @@ function synchronizeMiniIndex(content) {
     for (const reference of references2) {
       if (!referenceTargets.has(reference.key)) referenceTargets.set(reference.key, blockId);
     }
-    return `${linkReferencesInMarkdown(block.trim())}
+    return `${block.trim()}
 ^${blockId}`;
   });
   const references = extractReferences(allReferenceValues);
@@ -1022,7 +976,7 @@ function synchronizeMiniIndex(content) {
 function yamlString(value) {
   return JSON.stringify(value);
 }
-function criarNotaTranscricao(media, vtt) {
+function criarNotaTranscricao(media, vtt, thumbnailPath) {
   var _a, _b, _c;
   const paragraphs = vttParaParagrafos(vtt);
   const transcript = paragraphs.join("\n\n");
@@ -1042,6 +996,7 @@ function criarNotaTranscricao(media, vtt) {
     "",
     `# ${media.title}`,
     "",
+    ...thumbnailPath ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`, ""] : [],
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";
   return synchronizeMiniIndex(base).content;
@@ -1053,6 +1008,7 @@ var LOCALE_PT_BR = "T";
 var GENERAL_INDEX_FOLDER = "00 - \xCDndice Geral";
 var LEGACY_GENERAL_INDEX_FOLDER = "\xCDndice Geral";
 var GENERAL_INDEX_FILENAME = "\xCDndice Geral de Textos B\xEDblicos.md";
+var THUMBNAIL_FOLDER = "Anexos/\xCDndice Nights/Miniaturas";
 function wait(milliseconds) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 }
@@ -1082,6 +1038,20 @@ function subtitleUrl(media) {
     var _a2;
     return (_a2 = file.subtitles) == null ? void 0 : _a2.url;
   })) == null ? void 0 : _a.subtitles) == null ? void 0 : _b.url) != null ? _c : null;
+}
+function imageCandidates(value, output = []) {
+  if (typeof value === "string" && /^https?:\/\//i.test(value) && /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(value)) {
+    output.push(value);
+  } else if (Array.isArray(value)) {
+    for (const child of value) imageCandidates(child, output);
+  } else if (typeof value === "object" && value !== null) {
+    for (const child of Object.values(value)) imageCandidates(child, output);
+  }
+  return output;
+}
+function thumbnailUrl(media) {
+  var _a;
+  return (_a = imageCandidates(media.images).at(-1)) != null ? _a : null;
 }
 var SourceTranscriptService = class {
   constructor(app, settings, syncNote) {
@@ -1134,7 +1104,8 @@ var SourceTranscriptService = class {
           }
           try {
             const vtt = (await (0, import_obsidian3.requestUrl)({ url, method: "GET" })).text;
-            const note = criarNotaTranscricao(media, vtt);
+            const thumbnailPath = await this.downloadThumbnail(media);
+            const note = criarNotaTranscricao(media, vtt, thumbnailPath != null ? thumbnailPath : void 0);
             const filePath = await this.availablePath(folder, nomeArquivoSeguro(media.title));
             const file = await this.app.vault.create(filePath, note);
             existing.set(id, file);
@@ -1157,6 +1128,49 @@ var SourceTranscriptService = class {
       `${errors} erro(s)`
     ].join("; ");
     new import_obsidian3.Notice(`Atualiza\xE7\xE3o conclu\xEDda: ${details}.`, 12e3);
+  }
+  async updateMissingThumbnails() {
+    if (this.downloading) {
+      new import_obsidian3.Notice("Aguarde a atualiza\xE7\xE3o em andamento terminar.");
+      return;
+    }
+    const selected = SUPPORTED_CATEGORIES.filter((item) => {
+      var _a;
+      return (_a = this.settings.categorySettings[item.key]) == null ? void 0 : _a.enabled;
+    });
+    if (selected.length === 0) {
+      new import_obsidian3.Notice("Ative pelo menos uma cole\xE7\xE3o antes de procurar miniaturas.");
+      return;
+    }
+    this.downloading = true;
+    const progress = new import_obsidian3.Notice("Procurando miniaturas ausentes\u2026", 0);
+    let updated = 0;
+    try {
+      const existing = this.existingNotes();
+      for (const category of selected) {
+        for (const media of await this.allMedia(category.key)) {
+          const file = existing.get(sourceId(media));
+          if (!file) continue;
+          const content = await this.app.vault.read(file);
+          if (/!\[Miniatura\]\(Anexos\/Índice(?:%20| )Nights\/Miniaturas\//.test(content)) continue;
+          const thumbnailPath = await this.downloadThumbnail(media);
+          if (!thumbnailPath) continue;
+          const image = `[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`;
+          const next = content.replace(/^(# .+)$/m, `$1
+
+${image}`);
+          if (next !== content) {
+            await this.app.vault.modify(file, next);
+            updated += 1;
+          }
+          await wait(120);
+        }
+      }
+    } finally {
+      this.downloading = false;
+      progress.hide();
+    }
+    new import_obsidian3.Notice(`${updated} miniatura(s) adicionada(s).`, 8e3);
   }
   async ensureGeneralIndex(showNotice = false, openAfter = false) {
     const folder = GENERAL_INDEX_FOLDER;
@@ -1236,6 +1250,23 @@ var SourceTranscriptService = class {
     }
     return path;
   }
+  async downloadThumbnail(media) {
+    var _a, _b, _c;
+    const url = thumbnailUrl(media);
+    if (!url) return null;
+    await ensureFolder(this.app, THUMBNAIL_FOLDER);
+    const extension = (_c = (_b = (_a = /\.(png|webp)(?:\?|$)/i.exec(url)) == null ? void 0 : _a[1]) == null ? void 0 : _b.toLocaleLowerCase("pt-BR")) != null ? _c : "jpg";
+    const path = `${THUMBNAIL_FOLDER}/${nomeArquivoSeguro(sourceId(media))}.${extension}`;
+    const existing = this.app.vault.getAbstractFileByPath(path);
+    if (existing instanceof import_obsidian3.TFile) return path;
+    try {
+      const response = await (0, import_obsidian3.requestUrl)({ url, method: "GET" });
+      await this.app.vault.createBinary(path, response.arrayBuffer);
+      return path;
+    } catch (e) {
+      return null;
+    }
+  }
 };
 
 // src/note-sync.ts
@@ -1263,7 +1294,7 @@ var NoteSyncService = class {
     const timer = window.setTimeout(() => {
       this.timers.delete(file.path);
       void this.syncFile(file);
-    }, 900);
+    }, 3500);
     this.timers.set(file.path, timer);
   }
   async syncFile(file) {
@@ -1608,6 +1639,191 @@ var RemoteDriveTranscriptService = class {
   }
 };
 
+// src/scripture-links.ts
+var import_obsidian5 = require("obsidian");
+var verseCache = /* @__PURE__ */ new Map();
+var ONE_HOUR = 60 * 60 * 1e3;
+function bcv(reference) {
+  return `${String(reference.bookOrder + 1).padStart(2, "0")}${String(reference.chapter).padStart(3, "0")}${String(reference.verse).padStart(3, "0")}`;
+}
+function bibleAppUrl(reference) {
+  return `jwlibrary:///finder?wtlocale=T&bible=${bcv(reference)}`;
+}
+async function fetchVerse(reference) {
+  var _a, _b, _c, _d;
+  const code = bcv(reference);
+  const cached = verseCache.get(code);
+  if (cached && cached.expires > Date.now()) return cached;
+  try {
+    const apiCode = code.replace(/^0+/, "");
+    const response = await (0, import_obsidian5.requestUrl)({ url: `https://www.jw.org/pt/json/html/${apiCode}` });
+    const data = response.json;
+    const range = (_c = (_a = data.ranges) == null ? void 0 : _a[apiCode]) != null ? _c : Object.values((_b = data.ranges) != null ? _b : {})[0];
+    if (!(range == null ? void 0 : range.html)) return null;
+    const result = {
+      html: range.html.replace(/<a[^>]*>/g, "").replace(/<\/a>/g, ""),
+      citation: ((_d = range.citation) == null ? void 0 : _d.replace(/&nbsp;/g, " ")) || reference.display,
+      expires: Date.now() + ONE_HOUR
+    };
+    verseCache.set(code, result);
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
+var VersePreviewModal = class extends import_obsidian5.Modal {
+  constructor(app, reference) {
+    super(app);
+    this.reference = reference;
+  }
+  onOpen() {
+    this.titleEl.setText(this.reference.display);
+    const body = this.contentEl.createDiv({ cls: "indice-nights-verse-preview" });
+    body.createEl("p", { text: "Carregando o texto\u2026", cls: "indice-nights-verse-loading" });
+    void fetchVerse(this.reference).then((verse) => {
+      body.empty();
+      if (verse) {
+        const verseEl = body.createDiv({ cls: "indice-nights-verse-text" });
+        const parsed = new DOMParser().parseFromString(verse.html, "text/html");
+        for (const child of Array.from(parsed.body.childNodes)) {
+          verseEl.appendChild(activeDocument.importNode(child, true));
+        }
+        body.createEl("small", { text: verse.citation, cls: "indice-nights-verse-citation" });
+      } else {
+        body.createEl("p", { text: "N\xE3o foi poss\xEDvel carregar o texto agora." });
+      }
+      const actions = body.createDiv({ cls: "indice-nights-verse-actions" });
+      actions.createEl("button", { text: "Copiar refer\xEAncia" }).addEventListener("click", () => {
+        void navigator.clipboard.writeText(this.reference.display);
+        new import_obsidian5.Notice("Refer\xEAncia copiada.");
+      });
+      actions.createEl("a", {
+        text: "Abrir no aplicativo",
+        href: bibleAppUrl(this.reference),
+        cls: "mod-cta"
+      });
+    });
+  }
+};
+function shouldSkip(node) {
+  const parent = node.parentElement;
+  return !parent || Boolean(parent.closest(
+    "a, code, pre, .frontmatter, .metadata-container, .callout[data-callout='bible-index'], .indice-nights-verse-preview"
+  ));
+}
+function linkBibleReferences(container, app) {
+  var _a;
+  const walker = activeDocument.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  let current = walker.nextNode();
+  while (current) {
+    nodes.push(current);
+    current = walker.nextNode();
+  }
+  for (const node of nodes) {
+    if (shouldSkip(node)) continue;
+    const text = (_a = node.nodeValue) != null ? _a : "";
+    const locations = findReferencesInText(text);
+    if (locations.length === 0) continue;
+    const fragment = activeDocument.createDocumentFragment();
+    let cursor = 0;
+    for (const location of locations) {
+      fragment.append(text.slice(cursor, location.start));
+      const link = activeDocument.createElement("a");
+      link.className = "indice-nights-scripture-link";
+      link.textContent = text.slice(location.start, location.end);
+      link.dataset.tooltipPosition = "top";
+      link.setAttribute("aria-label", "Ver texto b\xEDblico");
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        new VersePreviewModal(app, location.reference).open();
+      });
+      fragment.append(link);
+      cursor = location.end;
+    }
+    fragment.append(text.slice(cursor));
+    node.replaceWith(fragment);
+  }
+}
+
+// src/consultation-mode.ts
+var import_obsidian6 = require("obsidian");
+var INDEX_FOLDER = "00 - \xCDndice Geral/";
+var SPEECH_FOLDER = "Discursos/";
+var ConsultationModeController = class {
+  constructor(app, enabled, finishEditing) {
+    this.app = app;
+    this.enabled = enabled;
+    this.finishEditing = finishEditing;
+    __publicField(this, "unlockedPath", null);
+    __publicField(this, "button", null);
+  }
+  refresh() {
+    const view = this.app.workspace.getActiveViewOfType(import_obsidian6.MarkdownView);
+    this.clearDecorations();
+    if (!(view == null ? void 0 : view.file) || !this.enabled()) return;
+    if (view.file.path.startsWith(INDEX_FOLDER)) {
+      this.unlockedPath = null;
+      view.containerEl.addClass("indice-nights-index-locked");
+      this.setMode(view, "preview");
+      return;
+    }
+    if (!view.file.path.startsWith(SPEECH_FOLDER)) return;
+    const editing = this.unlockedPath === view.file.path;
+    view.containerEl.addClass("indice-nights-consultation");
+    if (!editing) this.setMode(view, "preview");
+    this.createButton(view, editing);
+  }
+  async leaveCurrent(file) {
+    if (file && this.unlockedPath === file.path) await this.finishEditing(file);
+    this.unlockedPath = null;
+  }
+  unload() {
+    this.clearDecorations();
+  }
+  createButton(view, editing) {
+    const button = view.containerEl.createEl("button", {
+      cls: "indice-nights-edit-toggle",
+      text: editing ? "Concluir edi\xE7\xE3o" : "Editar discurso"
+    });
+    (0, import_obsidian6.setIcon)(button, editing ? "check" : "pencil");
+    button.addEventListener("click", () => {
+      void (async () => {
+        if (!view.file) return;
+        if (editing) {
+          await this.finishEditing(view.file);
+          this.unlockedPath = null;
+          this.setMode(view, "preview");
+        } else {
+          this.unlockedPath = view.file.path;
+          this.setMode(view, "source");
+        }
+        this.refresh();
+      })();
+    });
+    this.button = button;
+  }
+  setMode(view, mode) {
+    var _a;
+    if (view.getMode() === mode) return;
+    void view.leaf.setViewState({
+      type: "markdown",
+      state: { file: (_a = view.file) == null ? void 0 : _a.path, mode, source: false }
+    }, { focus: true });
+  }
+  clearDecorations() {
+    var _a;
+    (_a = this.button) == null ? void 0 : _a.remove();
+    this.button = null;
+    for (const leaf of this.app.workspace.getLeavesOfType("markdown")) {
+      const container = leaf.view.containerEl;
+      container.removeClass("indice-nights-index-locked");
+      container.removeClass("indice-nights-consultation");
+    }
+  }
+};
+
 // src/main.ts
 var STORAGE_PREFIX = "indice-nights:selection:";
 var LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
@@ -1631,7 +1847,7 @@ var DeviceSelectionStore = class {
     }
   }
 };
-var IndiceNightsPlugin = class extends import_obsidian5.Plugin {
+var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
   constructor() {
     super(...arguments);
     __publicField(this, "settings", { ...DEFAULT_SETTINGS });
@@ -1639,6 +1855,8 @@ var IndiceNightsPlugin = class extends import_obsidian5.Plugin {
     __publicField(this, "transcriptService");
     __publicField(this, "remoteDriveService");
     __publicField(this, "noteSyncService");
+    __publicField(this, "consultationMode");
+    __publicField(this, "previousFile", null);
     __publicField(this, "selections", new DeviceSelectionStore());
   }
   async onload() {
@@ -1653,6 +1871,11 @@ var IndiceNightsPlugin = class extends import_obsidian5.Plugin {
     this.remoteDriveService = new RemoteDriveTranscriptService(
       this.app,
       this.settings,
+      (file) => this.noteSyncService.syncFile(file)
+    );
+    this.consultationMode = new ConsultationModeController(
+      this.app,
+      () => this.settings.consultationMode,
       (file) => this.noteSyncService.syncFile(file)
     );
     this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
@@ -1689,32 +1912,44 @@ var IndiceNightsPlugin = class extends import_obsidian5.Plugin {
       ));
     });
     this.registerMarkdownPostProcessor((element) => {
-      linkBibleReferences(element);
+      linkBibleReferences(element, this.app);
     });
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
       this.indexManager.updateFile(file);
     }));
     this.registerEvent(this.app.vault.on("modify", (file) => {
-      if (file instanceof import_obsidian5.TFile) this.noteSyncService.schedule(file);
+      if (file instanceof import_obsidian7.TFile) this.noteSyncService.schedule(file);
     }));
     this.registerEvent(this.app.vault.on("delete", (file) => {
-      if (file instanceof import_obsidian5.TFile) this.indexManager.removePath(file.path);
+      if (file instanceof import_obsidian7.TFile) this.indexManager.removePath(file.path);
     }));
     this.registerEvent(this.app.vault.on("rename", (file, oldPath) => {
-      if (file instanceof import_obsidian5.TFile) this.indexManager.renameFile(file, oldPath);
+      if (file instanceof import_obsidian7.TFile) this.indexManager.renameFile(file, oldPath);
     }));
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
+      const previous = this.previousFile;
+      this.previousFile = file;
+      void this.consultationMode.leaveCurrent(previous).then(() => this.consultationMode.refresh());
       if (file) this.noteSyncService.schedule(file);
+    }));
+    this.registerEvent(this.app.workspace.on("layout-change", () => {
+      this.consultationMode.refresh();
     }));
     const activeFile = this.app.workspace.getActiveFile();
     if (activeFile) this.noteSyncService.schedule(activeFile);
+    this.previousFile = activeFile;
+    this.consultationMode.refresh();
   }
   onunload() {
-    var _a;
+    var _a, _b;
     (_a = this.noteSyncService) == null ? void 0 : _a.unload();
+    (_b = this.consultationMode) == null ? void 0 : _b.unload();
   }
   async saveSettings() {
     await this.saveData(this.settings);
+  }
+  refreshConsultationMode() {
+    this.consultationMode.refresh();
   }
   async loadSettings() {
     var _a;

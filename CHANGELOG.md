@@ -14,7 +14,7 @@
 
 ## 0.5.0
 
-- Nome público alterado para `Indice Nights`, compatível com as regras do diretório comunitário.
+- Nome público alterado para `Índice Nights`, compatível com as regras do diretório comunitário.
 - Importação de transcrições por link público de pasta do Google Drive, sem login e sem chave de API.
 - Leitura recursiva de arquivos TXT, Markdown e Documentos Google, preservando as subpastas.
 - Identificação por `id_remoto`, sem sobrescrever notas já importadas nem alterações pessoais.
@@ -84,3 +84,11 @@
 - Cache incremental baseado nos metadados do Obsidian.
 - Seleção local e independente por aparelho.
 - Interface responsiva para desktop e dispositivos móveis.
+# 0.6.0
+
+- Adiciona modo de consulta para discursos, com botão flutuante de edição.
+- Mantém o Índice Geral bloqueado em modo de leitura.
+- Exibe referências bíblicas em uma prévia interna antes de oferecer a abertura em outro aplicativo.
+- Mantém as referências como texto simples no arquivo Markdown.
+- Aguarda 3,5 segundos após a digitação antes de atualizar propriedades e mini-índice.
+- Baixa miniaturas para novas transcrições e permite completar imagens ausentes nas notas existentes.

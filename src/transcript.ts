@@ -1,5 +1,4 @@
-import { extractReferences, findReferencesInText } from "./references";
-import { bibleAppUrl } from "./scripture-links";
+import { extractReferences } from "./references";
 import type { SourceMediaItem } from "./types";
 
 const INVALID_FILE_CHARS = /[<>:"/\\|?*]/g;
@@ -125,27 +124,6 @@ function protectedMiniIndexLabel(display: string): string {
   return display.replace(/^((?:[123]\s+)?\p{L})/u, "$1\u2060");
 }
 
-function linkReferencesInMarkdown(block: string): string {
-  const protectedRanges = [...block.matchAll(/\[[^\]]+\]\([^)]+\)|\[\[[^\]]+\]\]|`[^`]*`/g)]
-    .filter((match) => match.index != null)
-    .map((match) => ({ start: match.index, end: match.index + match[0].length }));
-  const locations = findReferencesInText(block);
-  if (locations.length === 0) return block;
-
-  let output = "";
-  let cursor = 0;
-  for (const location of locations) {
-    const alreadyLinked = protectedRanges.some((range) => location.start >= range.start && location.end <= range.end);
-    if (alreadyLinked || location.start < cursor) continue;
-    output += block.slice(cursor, location.start);
-    const original = block.slice(location.start, location.end);
-    output += `[${original}](${bibleAppUrl(location.reference)})`;
-    cursor = location.end;
-  }
-  if (cursor === 0) return block;
-  return output + block.slice(cursor);
-}
-
 export function synchronizeMiniIndex(content: string): SyncedMiniIndex {
   const frontmatterMatch = /^---\s*\n[\s\S]*?\n---\s*\n?/.exec(content);
   const frontmatter = frontmatterMatch?.[0].trimEnd() ?? "";
@@ -164,7 +142,9 @@ export function synchronizeMiniIndex(content: string): SyncedMiniIndex {
     for (const reference of references) {
       if (!referenceTargets.has(reference.key)) referenceTargets.set(reference.key, blockId);
     }
-    return `${linkReferencesInMarkdown(block.trim())}\n^${blockId}`;
+    // A referência permanece como texto simples no arquivo. O link interativo é
+    // aplicado apenas na visualização, evitando avisos de aplicativo externo.
+    return `${block.trim()}\n^${blockId}`;
   });
 
   const references = extractReferences(allReferenceValues);
@@ -194,7 +174,8 @@ function yamlString(value: string): string {
 
 export function criarNotaTranscricao(
   media: SourceMediaItem,
-  vtt: string
+  vtt: string,
+  thumbnailPath?: string
 ): string {
   const paragraphs = vttParaParagrafos(vtt);
   const transcript = paragraphs.join("\n\n");
@@ -217,6 +198,9 @@ export function criarNotaTranscricao(
     "",
     `# ${media.title}`,
     "",
+    ...(thumbnailPath
+      ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`, ""]
+      : []),
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";
   return synchronizeMiniIndex(base).content;

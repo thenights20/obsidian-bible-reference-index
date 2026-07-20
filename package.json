@@ -1,6 +1,6 @@
 {
   "name": "indice-nights",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Índice bíblico e biblioteca local de transcrições em português para o Obsidian.",
   "main": "main.js",
   "scripts": {

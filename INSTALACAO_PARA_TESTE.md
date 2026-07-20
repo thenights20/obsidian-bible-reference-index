@@ -10,7 +10,7 @@
 
 4. Abra o Obsidian.
 5. Entre em `Configurações → Plugins comunitários`.
-6. Ative **Indice Nights**.
+6. Ative **Índice Nights**.
 7. Copie `Exemplo_Indice_Biblico.md` para qualquer pasta do cofre e abra a nota.
 
 Se a pasta `.obsidian` não aparecer no Explorador de Arquivos, ative a exibição de itens ocultos no Windows.

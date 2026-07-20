@@ -208,6 +208,91 @@
   margin-block: 1rem 0.35rem;
 }
 
+.indice-nights-edit-toggle {
+  position: absolute;
+  z-index: 20;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--background-modifier-border-hover);
+  border-radius: 999px;
+  box-shadow: var(--shadow-s);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  padding: 0.55rem 0.85rem;
+}
+
+.indice-nights-edit-toggle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.indice-nights-index-locked .view-action:has(.lucide-pencil),
+.indice-nights-index-locked .view-action:has(.lucide-book-open),
+.indice-nights-index-locked .view-action:has(.lucide-edit),
+.indice-nights-consultation .view-action:has(.lucide-pencil),
+.indice-nights-consultation .view-action:has(.lucide-book-open),
+.indice-nights-consultation .view-action:has(.lucide-edit) {
+  display: none;
+}
+
+.indice-nights-scripture-link {
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+}
+
+.indice-nights-verse-preview {
+  line-height: 1.65;
+}
+
+.indice-nights-verse-text {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+  padding: 1rem;
+}
+
+.indice-nights-verse-text .verseNum {
+  color: var(--text-accent);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  vertical-align: super;
+}
+
+.indice-nights-verse-citation {
+  display: block;
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+}
+
+.indice-nights-verse-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.indice-nights-verse-actions a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--button-radius);
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+}
+
+.markdown-preview-view img[alt="Miniatura"] {
+  display: block;
+  width: min(100%, 46rem);
+  max-height: 26rem;
+  margin: 0.75rem auto 1.25rem;
+  border-radius: var(--radius-m);
+  object-fit: cover;
+}
+
 @media (max-width: 600px) {
   .bri-controls {
     grid-template-columns: 1fr;

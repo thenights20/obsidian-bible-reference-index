@@ -8,6 +8,7 @@ const LOCALE_PT_BR = "T";
 const GENERAL_INDEX_FOLDER = "00 - Índice Geral";
 const LEGACY_GENERAL_INDEX_FOLDER = "Índice Geral";
 const GENERAL_INDEX_FILENAME = "Índice Geral de Textos Bíblicos.md";
+const THUMBNAIL_FOLDER = "Anexos/Índice Nights/Miniaturas";
 interface ApiCategory {
   key: string;
   name: string;
@@ -53,6 +54,21 @@ async function ensureFolder(app: App, folder: string): Promise<void> {
 
 function subtitleUrl(media: SourceMediaItem): string | null {
   return media.files.find((file) => file.subtitles?.url)?.subtitles?.url ?? null;
+}
+
+function imageCandidates(value: unknown, output: string[] = []): string[] {
+  if (typeof value === "string" && /^https?:\/\//i.test(value) && /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(value)) {
+    output.push(value);
+  } else if (Array.isArray(value)) {
+    for (const child of value) imageCandidates(child, output);
+  } else if (typeof value === "object" && value !== null) {
+    for (const child of Object.values(value as Record<string, unknown>)) imageCandidates(child, output);
+  }
+  return output;
+}
+
+function thumbnailUrl(media: SourceMediaItem): string | null {
+  return imageCandidates(media.images).at(-1) ?? null;
 }
 
 export class SourceTranscriptService {
@@ -109,7 +125,8 @@ export class SourceTranscriptService {
           }
           try {
             const vtt = (await requestUrl({ url, method: "GET" })).text;
-            const note = criarNotaTranscricao(media, vtt);
+            const thumbnailPath = await this.downloadThumbnail(media);
+            const note = criarNotaTranscricao(media, vtt, thumbnailPath ?? undefined);
             const filePath = await this.availablePath(folder, nomeArquivoSeguro(media.title));
             const file = await this.app.vault.create(filePath, note);
             existing.set(id, file);
@@ -133,6 +150,45 @@ export class SourceTranscriptService {
       `${errors} erro(s)`
     ].join("; ");
     new Notice(`Atualização concluída: ${details}.`, 12000);
+  }
+
+  async updateMissingThumbnails(): Promise<void> {
+    if (this.downloading) {
+      new Notice("Aguarde a atualização em andamento terminar.");
+      return;
+    }
+    const selected = SUPPORTED_CATEGORIES.filter((item) => this.settings.categorySettings[item.key]?.enabled);
+    if (selected.length === 0) {
+      new Notice("Ative pelo menos uma coleção antes de procurar miniaturas.");
+      return;
+    }
+    this.downloading = true;
+    const progress = new Notice("Procurando miniaturas ausentes…", 0);
+    let updated = 0;
+    try {
+      const existing = this.existingNotes();
+      for (const category of selected) {
+        for (const media of await this.allMedia(category.key)) {
+          const file = existing.get(sourceId(media));
+          if (!file) continue;
+          const content = await this.app.vault.read(file);
+          if (/!\[Miniatura\]\(Anexos\/Índice(?:%20| )Nights\/Miniaturas\//.test(content)) continue;
+          const thumbnailPath = await this.downloadThumbnail(media);
+          if (!thumbnailPath) continue;
+          const image = `[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`;
+          const next = content.replace(/^(# .+)$/m, `$1\n\n${image}`);
+          if (next !== content) {
+            await this.app.vault.modify(file, next);
+            updated += 1;
+          }
+          await wait(120);
+        }
+      }
+    } finally {
+      this.downloading = false;
+      progress.hide();
+    }
+    new Notice(`${updated} miniatura(s) adicionada(s).`, 8000);
   }
 
   async ensureGeneralIndex(showNotice = false, openAfter = false): Promise<void> {
@@ -215,5 +271,22 @@ export class SourceTranscriptService {
       path = `${folder}/${basename} (${counter}).md`;
     }
     return path;
+  }
+
+  private async downloadThumbnail(media: SourceMediaItem): Promise<string | null> {
+    const url = thumbnailUrl(media);
+    if (!url) return null;
+    await ensureFolder(this.app, THUMBNAIL_FOLDER);
+    const extension = /\.(png|webp)(?:\?|$)/i.exec(url)?.[1]?.toLocaleLowerCase("pt-BR") ?? "jpg";
+    const path = `${THUMBNAIL_FOLDER}/${nomeArquivoSeguro(sourceId(media))}.${extension}`;
+    const existing = this.app.vault.getAbstractFileByPath(path);
+    if (existing instanceof TFile) return path;
+    try {
+      const response = await requestUrl({ url, method: "GET" });
+      await this.app.vault.createBinary(path, response.arrayBuffer);
+      return path;
+    } catch {
+      return null;
+    }
   }
 }

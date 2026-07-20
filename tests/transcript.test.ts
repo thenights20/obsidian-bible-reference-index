@@ -54,9 +54,7 @@ describe("formatação de transcrições", () => {
     const oldNote = `---\nid_origem: "teste"\ntextos:\n  - "Isaías 33:22"\n---\n\n# Título\n\nLeia Isaías 33:22. Estas palavras continuam iguais.\n`;
     const updated = adicionarMiniIndiceEmNota(oldNote);
     expect(updated).toContain("[[#^citacao-002|I\u2060saías 33:22]]");
-    expect(updated).toContain(
-      "Leia [Isaías 33:22](jwlibrary:///finder?wtlocale=T&bible=23033022). Estas palavras continuam iguais.\n^citacao-002"
-    );
+    expect(updated).toContain("Leia Isaías 33:22. Estas palavras continuam iguais.\n^citacao-002");
     expect(adicionarMiniIndiceEmNota(updated!)).toBeNull();
   });
 

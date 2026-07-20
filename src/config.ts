@@ -6,7 +6,8 @@ export const DEFAULT_SETTINGS: PluginSettings = {
   pageSize: 75,
   remoteDriveUrl: "",
   remoteDriveFolder: "",
-  categorySettings: {}
+  categorySettings: {},
+  consultationMode: true
 };
 
 function cleanPath(value: string): string {

@@ -59,6 +59,7 @@ export interface PluginSettings {
   remoteDriveUrl: string;
   remoteDriveFolder: string;
   categorySettings: Record<string, SourceCategorySetting>;
+  consultationMode: boolean;
 }
 
 export interface SourceCategorySetting {
@@ -87,4 +88,5 @@ export interface SourceMediaItem {
   title: string;
   firstPublished?: string;
   files: SourceMediaFile[];
+  images?: unknown;
 }

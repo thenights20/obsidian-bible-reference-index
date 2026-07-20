@@ -8,6 +8,7 @@ import { NoteSyncService } from "./note-sync";
 import { RemoteDriveTranscriptService } from "./remote-drive";
 import { linkBibleReferences } from "./scripture-links";
 import type { PluginSettings } from "./types";
+import { ConsultationModeController } from "./consultation-mode";
 
 const STORAGE_PREFIX = "indice-nights:selection:";
 const LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
@@ -41,6 +42,8 @@ export default class IndiceNightsPlugin extends Plugin {
   transcriptService!: SourceTranscriptService;
   remoteDriveService!: RemoteDriveTranscriptService;
   private noteSyncService!: NoteSyncService;
+  private consultationMode!: ConsultationModeController;
+  private previousFile: TFile | null = null;
   private readonly selections = new DeviceSelectionStore();
 
   async onload(): Promise<void> {
@@ -55,6 +58,11 @@ export default class IndiceNightsPlugin extends Plugin {
     this.remoteDriveService = new RemoteDriveTranscriptService(
       this.app,
       this.settings,
+      (file) => this.noteSyncService.syncFile(file)
+    );
+    this.consultationMode = new ConsultationModeController(
+      this.app,
+      () => this.settings.consultationMode,
       (file) => this.noteSyncService.syncFile(file)
     );
     this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
@@ -94,7 +102,7 @@ export default class IndiceNightsPlugin extends Plugin {
     });
 
     this.registerMarkdownPostProcessor((element) => {
-      linkBibleReferences(element);
+      linkBibleReferences(element, this.app);
     });
 
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
@@ -114,19 +122,33 @@ export default class IndiceNightsPlugin extends Plugin {
     }));
 
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
+      const previous = this.previousFile;
+      this.previousFile = file;
+      void this.consultationMode.leaveCurrent(previous).then(() => this.consultationMode.refresh());
       if (file) this.noteSyncService.schedule(file);
+    }));
+
+    this.registerEvent(this.app.workspace.on("layout-change", () => {
+      this.consultationMode.refresh();
     }));
 
     const activeFile = this.app.workspace.getActiveFile();
     if (activeFile) this.noteSyncService.schedule(activeFile);
+    this.previousFile = activeFile;
+    this.consultationMode.refresh();
   }
 
   onunload(): void {
     this.noteSyncService?.unload();
+    this.consultationMode?.unload();
   }
 
   async saveSettings(): Promise<void> {
     await this.saveData(this.settings);
+  }
+
+  refreshConsultationMode(): void {
+    this.consultationMode.refresh();
   }
 
   private async loadSettings(): Promise<void> {

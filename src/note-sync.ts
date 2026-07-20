@@ -28,7 +28,7 @@ export class NoteSyncService {
     const timer = window.setTimeout(() => {
       this.timers.delete(file.path);
       void this.syncFile(file);
-    }, 900);
+    }, 3500);
     this.timers.set(file.path, timer);
   }
 
