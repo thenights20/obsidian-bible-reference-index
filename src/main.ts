@@ -2,20 +2,24 @@ import { Plugin, TFile } from "obsidian";
 import { DEFAULT_SETTINGS, parseBlockConfig } from "./config";
 import { BibleIndexManager } from "./index-service";
 import { BibleIndexView, type SelectionStore } from "./index-view";
-import { BibleIndexSettingTab } from "./settings";
-import { JwTranscriptService } from "./jw-service";
+import { IndiceNightsSettingTab } from "./settings";
+import { SourceTranscriptService } from "./transcript-source-service";
 import { NoteSyncService } from "./note-sync";
+import { RemoteDriveTranscriptService } from "./remote-drive";
 import { linkBibleReferences } from "./scripture-links";
 import type { PluginSettings } from "./types";
 
-const STORAGE_PREFIX = "bible-reference-index:selection:";
+const STORAGE_PREFIX = "indice-nights:selection:";
+const LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
 
 class DeviceSelectionStore implements SelectionStore {
   private readonly fallback = new Map<string, string>();
 
   get(key: string): string | null {
     try {
-      return window.localStorage.getItem(`${STORAGE_PREFIX}${key}`) ?? this.fallback.get(key) ?? null;
+      return window.localStorage.getItem(`${STORAGE_PREFIX}${key}`) ??
+        window.localStorage.getItem(`${LEGACY_STORAGE_PREFIX}${key}`) ??
+        this.fallback.get(key) ?? null;
     } catch {
       return this.fallback.get(key) ?? null;
     }
@@ -31,10 +35,11 @@ class DeviceSelectionStore implements SelectionStore {
   }
 }
 
-export default class BibleReferenceIndexPlugin extends Plugin {
+export default class IndiceNightsPlugin extends Plugin {
   settings: PluginSettings = { ...DEFAULT_SETTINGS };
   private indexManager!: BibleIndexManager;
-  transcriptService!: JwTranscriptService;
+  transcriptService!: SourceTranscriptService;
+  remoteDriveService!: RemoteDriveTranscriptService;
   private noteSyncService!: NoteSyncService;
   private readonly selections = new DeviceSelectionStore();
 
@@ -42,12 +47,17 @@ export default class BibleReferenceIndexPlugin extends Plugin {
     await this.loadSettings();
     this.indexManager = new BibleIndexManager(this.app);
     this.noteSyncService = new NoteSyncService(this.app);
-    this.transcriptService = new JwTranscriptService(
+    this.transcriptService = new SourceTranscriptService(
       this.app,
       this.settings,
       (file) => this.noteSyncService.syncFile(file)
     );
-    this.addSettingTab(new BibleIndexSettingTab(this.app, this));
+    this.remoteDriveService = new RemoteDriveTranscriptService(
+      this.app,
+      this.settings,
+      (file) => this.noteSyncService.syncFile(file)
+    );
+    this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
     await this.transcriptService.ensureGeneralIndex();
 
     this.addCommand({
@@ -55,6 +65,14 @@ export default class BibleReferenceIndexPlugin extends Plugin {
       name: "Baixar novas transcrições selecionadas",
       callback: () => {
         void this.transcriptService.downloadEnabled();
+      }
+    });
+
+    this.addCommand({
+      id: "baixar-transcricoes-pasta-publica",
+      name: "Baixar novas transcrições da pasta pública",
+      callback: () => {
+        void this.remoteDriveService.downloadNew();
       }
     });
 
@@ -112,7 +130,12 @@ export default class BibleReferenceIndexPlugin extends Plugin {
   }
 
   private async loadSettings(): Promise<void> {
-    const saved = await this.loadData() as Partial<PluginSettings> | null;
-    this.settings = { ...DEFAULT_SETTINGS, ...(saved ?? {}) };
+    const saved = await this.loadData() as (Partial<PluginSettings> & Record<string, unknown>) | null;
+    const legacyCategories = saved?.jwCategorySettings;
+    const categorySettings = saved?.categorySettings ??
+      (typeof legacyCategories === "object" && legacyCategories !== null
+        ? legacyCategories as PluginSettings["categorySettings"]
+        : DEFAULT_SETTINGS.categorySettings);
+    this.settings = { ...DEFAULT_SETTINGS, ...(saved ?? {}), categorySettings };
   }
 }

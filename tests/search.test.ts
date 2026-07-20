@@ -17,7 +17,7 @@ function reference(display: string, book: string, section: string, title: string
 describe("searchReferences", () => {
   const references = [
     reference("Rute 1:16", "Rute", "Congressos", "Demonstre amor leal"),
-    reference("João 3:16", "João", "Adoração Matinal", "Jeová nos ama")
+    reference("João 3:16", "João", "Estudo matinal", "A Bíblia é útil")
   ];
 
   it("searches references across different books", () => {
@@ -25,7 +25,7 @@ describe("searchReferences", () => {
   });
 
   it("searches note titles and folders without requiring accents", () => {
-    expect(searchReferences(references, "adoracao").map((item) => item.reference.display)).toEqual(["João 3:16"]);
+    expect(searchReferences(references, "estudo").map((item) => item.reference.display)).toEqual(["João 3:16"]);
     expect(searchReferences(references, "amor leal").map((item) => item.reference.display)).toEqual(["Rute 1:16"]);
   });
 });

@@ -1,9 +1,9 @@
 import { App, PluginSettingTab, Setting, TFolder } from "obsidian";
-import type BibleReferenceIndexPlugin from "./main";
-import { JW_SUPPORTED_CATEGORIES } from "./jw-categories";
+import type IndiceNightsPlugin from "./main";
+import { SUPPORTED_CATEGORIES } from "./transcript-categories";
 
-export class BibleIndexSettingTab extends PluginSettingTab {
-  constructor(app: App, private readonly plugin: BibleReferenceIndexPlugin) {
+export class IndiceNightsSettingTab extends PluginSettingTab {
+  constructor(app: App, private readonly plugin: IndiceNightsPlugin) {
     super(app, plugin);
   }
 
@@ -12,7 +12,7 @@ export class BibleIndexSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     new Setting(containerEl)
-      .setName("Transcrições do JW.ORG")
+      .setName("Biblioteca de transcrições")
       .setHeading();
 
     containerEl.createEl("p", {
@@ -25,7 +25,7 @@ export class BibleIndexSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Baixar novas transcrições")
-      .setDesc("Verifica as coleções marcadas e baixa somente discursos que ainda não possuem uma nota com o mesmo id_jw.")
+      .setDesc("Verifica as coleções marcadas e baixa somente discursos que ainda não possuem uma nota com o mesmo id_origem.")
       .addButton((button) => button
         .setCta()
         .setButtonText("Verificar e baixar")
@@ -33,6 +33,57 @@ export class BibleIndexSettingTab extends PluginSettingTab {
           button.setDisabled(true);
           try {
             await this.plugin.transcriptService.downloadEnabled();
+          } finally {
+            button.setDisabled(false);
+          }
+        }));
+
+    new Setting(containerEl)
+      .setName("Transcrições de uma pasta pública")
+      .setHeading();
+
+    containerEl.createEl("p", {
+      text: "Cole o link de uma pasta pública do Google Drive. O plugin lê arquivos TXT, Markdown e Documentos Google sem login e mantém as subpastas.",
+      cls: "setting-item-description"
+    });
+
+    new Setting(containerEl)
+      .setName("Link público da pasta")
+      .setDesc("No Google Drive, use Compartilhar → Acesso geral → Qualquer pessoa com o link → Leitor.")
+      .addText((text) => text
+        .setPlaceholder("https://drive.google.com/drive/folders/...")
+        .setValue(this.plugin.settings.remoteDriveUrl)
+        .onChange(async (value) => {
+          this.plugin.settings.remoteDriveUrl = value.trim();
+          await this.plugin.saveSettings();
+        }));
+
+    const remoteFolders = this.listFolders();
+    new Setting(containerEl)
+      .setName("Pasta de destino")
+      .setDesc("Se nenhuma for escolhida, será usada Discursos/Importados. As subpastas remotas serão preservadas.")
+      .addDropdown((dropdown) => {
+        dropdown.addOption("", "Automática: Discursos/Importados");
+        for (const folder of remoteFolders) dropdown.addOption(folder, folder);
+        const current = this.plugin.settings.remoteDriveFolder;
+        if (current && !remoteFolders.includes(current)) dropdown.addOption(current, current);
+        dropdown.setValue(current);
+        dropdown.onChange(async (folder) => {
+          this.plugin.settings.remoteDriveFolder = folder;
+          await this.plugin.saveSettings();
+        });
+      });
+
+    new Setting(containerEl)
+      .setName("Baixar da pasta pública")
+      .setDesc("Baixa somente arquivos novos. Notas já importadas e suas alterações pessoais não são substituídas.")
+      .addButton((button) => button
+        .setCta()
+        .setButtonText("Verificar e baixar")
+        .onClick(async () => {
+          button.setDisabled(true);
+          try {
+            await this.plugin.remoteDriveService.downloadNew();
           } finally {
             button.setDisabled(false);
           }
@@ -50,13 +101,10 @@ export class BibleIndexSettingTab extends PluginSettingTab {
 
   private renderCatalog(container: HTMLElement): void {
     container.empty();
-    const folders = this.app.vault.getAllLoadedFiles()
-      .filter((file): file is TFolder => file instanceof TFolder && file.path !== "/")
-      .map((folder) => folder.path)
-      .sort((a, b) => a.localeCompare(b, "pt-BR"));
+    const folders = this.listFolders();
 
-    for (const item of JW_SUPPORTED_CATEGORIES) {
-      const current = this.plugin.settings.jwCategorySettings[item.key] ?? { enabled: false, folder: "" };
+    for (const item of SUPPORTED_CATEGORIES) {
+      const current = this.plugin.settings.categorySettings[item.key] ?? { enabled: false, folder: "" };
       const row = new Setting(container)
         .setName(item.name)
         .setDesc(`${item.path.join(" › ")} — pasta automática: ${item.defaultFolder}`);
@@ -65,7 +113,7 @@ export class BibleIndexSettingTab extends PluginSettingTab {
         .setTooltip("Incluir esta coleção nos downloads")
         .setValue(current.enabled)
         .onChange(async (enabled) => {
-          this.plugin.settings.jwCategorySettings[item.key] = { ...current, enabled };
+          this.plugin.settings.categorySettings[item.key] = { ...current, enabled };
           await this.plugin.saveSettings();
           this.renderCatalog(container);
         }));
@@ -77,11 +125,18 @@ export class BibleIndexSettingTab extends PluginSettingTab {
           if (current.folder && !folders.includes(current.folder)) dropdown.addOption(current.folder, current.folder);
           dropdown.setValue(current.folder);
           dropdown.onChange(async (folder) => {
-            this.plugin.settings.jwCategorySettings[item.key] = { enabled: true, folder };
+            this.plugin.settings.categorySettings[item.key] = { enabled: true, folder };
             await this.plugin.saveSettings();
           });
         });
       }
     }
+  }
+
+  private listFolders(): string[] {
+    return this.app.vault.getAllLoadedFiles()
+      .filter((file): file is TFolder => file instanceof TFolder && file.path !== "/")
+      .map((folder) => folder.path)
+      .sort((a, b) => a.localeCompare(b, "pt-BR"));
   }
 }

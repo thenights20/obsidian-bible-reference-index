@@ -1,7 +1,7 @@
 # Instalação para teste no Windows
 
 1. Feche o Obsidian.
-2. Extraia o arquivo `Indice_Transcricoes_Instalacao_v0.4.2.zip`.
+2. Extraia o arquivo `Indice_Nights_Instalacao_v0.5.1.zip`.
 3. Copie a pasta `bible-reference-index` para:
 
    ```text
@@ -10,7 +10,7 @@
 
 4. Abra o Obsidian.
 5. Entre em `Configurações → Plugins comunitários`.
-6. Ative **Índice de Referências Bíblicas**.
+6. Ative **Indice Nights**.
 7. Copie `Exemplo_Indice_Biblico.md` para qualquer pasta do cofre e abra a nota.
 
 Se a pasta `.obsidian` não aparecer no Explorador de Arquivos, ative a exibição de itens ocultos no Windows.
@@ -25,6 +25,7 @@ Se a pasta `.obsidian` não aparecer no Explorador de Arquivos, ative a exibiç�
 - Abra as configurações do plugin e aguarde a lista automática de categorias.
 - Marque uma subcategoria, escolha uma pasta e clique em **Verificar e baixar**.
 - Confirme que uma nota já baixada não é baixada novamente.
+- Cole o link de uma pasta pública do Google Drive e confirme a importação dos arquivos de texto e de suas subpastas.
 
 ## Antes do teste no iPad
 

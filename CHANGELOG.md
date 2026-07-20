@@ -1,5 +1,21 @@
 # Histórico de versões
 
+## 0.5.1
+
+- Documentação, descrições e interface tornadas neutras e voltadas ao uso pessoal.
+- Novas transcrições passam a usar a propriedade genérica `id_origem`.
+- Notas antigas são reconhecidas e migradas sem provocar novos downloads.
+- O link da fonte de vídeo deixa de ser gravado no conteúdo das novas notas.
+
+## 0.5.0
+
+- Nome público alterado para `Indice Nights`, compatível com as regras do diretório comunitário.
+- Importação de transcrições por link público de pasta do Google Drive, sem login e sem chave de API.
+- Leitura recursiva de arquivos TXT, Markdown e Documentos Google, preservando as subpastas.
+- Identificação por `id_remoto`, sem sobrescrever notas já importadas nem alterações pessoais.
+- Notas remotas recebem título, orador quando reconhecido, propriedade `textos`, mini-índice e link do arquivo original.
+- Identificador técnico `bible-reference-index` preservado para manter a continuidade das atualizações.
+
 ## 0.4.2
 
 - Mantém a pasta do índice geral no topo do Explorador com o nome `00 - Índice Geral`.
@@ -17,7 +33,7 @@
 
 ## 0.4.0
 
-- Referências bíblicas escritas nas notas transformadas automaticamente em links para o JW Library.
+- Referências bíblicas escritas nas notas transformadas automaticamente em links para o aplicativo da Bíblia.
 - Propriedade `textos` e mini-índice sincronizados automaticamente com o conteúdo da nota.
 - Remoção automática de referências duplicadas.
 - Propriedades `categoria` e `subcategoria` removidas das novas transcrições e das notas atualizadas.
@@ -39,7 +55,7 @@
 - Biblioteca local de transcrições em português do Brasil.
 - Descoberta automática das categorias e subcategorias públicas de vídeos.
 - Seleção independente das subcategorias e das pastas de destino em cada aparelho.
-- Download somente de novas transcrições, com identificação pela propriedade `id_jw`.
+- Download somente de novas transcrições, com identificação por uma propriedade interna de origem.
 - Criação de notas com título original, orador quando identificado com segurança, categoria, subcategoria, data oficial de publicação e referências bíblicas.
 - Nome físico do arquivo tratado para funcionar no Windows, OneDrive, Dropbox e iPad.
 - Interface e documentação visíveis ao usuário em português.

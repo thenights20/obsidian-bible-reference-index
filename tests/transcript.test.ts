@@ -7,11 +7,11 @@ import {
   synchronizeMiniIndex,
   vttParaParagrafos
 } from "../src/transcript";
-import type { JwMediaItem } from "../src/types";
+import type { SourceMediaItem } from "../src/types";
 
-const media: JwMediaItem = {
-  naturalKey: "pub-jwb-139_T_2_VIDEO",
-  languageAgnosticNaturalKey: "pub-jwb-139_2_VIDEO",
+const media: SourceMediaItem = {
+  naturalKey: "pub-video-139_T_2_VIDEO",
+  languageAgnosticNaturalKey: "pub-video-139_2_VIDEO",
   title: "Robert Luccioni: Você Sabe Que Caminho Seguir?",
   firstPublished: "2026-07-07T14:39:24.349Z",
   files: []
@@ -19,8 +19,8 @@ const media: JwMediaItem = {
 
 describe("formatação de transcrições", () => {
   it("remove elementos técnicos do VTT sem reescrever a fala", () => {
-    const vtt = `WEBVTT\n\n00:00:01.000 --> 00:00:03.000\nJeová nos deu sua Palavra.\n\n00:00:03.000 --> 00:00:05.000\nEla é a verdade.`;
-    expect(vttParaParagrafos(vtt).join(" ")).toBe("Jeová nos deu sua Palavra. Ela é a verdade.");
+    const vtt = `WEBVTT\n\n00:00:01.000 --> 00:00:03.000\nA Bíblia contém bons conselhos.\n\n00:00:03.000 --> 00:00:05.000\nEles são úteis.`;
+    expect(vttParaParagrafos(vtt).join(" ")).toBe("A Bíblia contém bons conselhos. Eles são úteis.");
   });
 
   it("gera nome de arquivo compatível com Windows e OneDrive", () => {
@@ -29,7 +29,7 @@ describe("formatação de transcrições", () => {
 
   it("identifica o orador somente quando o título oferece um nome seguro", () => {
     expect(identificarOrador(media.title)).toBe("Robert Luccioni");
-    expect(identificarOrador("JW Broadcasting — julho de 2026")).toBeNull();
+    expect(identificarOrador("Programa mensal — julho de 2026")).toBeNull();
   });
 
   it("cria propriedades e conserva o título original dentro da nota", () => {
@@ -37,25 +37,25 @@ describe("formatação de transcrições", () => {
       media,
       "WEBVTT\n\n00:00:01.000 --> 00:00:03.000\nLeia João 3:16."
     );
-    expect(note).toContain('id_jw: "jwb-139_T_2"');
+    expect(note).toContain('id_origem: "video-139_T_2"');
     expect(note).toContain('orador: "Robert Luccioni"');
     expect(note).toContain("data_publicacao: 2026-07-07");
     expect(note).toContain('  - "João 3:16"');
     expect(note).toContain(`# ${media.title}`);
     expect(note).toContain("> [!bible-index] Textos bíblicos citados");
-    expect(note).toContain("[[#^citacao-003|J\u2060oão 3:16]]");
-    expect(note).toContain("^citacao-003");
+    expect(note).toContain("[[#^citacao-002|J\u2060oão 3:16]]");
+    expect(note).toContain("^citacao-002");
     expect(note).not.toContain("categoria:");
     expect(note).not.toContain("subcategoria:");
     expect(note).not.toContain("## Transcrição");
   });
 
   it("acrescenta mini-índice às notas antigas sem reescrever a transcrição", () => {
-    const oldNote = `---\nid_jw: "teste"\ntextos:\n  - "Isaías 33:22"\n---\n\n# Título\n\n[▶ Assistir no JW.ORG](https://example.com)\n\nLeia Isaías 33:22. Estas palavras continuam iguais.\n`;
+    const oldNote = `---\nid_origem: "teste"\ntextos:\n  - "Isaías 33:22"\n---\n\n# Título\n\nLeia Isaías 33:22. Estas palavras continuam iguais.\n`;
     const updated = adicionarMiniIndiceEmNota(oldNote);
-    expect(updated).toContain("[[#^citacao-003|I\u2060saías 33:22]]");
+    expect(updated).toContain("[[#^citacao-002|I\u2060saías 33:22]]");
     expect(updated).toContain(
-      "Leia [Isaías 33:22](jwlibrary:///finder?wtlocale=T&bible=23033022). Estas palavras continuam iguais.\n^citacao-003"
+      "Leia [Isaías 33:22](jwlibrary:///finder?wtlocale=T&bible=23033022). Estas palavras continuam iguais.\n^citacao-002"
     );
     expect(adicionarMiniIndiceEmNota(updated!)).toBeNull();
   });

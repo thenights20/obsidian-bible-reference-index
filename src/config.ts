@@ -4,9 +4,9 @@ export const DEFAULT_SETTINGS: PluginSettings = {
   defaultFolder: "Discursos",
   defaultProperty: "textos",
   pageSize: 75,
-  jwCatalog: [],
-  jwCatalogUpdatedAt: 0,
-  jwCategorySettings: {}
+  remoteDriveUrl: "",
+  remoteDriveFolder: "",
+  categorySettings: {}
 };
 
 function cleanPath(value: string): string {

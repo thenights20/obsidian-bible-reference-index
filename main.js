@@ -21,19 +21,19 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
 // src/main.ts
 var main_exports = {};
 __export(main_exports, {
-  default: () => BibleReferenceIndexPlugin
+  default: () => IndiceNightsPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian4 = require("obsidian");
+var import_obsidian5 = require("obsidian");
 
 // src/config.ts
 var DEFAULT_SETTINGS = {
   defaultFolder: "Discursos",
   defaultProperty: "textos",
   pageSize: 75,
-  jwCatalog: [],
-  jwCatalogUpdatedAt: 0,
-  jwCategorySettings: {}
+  remoteDriveUrl: "",
+  remoteDriveFolder: "",
+  categorySettings: {}
 };
 function cleanPath(value) {
   return value.trim().replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
@@ -375,8 +375,8 @@ var BibleIndex = class {
     const cached = this.contentCache.get(file.path);
     if (cached) return cached;
     const markdown = await this.app.vault.cachedRead(file);
-    const plainText = markdown.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "").replace(/<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->/g, "").replace(/```[\s\S]*?```/g, " ").replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\[\[[^\]|]+\|([^\]]+)\]\]/g, "$1").replace(/\[\[([^\]]+)\]\]/g, "$1").replace(/^\^[-\w]+\s*$/gm, "").replace(/^#{1,6}\s+/gm, "").replace(/^>\s?/gm, "").replace(/[*_~`]/g, "").replace(/\s+/g, " ").trim();
-    const sentences = ((_a = plainText.match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g)) != null ? _a : []).map((sentence) => sentence.trim()).filter(Boolean).map((sentence) => sentence.length > 320 ? `${sentence.slice(0, 317).trimEnd()}\u2026` : sentence);
+    const plainText2 = markdown.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "").replace(/<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->/g, "").replace(/```[\s\S]*?```/g, " ").replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\[\[[^\]|]+\|([^\]]+)\]\]/g, "$1").replace(/\[\[([^\]]+)\]\]/g, "$1").replace(/^\^[-\w]+\s*$/gm, "").replace(/^#{1,6}\s+/gm, "").replace(/^>\s?/gm, "").replace(/[*_~`]/g, "").replace(/\s+/g, " ").trim();
+    const sentences = ((_a = plainText2.match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g)) != null ? _a : []).map((sentence) => sentence.trim()).filter(Boolean).map((sentence) => sentence.length > 320 ? `${sentence.slice(0, 317).trimEnd()}\u2026` : sentence);
     this.contentCache.set(file.path, sentences);
     return sentences;
   }
@@ -680,15 +680,15 @@ var BibleIndexView = class extends import_obsidian.MarkdownRenderChild {
 // src/settings.ts
 var import_obsidian2 = require("obsidian");
 
-// src/jw-categories.ts
-var JW_SUPPORTED_CATEGORIES = [
+// src/transcript-categories.ts
+var SUPPORTED_CATEGORIES = [
   {
     key: "StudioTalks",
     name: "Discursos",
     type: "ondemand",
     parentKey: "VODStudio",
-    path: ["De Nosso Est\xFAdio", "Discursos"],
-    defaultFolder: "Discursos/De Nosso Est\xFAdio"
+    path: ["Biblioteca", "Discursos"],
+    defaultFolder: "Discursos/Biblioteca"
   },
   {
     key: "VODPgmEvtMorningWorship",
@@ -700,11 +700,11 @@ var JW_SUPPORTED_CATEGORIES = [
   },
   {
     key: "VODPgmEvtGilead",
-    name: "Formaturas de Gileade",
+    name: "Formaturas",
     type: "ondemand",
     parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Formaturas de Gileade"],
-    defaultFolder: "Discursos/Formaturas de Gileade"
+    path: ["Programas e Eventos", "Formaturas"],
+    defaultFolder: "Discursos/Formaturas"
   },
   {
     key: "VODPgmEvtAnnMtg",
@@ -741,7 +741,7 @@ var JW_SUPPORTED_CATEGORIES = [
 ];
 
 // src/settings.ts
-var BibleIndexSettingTab = class extends import_obsidian2.PluginSettingTab {
+var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
   constructor(app, plugin) {
     super(app, plugin);
     this.plugin = plugin;
@@ -749,17 +749,46 @@ var BibleIndexSettingTab = class extends import_obsidian2.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian2.Setting(containerEl).setName("Transcri\xE7\xF5es do JW.ORG").setHeading();
+    new import_obsidian2.Setting(containerEl).setName("Biblioteca de transcri\xE7\xF5es").setHeading();
     containerEl.createEl("p", {
       text: "Ative somente as cole\xE7\xF5es que deseja guardar neste aparelho. Se nenhuma pasta for escolhida, o plugin criar\xE1 automaticamente uma pasta organizada dentro de Discursos.",
       cls: "setting-item-description"
     });
     const catalog = containerEl.createDiv({ cls: "bri-catalog-settings" });
     this.renderCatalog(catalog);
-    new import_obsidian2.Setting(containerEl).setName("Baixar novas transcri\xE7\xF5es").setDesc("Verifica as cole\xE7\xF5es marcadas e baixa somente discursos que ainda n\xE3o possuem uma nota com o mesmo id_jw.").addButton((button) => button.setCta().setButtonText("Verificar e baixar").onClick(async () => {
+    new import_obsidian2.Setting(containerEl).setName("Baixar novas transcri\xE7\xF5es").setDesc("Verifica as cole\xE7\xF5es marcadas e baixa somente discursos que ainda n\xE3o possuem uma nota com o mesmo id_origem.").addButton((button) => button.setCta().setButtonText("Verificar e baixar").onClick(async () => {
       button.setDisabled(true);
       try {
         await this.plugin.transcriptService.downloadEnabled();
+      } finally {
+        button.setDisabled(false);
+      }
+    }));
+    new import_obsidian2.Setting(containerEl).setName("Transcri\xE7\xF5es de uma pasta p\xFAblica").setHeading();
+    containerEl.createEl("p", {
+      text: "Cole o link de uma pasta p\xFAblica do Google Drive. O plugin l\xEA arquivos TXT, Markdown e Documentos Google sem login e mant\xE9m as subpastas.",
+      cls: "setting-item-description"
+    });
+    new import_obsidian2.Setting(containerEl).setName("Link p\xFAblico da pasta").setDesc("No Google Drive, use Compartilhar \u2192 Acesso geral \u2192 Qualquer pessoa com o link \u2192 Leitor.").addText((text) => text.setPlaceholder("https://drive.google.com/drive/folders/...").setValue(this.plugin.settings.remoteDriveUrl).onChange(async (value) => {
+      this.plugin.settings.remoteDriveUrl = value.trim();
+      await this.plugin.saveSettings();
+    }));
+    const remoteFolders = this.listFolders();
+    new import_obsidian2.Setting(containerEl).setName("Pasta de destino").setDesc("Se nenhuma for escolhida, ser\xE1 usada Discursos/Importados. As subpastas remotas ser\xE3o preservadas.").addDropdown((dropdown) => {
+      dropdown.addOption("", "Autom\xE1tica: Discursos/Importados");
+      for (const folder of remoteFolders) dropdown.addOption(folder, folder);
+      const current = this.plugin.settings.remoteDriveFolder;
+      if (current && !remoteFolders.includes(current)) dropdown.addOption(current, current);
+      dropdown.setValue(current);
+      dropdown.onChange(async (folder) => {
+        this.plugin.settings.remoteDriveFolder = folder;
+        await this.plugin.saveSettings();
+      });
+    });
+    new import_obsidian2.Setting(containerEl).setName("Baixar da pasta p\xFAblica").setDesc("Baixa somente arquivos novos. Notas j\xE1 importadas e suas altera\xE7\xF5es pessoais n\xE3o s\xE3o substitu\xEDdas.").addButton((button) => button.setCta().setButtonText("Verificar e baixar").onClick(async () => {
+      button.setDisabled(true);
+      try {
+        await this.plugin.remoteDriveService.downloadNew();
       } finally {
         button.setDisabled(false);
       }
@@ -771,12 +800,12 @@ var BibleIndexSettingTab = class extends import_obsidian2.PluginSettingTab {
   renderCatalog(container) {
     var _a;
     container.empty();
-    const folders = this.app.vault.getAllLoadedFiles().filter((file) => file instanceof import_obsidian2.TFolder && file.path !== "/").map((folder) => folder.path).sort((a, b) => a.localeCompare(b, "pt-BR"));
-    for (const item of JW_SUPPORTED_CATEGORIES) {
-      const current = (_a = this.plugin.settings.jwCategorySettings[item.key]) != null ? _a : { enabled: false, folder: "" };
+    const folders = this.listFolders();
+    for (const item of SUPPORTED_CATEGORIES) {
+      const current = (_a = this.plugin.settings.categorySettings[item.key]) != null ? _a : { enabled: false, folder: "" };
       const row = new import_obsidian2.Setting(container).setName(item.name).setDesc(`${item.path.join(" \u203A ")} \u2014 pasta autom\xE1tica: ${item.defaultFolder}`);
       row.addToggle((toggle) => toggle.setTooltip("Incluir esta cole\xE7\xE3o nos downloads").setValue(current.enabled).onChange(async (enabled) => {
-        this.plugin.settings.jwCategorySettings[item.key] = { ...current, enabled };
+        this.plugin.settings.categorySettings[item.key] = { ...current, enabled };
         await this.plugin.saveSettings();
         this.renderCatalog(container);
       }));
@@ -787,20 +816,23 @@ var BibleIndexSettingTab = class extends import_obsidian2.PluginSettingTab {
           if (current.folder && !folders.includes(current.folder)) dropdown.addOption(current.folder, current.folder);
           dropdown.setValue(current.folder);
           dropdown.onChange(async (folder) => {
-            this.plugin.settings.jwCategorySettings[item.key] = { enabled: true, folder };
+            this.plugin.settings.categorySettings[item.key] = { enabled: true, folder };
             await this.plugin.saveSettings();
           });
         });
       }
     }
   }
+  listFolders() {
+    return this.app.vault.getAllLoadedFiles().filter((file) => file instanceof import_obsidian2.TFolder && file.path !== "/").map((folder) => folder.path).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }
 };
 
-// src/jw-service.ts
+// src/transcript-source-service.ts
 var import_obsidian3 = require("obsidian");
 
 // src/scripture-links.ts
-function jwLibraryUrl(reference) {
+function bibleAppUrl(reference) {
   const book = String(reference.bookOrder + 1).padStart(2, "0");
   const chapter = String(reference.chapter).padStart(3, "0");
   const verse = String(reference.verse).padStart(3, "0");
@@ -831,9 +863,9 @@ function linkBibleReferences(container) {
       fragment.append(text.slice(cursor, location.start));
       const link = createEl("a");
       link.className = "bri-scripture-link";
-      link.href = jwLibraryUrl(location.reference);
+      link.href = bibleAppUrl(location.reference);
       link.textContent = text.slice(location.start, location.end);
-      link.title = `Abrir ${location.reference.display} no JW Library`;
+      link.title = `Abrir ${location.reference.display} no aplicativo da B\xEDblia`;
       fragment.append(link);
       cursor = location.end;
     }
@@ -907,25 +939,25 @@ function nomeArquivoSeguro(title) {
   if (RESERVED_NAMES.test(safe)) safe = `Nota - ${safe}`;
   return safe.slice(0, 150).trim();
 }
-function idJw(media) {
+function sourceId(media) {
   return media.naturalKey.replace(/^pub-/, "").replace(/_(?:VIDEO|AUDIO)$/i, "");
 }
 function identificarOrador(title) {
   var _a, _b;
   const prefix = (_b = (_a = title.split(":", 1)[0]) == null ? void 0 : _a.trim()) != null ? _b : "";
   if (!prefix || prefix === title.trim() || prefix.length > 70) return null;
-  if (/^(jw|programa|discurso|notícias|boletim|relatório|congresso|assembleia)\b/i.test(prefix)) return null;
+  if (/^(programa|discurso|notícias|boletim|relatório|congresso|assembleia)\b/i.test(prefix)) return null;
   const words = prefix.split(/\s+/);
   if (words.length < 2 || words.length > 6) return null;
   if (!words.every((word) => /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÜÇ][\p{L}'’.-]*$/u.test(word))) return null;
   return prefix;
 }
 function withoutExistingMiniIndex(body) {
-  return body.replace(/\n?<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->\n?/g, "\n").replace(/\n?> \[!bible-index\][^\n]*\n>[^\n]*(?:\n|$)/g, "\n").replace(/\n?## 📖 Mini-índice de textos\s*\n+[\s\S]*?(?=\n{2,})\n{2,}/g, "\n\n").replace(/^\^citacao-\d+\s*$/gm, "").replace(/\n{3,}/g, "\n\n").trim();
+  return body.replace(/^\[▶ Assistir no [^\]]+\]\([^)]+\)\s*$/gim, "").replace(/\n?<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->\n?/g, "\n").replace(/\n?> \[!bible-index\][^\n]*\n>[^\n]*(?:\n|$)/g, "\n").replace(/\n?## 📖 Mini-índice de textos\s*\n+[\s\S]*?(?=\n{2,})\n{2,}/g, "\n\n").replace(/^\^citacao-\d+\s*$/gm, "").replace(/\n{3,}/g, "\n\n").trim();
 }
 function canContainSpokenReference(block) {
   const trimmed = block.trim();
-  return Boolean(trimmed) && !/^#{1,6}\s/.test(trimmed) && !/^\[▶ Assistir no JW\.ORG\]/.test(trimmed) && !/^> \[!bible-index\]/.test(trimmed) && !/^```/.test(trimmed) && !/^<!--/.test(trimmed);
+  return Boolean(trimmed) && !/^#{1,6}\s/.test(trimmed) && !/^\[▶ Assistir ao vídeo original\]/.test(trimmed) && !/^> \[!bible-index\]/.test(trimmed) && !/^```/.test(trimmed) && !/^<!--/.test(trimmed);
 }
 function protectedMiniIndexLabel(display) {
   return display.replace(/^((?:[123]\s+)?\p{L})/u, "$1\u2060");
@@ -941,7 +973,7 @@ function linkReferencesInMarkdown(block) {
     if (alreadyLinked || location.start < cursor) continue;
     output += block.slice(cursor, location.start);
     const original = block.slice(location.start, location.end);
-    output += `[${original}](${jwLibraryUrl(location.reference)})`;
+    output += `[${original}](${bibleAppUrl(location.reference)})`;
     cursor = location.end;
   }
   if (cursor === 0) return block;
@@ -979,7 +1011,7 @@ function synchronizeMiniIndex(content) {
       "> [!bible-index] Textos b\xEDblicos citados",
       `> ${links}`
     ].join("\n");
-    const sourceIndex = renderedBlocks.findIndex((block) => /^\[▶ Assistir no JW\.ORG\]/.test(block));
+    const sourceIndex = renderedBlocks.findIndex((block) => /^\[▶ Assistir ao vídeo original\]/.test(block));
     const titleIndex = renderedBlocks.findIndex((block) => /^#\s/.test(block));
     const insertionIndex = sourceIndex >= 0 ? sourceIndex + 1 : titleIndex >= 0 ? titleIndex + 1 : 0;
     renderedBlocks.splice(insertionIndex, 0, miniIndex);
@@ -997,10 +1029,9 @@ function criarNotaTranscricao(media, vtt) {
   const references = extractReferences(transcript);
   const speaker = identificarOrador(media.title);
   const date = (_c = (_b = /^\d{4}-\d{2}-\d{2}/.exec((_a = media.firstPublished) != null ? _a : "")) == null ? void 0 : _b[0]) != null ? _c : null;
-  const source = `https://www.jw.org/finder?srcid=share&wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`;
   const yaml = [
     "---",
-    `id_jw: ${yamlString(idJw(media))}`,
+    `id_origem: ${yamlString(sourceId(media))}`,
     ...speaker ? [`orador: ${yamlString(speaker)}`] : [],
     ...date ? [`data_publicacao: ${date}`] : [],
     ...references.length ? ["textos:", ...references.map((reference) => `  - ${yamlString(reference.display)}`)] : ["textos: []"],
@@ -1011,14 +1042,12 @@ function criarNotaTranscricao(media, vtt) {
     "",
     `# ${media.title}`,
     "",
-    `[\u25B6 Assistir no JW.ORG](${source})`,
-    "",
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";
   return synchronizeMiniIndex(base).content;
 }
 
-// src/jw-service.ts
+// src/transcript-source-service.ts
 var API_BASE = "https://b.jw-cdn.org/apis/mediator/v1";
 var LOCALE_PT_BR = "T";
 var GENERAL_INDEX_FOLDER = "00 - \xCDndice Geral";
@@ -1054,7 +1083,7 @@ function subtitleUrl(media) {
     return (_a2 = file.subtitles) == null ? void 0 : _a2.url;
   })) == null ? void 0 : _a.subtitles) == null ? void 0 : _b.url) != null ? _c : null;
 }
-var JwTranscriptService = class {
+var SourceTranscriptService = class {
   constructor(app, settings, syncNote) {
     this.app = app;
     this.settings = settings;
@@ -1066,8 +1095,8 @@ var JwTranscriptService = class {
       new import_obsidian3.Notice("J\xE1 existe uma atualiza\xE7\xE3o de transcri\xE7\xF5es em andamento.");
       return;
     }
-    const selected = JW_SUPPORTED_CATEGORIES.filter((item) => {
-      const config = this.settings.jwCategorySettings[item.key];
+    const selected = SUPPORTED_CATEGORIES.filter((item) => {
+      const config = this.settings.categorySettings[item.key];
       return config == null ? void 0 : config.enabled;
     });
     if (selected.length === 0) {
@@ -1085,12 +1114,12 @@ var JwTranscriptService = class {
       const existing = this.existingNotes();
       for (const [categoryIndex, category] of selected.entries()) {
         progress.setMessage(`Verificando ${category.name} (${categoryIndex + 1}/${selected.length})\u2026`);
-        const chosenFolder = cleanFolder(this.settings.jwCategorySettings[category.key].folder);
+        const chosenFolder = cleanFolder(this.settings.categorySettings[category.key].folder);
         const folder = chosenFolder || category.defaultFolder;
         await ensureFolder(this.app, folder);
         const mediaItems = await this.allMedia(category.key);
         for (const [mediaIndex, media] of mediaItems.entries()) {
-          const id = idJw(media);
+          const id = sourceId(media);
           progress.setMessage(`${category.name}: ${mediaIndex + 1}/${mediaItems.length} \u2014 ${media.title}`);
           const existingFile = existing.get(id);
           if (existingFile) {
@@ -1190,7 +1219,10 @@ var JwTranscriptService = class {
     var _a, _b;
     const notes = /* @__PURE__ */ new Map();
     for (const file of this.app.vault.getMarkdownFiles()) {
-      const value = (_b = (_a = this.app.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b.id_jw;
+      const rawFrontmatter = (_a = this.app.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter;
+      if (typeof rawFrontmatter !== "object" || rawFrontmatter === null) continue;
+      const frontmatter = rawFrontmatter;
+      const value = (_b = frontmatter.id_origem) != null ? _b : frontmatter.id_jw;
       if (typeof value === "string" && value.trim()) notes.set(value.trim(), file);
     }
     return notes;
@@ -1251,12 +1283,16 @@ var NoteSyncService = class {
       const expectedTexts = synchronized.references.map((reference) => reference.display);
       const currentTexts = propertyValues(frontmatter.textos);
       const hasTexts = Object.hasOwn(frontmatter, "textos");
-      const hasRemovedProperties = Object.hasOwn(frontmatter, "categoria") || Object.hasOwn(frontmatter, "subcategoria");
+      const hasRemovedProperties = Object.hasOwn(frontmatter, "categoria") || Object.hasOwn(frontmatter, "subcategoria") || Object.hasOwn(frontmatter, "id_jw");
       const needsTexts = expectedTexts.length > 0 || hasTexts;
       if (hasRemovedProperties || needsTexts && !sameValues(currentTexts, expectedTexts)) {
         await this.app.fileManager.processFrontMatter(file, (properties) => {
           delete properties.categoria;
           delete properties.subcategoria;
+          if (typeof properties.id_jw === "string" && !properties.id_origem) {
+            properties.id_origem = properties.id_jw;
+          }
+          delete properties.id_jw;
           if (needsTexts) properties.textos = expectedTexts;
         });
         changed = true;
@@ -1276,22 +1312,315 @@ var NoteSyncService = class {
     if (file.path.startsWith("Discursos/")) return true;
     const rawFrontmatter = (_a = this.app.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter;
     if (!isRecord(rawFrontmatter)) return false;
-    return typeof rawFrontmatter.id_jw === "string" || Object.hasOwn(rawFrontmatter, "textos");
+    return typeof rawFrontmatter.id_origem === "string" || typeof rawFrontmatter.id_jw === "string" || typeof rawFrontmatter.id_remoto === "string" || Object.hasOwn(rawFrontmatter, "textos");
+  }
+};
+
+// src/remote-drive.ts
+var import_obsidian4 = require("obsidian");
+
+// src/remote-drive-content.ts
+var DRIVE_ID = /^[A-Za-z0-9_-]{10,}$/;
+function decodeHtml(value) {
+  const named = {
+    amp: "&",
+    apos: "'",
+    gt: ">",
+    lt: "<",
+    nbsp: " ",
+    quot: '"'
+  };
+  return value.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (entity, code) => {
+    var _a;
+    if (code.startsWith("#x")) return String.fromCodePoint(Number.parseInt(code.slice(2), 16));
+    if (code.startsWith("#")) return String.fromCodePoint(Number.parseInt(code.slice(1), 10));
+    return (_a = named[code.toLocaleLowerCase("pt-BR")]) != null ? _a : entity;
+  });
+}
+function plainText(html) {
+  return decodeHtml(html.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+}
+function driveIdFromPath(pathname, pattern) {
+  var _a, _b;
+  const id = (_b = (_a = pattern.exec(pathname)) == null ? void 0 : _a[1]) != null ? _b : null;
+  return id && DRIVE_ID.test(id) ? id : null;
+}
+function parsePublicDriveFolderLink(value) {
+  var _a;
+  let url;
+  try {
+    url = new URL(value.trim());
+  } catch (e) {
+    throw new Error("Cole um link v\xE1lido de uma pasta p\xFAblica do Google Drive.");
+  }
+  if (url.protocol !== "https:" || url.hostname !== "drive.google.com") {
+    throw new Error("O link precisa come\xE7ar com https://drive.google.com/.");
+  }
+  const folderId = (_a = driveIdFromPath(url.pathname, /\/drive\/(?:u\/\d+\/)?folders\/([A-Za-z0-9_-]+)/)) != null ? _a : driveIdFromPath(url.pathname, /\/folders\/([A-Za-z0-9_-]+)/);
+  if (!folderId) throw new Error("Este n\xE3o parece ser um link de pasta do Google Drive.");
+  return {
+    folderId,
+    resourceKey: url.searchParams.get("resourcekey")
+  };
+}
+function classifyLink(rawHref) {
+  var _a, _b;
+  let url;
+  try {
+    url = new URL(decodeHtml(rawHref), "https://drive.google.com");
+  } catch (e) {
+    return null;
+  }
+  if (url.protocol !== "https:") return null;
+  const resourceKey = url.searchParams.get("resourcekey");
+  if (url.hostname === "drive.google.com") {
+    const folderId = (_a = driveIdFromPath(url.pathname, /\/drive\/(?:u\/\d+\/)?folders\/([A-Za-z0-9_-]+)/)) != null ? _a : driveIdFromPath(url.pathname, /\/folders\/([A-Za-z0-9_-]+)/);
+    if (folderId) return { id: folderId, type: "folder", resourceKey };
+    const fileId = (_b = driveIdFromPath(url.pathname, /\/file\/d\/([A-Za-z0-9_-]+)/)) != null ? _b : url.pathname === "/open" || url.pathname === "/uc" ? url.searchParams.get("id") : null;
+    if (fileId && DRIVE_ID.test(fileId)) return { id: fileId, type: "file", resourceKey };
+  }
+  if (url.hostname === "docs.google.com") {
+    const documentId = driveIdFromPath(url.pathname, /\/document\/d\/([A-Za-z0-9_-]+)/);
+    if (documentId) return { id: documentId, type: "google-doc", resourceKey };
+  }
+  return null;
+}
+function parsePublicDriveFolderHtml(html) {
+  var _a, _b;
+  const entries = /* @__PURE__ */ new Map();
+  const anchorPattern = /<a\b[^>]*\bhref\s*=\s*(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a>/gi;
+  for (const match of html.matchAll(anchorPattern)) {
+    const classified = classifyLink((_a = match[2]) != null ? _a : "");
+    const name = plainText((_b = match[3]) != null ? _b : "");
+    if (!classified || !name) continue;
+    const key = `${classified.type}:${classified.id}`;
+    if (!entries.has(key)) entries.set(key, { ...classified, name });
+  }
+  return [...entries.values()];
+}
+function isSupportedRemoteTranscript(entry) {
+  if (entry.type === "google-doc") return true;
+  return entry.type === "file" && /\.(?:txt|md|markdown)$/i.test(entry.name);
+}
+function withoutSourceFrontmatter(content) {
+  return content.replace(/^\uFEFF/, "").replace(/^---\s*\r?\n[\s\S]*?\r?\n---\s*(?:\r?\n|$)/, "").replace(/\r\n?/g, "\n").trim();
+}
+function yamlString2(value) {
+  return JSON.stringify(value);
+}
+function remoteDriveOriginalUrl(file) {
+  const base = file.type === "google-doc" ? `https://docs.google.com/document/d/${file.id}/edit` : `https://drive.google.com/file/d/${file.id}/view`;
+  return file.resourceKey ? `${base}?resourcekey=${encodeURIComponent(file.resourceKey)}` : base;
+}
+function createRemoteTranscriptNote(file, rawContent) {
+  const originalTitle = file.name.replace(/\.(?:txt|md|markdown)$/i, "").trim();
+  const title = nomeArquivoSeguro(originalTitle);
+  const speaker = identificarOrador(originalTitle);
+  const body = withoutSourceFrontmatter(rawContent);
+  const references = extractReferences(body);
+  const yaml = [
+    "---",
+    `id_remoto: ${yamlString2(`google-drive:${file.id}`)}`,
+    ...speaker ? [`orador: ${yamlString2(speaker)}`] : [],
+    ...references.length ? ["textos:", ...references.map((reference) => `  - ${yamlString2(reference.display)}`)] : ["textos: []"],
+    "---"
+  ];
+  const hasHeading = /^#\s+\S/m.test(body);
+  const base = [
+    ...yaml,
+    "",
+    ...hasHeading ? [] : [`# ${title}`, ""],
+    `[\u2197 Abrir arquivo original no Google Drive](${remoteDriveOriginalUrl(file)})`,
+    "",
+    body
+  ].join("\n").trimEnd() + "\n";
+  return synchronizeMiniIndex(base).content;
+}
+
+// src/remote-drive.ts
+var DEFAULT_FOLDER = "Discursos/Importados";
+var MAX_FOLDERS = 100;
+var MAX_FILES = 1e3;
+var MAX_DEPTH = 12;
+function cleanFolder2(value) {
+  const trimmed = value.trim().replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
+  return trimmed ? (0, import_obsidian4.normalizePath)(trimmed) : "";
+}
+function safeFolderName(value) {
+  return nomeArquivoSeguro(value).replace(/\.+$/g, "").trim() || "Pasta sem nome";
+}
+async function ensureFolder2(app, folder) {
+  const parts = cleanFolder2(folder).split("/").filter(Boolean);
+  let current = "";
+  for (const part of parts) {
+    current = current ? `${current}/${part}` : part;
+    if (!app.vault.getAbstractFileByPath(current)) await app.vault.createFolder(current);
+  }
+}
+function embeddedFolderUrl(folderId, resourceKey) {
+  const params = new URLSearchParams({ id: folderId });
+  if (resourceKey) params.set("resourcekey", resourceKey);
+  return `https://drive.google.com/embeddedfolderview?${params.toString()}#list`;
+}
+function downloadUrl(file) {
+  const params = new URLSearchParams();
+  if (file.resourceKey) params.set("resourcekey", file.resourceKey);
+  if (file.type === "google-doc") {
+    const query = params.toString();
+    return `https://docs.google.com/document/d/${file.id}/export?format=txt${query ? `&${query}` : ""}`;
+  }
+  params.set("export", "download");
+  params.set("id", file.id);
+  return `https://drive.google.com/uc?${params.toString()}`;
+}
+function looksLikeGooglePage(contentType, text) {
+  const beginning = text.slice(0, 800).toLocaleLowerCase("pt-BR");
+  return contentType.toLocaleLowerCase("pt-BR").includes("text/html") || /<!doctype html|<html\b/.test(beginning);
+}
+var RemoteDriveTranscriptService = class {
+  constructor(app, settings, syncNote) {
+    this.app = app;
+    this.settings = settings;
+    this.syncNote = syncNote;
+    __publicField(this, "downloading", false);
+  }
+  async downloadNew() {
+    var _a;
+    if (this.downloading) {
+      new import_obsidian4.Notice("J\xE1 existe uma importa\xE7\xE3o da pasta p\xFAblica em andamento.");
+      return;
+    }
+    let root;
+    try {
+      root = parsePublicDriveFolderLink(this.settings.remoteDriveUrl);
+    } catch (error) {
+      new import_obsidian4.Notice(error instanceof Error ? error.message : "O link da pasta p\xFAblica \xE9 inv\xE1lido.", 9e3);
+      return;
+    }
+    this.downloading = true;
+    const progress = new import_obsidian4.Notice("Lendo a pasta p\xFAblica do Google Drive\u2026", 0);
+    let created = 0;
+    let skipped = 0;
+    let synchronized = 0;
+    let errors = 0;
+    try {
+      const files = await this.collectFiles(root.folderId, root.resourceKey, progress);
+      const existing = this.existingNotes();
+      const destination = cleanFolder2(this.settings.remoteDriveFolder) || DEFAULT_FOLDER;
+      for (const [index, file] of files.entries()) {
+        progress.setMessage(`Importando ${index + 1}/${files.length}: ${file.name}`);
+        const remoteId = `google-drive:${file.id}`;
+        const existingFile = existing.get(remoteId);
+        if (existingFile) {
+          if (await this.syncNote(existingFile)) synchronized += 1;
+          skipped += 1;
+          continue;
+        }
+        try {
+          const response = await (0, import_obsidian4.requestUrl)({ url: downloadUrl(file), method: "GET" });
+          const contentType = (_a = response.headers["content-type"]) != null ? _a : "";
+          if (looksLikeGooglePage(contentType, response.text)) {
+            throw new Error("O Google Drive n\xE3o entregou o arquivo como texto.");
+          }
+          const folder = cleanFolder2([destination, file.relativeFolder].filter(Boolean).join("/"));
+          await ensureFolder2(this.app, folder);
+          const basename = nomeArquivoSeguro(file.name.replace(/\.(?:txt|md|markdown)$/i, ""));
+          const path = await this.availablePath(folder, basename);
+          const note = createRemoteTranscriptNote(file, response.text);
+          const createdFile = await this.app.vault.create(path, note);
+          existing.set(remoteId, createdFile);
+          created += 1;
+        } catch (e) {
+          errors += 1;
+        }
+      }
+      new import_obsidian4.Notice(
+        `Importa\xE7\xE3o conclu\xEDda: ${created} nova(s), ${skipped} j\xE1 existente(s), ${synchronized} mini-\xEDndice(s) atualizado(s), ${errors} erro(s).`,
+        12e3
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "N\xE3o foi poss\xEDvel ler a pasta p\xFAblica.";
+      new import_obsidian4.Notice(`Importa\xE7\xE3o interrompida: ${message}`, 12e3);
+    } finally {
+      progress.hide();
+      this.downloading = false;
+    }
+  }
+  async collectFiles(rootId, resourceKey, progress) {
+    const files = [];
+    const visited = /* @__PURE__ */ new Set();
+    const pending = [
+      { id: rootId, resourceKey, path: "", depth: 0 }
+    ];
+    while (pending.length > 0) {
+      const folder = pending.shift();
+      if (!folder || visited.has(folder.id)) continue;
+      if (folder.depth > MAX_DEPTH) throw new Error(`A pasta excedeu o limite de ${MAX_DEPTH} n\xEDveis.`);
+      visited.add(folder.id);
+      if (visited.size > MAX_FOLDERS) throw new Error(`A pasta excedeu o limite de ${MAX_FOLDERS} subpastas.`);
+      progress.setMessage(`Lendo pasta p\xFAblica ${visited.size}\u2026`);
+      const response = await (0, import_obsidian4.requestUrl)({
+        url: embeddedFolderUrl(folder.id, folder.resourceKey),
+        method: "GET"
+      });
+      const entries = parsePublicDriveFolderHtml(response.text);
+      if (entries.length === 0 && visited.size === 1) {
+        throw new Error("A pasta est\xE1 vazia, n\xE3o \xE9 p\xFAblica ou o Google alterou a p\xE1gina de compartilhamento.");
+      }
+      for (const entry of entries) {
+        if (entry.type === "folder") {
+          pending.push({
+            id: entry.id,
+            resourceKey: entry.resourceKey,
+            path: [folder.path, safeFolderName(entry.name)].filter(Boolean).join("/"),
+            depth: folder.depth + 1
+          });
+          continue;
+        }
+        if (!isSupportedRemoteTranscript(entry)) continue;
+        files.push(this.toTranscript(entry, folder.path));
+        if (files.length > MAX_FILES) throw new Error(`A pasta excedeu o limite de ${MAX_FILES} arquivos.`);
+      }
+    }
+    return files;
+  }
+  toTranscript(entry, relativeFolder) {
+    if (entry.type === "folder") throw new Error("Uma pasta n\xE3o pode ser importada como transcri\xE7\xE3o.");
+    return { ...entry, type: entry.type, relativeFolder };
+  }
+  existingNotes() {
+    var _a, _b;
+    const notes = /* @__PURE__ */ new Map();
+    for (const file of this.app.vault.getMarkdownFiles()) {
+      const value = (_b = (_a = this.app.metadataCache.getFileCache(file)) == null ? void 0 : _a.frontmatter) == null ? void 0 : _b.id_remoto;
+      if (typeof value === "string" && value.trim()) notes.set(value.trim(), file);
+    }
+    return notes;
+  }
+  async availablePath(folder, basename) {
+    let counter = 1;
+    let path = `${folder}/${basename}.md`;
+    while (this.app.vault.getAbstractFileByPath(path)) {
+      counter += 1;
+      path = `${folder}/${basename} (${counter}).md`;
+    }
+    return path;
   }
 };
 
 // src/main.ts
-var STORAGE_PREFIX = "bible-reference-index:selection:";
+var STORAGE_PREFIX = "indice-nights:selection:";
+var LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
 var DeviceSelectionStore = class {
   constructor() {
     __publicField(this, "fallback", /* @__PURE__ */ new Map());
   }
   get(key) {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     try {
-      return (_b = (_a = window.localStorage.getItem(`${STORAGE_PREFIX}${key}`)) != null ? _a : this.fallback.get(key)) != null ? _b : null;
+      return (_c = (_b = (_a = window.localStorage.getItem(`${STORAGE_PREFIX}${key}`)) != null ? _a : window.localStorage.getItem(`${LEGACY_STORAGE_PREFIX}${key}`)) != null ? _b : this.fallback.get(key)) != null ? _c : null;
     } catch (e) {
-      return (_c = this.fallback.get(key)) != null ? _c : null;
+      return (_d = this.fallback.get(key)) != null ? _d : null;
     }
   }
   set(key, value) {
@@ -1302,12 +1631,13 @@ var DeviceSelectionStore = class {
     }
   }
 };
-var BibleReferenceIndexPlugin = class extends import_obsidian4.Plugin {
+var IndiceNightsPlugin = class extends import_obsidian5.Plugin {
   constructor() {
     super(...arguments);
     __publicField(this, "settings", { ...DEFAULT_SETTINGS });
     __publicField(this, "indexManager");
     __publicField(this, "transcriptService");
+    __publicField(this, "remoteDriveService");
     __publicField(this, "noteSyncService");
     __publicField(this, "selections", new DeviceSelectionStore());
   }
@@ -1315,18 +1645,30 @@ var BibleReferenceIndexPlugin = class extends import_obsidian4.Plugin {
     await this.loadSettings();
     this.indexManager = new BibleIndexManager(this.app);
     this.noteSyncService = new NoteSyncService(this.app);
-    this.transcriptService = new JwTranscriptService(
+    this.transcriptService = new SourceTranscriptService(
       this.app,
       this.settings,
       (file) => this.noteSyncService.syncFile(file)
     );
-    this.addSettingTab(new BibleIndexSettingTab(this.app, this));
+    this.remoteDriveService = new RemoteDriveTranscriptService(
+      this.app,
+      this.settings,
+      (file) => this.noteSyncService.syncFile(file)
+    );
+    this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
     await this.transcriptService.ensureGeneralIndex();
     this.addCommand({
       id: "baixar-novas-transcricoes",
       name: "Baixar novas transcri\xE7\xF5es selecionadas",
       callback: () => {
         void this.transcriptService.downloadEnabled();
+      }
+    });
+    this.addCommand({
+      id: "baixar-transcricoes-pasta-publica",
+      name: "Baixar novas transcri\xE7\xF5es da pasta p\xFAblica",
+      callback: () => {
+        void this.remoteDriveService.downloadNew();
       }
     });
     this.registerMarkdownCodeBlockProcessor("indice-biblico", (source, el, context) => {
@@ -1353,13 +1695,13 @@ var BibleReferenceIndexPlugin = class extends import_obsidian4.Plugin {
       this.indexManager.updateFile(file);
     }));
     this.registerEvent(this.app.vault.on("modify", (file) => {
-      if (file instanceof import_obsidian4.TFile) this.noteSyncService.schedule(file);
+      if (file instanceof import_obsidian5.TFile) this.noteSyncService.schedule(file);
     }));
     this.registerEvent(this.app.vault.on("delete", (file) => {
-      if (file instanceof import_obsidian4.TFile) this.indexManager.removePath(file.path);
+      if (file instanceof import_obsidian5.TFile) this.indexManager.removePath(file.path);
     }));
     this.registerEvent(this.app.vault.on("rename", (file, oldPath) => {
-      if (file instanceof import_obsidian4.TFile) this.indexManager.renameFile(file, oldPath);
+      if (file instanceof import_obsidian5.TFile) this.indexManager.renameFile(file, oldPath);
     }));
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
       if (file) this.noteSyncService.schedule(file);
@@ -1375,7 +1717,10 @@ var BibleReferenceIndexPlugin = class extends import_obsidian4.Plugin {
     await this.saveData(this.settings);
   }
   async loadSettings() {
+    var _a;
     const saved = await this.loadData();
-    this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {} };
+    const legacyCategories = saved == null ? void 0 : saved.jwCategorySettings;
+    const categorySettings = (_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings;
+    this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {}, categorySettings };
   }
 };

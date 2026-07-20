@@ -1,6 +1,6 @@
 import { extractReferences, findReferencesInText } from "./references";
-import { jwLibraryUrl } from "./scripture-links";
-import type { JwMediaItem } from "./types";
+import { bibleAppUrl } from "./scripture-links";
+import type { SourceMediaItem } from "./types";
 
 const INVALID_FILE_CHARS = /[<>:"/\\|?*]/g;
 const RESERVED_NAMES = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i;
@@ -81,14 +81,14 @@ export function nomeArquivoSeguro(title: string): string {
   return safe.slice(0, 150).trim();
 }
 
-export function idJw(media: JwMediaItem): string {
+export function sourceId(media: SourceMediaItem): string {
   return media.naturalKey.replace(/^pub-/, "").replace(/_(?:VIDEO|AUDIO)$/i, "");
 }
 
 export function identificarOrador(title: string): string | null {
   const prefix = title.split(":", 1)[0]?.trim() ?? "";
   if (!prefix || prefix === title.trim() || prefix.length > 70) return null;
-  if (/^(jw|programa|discurso|notícias|boletim|relatório|congresso|assembleia)\b/i.test(prefix)) return null;
+  if (/^(programa|discurso|notícias|boletim|relatório|congresso|assembleia)\b/i.test(prefix)) return null;
   const words = prefix.split(/\s+/);
   if (words.length < 2 || words.length > 6) return null;
   if (!words.every((word) => /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÜÇ][\p{L}'’.-]*$/u.test(word))) return null;
@@ -102,6 +102,7 @@ export interface SyncedMiniIndex {
 
 function withoutExistingMiniIndex(body: string): string {
   return body
+    .replace(/^\[▶ Assistir no [^\]]+\]\([^)]+\)\s*$/gim, "")
     .replace(/\n?<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->\n?/g, "\n")
     .replace(/\n?> \[!bible-index\][^\n]*\n>[^\n]*(?:\n|$)/g, "\n")
     .replace(/\n?## 📖 Mini-índice de textos\s*\n+[\s\S]*?(?=\n{2,})\n{2,}/g, "\n\n")
@@ -114,7 +115,7 @@ function canContainSpokenReference(block: string): boolean {
   const trimmed = block.trim();
   return Boolean(trimmed) &&
     !/^#{1,6}\s/.test(trimmed) &&
-    !/^\[▶ Assistir no JW\.ORG\]/.test(trimmed) &&
+    !/^\[▶ Assistir ao vídeo original\]/.test(trimmed) &&
     !/^> \[!bible-index\]/.test(trimmed) &&
     !/^```/.test(trimmed) &&
     !/^<!--/.test(trimmed);
@@ -138,7 +139,7 @@ function linkReferencesInMarkdown(block: string): string {
     if (alreadyLinked || location.start < cursor) continue;
     output += block.slice(cursor, location.start);
     const original = block.slice(location.start, location.end);
-    output += `[${original}](${jwLibraryUrl(location.reference)})`;
+    output += `[${original}](${bibleAppUrl(location.reference)})`;
     cursor = location.end;
   }
   if (cursor === 0) return block;
@@ -177,7 +178,7 @@ export function synchronizeMiniIndex(content: string): SyncedMiniIndex {
       "> [!bible-index] Textos bíblicos citados",
       `> ${links}`
     ].join("\n");
-    const sourceIndex = renderedBlocks.findIndex((block) => /^\[▶ Assistir no JW\.ORG\]/.test(block));
+    const sourceIndex = renderedBlocks.findIndex((block) => /^\[▶ Assistir ao vídeo original\]/.test(block));
     const titleIndex = renderedBlocks.findIndex((block) => /^#\s/.test(block));
     const insertionIndex = sourceIndex >= 0 ? sourceIndex + 1 : titleIndex >= 0 ? titleIndex + 1 : 0;
     renderedBlocks.splice(insertionIndex, 0, miniIndex);
@@ -192,7 +193,7 @@ function yamlString(value: string): string {
 }
 
 export function criarNotaTranscricao(
-  media: JwMediaItem,
+  media: SourceMediaItem,
   vtt: string
 ): string {
   const paragraphs = vttParaParagrafos(vtt);
@@ -200,11 +201,9 @@ export function criarNotaTranscricao(
   const references = extractReferences(transcript);
   const speaker = identificarOrador(media.title);
   const date = /^\d{4}-\d{2}-\d{2}/.exec(media.firstPublished ?? "")?.[0] ?? null;
-  const source = `https://www.jw.org/finder?srcid=share&wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`;
-
   const yaml = [
     "---",
-    `id_jw: ${yamlString(idJw(media))}`,
+    `id_origem: ${yamlString(sourceId(media))}`,
     ...(speaker ? [`orador: ${yamlString(speaker)}`] : []),
     ...(date ? [`data_publicacao: ${date}`] : []),
     ...(references.length
@@ -217,8 +216,6 @@ export function criarNotaTranscricao(
     ...yaml,
     "",
     `# ${media.title}`,
-    "",
-    `[▶ Assistir no JW.ORG](${source})`,
     "",
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";

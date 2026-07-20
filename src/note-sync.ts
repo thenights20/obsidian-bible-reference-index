@@ -50,12 +50,17 @@ export class NoteSyncService {
       const currentTexts = propertyValues(frontmatter.textos);
       const hasTexts = Object.hasOwn(frontmatter, "textos");
       const hasRemovedProperties = Object.hasOwn(frontmatter, "categoria") ||
-        Object.hasOwn(frontmatter, "subcategoria");
+        Object.hasOwn(frontmatter, "subcategoria") ||
+        Object.hasOwn(frontmatter, "id_jw");
       const needsTexts = expectedTexts.length > 0 || hasTexts;
       if (hasRemovedProperties || (needsTexts && !sameValues(currentTexts, expectedTexts))) {
         await this.app.fileManager.processFrontMatter(file, (properties: Record<string, unknown>) => {
           delete properties.categoria;
           delete properties.subcategoria;
+          if (typeof properties.id_jw === "string" && !properties.id_origem) {
+            properties.id_origem = properties.id_jw;
+          }
+          delete properties.id_jw;
           if (needsTexts) properties.textos = expectedTexts;
         });
         changed = true;
@@ -76,6 +81,9 @@ export class NoteSyncService {
     if (file.path.startsWith("Discursos/")) return true;
     const rawFrontmatter: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter;
     if (!isRecord(rawFrontmatter)) return false;
-    return typeof rawFrontmatter.id_jw === "string" || Object.hasOwn(rawFrontmatter, "textos");
+    return typeof rawFrontmatter.id_origem === "string" ||
+      typeof rawFrontmatter.id_jw === "string" ||
+      typeof rawFrontmatter.id_remoto === "string" ||
+      Object.hasOwn(rawFrontmatter, "textos");
   }
 }

@@ -1,7 +1,7 @@
 import { findReferencesInText } from "./references";
 import type { ParsedReference } from "./types";
 
-export function jwLibraryUrl(reference: ParsedReference): string {
+export function bibleAppUrl(reference: ParsedReference): string {
   const book = String(reference.bookOrder + 1).padStart(2, "0");
   const chapter = String(reference.chapter).padStart(3, "0");
   const verse = String(reference.verse).padStart(3, "0");
@@ -35,9 +35,9 @@ export function linkBibleReferences(container: HTMLElement): void {
       fragment.append(text.slice(cursor, location.start));
       const link = createEl("a");
       link.className = "bri-scripture-link";
-      link.href = jwLibraryUrl(location.reference);
+      link.href = bibleAppUrl(location.reference);
       link.textContent = text.slice(location.start, location.end);
-      link.title = `Abrir ${location.reference.display} no JW Library`;
+      link.title = `Abrir ${location.reference.display} no aplicativo da Bíblia`;
       fragment.append(link);
       cursor = location.end;
     }

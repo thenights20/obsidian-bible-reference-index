@@ -56,17 +56,17 @@ export interface PluginSettings {
   defaultFolder: string;
   defaultProperty: string;
   pageSize: number;
-  jwCatalog: JwCatalogItem[];
-  jwCatalogUpdatedAt: number;
-  jwCategorySettings: Record<string, JwCategorySetting>;
+  remoteDriveUrl: string;
+  remoteDriveFolder: string;
+  categorySettings: Record<string, SourceCategorySetting>;
 }
 
-export interface JwCategorySetting {
+export interface SourceCategorySetting {
   enabled: boolean;
   folder: string;
 }
 
-export interface JwCatalogItem {
+export interface SourceCatalogItem {
   key: string;
   name: string;
   type: "container" | "ondemand";
@@ -74,17 +74,17 @@ export interface JwCatalogItem {
   path: string[];
 }
 
-export interface JwMediaFile {
+export interface SourceMediaFile {
   label: string | null;
   subtitles?: {
     url: string;
   };
 }
 
-export interface JwMediaItem {
+export interface SourceMediaItem {
   naturalKey: string;
   languageAgnosticNaturalKey: string;
   title: string;
   firstPublished?: string;
-  files: JwMediaFile[];
+  files: SourceMediaFile[];
 }

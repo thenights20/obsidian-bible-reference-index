@@ -1,4 +1,4 @@
-ÍNDICE DE REFERÊNCIAS BÍBLICAS — TESTE 0.4.2
+INDICE NIGHTS — TESTE 0.5.1
 
 O arquivo de instalação contém uma pasta chamada:
 
@@ -14,11 +14,11 @@ COMO INSTALAR NO WINDOWS
 6. Se o Windows perguntar, escolha substituir os três arquivos existentes.
 7. Abra o Obsidian novamente.
 8. Entre em Configurações > Plugins comunitários.
-9. Ative Índice de Referências Bíblicas.
+9. Ative Indice Nights.
 
 PRIMEIRO TESTE DAS TRANSCRIÇÕES
 
-1. Abra Configurações > Índice de Referências Bíblicas.
+1. Abra Configurações > Indice Nights.
 2. Aguarde a lista de categorias aparecer.
 3. Marque somente uma subcategoria pequena no primeiro teste.
 4. Deixe a opção de pasta automática ou escolha outra pasta do seu cofre.
@@ -31,7 +31,7 @@ TESTE DA ATUALIZAÇÃO AUTOMÁTICA
 1. Abra uma transcrição e escreva uma referência bíblica em um parágrafo.
 2. Aguarde cerca de um segundo depois de terminar a edição.
 3. Confirme que a referência entrou na propriedade textos e no mini-índice.
-4. Abra a nota em modo de leitura e clique na referência para testar o JW Library.
+4. Abra a nota em modo de leitura e clique na referência para testar o aplicativo da Bíblia.
 5. No índice geral, marque Pesquisar dentro do conteúdo das notas e pesquise uma palavra.
 
 O índice geral será criado automaticamente em:
@@ -42,5 +42,13 @@ Ao verificar uma coleção, o plugin também acrescenta o mini-índice às notas
 antigas daquela coleção que ainda não tenham esse recurso.
 
 O plugin não baixa vídeos. Ele baixa apenas as legendas disponíveis e cria
-notas Markdown locais. Esta versão ainda é de teste e não foi enviada ao
-GitHub.
+notas Markdown locais.
+
+TESTE DA PASTA PÚBLICA
+
+1. No Google Drive, deixe a pasta como Qualquer pessoa com o link > Leitor.
+2. Em Configurações > Indice Nights, cole o link da pasta pública.
+3. Escolha uma pasta de destino ou mantenha Discursos/Importados.
+4. Clique em Verificar e baixar.
+5. O plugin aceita TXT, Markdown e Documentos Google, inclusive em subpastas.
+6. Repita o teste: arquivos já importados não devem ser substituídos.
