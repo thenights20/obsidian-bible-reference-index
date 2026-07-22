@@ -45,14 +45,20 @@ jobs:
         run: |
           if gh release view "$PLUGIN_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo "Release $PLUGIN_VERSION já existe. Atualizando arquivos..."
+
             gh release upload "$PLUGIN_VERSION" \
-              main.js manifest.json styles.css \
+              main.js \
+              manifest.json \
+              styles.css \
               --clobber \
               --repo "$GITHUB_REPOSITORY"
           else
             echo "Criando Release $PLUGIN_VERSION..."
+
             gh release create "$PLUGIN_VERSION" \
-              main.js manifest.json styles.css \
+              main.js \
+              manifest.json \
+              styles.css \
               --target "$GITHUB_SHA" \
               --repo "$GITHUB_REPOSITORY" \
               --title "$PLUGIN_VERSION" \
