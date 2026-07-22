@@ -16,25 +16,56 @@ jobs:
     steps:
       - name: Baixar os arquivos
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Identificar a versão
         shell: bash
-        run: echo "PLUGIN_VERSION=$(jq -r '.version' manifest.json)" >> "$GITHUB_ENV"
+        run: |
+          VERSION="$(jq -r '.version' manifest.json)"
+          if [[ -z "$VERSION" || "$VERSION" == "null" ]]; then
+            echo "Não foi possível identificar a versão no manifest.json."
+            exit 1
+          fi
+          echo "PLUGIN_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Versão identificada: $VERSION"
 
-      - name: Criar ou atualizar o Release
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Validar arquivos do plugin
         shell: bash
         run: |
           test -f main.js
           test -f manifest.json
           test -f styles.css
 
-          if gh release view "$PLUGIN_VERSION" >/dev/null 2>&1; then
-            gh release upload "$PLUGIN_VERSION" main.js manifest.json styles.css --clobber
+      - name: Criar a tag se necessário
+        shell: bash
+        run: |
+          git fetch --tags --force
+
+          if git rev-parse "refs/tags/$PLUGIN_VERSION" >/dev/null 2>&1; then
+            echo "A tag $PLUGIN_VERSION já existe."
           else
-            gh release create "$PLUGIN_VERSION" main.js manifest.json styles.css \
-              --target "$GITHUB_SHA" \
+            echo "Criando a tag $PLUGIN_VERSION no commit $GITHUB_SHA..."
+            git tag "$PLUGIN_VERSION" "$GITHUB_SHA"
+            git push origin "$PLUGIN_VERSION"
+          fi
+
+      - name: Criar ou atualizar o Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$PLUGIN_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $PLUGIN_VERSION já existe. Atualizando arquivos..."
+            gh release upload "$PLUGIN_VERSION" \
+              main.js manifest.json styles.css \
+              --clobber \
+              --repo "$GITHUB_REPOSITORY"
+          else
+            echo "Criando release $PLUGIN_VERSION..."
+            gh release create "$PLUGIN_VERSION" \
+              main.js manifest.json styles.css \
+              --repo "$GITHUB_REPOSITORY" \
               --title "$PLUGIN_VERSION" \
-              --generate-notes
+              --notes "Publicação automática do Indice Nights $PLUGIN_VERSION."
           fi
