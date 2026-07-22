@@ -1,1 +1,50 @@
+name: Publicar versao
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar os arquivos
+        uses: actions/checkout@v4
+
+      - name: Identificar a versao
+        shell: bash
+        run: |
+          VERSION="$(jq -r '.version' manifest.json)"
+          if [ -z "$VERSION" ] || [ "$VERSION" = "null" ]; then
+            echo "Nao foi possivel identificar a versao no manifest.json."
+            exit 1
+          fi
+          echo "PLUGIN_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Versao identificada: $VERSION"
+
+      - name: Validar arquivos do plugin
+        shell: bash
+        run: |
+          test -f main.js
+          test -f manifest.json
+          test -f styles.css
+          echo "Arquivos do plugin encontrados."
+
+      - name: Criar ou atualizar o Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$PLUGIN_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $PLUGIN_VERSION ja existe. Atualizando arquivos..."
+            gh release upload "$PLUGIN_VERSION" main.js manifest.json styles.css --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            echo "Criando Release $PLUGIN_VERSION..."
+            gh release create "$PLUGIN_VERSION" main.js manifest.json styles.css --target "$GITHUB_SHA" --repo "$GITHUB_REPOSITORY" --title "$PLUGIN_VERSION" --notes "Publicacao automatica do Indice Nights $PLUGIN_VERSION."
+          fi
