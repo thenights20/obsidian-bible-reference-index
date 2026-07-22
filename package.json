@@ -1,34 +1,54 @@
-{
-  "name": "indice-nights",
-  "version": "0.6.0",
-  "description": "Índice bíblico e biblioteca local de transcrições em português para o Obsidian.",
-  "main": "main.js",
-  "scripts": {
-    "build": "node esbuild.config.mjs production",
-    "dev": "node esbuild.config.mjs",
-    "test": "vitest run",
-    "lint": "eslint src tests",
-    "check": "tsc --noEmit && npm run lint && npm test && npm run build"
-  },
-  "keywords": [
-    "obsidian",
-    "biblia",
-    "referencias",
-    "indice",
-    "transcricoes"
-  ],
-  "author": "the_nights",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^24.0.0",
-    "@typescript-eslint/parser": "^8.64.0",
-    "builtin-modules": "^4.0.0",
-    "esbuild": "^0.25.0",
-    "eslint": "^9.39.5",
-    "eslint-plugin-obsidianmd": "^0.4.1",
-    "obsidian": "^1.8.7",
-    "tslib": "^2.8.1",
-    "typescript": "^5.8.0",
-    "vitest": "^3.2.0"
-  }
-}
+INDICE NIGHTS — TESTE 0.5.2
+
+O arquivo de instalação contém uma pasta chamada:
+
+    bible-reference-index
+
+COMO INSTALAR NO WINDOWS
+
+1. No Obsidian, desative temporariamente o plugin antigo.
+2. Feche completamente o Obsidian.
+3. Abra a pasta do seu cofre.
+4. Entre em .obsidian e depois em plugins.
+5. Copie para lá a pasta bible-reference-index deste pacote.
+6. Se o Windows perguntar, escolha substituir os três arquivos existentes.
+7. Abra o Obsidian novamente.
+8. Entre em Configurações > Plugins comunitários.
+9. Ative Indice Nights.
+
+PRIMEIRO TESTE DAS TRANSCRIÇÕES
+
+1. Abra Configurações > Indice Nights.
+2. Aguarde a lista de categorias aparecer.
+3. Marque somente uma subcategoria pequena no primeiro teste.
+4. Deixe a opção de pasta automática ou escolha outra pasta do seu cofre.
+5. Clique em Verificar e baixar.
+6. Abra a nota criada e confira título, propriedades, mini-índice e transcrição.
+7. Clique novamente em Verificar e baixar. A mesma nota deve ser ignorada.
+
+TESTE DA ATUALIZAÇÃO AUTOMÁTICA
+
+1. Abra uma transcrição e escreva uma referência bíblica em um parágrafo.
+2. Aguarde cerca de um segundo depois de terminar a edição.
+3. Confirme que a referência entrou na propriedade textos e no mini-índice.
+4. Abra a nota em modo de leitura e clique na referência para testar o aplicativo da Bíblia.
+5. No índice geral, marque Pesquisar dentro do conteúdo das notas e pesquise uma palavra.
+
+O índice geral será criado automaticamente em:
+
+    00 - Índice Geral/Índice Geral de Textos Bíblicos.md
+
+Ao verificar uma coleção, o plugin também acrescenta o mini-índice às notas
+antigas daquela coleção que ainda não tenham esse recurso.
+
+O plugin não baixa vídeos. Ele baixa apenas as legendas disponíveis e cria
+notas Markdown locais.
+
+TESTE DA PASTA PÚBLICA
+
+1. No Google Drive, deixe a pasta como Qualquer pessoa com o link > Leitor.
+2. Em Configurações > Indice Nights, cole o link da pasta pública.
+3. Escolha uma pasta de destino ou mantenha Discursos/Importados.
+4. Clique em Verificar e baixar.
+5. O plugin aceita TXT, Markdown e Documentos Google, inclusive em subpastas.
+6. Repita o teste: arquivos já importados não devem ser substituídos.

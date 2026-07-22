@@ -1,7 +1,4 @@
-# 📚 Índice de Textos Bíblicos
-
-```indice-biblico
-pasta: Discursos
-propriedade: textos
-quantidade: 75
-```
+node_modules/
+main.js
+*.zip
+.DS_Store
