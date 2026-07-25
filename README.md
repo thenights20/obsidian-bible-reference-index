@@ -2,6 +2,14 @@
 
 Plugin comunitário para o Obsidian que cria um índice leve das referências bíblicas e uma biblioteca local de transcrições em português do Brasil.
 
+## Instalação e uso rápido
+
+1. Baixe `main.js`, `manifest.json` e `styles.css` da release mais recente.
+2. Copie os três arquivos para `SEU_COFRE/.obsidian/plugins/bible-reference-index/`.
+3. Reinicie o Obsidian e ative **Indice Nights** em `Configurações → Plugins comunitários`.
+4. Abra `Configurações → Indice Nights` para escolher as coleções de transcrições e executar **Verificar e baixar**.
+5. O índice geral é criado automaticamente; para um índice manual, use o bloco `indice-biblico` descrito abaixo.
+
 ## Recursos
 
 - Menu com os 66 livros em ordem bíblica.

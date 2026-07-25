@@ -10,29 +10,19 @@ import { linkBibleReferences } from "./scripture-links";
 import type { PluginSettings } from "./types";
 import { ConsultationModeController } from "./consultation-mode";
 
-const STORAGE_PREFIX = "indice-nights:selection:";
-const LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
-
 class DeviceSelectionStore implements SelectionStore {
-  private readonly fallback = new Map<string, string>();
+  constructor(
+    private readonly values: Record<string, string>,
+    private readonly persist: () => void
+  ) {}
 
   get(key: string): string | null {
-    try {
-      return window.localStorage.getItem(`${STORAGE_PREFIX}${key}`) ??
-        window.localStorage.getItem(`${LEGACY_STORAGE_PREFIX}${key}`) ??
-        this.fallback.get(key) ?? null;
-    } catch {
-      return this.fallback.get(key) ?? null;
-    }
+    return this.values[key] ?? null;
   }
 
   set(key: string, value: string): void {
-    this.fallback.set(key, value);
-    try {
-      window.localStorage.setItem(`${STORAGE_PREFIX}${key}`, value);
-    } catch {
-      // The in-memory fallback keeps the menu usable when local storage is unavailable.
-    }
+    this.values[key] = value;
+    this.persist();
   }
 }
 
@@ -44,10 +34,12 @@ export default class IndiceNightsPlugin extends Plugin {
   private noteSyncService!: NoteSyncService;
   private consultationMode!: ConsultationModeController;
   private previousFile: TFile | null = null;
-  private readonly selections = new DeviceSelectionStore();
+  private selections!: DeviceSelectionStore;
+  private selectionData: Record<string, string> = {};
 
   async onload(): Promise<void> {
     await this.loadSettings();
+    this.selections = new DeviceSelectionStore(this.selectionData, () => { void this.saveSettings(); });
     this.indexManager = new BibleIndexManager(this.app);
     this.noteSyncService = new NoteSyncService(this.app);
     this.transcriptService = new SourceTranscriptService(
@@ -144,7 +136,7 @@ export default class IndiceNightsPlugin extends Plugin {
   }
 
   async saveSettings(): Promise<void> {
-    await this.saveData(this.settings);
+    await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
   }
 
   refreshConsultationMode(): void {
@@ -154,6 +146,10 @@ export default class IndiceNightsPlugin extends Plugin {
   private async loadSettings(): Promise<void> {
     const saved = await this.loadData() as (Partial<PluginSettings> & Record<string, unknown>) | null;
     const legacyCategories = saved?.jwCategorySettings;
+    const savedSelections = saved?.deviceSelections;
+    this.selectionData = typeof savedSelections === "object" && savedSelections !== null
+      ? { ...(savedSelections as Record<string, string>) }
+      : {};
     const categorySettings = saved?.categorySettings ??
       (typeof legacyCategories === "object" && legacyCategories !== null
         ? legacyCategories as PluginSettings["categorySettings"]

@@ -1,5 +1,14 @@
 # Histórico de versões
 
+## 0.6.4
+
+- Remove seletores CSS `:has()` e usa classes explícitas para ocultar ações de edição.
+- Substitui criação manual de elemento por helper `createEl` do Obsidian.
+- Migra a seleção do livro de `localStorage` para os dados persistentes do plugin.
+- Remove a dependência `builtin-modules` e usa `node:module` no build.
+- Torna as instruções de instalação e uso mais explícitas no README.
+- Mantém as funcionalidades e o identificador `bible-reference-index` existentes.
+
 ## 0.6.3
 
 - Corrige e valida o `manifest.json` usado na publicação.

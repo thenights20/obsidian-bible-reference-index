@@ -21,6 +21,7 @@ export class ConsultationModeController {
     if (view.file.path.startsWith(INDEX_FOLDER)) {
       this.unlockedPath = null;
       view.containerEl.addClass("indice-nights-index-locked");
+      this.markHiddenViewActions(view);
       this.setMode(view, "preview");
       return;
     }
@@ -28,6 +29,7 @@ export class ConsultationModeController {
     if (!view.file.path.startsWith(SPEECH_FOLDER)) return;
     const editing = this.unlockedPath === view.file.path;
     view.containerEl.addClass("indice-nights-consultation");
+    this.markHiddenViewActions(view);
     if (!editing) this.setMode(view, "preview");
     this.createButton(view, editing);
   }
@@ -39,6 +41,14 @@ export class ConsultationModeController {
 
   unload(): void {
     this.clearDecorations();
+  }
+
+  private markHiddenViewActions(view: MarkdownView): void {
+    for (const action of Array.from(view.containerEl.querySelectorAll<HTMLElement>(".view-action"))) {
+      if (action.querySelector(".lucide-pencil, .lucide-book-open, .lucide-edit")) {
+        action.addClass("indice-nights-hidden-view-action");
+      }
+    }
   }
 
   private createButton(view: MarkdownView, editing: boolean): void {
@@ -79,6 +89,9 @@ export class ConsultationModeController {
       const container = leaf.view.containerEl;
       container.removeClass("indice-nights-index-locked");
       container.removeClass("indice-nights-consultation");
+      for (const action of Array.from(container.querySelectorAll<HTMLElement>(".indice-nights-hidden-view-action"))) {
+        action.removeClass("indice-nights-hidden-view-action");
+      }
     }
   }
 }
