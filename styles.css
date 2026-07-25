@@ -208,30 +208,6 @@
   margin-block: 1rem 0.35rem;
 }
 
-.indice-nights-edit-toggle {
-  position: absolute;
-  z-index: 20;
-  right: max(1rem, env(safe-area-inset-right));
-  bottom: max(1rem, env(safe-area-inset-bottom));
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  border: 1px solid var(--background-modifier-border-hover);
-  border-radius: 999px;
-  box-shadow: var(--shadow-s);
-  background: var(--interactive-accent);
-  color: var(--text-on-accent);
-  padding: 0.55rem 0.85rem;
-}
-
-.indice-nights-edit-toggle svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.indice-nights-hidden-view-action {
-  display: none;
-}
 
 .indice-nights-scripture-link {
   color: var(--link-color);

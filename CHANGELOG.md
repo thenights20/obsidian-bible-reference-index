@@ -1,5 +1,13 @@
 # Histórico de versões
 
+## 0.6.5
+
+- Remove o modo de consulta que forçava discursos para o modo de leitura e podia deixar o corpo da nota em branco.
+- Remove o botão flutuante “Editar discurso” e deixa o Obsidian controlar normalmente o modo de edição/leitura.
+- Mantém a sincronização automática de referências, mini-índice, prévia bíblica, downloads e importação.
+- Troca a criação de links bíblicos pelo helper `HTMLElement.createEl()` do Obsidian.
+- Corrige os avisos de tipagem insegura relacionados à criação dos links bíblicos.
+
 ## 0.6.4
 
 - Remove seletores CSS `:has()` e usa classes explícitas para ocultar ações de edição.

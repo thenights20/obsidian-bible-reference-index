@@ -112,16 +112,6 @@ export class IndiceNightsSettingTab extends PluginSettingTab {
           await this.plugin.transcriptService.ensureGeneralIndex(true, true);
         }));
 
-    new Setting(containerEl)
-      .setName("Modo de consulta")
-      .setDesc("Mantém Discursos em leitura, com um botão flutuante para editar. O Índice Geral permanece sempre bloqueado.")
-      .addToggle((toggle) => toggle
-        .setValue(this.plugin.settings.consultationMode)
-        .onChange(async (enabled) => {
-          this.plugin.settings.consultationMode = enabled;
-          await this.plugin.saveSettings();
-          this.plugin.refreshConsultationMode();
-        }));
   }
 
   private renderCatalog(container: HTMLElement): void {

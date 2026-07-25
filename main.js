@@ -24,7 +24,7 @@ __export(main_exports, {
   default: () => IndiceNightsPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian7 = require("obsidian");
+var import_obsidian6 = require("obsidian");
 
 // src/config.ts
 var DEFAULT_SETTINGS = {
@@ -33,8 +33,7 @@ var DEFAULT_SETTINGS = {
   pageSize: 75,
   remoteDriveUrl: "",
   remoteDriveFolder: "",
-  categorySettings: {},
-  consultationMode: true
+  categorySettings: {}
 };
 function cleanPath(value) {
   return value.trim().replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
@@ -804,11 +803,6 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
     }));
     new import_obsidian2.Setting(containerEl).setName("\xCDndice geral").setDesc("O plugin cria automaticamente a nota \u201C00 - \xCDndice Geral/\xCDndice Geral de Textos B\xEDblicos\u201D. O prefixo mant\xE9m a pasta no topo do Explorador.").addButton((button) => button.setButtonText("Criar ou localizar \xEDndice").onClick(async () => {
       await this.plugin.transcriptService.ensureGeneralIndex(true, true);
-    }));
-    new import_obsidian2.Setting(containerEl).setName("Modo de consulta").setDesc("Mant\xE9m Discursos em leitura, com um bot\xE3o flutuante para editar. O \xCDndice Geral permanece sempre bloqueado.").addToggle((toggle) => toggle.setValue(this.plugin.settings.consultationMode).onChange(async (enabled) => {
-      this.plugin.settings.consultationMode = enabled;
-      await this.plugin.saveSettings();
-      this.plugin.refreshConsultationMode();
     }));
   }
   renderCatalog(container) {
@@ -1725,11 +1719,13 @@ function linkBibleReferences(container, app) {
     const text = (_a = node.nodeValue) != null ? _a : "";
     const locations = findReferencesInText(text);
     if (locations.length === 0) continue;
+    const parent = node.parentElement;
+    if (!parent) continue;
     const fragment = activeDocument.createDocumentFragment();
     let cursor = 0;
     for (const location of locations) {
       fragment.append(text.slice(cursor, location.start));
-      const link = (0, import_obsidian5.createEl)("a", {
+      const link = parent.createEl("a", {
         cls: "indice-nights-scripture-link",
         text: text.slice(location.start, location.end)
       });
@@ -1748,95 +1744,6 @@ function linkBibleReferences(container, app) {
   }
 }
 
-// src/consultation-mode.ts
-var import_obsidian6 = require("obsidian");
-var INDEX_FOLDER = "00 - \xCDndice Geral/";
-var SPEECH_FOLDER = "Discursos/";
-var ConsultationModeController = class {
-  constructor(app, enabled, finishEditing) {
-    this.app = app;
-    this.enabled = enabled;
-    this.finishEditing = finishEditing;
-    __publicField(this, "unlockedPath", null);
-    __publicField(this, "button", null);
-  }
-  refresh() {
-    const view = this.app.workspace.getActiveViewOfType(import_obsidian6.MarkdownView);
-    this.clearDecorations();
-    if (!(view == null ? void 0 : view.file) || !this.enabled()) return;
-    if (view.file.path.startsWith(INDEX_FOLDER)) {
-      this.unlockedPath = null;
-      view.containerEl.addClass("indice-nights-index-locked");
-      this.markHiddenViewActions(view);
-      this.setMode(view, "preview");
-      return;
-    }
-    if (!view.file.path.startsWith(SPEECH_FOLDER)) return;
-    const editing = this.unlockedPath === view.file.path;
-    view.containerEl.addClass("indice-nights-consultation");
-    this.markHiddenViewActions(view);
-    if (!editing) this.setMode(view, "preview");
-    this.createButton(view, editing);
-  }
-  async leaveCurrent(file) {
-    if (file && this.unlockedPath === file.path) await this.finishEditing(file);
-    this.unlockedPath = null;
-  }
-  unload() {
-    this.clearDecorations();
-  }
-  markHiddenViewActions(view) {
-    for (const action of Array.from(view.containerEl.querySelectorAll(".view-action"))) {
-      if (action.querySelector(".lucide-pencil, .lucide-book-open, .lucide-edit")) {
-        action.addClass("indice-nights-hidden-view-action");
-      }
-    }
-  }
-  createButton(view, editing) {
-    const button = view.containerEl.createEl("button", {
-      cls: "indice-nights-edit-toggle",
-      text: editing ? "Concluir edi\xE7\xE3o" : "Editar discurso"
-    });
-    (0, import_obsidian6.setIcon)(button, editing ? "check" : "pencil");
-    button.addEventListener("click", () => {
-      void (async () => {
-        if (!view.file) return;
-        if (editing) {
-          await this.finishEditing(view.file);
-          this.unlockedPath = null;
-          this.setMode(view, "preview");
-        } else {
-          this.unlockedPath = view.file.path;
-          this.setMode(view, "source");
-        }
-        this.refresh();
-      })();
-    });
-    this.button = button;
-  }
-  setMode(view, mode) {
-    var _a;
-    if (view.getMode() === mode) return;
-    void view.leaf.setViewState({
-      type: "markdown",
-      state: { file: (_a = view.file) == null ? void 0 : _a.path, mode, source: false }
-    }, { focus: true });
-  }
-  clearDecorations() {
-    var _a;
-    (_a = this.button) == null ? void 0 : _a.remove();
-    this.button = null;
-    for (const leaf of this.app.workspace.getLeavesOfType("markdown")) {
-      const container = leaf.view.containerEl;
-      container.removeClass("indice-nights-index-locked");
-      container.removeClass("indice-nights-consultation");
-      for (const action of Array.from(container.querySelectorAll(".indice-nights-hidden-view-action"))) {
-        action.removeClass("indice-nights-hidden-view-action");
-      }
-    }
-  }
-};
-
 // src/main.ts
 var DeviceSelectionStore = class {
   constructor(values, persist) {
@@ -1852,7 +1759,7 @@ var DeviceSelectionStore = class {
     this.persist();
   }
 };
-var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
+var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   constructor() {
     super(...arguments);
     __publicField(this, "settings", { ...DEFAULT_SETTINGS });
@@ -1860,8 +1767,6 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
     __publicField(this, "transcriptService");
     __publicField(this, "remoteDriveService");
     __publicField(this, "noteSyncService");
-    __publicField(this, "consultationMode");
-    __publicField(this, "previousFile", null);
     __publicField(this, "selections");
     __publicField(this, "selectionData", {});
   }
@@ -1880,11 +1785,6 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
     this.remoteDriveService = new RemoteDriveTranscriptService(
       this.app,
       this.settings,
-      (file) => this.noteSyncService.syncFile(file)
-    );
-    this.consultationMode = new ConsultationModeController(
-      this.app,
-      () => this.settings.consultationMode,
       (file) => this.noteSyncService.syncFile(file)
     );
     this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
@@ -1927,38 +1827,26 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
       this.indexManager.updateFile(file);
     }));
     this.registerEvent(this.app.vault.on("modify", (file) => {
-      if (file instanceof import_obsidian7.TFile) this.noteSyncService.schedule(file);
+      if (file instanceof import_obsidian6.TFile) this.noteSyncService.schedule(file);
     }));
     this.registerEvent(this.app.vault.on("delete", (file) => {
-      if (file instanceof import_obsidian7.TFile) this.indexManager.removePath(file.path);
+      if (file instanceof import_obsidian6.TFile) this.indexManager.removePath(file.path);
     }));
     this.registerEvent(this.app.vault.on("rename", (file, oldPath) => {
-      if (file instanceof import_obsidian7.TFile) this.indexManager.renameFile(file, oldPath);
+      if (file instanceof import_obsidian6.TFile) this.indexManager.renameFile(file, oldPath);
     }));
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
-      const previous = this.previousFile;
-      this.previousFile = file;
-      void this.consultationMode.leaveCurrent(previous).then(() => this.consultationMode.refresh());
       if (file) this.noteSyncService.schedule(file);
-    }));
-    this.registerEvent(this.app.workspace.on("layout-change", () => {
-      this.consultationMode.refresh();
     }));
     const activeFile = this.app.workspace.getActiveFile();
     if (activeFile) this.noteSyncService.schedule(activeFile);
-    this.previousFile = activeFile;
-    this.consultationMode.refresh();
   }
   onunload() {
-    var _a, _b;
+    var _a;
     (_a = this.noteSyncService) == null ? void 0 : _a.unload();
-    (_b = this.consultationMode) == null ? void 0 : _b.unload();
   }
   async saveSettings() {
     await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
-  }
-  refreshConsultationMode() {
-    this.consultationMode.refresh();
   }
   async loadSettings() {
     var _a;

@@ -1,4 +1,4 @@
-import { Modal, Notice, createEl, requestUrl, type App } from "obsidian";
+import { Modal, Notice, requestUrl, type App } from "obsidian";
 import { findReferencesInText } from "./references";
 import type { ParsedReference } from "./types";
 
@@ -97,11 +97,13 @@ export function linkBibleReferences(container: HTMLElement, app: App): void {
     const text = node.nodeValue ?? "";
     const locations = findReferencesInText(text);
     if (locations.length === 0) continue;
+    const parent = node.parentElement;
+    if (!parent) continue;
     const fragment = activeDocument.createDocumentFragment();
     let cursor = 0;
     for (const location of locations) {
       fragment.append(text.slice(cursor, location.start));
-      const link = createEl("a", {
+      const link = parent.createEl("a", {
         cls: "indice-nights-scripture-link",
         text: text.slice(location.start, location.end)
       });
