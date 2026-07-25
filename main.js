@@ -1729,9 +1729,10 @@ function linkBibleReferences(container, app) {
     let cursor = 0;
     for (const location of locations) {
       fragment.append(text.slice(cursor, location.start));
-      const link = activeDocument.createElement("a");
-      link.className = "indice-nights-scripture-link";
-      link.textContent = text.slice(location.start, location.end);
+      const link = (0, import_obsidian5.createEl)("a", {
+        cls: "indice-nights-scripture-link",
+        text: text.slice(location.start, location.end)
+      });
       link.dataset.tooltipPosition = "top";
       link.setAttribute("aria-label", "Ver texto b\xEDblico");
       link.addEventListener("click", (event) => {
@@ -1766,12 +1767,14 @@ var ConsultationModeController = class {
     if (view.file.path.startsWith(INDEX_FOLDER)) {
       this.unlockedPath = null;
       view.containerEl.addClass("indice-nights-index-locked");
+      this.markHiddenViewActions(view);
       this.setMode(view, "preview");
       return;
     }
     if (!view.file.path.startsWith(SPEECH_FOLDER)) return;
     const editing = this.unlockedPath === view.file.path;
     view.containerEl.addClass("indice-nights-consultation");
+    this.markHiddenViewActions(view);
     if (!editing) this.setMode(view, "preview");
     this.createButton(view, editing);
   }
@@ -1781,6 +1784,13 @@ var ConsultationModeController = class {
   }
   unload() {
     this.clearDecorations();
+  }
+  markHiddenViewActions(view) {
+    for (const action of Array.from(view.containerEl.querySelectorAll(".view-action"))) {
+      if (action.querySelector(".lucide-pencil, .lucide-book-open, .lucide-edit")) {
+        action.addClass("indice-nights-hidden-view-action");
+      }
+    }
   }
   createButton(view, editing) {
     const button = view.containerEl.createEl("button", {
@@ -1820,31 +1830,26 @@ var ConsultationModeController = class {
       const container = leaf.view.containerEl;
       container.removeClass("indice-nights-index-locked");
       container.removeClass("indice-nights-consultation");
+      for (const action of Array.from(container.querySelectorAll(".indice-nights-hidden-view-action"))) {
+        action.removeClass("indice-nights-hidden-view-action");
+      }
     }
   }
 };
 
 // src/main.ts
-var STORAGE_PREFIX = "indice-nights:selection:";
-var LEGACY_STORAGE_PREFIX = "bible-reference-index:selection:";
 var DeviceSelectionStore = class {
-  constructor() {
-    __publicField(this, "fallback", /* @__PURE__ */ new Map());
+  constructor(values, persist) {
+    this.values = values;
+    this.persist = persist;
   }
   get(key) {
-    var _a, _b, _c, _d;
-    try {
-      return (_c = (_b = (_a = window.localStorage.getItem(`${STORAGE_PREFIX}${key}`)) != null ? _a : window.localStorage.getItem(`${LEGACY_STORAGE_PREFIX}${key}`)) != null ? _b : this.fallback.get(key)) != null ? _c : null;
-    } catch (e) {
-      return (_d = this.fallback.get(key)) != null ? _d : null;
-    }
+    var _a;
+    return (_a = this.values[key]) != null ? _a : null;
   }
   set(key, value) {
-    this.fallback.set(key, value);
-    try {
-      window.localStorage.setItem(`${STORAGE_PREFIX}${key}`, value);
-    } catch (e) {
-    }
+    this.values[key] = value;
+    this.persist();
   }
 };
 var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
@@ -1857,10 +1862,14 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
     __publicField(this, "noteSyncService");
     __publicField(this, "consultationMode");
     __publicField(this, "previousFile", null);
-    __publicField(this, "selections", new DeviceSelectionStore());
+    __publicField(this, "selections");
+    __publicField(this, "selectionData", {});
   }
   async onload() {
     await this.loadSettings();
+    this.selections = new DeviceSelectionStore(this.selectionData, () => {
+      void this.saveSettings();
+    });
     this.indexManager = new BibleIndexManager(this.app);
     this.noteSyncService = new NoteSyncService(this.app);
     this.transcriptService = new SourceTranscriptService(
@@ -1946,7 +1955,7 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
     (_b = this.consultationMode) == null ? void 0 : _b.unload();
   }
   async saveSettings() {
-    await this.saveData(this.settings);
+    await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
   }
   refreshConsultationMode() {
     this.consultationMode.refresh();
@@ -1955,6 +1964,8 @@ var IndiceNightsPlugin = class extends import_obsidian7.Plugin {
     var _a;
     const saved = await this.loadData();
     const legacyCategories = saved == null ? void 0 : saved.jwCategorySettings;
+    const savedSelections = saved == null ? void 0 : saved.deviceSelections;
+    this.selectionData = typeof savedSelections === "object" && savedSelections !== null ? { ...savedSelections } : {};
     const categorySettings = (_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings;
     this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {}, categorySettings };
   }

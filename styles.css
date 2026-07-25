@@ -229,12 +229,7 @@
   height: 1rem;
 }
 
-.indice-nights-index-locked .view-action:has(.lucide-pencil),
-.indice-nights-index-locked .view-action:has(.lucide-book-open),
-.indice-nights-index-locked .view-action:has(.lucide-edit),
-.indice-nights-consultation .view-action:has(.lucide-pencil),
-.indice-nights-consultation .view-action:has(.lucide-book-open),
-.indice-nights-consultation .view-action:has(.lucide-edit) {
+.indice-nights-hidden-view-action {
   display: none;
 }
 
