@@ -257,14 +257,29 @@
 
 .markdown-preview-view img[alt="Miniatura"] {
   display: block;
-  width: min(100%, 46rem);
-  max-height: 26rem;
-  margin: 0.75rem auto 1.25rem;
+  width: 30%;
+  max-width: 22rem;
+  height: auto;
+  max-height: none;
+  margin: 0.75rem 0 1.25rem auto;
   border-radius: var(--radius-m);
-  object-fit: cover;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .markdown-preview-view img[alt="Miniatura"] {
+    width: 45%;
+    max-width: 20rem;
+  }
 }
 
 @media (max-width: 600px) {
+  .markdown-preview-view img[alt="Miniatura"] {
+    width: 100%;
+    max-width: none;
+    margin: 0.75rem 0 1.25rem;
+  }
+
   .bri-controls {
     grid-template-columns: 1fr;
   }

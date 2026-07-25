@@ -1,5 +1,11 @@
 # Histórico de versões
 
+## 0.6.6
+
+- Ajusta a miniatura das transcrições para preservar a proporção original, sem zoom ou corte.
+- Reduz a miniatura para cerca de 30% da largura em telas maiores e a alinha à direita.
+- Adapta o tamanho da miniatura para tablets e celulares.
+
 ## 0.6.5
 
 - Remove o modo de consulta que forçava discursos para o modo de leitura e podia deixar o corpo da nota em branco.
