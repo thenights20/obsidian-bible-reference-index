@@ -255,26 +255,48 @@
   text-decoration: none;
 }
 
+/* Miniaturas de transcrições: layout integrado ao texto, semelhante a uma publicação. */
+.markdown-preview-view .indice-nights-thumbnail-link {
+  display: block;
+  float: right;
+  width: 43%;
+  max-width: 31rem;
+  margin: 0.35rem 0 1.35rem 1.75rem;
+  padding: 0;
+  background-image: none;
+  border-radius: var(--radius-m);
+  line-height: 0;
+}
+
+.markdown-preview-view .indice-nights-thumbnail-link img[alt="Miniatura"],
 .markdown-preview-view img[alt="Miniatura"] {
   display: block;
-  width: 30%;
-  max-width: 22rem;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   max-height: none;
-  margin: 0.75rem 0 1.25rem auto;
+  margin: 0;
   border-radius: var(--radius-m);
   object-fit: contain;
 }
 
+/* O ícone padrão de link externo do Obsidian fica solto quando o link envolve uma imagem. */
+.markdown-preview-view .indice-nights-thumbnail-link.external-link {
+  background-image: none;
+  padding-inline-end: 0;
+}
+
 @media (max-width: 900px) {
-  .markdown-preview-view img[alt="Miniatura"] {
-    width: 45%;
-    max-width: 20rem;
+  .markdown-preview-view .indice-nights-thumbnail-link {
+    width: 46%;
+    max-width: 24rem;
+    margin-left: 1.25rem;
   }
 }
 
 @media (max-width: 600px) {
-  .markdown-preview-view img[alt="Miniatura"] {
+  .markdown-preview-view .indice-nights-thumbnail-link {
+    float: none;
     width: 100%;
     max-width: none;
     margin: 0.75rem 0 1.25rem;
@@ -306,5 +328,1538 @@
   .bri-catalog-settings .setting-item-control {
     justify-content: flex-start;
     width: 100%;
+  }
+}
+
+/* v0.7.5 — catálogo visual inspirado em uma biblioteca de mídia */
+.bri-catalog-settings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.bri-catalog-settings .bri-catalog-card.setting-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 10.5rem;
+  padding: 1rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  background: var(--background-secondary);
+  overflow: hidden;
+  transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
+}
+
+.bri-catalog-settings .bri-catalog-card.setting-item:hover {
+  border-color: var(--background-modifier-border-hover);
+  background: var(--background-secondary-alt);
+  transform: translateY(-1px);
+}
+
+.bri-catalog-settings .bri-catalog-card.is-enabled {
+  border-color: rgba(var(--interactive-accent-rgb), 0.55);
+}
+
+.bri-catalog-settings .bri-catalog-card .setting-item-info {
+  display: grid;
+  grid-template-columns: 2.55rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 0.8rem;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.bri-catalog-card-icon {
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: var(--radius-m);
+  background: var(--background-modifier-hover);
+  color: var(--text-accent);
+}
+
+.bri-catalog-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.bri-catalog-settings .bri-catalog-card .setting-item-name {
+  align-self: end;
+  min-width: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--font-semibold);
+  line-height: 1.25;
+  color: var(--text-normal);
+}
+
+.bri-catalog-settings .bri-catalog-card .setting-item-description {
+  align-self: start;
+  min-width: 0;
+  margin-top: 0.25rem;
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.bri-catalog-settings .bri-catalog-card .setting-item-control {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.bri-catalog-settings .bri-catalog-card.is-enabled .setting-item-control .checkbox-container {
+  justify-self: start;
+}
+
+.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control {
+  grid-template-columns: 1fr auto;
+}
+
+.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control .checkbox-container {
+  grid-column: 2;
+}
+
+.bri-catalog-settings .bri-catalog-card select {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+@media (max-width: 1000px) {
+  .bri-catalog-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .bri-catalog-settings {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .bri-catalog-settings .bri-catalog-card.setting-item {
+    min-height: 0;
+    padding: 0.9rem;
+  }
+
+  .bri-catalog-settings .bri-catalog-card .setting-item-control {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+}
+
+/* v0.7.6: Séries são exibidas como cartões individuais dentro do catálogo. */
+
+/* ============================================================
+   Índice Nights v0.7.8 — Biblioteca visual responsiva
+   Desktop, iPad e iPhone
+   ============================================================ */
+
+.indice-nights-settings {
+  --bri-panel-gap: 14px;
+  --bri-card-radius: 14px;
+  --bri-card-border: var(--background-modifier-border);
+  --bri-card-bg: var(--background-secondary);
+  --bri-card-bg-hover: var(--background-secondary-alt);
+  --bri-soft-accent: color-mix(in srgb, var(--interactive-accent) 13%, var(--background-secondary));
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.indice-nights-settings *,
+.indice-nights-settings *::before,
+.indice-nights-settings *::after {
+  box-sizing: border-box;
+}
+
+.indice-nights-settings .bri-library-intro {
+  margin: -2px 0 16px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Índice geral */
+.indice-nights-settings .bri-index-hero {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 0 !important;
+  float: none !important;
+  clear: both !important;
+  width: 100% !important;
+  min-height: 86px;
+  display: grid !important;
+  grid-template-columns: 52px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 18px !important;
+  padding: 15px 17px !important;
+  border: 1px solid #3893ff !important;
+  border-radius: var(--bri-card-radius) !important;
+  background: linear-gradient(110deg, #073d8e 0%, #075dcc 52%, #0649a6 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(0, 84, 196, .16);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transform: none !important;
+}
+
+.indice-nights-settings .bri-index-hero:hover {
+  background: linear-gradient(110deg, #08479f 0%, #0866dc 52%, #0754b8 100%) !important;
+}
+
+.indice-nights-settings .bri-index-hero-icon {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.34);
+  border-radius: 12px;
+  background: rgba(255,255,255,.08);
+}
+
+.indice-nights-settings .bri-index-hero-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.indice-nights-settings .bri-index-hero-copy {
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-index-hero-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.indice-nights-settings .bri-index-hero-title {
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.indice-nights-settings .bri-index-hero-badge {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.17);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.indice-nights-settings .bri-index-hero-description {
+  margin-top: 5px;
+  color: rgba(255,255,255,.84);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.indice-nights-settings .bri-index-hero-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+}
+
+/* Grade principal */
+.indice-nights-settings .bri-catalog-settings {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-auto-flow: row !important;
+  align-items: stretch !important;
+  gap: var(--bri-panel-gap) !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+/* Cartões normais */
+.indice-nights-settings .bri-library-card {
+  position: relative;
+  min-width: 0;
+  min-height: 214px;
+  display: grid !important;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 12px 13px;
+  align-content: stretch;
+  padding: 16px !important;
+  margin: 0 !important;
+  border: 1px solid var(--bri-card-border) !important;
+  border-radius: var(--bri-card-radius) !important;
+  background: var(--bri-card-bg) !important;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.indice-nights-settings .bri-library-card:hover {
+  background: var(--bri-card-bg-hover) !important;
+  border-color: color-mix(in srgb, var(--interactive-accent) 36%, var(--bri-card-border)) !important;
+}
+
+.indice-nights-settings .bri-library-card.is-enabled {
+  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--bri-card-border)) !important;
+}
+
+.indice-nights-settings .bri-library-card-icon,
+.indice-nights-settings .bri-library-group-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 11px;
+  background: var(--bri-soft-accent);
+  color: var(--interactive-accent);
+}
+
+.indice-nights-settings .bri-library-card-icon svg,
+.indice-nights-settings .bri-library-group-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.indice-nights-settings .bri-library-card-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.indice-nights-settings .bri-library-card-title {
+  margin: 1px 0 0;
+  color: var(--text-normal);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.32;
+}
+
+.indice-nights-settings .bri-library-card-description {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.indice-nights-settings .bri-library-card-path {
+  margin-top: auto;
+  padding-top: 12px;
+  color: var(--text-faint);
+  font-size: 11.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.indice-nights-settings .bri-library-card-footer {
+  grid-column: 1 / -1;
+  min-width: 0;
+  min-height: 44px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.indice-nights-settings .bri-library-card-status {
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+.indice-nights-settings .bri-library-card-select {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.indice-nights-settings .bri-library-card-select select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Remove o espaçamento nativo de Setting dentro dos mini-controles */
+.indice-nights-settings .bri-library-card-select .setting-item,
+.indice-nights-settings .bri-library-card-toggle .setting-item,
+.indice-nights-settings .bri-library-group-option-select .setting-item,
+.indice-nights-settings .bri-library-group-option-toggle .setting-item {
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.indice-nights-settings .bri-library-card-select .setting-item-info,
+.indice-nights-settings .bri-library-card-toggle .setting-item-info,
+.indice-nights-settings .bri-library-group-option-select .setting-item-info,
+.indice-nights-settings .bri-library-group-option-toggle .setting-item-info {
+  display: none !important;
+}
+
+.indice-nights-settings .bri-library-card-select .setting-item-control,
+.indice-nights-settings .bri-library-card-toggle .setting-item-control,
+.indice-nights-settings .bri-library-group-option-select .setting-item-control,
+.indice-nights-settings .bri-library-group-option-toggle .setting-item-control {
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Congressos / Séries */
+.indice-nights-settings .bri-library-groups-wrap {
+  grid-column: 1 / -1;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--bri-panel-gap);
+  width: 100%;
+  margin: 0;
+}
+
+.indice-nights-settings .bri-library-group {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  border: 1px solid var(--bri-card-border);
+  border-radius: var(--bri-card-radius);
+  background: var(--bri-card-bg);
+  overflow: hidden;
+}
+
+.indice-nights-settings .bri-library-group[open] {
+  border-color: color-mix(in srgb, var(--interactive-accent) 44%, var(--bri-card-border));
+}
+
+.indice-nights-settings .bri-library-group-summary {
+  min-height: 108px;
+  display: grid !important;
+  grid-template-columns: 48px minmax(0, 1fr) auto 24px;
+  align-items: center;
+  gap: 13px;
+  padding: 16px !important;
+  margin: 0 !important;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.indice-nights-settings .bri-library-group-summary::-webkit-details-marker {
+  display: none;
+}
+
+.indice-nights-settings .bri-library-group-copy {
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-library-group-title {
+  color: var(--text-normal);
+  font-size: 15px;
+  line-height: 1.32;
+  font-weight: 700;
+}
+
+.indice-nights-settings .bri-library-group-description {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.indice-nights-settings .bri-library-group-count {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.indice-nights-settings .bri-library-group-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform .18s ease;
+}
+
+.indice-nights-settings .bri-library-group[open] .bri-library-group-chevron {
+  transform: rotate(180deg);
+}
+
+.indice-nights-settings .bri-library-group-panel {
+  display: grid;
+  gap: 8px;
+  padding: 0 16px 16px;
+  animation: bri-panel-open .18s ease-out;
+}
+
+@keyframes bri-panel-open {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.indice-nights-settings .bri-library-group-option {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-primary);
+}
+
+.indice-nights-settings .bri-library-group-option.is-enabled {
+  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));
+}
+
+.indice-nights-settings .bri-library-group-option-info {
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-library-group-option-title {
+  color: var(--text-normal);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.indice-nights-settings .bri-library-group-option-description {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.indice-nights-settings .bri-library-group-option-controls {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.indice-nights-settings .bri-library-group-option-select {
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-library-group-option-select select {
+  width: min(220px, 30vw);
+  max-width: 220px;
+}
+
+/* Ação de download */
+.indice-nights-settings .bri-action-setting {
+  margin-top: 16px !important;
+  padding: 14px 16px !important;
+  border: 1px solid var(--background-modifier-border) !important;
+  border-radius: var(--bri-card-radius);
+  background: var(--background-secondary);
+}
+
+.indice-nights-settings .bri-action-setting .setting-item-info {
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-action-setting .setting-item-control {
+  flex-shrink: 0;
+}
+
+/* ====================== TABLET / iPad ====================== */
+@media (max-width: 1024px) {
+  .indice-nights-settings {
+    --bri-panel-gap: 12px;
+  }
+
+  .indice-nights-settings .bri-catalog-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .indice-nights-settings .bri-library-card {
+    min-height: 206px;
+  }
+
+  .indice-nights-settings .bri-library-groups-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .indice-nights-settings .bri-library-group-summary {
+    min-height: 96px;
+  }
+}
+
+/* iPad em painel estreito / split view */
+@media (max-width: 780px) {
+  .indice-nights-settings .bri-index-hero {
+    grid-template-columns: 46px minmax(0, 1fr) 20px;
+    min-height: 78px;
+    gap: 11px;
+    padding: 13px 14px !important;
+  }
+
+  .indice-nights-settings .bri-index-hero-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .indice-nights-settings .bri-index-hero-title {
+    font-size: 16px;
+  }
+
+  .indice-nights-settings .bri-index-hero-description {
+    font-size: 12px;
+  }
+
+  .indice-nights-settings .bri-catalog-settings {
+    grid-template-columns: 1fr !important;
+  }
+
+  .indice-nights-settings .bri-library-card {
+    min-height: 0;
+  }
+
+  .indice-nights-settings .bri-library-group-count {
+    display: inline-flex;
+  }
+}
+
+/* ====================== iPhone / celulares ====================== */
+@media (max-width: 560px) {
+  .indice-nights-settings {
+    --bri-panel-gap: 10px;
+  }
+
+  .indice-nights-settings .bri-library-intro {
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+
+  .indice-nights-settings .bri-index-hero {
+    grid-template-columns: 42px minmax(0, 1fr) 18px;
+    gap: 10px;
+    min-height: 72px;
+    margin-bottom: 12px !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .indice-nights-settings .bri-index-hero-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .indice-nights-settings .bri-index-hero-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .indice-nights-settings .bri-index-hero-title {
+    font-size: 15px;
+  }
+
+  .indice-nights-settings .bri-index-hero-badge {
+    display: none;
+  }
+
+  .indice-nights-settings .bri-index-hero-description {
+    margin-top: 3px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .indice-nights-settings .bri-library-card {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 10px 11px;
+    padding: 13px !important;
+    border-radius: 12px !important;
+  }
+
+  .indice-nights-settings .bri-library-card-icon,
+  .indice-nights-settings .bri-library-group-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .indice-nights-settings .bri-library-card-title,
+  .indice-nights-settings .bri-library-group-title {
+    font-size: 14px;
+  }
+
+  .indice-nights-settings .bri-library-card-description,
+  .indice-nights-settings .bri-library-group-description {
+    font-size: 11.5px;
+  }
+
+  .indice-nights-settings .bri-library-card-path {
+    padding-top: 9px;
+    font-size: 10.5px;
+  }
+
+  .indice-nights-settings .bri-library-card-footer {
+    padding-top: 10px;
+  }
+
+  .indice-nights-settings .bri-library-card-select {
+    flex-basis: 100%;
+    order: 2;
+  }
+
+  .indice-nights-settings .bri-library-card-footer {
+    flex-wrap: wrap;
+  }
+
+  .indice-nights-settings .bri-library-group {
+    border-radius: 12px;
+  }
+
+  .indice-nights-settings .bri-library-group-summary {
+    grid-template-columns: 42px minmax(0, 1fr) 20px;
+    min-height: 82px;
+    gap: 10px;
+    padding: 13px !important;
+  }
+
+  .indice-nights-settings .bri-library-group-count {
+    display: none;
+  }
+
+  .indice-nights-settings .bri-library-group-panel {
+    padding: 0 12px 12px;
+  }
+
+  .indice-nights-settings .bri-library-group-option {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .indice-nights-settings .bri-library-group-option-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .indice-nights-settings .bri-library-group-option-select {
+    flex: 1 1 auto;
+  }
+
+  .indice-nights-settings .bri-library-group-option-select select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .indice-nights-settings .bri-action-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 13px !important;
+  }
+
+  .indice-nights-settings .bri-action-setting .setting-item-control,
+  .indice-nights-settings .bri-action-setting button {
+    width: 100%;
+  }
+}
+
+/* iPhone muito estreito */
+@media (max-width: 390px) {
+  .indice-nights-settings .bri-index-hero-description {
+    display: none;
+  }
+
+  .indice-nights-settings .bri-index-hero {
+    min-height: 64px;
+  }
+
+  .indice-nights-settings .bri-library-card-path {
+    overflow-wrap: anywhere;
+  }
+}
+
+
+/* ============================================================
+   Índice Nights v0.7.9 — divisores e acabamento da área inferior
+   ============================================================ */
+
+.indice-nights-settings .bri-section-divider {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 20px 0 12px;
+}
+
+.indice-nights-settings .bri-section-divider-label {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.indice-nights-settings .bri-section-divider-line {
+  height: 1px;
+  width: 100%;
+  border-radius: 999px;
+}
+
+.indice-nights-settings .bri-section-divider-official .bri-section-divider-label {
+  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));
+}
+
+.indice-nights-settings .bri-section-divider-official .bri-section-divider-line {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--interactive-accent) 70%, transparent),
+    color-mix(in srgb, var(--interactive-accent) 18%, transparent)
+  );
+}
+
+.indice-nights-settings .bri-section-divider-unofficial {
+  margin-top: 22px;
+}
+
+.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {
+  color: color-mix(in srgb, var(--text-muted) 82%, var(--interactive-accent));
+}
+
+.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-line {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--text-muted) 45%, transparent),
+    color-mix(in srgb, var(--text-muted) 10%, transparent)
+  );
+}
+
+/* Área inferior no mesmo padrão visual do catálogo */
+.indice-nights-settings .bri-unofficial-panel {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 14px 16px !important;
+  border: 1px solid var(--background-modifier-border) !important;
+  border-radius: 12px;
+  background: var(--background-secondary);
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {
+  border-color: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border)) !important;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {
+  min-width: 0;
+  padding-right: 14px;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description {
+  margin-top: 3px;
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {
+  min-width: min(260px, 38%);
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item input[type="text"],
+.indice-nights-settings .bri-unofficial-panel > .setting-item select {
+  width: min(280px, 100%);
+  max-width: 100%;
+}
+
+.indice-nights-settings .bri-unofficial-panel > p.setting-item-description {
+  margin: 0;
+  padding: 4px 2px 2px;
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child {
+  margin-bottom: 0;
+}
+
+/* iPad / tablet */
+@media (max-width: 1024px) {
+  .indice-nights-settings .bri-section-divider {
+    margin-top: 18px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item {
+    padding: 13px 14px !important;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {
+    min-width: min(240px, 42%);
+  }
+}
+
+/* iPad em Split View e tablets estreitos */
+@media (max-width: 780px) {
+  .indice-nights-settings .bri-unofficial-panel > .setting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {
+    width: 100%;
+    min-width: 0;
+    justify-content: stretch;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control > * {
+    max-width: 100%;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item input[type="text"],
+  .indice-nights-settings .bri-unofficial-panel > .setting-item select,
+  .indice-nights-settings .bri-unofficial-panel > .setting-item button {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* iPhone */
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-section-divider {
+    grid-template-columns: auto minmax(24px, 1fr);
+    gap: 9px;
+    margin: 16px 0 10px;
+  }
+
+  .indice-nights-settings .bri-section-divider-label {
+    font-size: 12px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel {
+    gap: 8px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item {
+    padding: 12px !important;
+    border-radius: 11px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {
+    font-size: 13px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description,
+  .indice-nights-settings .bri-unofficial-panel > p.setting-item-description {
+    font-size: 11px;
+  }
+}
+
+
+/* ============================================================
+   Índice Nights v0.8.0 — títulos de seção em faixa elegante
+   ============================================================ */
+
+.indice-nights-settings .bri-section-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  margin: 20px 0 12px;
+  padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border));
+  border-radius: 10px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary)) 0%,
+      color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary)) 55%,
+      var(--background-secondary) 100%
+    );
+}
+
+.indice-nights-settings .bri-section-divider::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--interactive-accent) 94%, white 6%),
+    color-mix(in srgb, var(--interactive-accent) 70%, transparent)
+  );
+}
+
+.indice-nights-settings .bri-section-divider-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  padding-left: 2px;
+  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .015em;
+  white-space: nowrap;
+}
+
+.indice-nights-settings .bri-section-divider-line {
+  display: none !important;
+}
+
+/* Oficial: um pouco mais vivo, combinando com o Índice Geral */
+.indice-nights-settings .bri-section-divider-official {
+  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 5%, transparent);
+}
+
+/* Não oficial: mesma linguagem visual, porém mais neutra */
+.indice-nights-settings .bri-section-divider-unofficial {
+  margin-top: 22px;
+  border-color: color-mix(in srgb, var(--text-muted) 28%, var(--background-modifier-border));
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--text-muted) 9%, var(--background-secondary)) 0%,
+      color-mix(in srgb, var(--text-muted) 4%, var(--background-secondary)) 55%,
+      var(--background-secondary) 100%
+    );
+}
+
+.indice-nights-settings .bri-section-divider-unofficial::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--text-muted) 75%, var(--interactive-accent) 25%),
+    color-mix(in srgb, var(--text-muted) 45%, transparent)
+  );
+}
+
+.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {
+  color: color-mix(in srgb, var(--text-muted) 78%, var(--text-normal));
+}
+
+/* Tablet / iPad */
+@media (max-width: 1024px) {
+  .indice-nights-settings .bri-section-divider {
+    min-height: 36px;
+    margin-top: 18px;
+    padding-inline: 13px;
+  }
+}
+
+/* iPhone */
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-section-divider {
+    min-height: 34px;
+    margin: 15px 0 10px;
+    padding-inline: 12px;
+    border-radius: 9px;
+  }
+
+  .indice-nights-settings .bri-section-divider::before {
+    width: 3px;
+  }
+
+  .indice-nights-settings .bri-section-divider-label {
+    font-size: 12px;
+  }
+}
+
+
+/* ============================================================
+   Índice Nights v0.8.1 — acabamento aprovado
+   ============================================================ */
+
+/* Sem texto introdutório: aproxima o Índice Geral do cabeçalho. */
+.indice-nights-settings .bri-index-hero {
+  margin-top: 8px !important;
+}
+
+/* Faixas de seção: título branco centralizado e linhas laterais. */
+.indice-nights-settings .bri-section-divider {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 40px;
+  margin: 20px 0 12px;
+  padding: 0 15px !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.indice-nights-settings .bri-section-divider::before {
+  width: 4px;
+}
+
+.indice-nights-settings .bri-section-divider-label {
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  padding: 0 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: .01em;
+}
+
+.indice-nights-settings .bri-section-divider-decoration {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 1px;
+  border-radius: 999px;
+  opacity: .65;
+}
+
+.indice-nights-settings .bri-section-divider-official {
+  border-color: color-mix(in srgb, #9b5cff 62%, var(--background-modifier-border)) !important;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, #7b45c7 26%, var(--background-secondary)) 0%,
+      color-mix(in srgb, #5a387d 15%, var(--background-secondary)) 50%,
+      color-mix(in srgb, #7b45c7 22%, var(--background-secondary)) 100%
+    ) !important;
+}
+
+.indice-nights-settings .bri-section-divider-official::before {
+  background: linear-gradient(180deg, #a86cff, #743ad0) !important;
+}
+
+.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration {
+  background: linear-gradient(90deg, transparent, rgba(214, 184, 255, .8));
+}
+
+.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration-right {
+  background: linear-gradient(90deg, rgba(214, 184, 255, .8), transparent);
+}
+
+/* Não oficial: turquesa discreto, mas com a mesma identidade. */
+.indice-nights-settings .bri-section-divider-unofficial {
+  border-color: color-mix(in srgb, #00b8b8 58%, var(--background-modifier-border)) !important;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, #007f80 24%, var(--background-secondary)) 0%,
+      color-mix(in srgb, #006769 12%, var(--background-secondary)) 50%,
+      color-mix(in srgb, #007f80 21%, var(--background-secondary)) 100%
+    ) !important;
+}
+
+.indice-nights-settings .bri-section-divider-unofficial::before {
+  background: linear-gradient(180deg, #00d1d1, #008e90) !important;
+}
+
+.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration {
+  background: linear-gradient(90deg, transparent, rgba(122, 235, 235, .74));
+}
+
+.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration-right {
+  background: linear-gradient(90deg, rgba(122, 235, 235, .74), transparent);
+}
+
+/* Botão colocado na faixa de "Transcrições não oficiais". */
+.indice-nights-settings .bri-section-divider-with-action {
+  grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr) auto !important;
+}
+
+.indice-nights-settings .bri-section-divider-action {
+  position: relative;
+  z-index: 3;
+  justify-self: end;
+  min-height: 28px;
+  padding: 5px 11px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 7px;
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: none;
+}
+
+.indice-nights-settings .bri-section-divider-action:hover {
+  background: rgba(255,255,255,.17);
+  border-color: rgba(255,255,255,.32);
+}
+
+.indice-nights-settings .bri-section-divider-action.is-loading {
+  opacity: .68;
+  cursor: wait;
+}
+
+/* Painel não oficial como um único bloco profissional. */
+.indice-nights-settings .bri-unofficial-panel {
+  display: block !important;
+  width: 100%;
+  padding: 0 !important;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 12px;
+  background: var(--background-secondary);
+  overflow: hidden;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item,
+.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {
+  min-height: 72px;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--background-modifier-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child,
+.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row:last-child {
+  border-bottom: 0 !important;
+}
+
+.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {
+  background: var(--background-modifier-hover) !important;
+}
+
+.indice-nights-settings .bri-unofficial-row .setting-item-info {
+  position: relative;
+  min-width: 0;
+  padding-left: 48px !important;
+}
+
+.indice-nights-settings .bri-unofficial-row-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  border-radius: 9px;
+  background: color-mix(in srgb, #00a8aa 22%, var(--background-modifier-hover));
+  color: #16c9cb;
+}
+
+.indice-nights-settings .bri-unofficial-row-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.indice-nights-settings .bri-unofficial-row .setting-item-name {
+  font-size: 13.5px !important;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.indice-nights-settings .bri-unofficial-row .setting-item-description {
+  margin-top: 3px;
+  font-size: 11px !important;
+  line-height: 1.42;
+}
+
+.indice-nights-settings .bri-unofficial-row .setting-item-control {
+  min-width: 230px;
+  flex-shrink: 0;
+}
+
+.indice-nights-settings .bri-unofficial-row input[type="text"],
+.indice-nights-settings .bri-unofficial-row select {
+  width: min(290px, 100%);
+  max-width: 100%;
+}
+
+/* iPad */
+@media (max-width: 1024px) {
+  .indice-nights-settings .bri-section-divider {
+    min-height: 38px;
+    gap: 11px;
+    padding-inline: 13px !important;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-control {
+    min-width: 210px;
+  }
+}
+
+/* iPad Split View */
+@media (max-width: 780px) {
+  .indice-nights-settings .bri-section-divider-with-action {
+    grid-template-columns: minmax(14px, 1fr) auto minmax(14px, 1fr) auto !important;
+    gap: 9px;
+  }
+
+  .indice-nights-settings .bri-section-divider-action {
+    padding-inline: 9px;
+    font-size: 11px;
+  }
+
+  .indice-nights-settings .bri-unofficial-row {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 10px;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-info {
+    width: 100%;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-control {
+    width: 100%;
+    min-width: 0;
+    justify-content: stretch;
+    padding-left: 48px;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-control input,
+  .indice-nights-settings .bri-unofficial-row .setting-item-control select,
+  .indice-nights-settings .bri-unofficial-row .setting-item-control button {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* iPhone */
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-section-divider {
+    min-height: 36px;
+    margin: 15px 0 10px;
+    padding-inline: 10px !important;
+    border-radius: 9px;
+  }
+
+  .indice-nights-settings .bri-section-divider-label {
+    font-size: 12px !important;
+  }
+
+  .indice-nights-settings .bri-section-divider-with-action {
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "title action";
+    gap: 8px;
+  }
+
+  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-decoration {
+    display: none;
+  }
+
+  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-label {
+    grid-area: title;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .indice-nights-settings .bri-section-divider-action {
+    grid-area: action;
+    justify-self: end;
+    min-height: 27px;
+    padding: 5px 8px;
+    font-size: 10.5px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel {
+    border-radius: 10px;
+  }
+
+  .indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {
+    min-height: 0;
+    padding: 11px !important;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-info {
+    padding-left: 42px !important;
+  }
+
+  .indice-nights-settings .bri-unofficial-row-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .indice-nights-settings .bri-unofficial-row .setting-item-control {
+    padding-left: 42px;
+  }
+}
+
+
+/* ============================================================
+   Índice Nights v0.8.2 — ações na faixa de Transcrições oficiais
+   ============================================================ */
+
+.indice-nights-settings .bri-section-divider-with-actions {
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr) auto !important;
+}
+
+.indice-nights-settings .bri-section-divider-actions {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  min-width: 0;
+}
+
+.indice-nights-settings .bri-section-divider-action-official {
+  border-color: rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+}
+
+.indice-nights-settings .bri-section-divider-action-official:hover {
+  border-color: rgba(255, 255, 255, .34);
+  background: rgba(255, 255, 255, .18);
+}
+
+.indice-nights-settings .bri-section-divider-action {
+  min-height: 29px;
+}
+
+/* Com a ação principal transferida para o cabeçalho,
+   remove qualquer margem residual da antiga linha de download. */
+.indice-nights-settings .bri-catalog-settings + .bri-section-divider-unofficial {
+  margin-top: 22px;
+}
+
+/* Tablet / iPad */
+@media (max-width: 1024px) {
+  .indice-nights-settings .bri-section-divider-with-actions {
+    grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr) auto !important;
+    gap: 9px;
+  }
+
+  .indice-nights-settings .bri-section-divider-actions {
+    gap: 6px;
+  }
+
+  .indice-nights-settings .bri-section-divider-action-official {
+    padding-inline: 9px;
+    font-size: 11px;
+  }
+}
+
+/* iPad em Split View */
+@media (max-width: 780px) {
+  .indice-nights-settings .bri-section-divider-with-actions {
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "title actions";
+  }
+
+  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-decoration {
+    display: none;
+  }
+
+  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {
+    grid-area: title;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .indice-nights-settings .bri-section-divider-actions {
+    grid-area: actions;
+    justify-self: end;
+  }
+
+  .indice-nights-settings .bri-section-divider-action-official {
+    min-height: 28px;
+    padding: 5px 8px;
+    font-size: 10.5px;
+  }
+}
+
+/* iPhone: mantém os dois botões utilizáveis sem estourar a largura. */
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-section-divider-with-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "title"
+      "actions";
+    gap: 8px;
+    padding-block: 9px !important;
+  }
+
+  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {
+    grid-area: title;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .indice-nights-settings .bri-section-divider-actions {
+    grid-area: actions;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .indice-nights-settings .bri-section-divider-action-official {
+    width: 100%;
+    min-width: 0;
+    min-height: 30px;
+    padding: 5px 6px;
+    font-size: 10px;
+    white-space: normal;
+    line-height: 1.15;
   }
 }

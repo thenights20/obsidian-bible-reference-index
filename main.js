@@ -682,63 +682,21 @@ var import_obsidian2 = require("obsidian");
 
 // src/transcript-categories.ts
 var SUPPORTED_CATEGORIES = [
-  {
-    key: "StudioTalks",
-    name: "Discursos",
-    type: "ondemand",
-    parentKey: "VODStudio",
-    path: ["Biblioteca", "Discursos"],
-    defaultFolder: "Discursos/Biblioteca"
-  },
-  {
-    key: "VODPgmEvtMorningWorship",
-    name: "Adora\xE7\xF5es Matinais",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Adora\xE7\xF5es Matinais"],
-    defaultFolder: "Discursos/Adora\xE7\xF5es Matinais"
-  },
-  {
-    key: "VODPgmEvtGilead",
-    name: "Formaturas",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Formaturas"],
-    defaultFolder: "Discursos/Formaturas"
-  },
-  {
-    key: "VODPgmEvtAnnMtg",
-    name: "Reuni\xF5es Anuais",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Reuni\xF5es Anuais"],
-    defaultFolder: "Discursos/Reuni\xF5es Anuais"
-  },
-  {
-    key: "2020Convention",
-    name: "Congresso de 2020",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Congressos", "Congresso de 2020"],
-    defaultFolder: "Discursos/Congressos/2020"
-  },
-  {
-    key: "2021Convention",
-    name: "Congresso de 2021",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Congressos", "Congresso de 2021"],
-    defaultFolder: "Discursos/Congressos/2021"
-  },
-  {
-    key: "2022Convention",
-    name: "Congresso de 2022",
-    type: "ondemand",
-    parentKey: "VODProgramsEvents",
-    path: ["Programas e Eventos", "Congressos", "Congresso de 2022"],
-    defaultFolder: "Discursos/Congressos/2022"
-  }
-];
+  { key: "StudioTalks", name: "Discursos", description: "Discursos proferidos no JW Broadcasting.", type: "ondemand", parentKey: "VODStudio", path: ["Discursos"], defaultFolder: "Discursos/Discursos" },
+  { key: "discover:studio-news", name: "Boletim Mensal", description: "Notícias, anúncios e assuntos apresentados no boletim mensal.", type: "ondemand", parentKey: "VODStudio", path: ["Boletim Mensal"], defaultFolder: "Discursos/Boletim Mensal", discoverNames: ["Notícias e Anúncios", "Notícias e anúncios", "News and Announcements"] },
+  { key: "VODPgmEvtMorningWorship", name: "Adorações Matinais", description: "Discursos e reflexões apresentados nas adorações matinais.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Adorações Matinais"], defaultFolder: "Discursos/Adorações Matinais" },
+  { key: "VODPgmEvtGilead", name: "Formaturas", description: "Programas e discursos de formaturas.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Formaturas"], defaultFolder: "Discursos/Formaturas" },
+  { key: "VODPgmEvtAnnMtg", name: "Reuniões Anuais", description: "Programas e discursos das reuniões anuais.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Reuniões Anuais"], defaultFolder: "Discursos/Reuniões Anuais" },
+  { key: "2020Convention", name: "Congresso de 2020", description: "Transcrições do congresso de 2020.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2020"], defaultFolder: "Discursos/Congressos/2020" },
+  { key: "2021Convention", name: "Congresso de 2021", description: "Transcrições do congresso de 2021.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2021"], defaultFolder: "Discursos/Congressos/2021" },
+  { key: "2022Convention", name: "Congresso de 2022", description: "Transcrições do congresso de 2022.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2022"], defaultFolder: "Discursos/Congressos/2022" },
+  { key: "discover:series-bible-intros", name: "Introdução aos livros da Bíblia", description: "Vídeos de introdução aos livros da Bíblia.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Introdução aos livros da Bíblia"], defaultFolder: "Discursos/Séries/Introdução aos livros da Bíblia", discoverNames: ["Vídeos de Introdução aos Livros da Bíblia", "Introdução aos livros da Bíblia", "Bible Book Introductions"] },
+  { key: "discover:series-treasures", name: "À procura de tesouros", description: "Série À procura de tesouros.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "À procura de tesouros"], defaultFolder: "Discursos/Séries/À procura de tesouros", discoverNames: ["À procura de tesouros", "A procura de tesouros"] },
+  { key: "discover:series-lessons", name: "O que aprendemos", description: "Série O que aprendemos.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "O que aprendemos"], defaultFolder: "Discursos/Séries/O que aprendemos", discoverNames: ["O que aprendemos"] },
+  { key: "discover:series-iron", name: "O ferro afia o ferro", description: "Série O ferro afia o ferro.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "O ferro afia o ferro"], defaultFolder: "Discursos/Séries/O ferro afia o ferro", discoverNames: ["O ferro afia o ferro", "O Ferro Afia o Ferro"] },
+  { key: "discover:series-faith", name: "Exemplos de fé", description: "Série Exemplos de fé.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Exemplos de fé"], defaultFolder: "Discursos/Séries/Exemplos de fé", discoverNames: ["Exemplos de Fé", "Exemplos de fé", "Imite a sua fé"] },
+  { key: "discover:series-marriage", name: "Para ter um casamento feliz", description: "Série com princípios bíblicos para o casamento.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Para ter um casamento feliz"], defaultFolder: "Discursos/Séries/Para ter um casamento feliz", discoverNames: ["Para ter um casamento feliz", "Para Ter Um Casamento Feliz"] }
+]
 
 // src/settings.ts
 var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
@@ -749,77 +707,173 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian2.Setting(containerEl).setName("Biblioteca de transcri\xE7\xF5es").setHeading();
-    containerEl.createEl("p", {
-      text: "Ative somente as cole\xE7\xF5es que deseja guardar neste aparelho. Se nenhuma pasta for escolhida, o plugin criar\xE1 automaticamente uma pasta organizada dentro de Discursos.",
-      cls: "setting-item-description"
+    containerEl.addClass("indice-nights-settings");
+
+    new import_obsidian2.Setting(containerEl).setName("Biblioteca de transcrições").setHeading();
+    const indexHero = containerEl.createEl("button", {
+      cls: "bri-index-hero",
+      attr: { type: "button", "aria-label": "Criar ou abrir o Índice Geral" }
     });
-    const catalog = containerEl.createDiv({ cls: "bri-catalog-settings" });
-    this.renderCatalog(catalog);
-    new import_obsidian2.Setting(containerEl).setName("Baixar novas transcri\xE7\xF5es").setDesc("Verifica as cole\xE7\xF5es marcadas e baixa somente discursos que ainda n\xE3o possuem uma nota com o mesmo id_origem.").addButton((button) => button.setCta().setButtonText("Verificar e baixar").onClick(async () => {
-      button.setDisabled(true);
+    const indexIcon = indexHero.createSpan({ cls: "bri-index-hero-icon" });
+    (0, import_obsidian2.setIcon)(indexIcon, "book-open");
+    const indexCopy = indexHero.createDiv({ cls: "bri-index-hero-copy" });
+    const indexTitleRow = indexCopy.createDiv({ cls: "bri-index-hero-title-row" });
+    indexTitleRow.createSpan({ text: "Índice Geral", cls: "bri-index-hero-title" });
+    indexTitleRow.createSpan({ text: "Recomendado", cls: "bri-index-hero-badge" });
+    indexCopy.createDiv({
+      text: "Crie ou abra o índice completo de textos bíblicos encontrados nas transcrições.",
+      cls: "bri-index-hero-description"
+    });
+    const indexArrow = indexHero.createSpan({ cls: "bri-index-hero-arrow" });
+    (0, import_obsidian2.setIcon)(indexArrow, "chevron-right");
+    indexHero.addEventListener("click", async () => {
+      await this.plugin.transcriptService.ensureGeneralIndex(true, true);
+    });
+
+    const officialDivider = containerEl.createDiv({ cls: "bri-section-divider bri-section-divider-official bri-section-divider-with-actions" });
+    officialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-left" });
+    officialDivider.createSpan({ text: "Transcrições oficiais", cls: "bri-section-divider-label" });
+    officialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-right" });
+
+    const officialActions = officialDivider.createDiv({ cls: "bri-section-divider-actions" });
+
+    const officialDownloadAction = officialActions.createEl("button", {
+      text: "Atualizar ou baixar",
+      cls: "bri-section-divider-action bri-section-divider-action-official",
+      attr: { type: "button" }
+    });
+    officialDownloadAction.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      officialDownloadAction.disabled = true;
+      officialDownloadAction.addClass("is-loading");
       try {
         await this.plugin.transcriptService.downloadEnabled();
       } finally {
-        button.setDisabled(false);
+        officialDownloadAction.disabled = false;
+        officialDownloadAction.removeClass("is-loading");
       }
-    }));
-    new import_obsidian2.Setting(containerEl).setName("Transcri\xE7\xF5es de uma pasta p\xFAblica").setHeading();
-    new import_obsidian2.Setting(containerEl).setName("Miniaturas ausentes").setDesc("Baixa e acrescenta a imagem de apresenta\xE7\xE3o \xE0s transcri\xE7\xF5es j\xE1 existentes das cole\xE7\xF5es ativadas.").addButton((button) => button.setButtonText("Atualizar miniaturas").onClick(async () => {
-      button.setDisabled(true);
+    });
+
+    const officialThumbnailAction = officialActions.createEl("button", {
+      text: "Atualizar miniaturas",
+      cls: "bri-section-divider-action bri-section-divider-action-official",
+      attr: { type: "button" }
+    });
+    officialThumbnailAction.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      officialThumbnailAction.disabled = true;
+      officialThumbnailAction.addClass("is-loading");
       try {
         await this.plugin.transcriptService.updateMissingThumbnails();
       } finally {
-        button.setDisabled(false);
+        officialThumbnailAction.disabled = false;
+        officialThumbnailAction.removeClass("is-loading");
       }
-    }));
-    containerEl.createEl("p", {
-      text: "Cole o link de uma pasta p\xFAblica do Google Drive. O plugin l\xEA arquivos TXT, Markdown e Documentos Google sem login e mant\xE9m as subpastas.",
-      cls: "setting-item-description"
     });
-    new import_obsidian2.Setting(containerEl).setName("Link p\xFAblico da pasta").setDesc("No Google Drive, use Compartilhar \u2192 Acesso geral \u2192 Qualquer pessoa com o link \u2192 Leitor.").addText((text) => text.setPlaceholder("https://drive.google.com/drive/folders/...").setValue(this.plugin.settings.remoteDriveUrl).onChange(async (value) => {
-      this.plugin.settings.remoteDriveUrl = value.trim();
-      await this.plugin.saveSettings();
-    }));
-    const remoteFolders = this.listFolders();
-    new import_obsidian2.Setting(containerEl).setName("Pasta de destino").setDesc("Se nenhuma for escolhida, ser\xE1 usada Discursos/Importados. As subpastas remotas ser\xE3o preservadas.").addDropdown((dropdown) => {
-      dropdown.addOption("", "Autom\xE1tica: Discursos/Importados");
-      for (const folder of remoteFolders) dropdown.addOption(folder, folder);
-      const current = this.plugin.settings.remoteDriveFolder;
-      if (current && !remoteFolders.includes(current)) dropdown.addOption(current, current);
-      dropdown.setValue(current);
-      dropdown.onChange(async (folder) => {
-        this.plugin.settings.remoteDriveFolder = folder;
-        await this.plugin.saveSettings();
-      });
+
+    const catalog = containerEl.createDiv({ cls: "bri-catalog-settings" });
+    this.renderCatalog(catalog);
+
+    const unofficialDivider = containerEl.createDiv({ cls: "bri-section-divider bri-section-divider-unofficial bri-section-divider-with-action" });
+    unofficialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-left" });
+    unofficialDivider.createSpan({ text: "Transcrições não oficiais", cls: "bri-section-divider-label" });
+    unofficialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-right" });
+    const unofficialAction = unofficialDivider.createEl("button", {
+      text: "Atualizar ou baixar",
+      cls: "bri-section-divider-action",
+      attr: { type: "button" }
     });
-    new import_obsidian2.Setting(containerEl).setName("Baixar da pasta p\xFAblica").setDesc("Baixa somente arquivos novos. Notas j\xE1 importadas e suas altera\xE7\xF5es pessoais n\xE3o s\xE3o substitu\xEDdas.").addButton((button) => button.setCta().setButtonText("Verificar e baixar").onClick(async () => {
-      button.setDisabled(true);
+    unofficialAction.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      unofficialAction.disabled = true;
+      unofficialAction.addClass("is-loading");
       try {
         await this.plugin.remoteDriveService.downloadNew();
       } finally {
-        button.setDisabled(false);
+        unofficialAction.disabled = false;
+        unofficialAction.removeClass("is-loading");
       }
-    }));
-    new import_obsidian2.Setting(containerEl).setName("\xCDndice geral").setDesc("O plugin cria automaticamente a nota \u201C00 - \xCDndice Geral/\xCDndice Geral de Textos B\xEDblicos\u201D. O prefixo mant\xE9m a pasta no topo do Explorador.").addButton((button) => button.setButtonText("Criar ou localizar \xEDndice").onClick(async () => {
-      await this.plugin.transcriptService.ensureGeneralIndex(true, true);
-    }));
+    });
+
+    const unofficialPanel = containerEl.createDiv({ cls: "bri-unofficial-panel" });
+
+    const linkSetting = new import_obsidian2.Setting(unofficialPanel)
+      .setName("Link público da pasta")
+      .setDesc("Cole o link de uma pasta pública do Google Drive. O plugin lê TXT, Markdown e Documentos Google e mantém as subpastas.")
+      .addText((text) => text
+        .setPlaceholder("https://drive.google.com/drive/folders/...")
+        .setValue(this.plugin.settings.remoteDriveUrl)
+        .onChange(async (value) => {
+          this.plugin.settings.remoteDriveUrl = value.trim();
+          await this.plugin.saveSettings();
+        }));
+    linkSetting.settingEl.addClass("bri-unofficial-row");
+    const linkIcon = linkSetting.infoEl.createSpan({ cls: "bri-unofficial-row-icon" });
+    (0, import_obsidian2.setIcon)(linkIcon, "link-2");
+    linkSetting.infoEl.prepend(linkIcon);
+
+    const remoteFolders = this.listFolders();
+    const folderSetting = new import_obsidian2.Setting(unofficialPanel)
+      .setName("Pasta de destino")
+      .setDesc("Se nenhuma for escolhida, será usada Discursos/Importados. As subpastas remotas serão preservadas.")
+      .addDropdown((dropdown) => {
+        dropdown.addOption("", "Automática: Discursos/Importados");
+        for (const folder of remoteFolders) dropdown.addOption(folder, folder);
+        const current = this.plugin.settings.remoteDriveFolder;
+        if (current && !remoteFolders.includes(current)) dropdown.addOption(current, current);
+        dropdown.setValue(current);
+        dropdown.onChange(async (folder) => {
+          this.plugin.settings.remoteDriveFolder = folder;
+          await this.plugin.saveSettings();
+        });
+      });
+    folderSetting.settingEl.addClass("bri-unofficial-row");
+    const folderIcon = folderSetting.infoEl.createSpan({ cls: "bri-unofficial-row-icon" });
+    (0, import_obsidian2.setIcon)(folderIcon, "folder");
+    folderSetting.infoEl.prepend(folderIcon);
   }
   renderCatalog(container) {
-    var _a;
     container.empty();
     const folders = this.listFolders();
-    for (const item of SUPPORTED_CATEGORIES) {
-      const current = (_a = this.plugin.settings.categorySettings[item.key]) != null ? _a : { enabled: false, folder: "" };
-      const row = new import_obsidian2.Setting(container).setName(item.name).setDesc(`${item.path.join(" \u203A ")} \u2014 pasta autom\xE1tica: ${item.defaultFolder}`);
-      row.addToggle((toggle) => toggle.setTooltip("Incluir esta cole\xE7\xE3o nos downloads").setValue(current.enabled).onChange(async (enabled) => {
-        this.plugin.settings.categorySettings[item.key] = { ...current, enabled };
-        await this.plugin.saveSettings();
-        this.renderCatalog(container);
-      }));
+
+    const getCurrent = (item) => {
+      var _a;
+      return (_a = this.plugin.settings.categorySettings[item.key]) != null ? _a : { enabled: false, folder: "" };
+    };
+
+    const iconFor = (item) => {
+      if (item.key === "StudioTalks") return "mic-2";
+      if (item.key === "discover:studio-news") return "newspaper";
+      if (item.key === "VODPgmEvtMorningWorship") return "sunrise";
+      if (item.key === "VODPgmEvtGilead") return "graduation-cap";
+      if (item.key === "VODPgmEvtAnnMtg") return "calendar-days";
+      return "library";
+    };
+
+    const renderStandardCard = (item) => {
+      const current = getCurrent(item);
+      const card = container.createDiv({ cls: "bri-library-card" });
+      if (current.enabled) card.addClass("is-enabled");
+
+      const iconBox = card.createDiv({ cls: "bri-library-card-icon" });
+      (0, import_obsidian2.setIcon)(iconBox, iconFor(item));
+
+      const body = card.createDiv({ cls: "bri-library-card-body" });
+      body.createDiv({ text: item.name, cls: "bri-library-card-title" });
+      body.createDiv({ text: item.description || item.path.join(" › "), cls: "bri-library-card-description" });
+      body.createDiv({
+        text: `Pasta automática: ${item.defaultFolder}`,
+        cls: "bri-library-card-path"
+      });
+
+      const footer = card.createDiv({ cls: "bri-library-card-footer" });
       if (current.enabled) {
-        row.addDropdown((dropdown) => {
-          dropdown.addOption("", `Autom\xE1tica: ${item.defaultFolder}`);
+        const selectHost = footer.createDiv({ cls: "bri-library-card-select" });
+        new import_obsidian2.Setting(selectHost).addDropdown((dropdown) => {
+          dropdown.addOption("", `Automática: ${item.defaultFolder}`);
           for (const folder of folders) dropdown.addOption(folder, folder);
           if (current.folder && !folders.includes(current.folder)) dropdown.addOption(current.folder, current.folder);
           dropdown.setValue(current.folder);
@@ -828,6 +882,93 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
             await this.plugin.saveSettings();
           });
         });
+      } else {
+        footer.createSpan({ text: "Desativado", cls: "bri-library-card-status" });
+      }
+
+      const toggleHost = footer.createDiv({ cls: "bri-library-card-toggle" });
+      new import_obsidian2.Setting(toggleHost).addToggle((toggle) => toggle
+        .setTooltip("Incluir esta coleção nos downloads")
+        .setValue(current.enabled)
+        .onChange(async (enabled) => {
+          this.plugin.settings.categorySettings[item.key] = { ...current, enabled };
+          await this.plugin.saveSettings();
+          this.renderCatalog(container);
+        }));
+    };
+
+    const regularItems = SUPPORTED_CATEGORIES.filter((item) => !item.group);
+    for (const item of regularItems) renderStandardCard(item);
+
+    const groupItems = SUPPORTED_CATEGORIES.filter((item) => item.group);
+    const groupNames = Array.from(new Set(groupItems.map((item) => item.group)));
+    const groupsWrap = container.createDiv({ cls: "bri-library-groups-wrap" });
+
+    const renderGroupOption = (item, host) => {
+      host.empty();
+      const current = getCurrent(item);
+      const option = host.createDiv({ cls: "bri-library-group-option" });
+      if (current.enabled) option.addClass("is-enabled");
+
+      const optionInfo = option.createDiv({ cls: "bri-library-group-option-info" });
+      optionInfo.createDiv({ text: item.name, cls: "bri-library-group-option-title" });
+      optionInfo.createDiv({ text: item.description || "", cls: "bri-library-group-option-description" });
+
+      const controls = option.createDiv({ cls: "bri-library-group-option-controls" });
+      if (current.enabled) {
+        const selectHost = controls.createDiv({ cls: "bri-library-group-option-select" });
+        new import_obsidian2.Setting(selectHost).addDropdown((dropdown) => {
+          dropdown.addOption("", `Automática: ${item.defaultFolder}`);
+          for (const folder of folders) dropdown.addOption(folder, folder);
+          if (current.folder && !folders.includes(current.folder)) dropdown.addOption(current.folder, current.folder);
+          dropdown.setValue(current.folder);
+          dropdown.onChange(async (folder) => {
+            this.plugin.settings.categorySettings[item.key] = { enabled: true, folder };
+            await this.plugin.saveSettings();
+          });
+        });
+      }
+
+      const toggleHost = controls.createDiv({ cls: "bri-library-group-option-toggle" });
+      new import_obsidian2.Setting(toggleHost).addToggle((toggle) => toggle
+        .setValue(current.enabled)
+        .setTooltip("Incluir esta coleção nos downloads")
+        .onChange(async (enabled) => {
+          this.plugin.settings.categorySettings[item.key] = { ...current, enabled };
+          await this.plugin.saveSettings();
+          renderGroupOption(item, host);
+        }));
+    };
+
+    for (const groupName of groupNames) {
+      const items = groupItems.filter((item) => item.group === groupName);
+      const details = groupsWrap.createEl("details", { cls: "bri-library-group" });
+      const enabledCount = items.filter((item) => getCurrent(item).enabled).length;
+
+      const summary = details.createEl("summary", { cls: "bri-library-group-summary" });
+      const iconBox = summary.createSpan({ cls: "bri-library-group-icon" });
+      (0, import_obsidian2.setIcon)(iconBox, groupName === "Congressos" ? "users" : "clapperboard");
+
+      const copy = summary.createDiv({ cls: "bri-library-group-copy" });
+      copy.createDiv({ text: groupName, cls: "bri-library-group-title" });
+      copy.createDiv({
+        text: groupName === "Congressos"
+          ? "Escolha o ano do congresso para ativar e baixar as transcrições."
+          : "Escolha as séries que deseja manter disponíveis no Obsidian.",
+        cls: "bri-library-group-description"
+      });
+
+      summary.createSpan({
+        text: enabledCount ? `${enabledCount} ativo${enabledCount > 1 ? "s" : ""}` : `${items.length} opções`,
+        cls: "bri-library-group-count"
+      });
+      const chevron = summary.createSpan({ cls: "bri-library-group-chevron" });
+      (0, import_obsidian2.setIcon)(chevron, "chevron-down");
+
+      const panel = details.createDiv({ cls: "bri-library-group-panel" });
+      for (const item of items) {
+        const optionHost = panel.createDiv({ cls: "bri-library-group-option-host" });
+        renderGroupOption(item, optionHost);
       }
     }
   }
@@ -1045,7 +1186,20 @@ function imageCandidates(value, output = []) {
 }
 function thumbnailUrl(media) {
   var _a;
-  return (_a = imageCandidates(media.images).at(-1)) != null ? _a : null;
+  const candidates = imageCandidates(media.images);
+  if (candidates.length === 0) return null;
+  const score = (url) => {
+    const value = url.toLowerCase();
+    let points = 0;
+    if (/(?:^|[_\-/])wss(?:[_\-./]|$)/.test(value)) points += 120;
+    if (/(?:wide|widescreen|16x9|landscape)/.test(value)) points += 100;
+    if (/(?:^|[_\-/])sqr(?:[_\-./]|$)|square/.test(value)) points -= 120;
+    if (/(?:_xl\.|_xl_|\/xl\/)/.test(value)) points += 30;
+    else if (/(?:_lg\.|_lg_|\/lg\/)/.test(value)) points += 20;
+    else if (/(?:_md\.|_md_|\/md\/)/.test(value)) points += 10;
+    return points;
+  };
+  return (_a = candidates.map((url, index) => ({ url, index, score: score(url) })).sort((a, b) => b.score - a.score || b.index - a.index)[0]) == null ? void 0 : _a.url;
 }
 var SourceTranscriptService = class {
   constructor(app, settings, syncNote) {
@@ -1081,7 +1235,7 @@ var SourceTranscriptService = class {
         const chosenFolder = cleanFolder(this.settings.categorySettings[category.key].folder);
         const folder = chosenFolder || category.defaultFolder;
         await ensureFolder(this.app, folder);
-        const mediaItems = await this.allMedia(category.key);
+        const mediaItems = await this.allMedia(category);
         for (const [mediaIndex, media] of mediaItems.entries()) {
           const id = sourceId(media);
           progress.setMessage(`${category.name}: ${mediaIndex + 1}/${mediaItems.length} \u2014 ${media.title}`);
@@ -1137,26 +1291,24 @@ var SourceTranscriptService = class {
       return;
     }
     this.downloading = true;
-    const progress = new import_obsidian3.Notice("Procurando miniaturas ausentes\u2026", 0);
+    const progress = new import_obsidian3.Notice("Atualizando miniaturas\u2026", 0);
     let updated = 0;
     try {
       const existing = this.existingNotes();
       for (const category of selected) {
-        for (const media of await this.allMedia(category.key)) {
+        for (const media of await this.allMedia(category)) {
           const file = existing.get(sourceId(media));
           if (!file) continue;
           const content = await this.app.vault.read(file);
-          if (/!\[Miniatura\]\(Anexos\/Índice(?:%20| )Nights\/Miniaturas\//.test(content)) continue;
-          const thumbnailPath = await this.downloadThumbnail(media);
+          const hasThumbnail = /!\[Miniatura\]\(Anexos\/Índice(?:%20| )Nights\/Miniaturas\//.test(content);
+          const thumbnailPath = await this.downloadThumbnail(media, true);
           if (!thumbnailPath) continue;
-          const image = `[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`;
-          const next = content.replace(/^(# .+)$/m, `$1
-
-${image}`);
-          if (next !== content) {
-            await this.app.vault.modify(file, next);
-            updated += 1;
+          if (!hasThumbnail) {
+            const image = `[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`;
+            const next = content.replace(/^(# .+)$/m, `$1\n\n${image}`);
+            if (next !== content) await this.app.vault.modify(file, next);
           }
+          updated += 1;
           await wait(120);
         }
       }
@@ -1164,7 +1316,7 @@ ${image}`);
       this.downloading = false;
       progress.hide();
     }
-    new import_obsidian3.Notice(`${updated} miniatura(s) adicionada(s).`, 8e3);
+    new import_obsidian3.Notice(`${updated} miniatura(s) atualizada(s).`, 8e3);
   }
   async ensureGeneralIndex(showNotice = false, openAfter = false) {
     const folder = GENERAL_INDEX_FOLDER;
@@ -1208,8 +1360,28 @@ ${image}`);
       await this.app.vault.rename(oldFile, newPath);
     }
   }
-  async allMedia(categoryKey) {
+  normalizeCategoryName(value) {
+    return value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLocaleLowerCase("pt-BR").replace(/[^a-z0-9]+/g, " ").trim();
+  }
+  async resolveCategoryKey(category) {
+    var _a;
+    if (!category.key.startsWith("discover:")) return category.key;
+    if (!category.parentKey || !((_a = category.discoverNames) == null ? void 0 : _a.length)) throw new Error(`Categoria dinâmica sem origem configurada: ${category.name}`);
+    const parent = await getCategory(category.parentKey, 0, 0);
+    const children = parent.category.subcategories != null ? parent.category.subcategories : [];
+    const wanted = category.discoverNames.map((name) => this.normalizeCategoryName(name));
+    const exact = children.find((child) => wanted.includes(this.normalizeCategoryName(child.name)));
+    if (exact) return exact.key;
+    const partial = children.find((child) => {
+      const name = this.normalizeCategoryName(child.name);
+      return wanted.some((candidate) => name.includes(candidate) || candidate.includes(name));
+    });
+    if (partial) return partial.key;
+    throw new Error(`Não encontrei “${category.name}” dentro de ${category.parentKey}.`);
+  }
+  async allMedia(category) {
     var _a, _b, _c;
+    const categoryKey = await this.resolveCategoryKey(category);
     const media = [];
     const limit = 50;
     let offset = 0;
@@ -1244,7 +1416,7 @@ ${image}`);
     }
     return path;
   }
-  async downloadThumbnail(media) {
+  async downloadThumbnail(media, replaceExisting = false) {
     var _a, _b, _c;
     const url = thumbnailUrl(media);
     if (!url) return null;
@@ -1252,10 +1424,11 @@ ${image}`);
     const extension = (_c = (_b = (_a = /\.(png|webp)(?:\?|$)/i.exec(url)) == null ? void 0 : _a[1]) == null ? void 0 : _b.toLocaleLowerCase("pt-BR")) != null ? _c : "jpg";
     const path = `${THUMBNAIL_FOLDER}/${nomeArquivoSeguro(sourceId(media))}.${extension}`;
     const existing = this.app.vault.getAbstractFileByPath(path);
-    if (existing instanceof import_obsidian3.TFile) return path;
+    if (existing instanceof import_obsidian3.TFile && !replaceExisting) return path;
     try {
       const response = await (0, import_obsidian3.requestUrl)({ url, method: "GET" });
-      await this.app.vault.createBinary(path, response.arrayBuffer);
+      if (existing instanceof import_obsidian3.TFile) await this.app.vault.modifyBinary(existing, response.arrayBuffer);
+      else await this.app.vault.createBinary(path, response.arrayBuffer);
       return path;
     } catch (e) {
       return null;
@@ -1821,6 +1994,7 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
       ));
     });
     this.registerMarkdownPostProcessor((element) => {
+      this.prepareThumbnailLayout(element);
       linkBibleReferences(element, this.app);
     });
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
@@ -1844,6 +2018,13 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   onunload() {
     var _a;
     (_a = this.noteSyncService) == null ? void 0 : _a.unload();
+  }
+  prepareThumbnailLayout(element) {
+    const thumbnails = element.querySelectorAll('img[alt="Miniatura"]');
+    for (const image of thumbnails) {
+      const link = image.closest("a");
+      if (link) link.addClass("indice-nights-thumbnail-link");
+    }
   }
   async saveSettings() {
     await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
