@@ -877,6 +877,52 @@
   max-width: 220px;
 }
 
+
+/* v0.8.10 — Séries mais legíveis no desktop.
+   Aplica somente em telas de PC; os breakpoints de iPad/iPhone permanecem intactos. */
+@media (min-width: 900px) {
+  body:not(.is-mobile) .indice-nights-settings .bri-library-groups-wrap {
+    grid-template-columns: 1fr !important;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-summary {
+    min-height: 92px;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-panel {
+    gap: 10px;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option {
+    grid-template-columns: minmax(260px, 1fr) minmax(320px, 42%);
+    gap: 18px;
+    padding: 12px 14px;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-title {
+    font-size: 13.5px;
+    line-height: 1.35;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-description {
+    font-size: 11.5px;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-select {
+    flex: 1 1 auto;
+  }
+
+  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-select select {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
 /* Ação de download */
 .indice-nights-settings .bri-action-setting {
   margin-top: 16px !important;

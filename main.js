@@ -713,12 +713,12 @@ var SUPPORTED_CATEGORIES = [
   { key: "2020Convention", name: "Congresso de 2020", description: "Transcrições do congresso de 2020.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2020"], defaultFolder: "Discursos/Congressos/2020" },
   { key: "2021Convention", name: "Congresso de 2021", description: "Transcrições do congresso de 2021.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2021"], defaultFolder: "Discursos/Congressos/2021" },
   { key: "2022Convention", name: "Congresso de 2022", description: "Transcrições do congresso de 2022.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2022"], defaultFolder: "Discursos/Congressos/2022" },
-  { key: "discover:series-bible-intros", name: "Introdução aos livros da Bíblia", description: "Vídeos de introdução aos livros da Bíblia.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Introdução aos livros da Bíblia"], defaultFolder: "Discursos/Séries/Introdução aos livros da Bíblia", discoverNames: ["Vídeos de Introdução aos Livros da Bíblia", "Introdução aos livros da Bíblia", "Bible Book Introductions"] },
-  { key: "discover:series-treasures", name: "À procura de tesouros", description: "Série À procura de tesouros.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "À procura de tesouros"], defaultFolder: "Discursos/Séries/À procura de tesouros", discoverNames: ["À procura de tesouros", "A procura de tesouros"] },
-  { key: "discover:series-lessons", name: "O que aprendemos", description: "Série O que aprendemos.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "O que aprendemos"], defaultFolder: "Discursos/Séries/O que aprendemos", discoverNames: ["O que aprendemos", "Lições Que Aprendemos de A Sentinela", "Lições que aprendemos de A Sentinela", "Lições de A Sentinela"] },
-  { key: "discover:series-iron", name: "O ferro afia o ferro", description: "Série O ferro afia o ferro.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "O ferro afia o ferro"], defaultFolder: "Discursos/Séries/O ferro afia o ferro", discoverNames: ["O ferro afia o ferro", "O Ferro Afia o Ferro", "Ferro Afia o Ferro", "Ferro afia o ferro"] },
-  { key: "discover:series-faith", name: "Exemplos de fé", description: "Série Exemplos de fé.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Exemplos de fé"], defaultFolder: "Discursos/Séries/Exemplos de fé", discoverNames: ["Exemplos de Fé", "Exemplos de fé", "Exemplos de Fé – Vídeos", "Exemplos de Fé - Vídeos", "Imite a sua fé"] },
-  { key: "discover:series-marriage", name: "Para ter um casamento feliz", description: "Série com princípios bíblicos para o casamento.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Para ter um casamento feliz"], defaultFolder: "Discursos/Séries/Para ter um casamento feliz", discoverNames: ["Para ter um casamento feliz", "Para Ter Um Casamento Feliz", "Para Ter Um Casamento Feliz...", "Para ter um casamento feliz..."] }
+  { key: "discover:series-bible-intros", name: "Introdução aos livros da Bíblia", description: "Vídeos de introdução aos livros da Bíblia.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Introdução aos livros da Bíblia"], defaultFolder: "Discursos/Séries/Introdução aos livros da Bíblia", discoverNames: ["Introdução aos Livros da Bíblia", "Introdução aos livros da Bíblia"] },
+  { key: "SeriesDigForTreasures", name: "Busque por Tesouros", description: "Série oficial Busque por Tesouros.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Busque por Tesouros"], defaultFolder: "Discursos/Séries/Busque por Tesouros" },
+  { key: "SeriesLearnFromThem", name: "Exemplos para Nós", description: "Série oficial Exemplos para Nós.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Exemplos para Nós"], defaultFolder: "Discursos/Séries/Exemplos para Nós" },
+  { key: "SeriesIronSharpens", name: "Ferro Afia o Ferro", description: "Série oficial Ferro Afia o Ferro.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Ferro Afia o Ferro"], defaultFolder: "Discursos/Séries/Ferro Afia o Ferro" },
+  { key: "SeriesImitateFaith", name: "Imite a Sua Fé", description: "Série oficial Imite a Sua Fé.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Imite a Sua Fé"], defaultFolder: "Discursos/Séries/Imite a Sua Fé" },
+  { key: "SeriesHappyMarriage", name: "Como Ser Feliz no Casamento?", description: "Série oficial Como Ser Feliz no Casamento?.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Como Ser Feliz no Casamento"], defaultFolder: "Discursos/Séries/Como Ser Feliz no Casamento" }
 ]
 
 // src/settings.ts
@@ -1278,6 +1278,11 @@ var SourceTranscriptService = class {
       console.warn("Indice Nights: não foi possível migrar a pasta do boletim", e);
     }
     try {
+      await this.migrateSeriesFolders();
+    } catch (e) {
+      console.warn("Indice Nights: não foi possível migrar as pastas das séries", e);
+    }
+    try {
       await this.migrateBibleIntroOrder();
     } catch (e) {
       console.warn("Indice Nights: não foi possível ordenar a série de introdução bíblica", e);
@@ -1288,6 +1293,21 @@ var SourceTranscriptService = class {
     const newFolder = this.app.vault.getAbstractFileByPath(GOVERNING_BODY_BULLETIN_FOLDER);
     if (oldFolder instanceof import_obsidian3.TFolder && !newFolder) {
       await this.app.vault.rename(oldFolder, GOVERNING_BODY_BULLETIN_FOLDER);
+    }
+  }
+  async migrateSeriesFolders() {
+    const moves = [
+      ["Discursos/Séries/À procura de tesouros", "Discursos/Séries/Busque por Tesouros"],
+      ["Discursos/Séries/O ferro afia o ferro", "Discursos/Séries/Ferro Afia o Ferro"],
+      ["Discursos/Séries/Exemplos de fé", "Discursos/Séries/Imite a Sua Fé"],
+      ["Discursos/Séries/Para ter um casamento feliz", "Discursos/Séries/Como Ser Feliz no Casamento"]
+    ];
+    for (const [oldPath, newPath] of moves) {
+      const oldFolder = this.app.vault.getAbstractFileByPath(oldPath);
+      const newFolder = this.app.vault.getAbstractFileByPath(newPath);
+      if (oldFolder instanceof import_obsidian3.TFolder && !newFolder) {
+        await this.app.vault.rename(oldFolder, newPath);
+      }
     }
   }
   async migrateBibleIntroOrder() {
@@ -1485,7 +1505,30 @@ var SourceTranscriptService = class {
     }
   }
   normalizeCategoryName(value) {
-    return value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLocaleLowerCase("pt-BR").replace(/[^a-z0-9]+/g, " ").trim();
+    return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").replace(/[^a-z0-9]+/g, " ").trim();
+  }
+  discoveryRoots(category) {
+    if (category.group === "Séries" || category.key.startsWith("discover:series-")) {
+      return ["VODSeries"];
+    }
+    return [...new Set([category.parentKey].filter(Boolean))];
+  }
+  categoryNameMatches(name, wanted) {
+    if (!name) return false;
+    if (wanted.includes(name)) return true;
+    return wanted.some((candidate) => {
+      if (!candidate) return false;
+      if (name.includes(candidate) || candidate.includes(name)) return true;
+      const candidateWords = candidate.split(" ").filter((word) => word.length >= 4);
+      if (candidateWords.length < 2) return false;
+      const matches = candidateWords.filter((word) => name.includes(word)).length;
+      return matches >= Math.min(3, candidateWords.length);
+    });
+  }
+  mediaMatchesSeries(media, wanted) {
+    const title = this.normalizeCategoryName(media.title != null ? media.title : "");
+    if (!title) return false;
+    return wanted.some((candidate) => candidate && (title.includes(candidate) || candidate.includes(title)));
   }
   async resolveCategoryKey(category) {
     var _a;
@@ -1493,7 +1536,7 @@ var SourceTranscriptService = class {
     if (!category.parentKey || !((_a = category.discoverNames) == null ? void 0 : _a.length)) throw new Error(`Categoria dinâmica sem origem configurada: ${category.name}`);
     const wanted = category.discoverNames.map((name) => this.normalizeCategoryName(name));
     const visited = /* @__PURE__ */ new Set();
-    const queue = [{ key: category.parentKey, depth: 0 }];
+    const queue = this.discoveryRoots(category).map((key) => ({ key, depth: 0 }));
     let bestPartial = null;
     while (queue.length > 0) {
       const current = queue.shift();
@@ -1501,25 +1544,61 @@ var SourceTranscriptService = class {
       visited.add(current.key);
       let response;
       try {
-        response = await getCategory(current.key, 0, 0);
+        response = await getCategory(current.key, 50, 0);
       } catch (e) {
         console.warn("Indice Nights: falha ao explorar categoria", current.key, e);
         continue;
       }
+      const currentName = this.normalizeCategoryName(response.category.name != null ? response.category.name : "");
+      if (current.depth > 0 && this.categoryNameMatches(currentName, wanted)) return current.key;
+      const currentMedia = response.category.media != null ? response.category.media : [];
+      const matchingMedia = currentMedia.filter((media) => this.mediaMatchesSeries(media, wanted));
+      if (matchingMedia.length >= 2 && matchingMedia.length >= Math.ceil(currentMedia.length * 0.4)) return current.key;
       const children = response.category.subcategories != null ? response.category.subcategories : [];
       for (const child of children) {
-        const name = this.normalizeCategoryName(child.name);
-        if (wanted.includes(name)) return child.key;
+        const name = this.normalizeCategoryName(child.name != null ? child.name : "");
+        if (this.categoryNameMatches(name, wanted)) return child.key;
         if (!bestPartial && wanted.some((candidate) => name.includes(candidate) || candidate.includes(name))) bestPartial = child.key;
-        if (current.depth < 3 && child.key && !visited.has(child.key)) queue.push({ key: child.key, depth: current.depth + 1 });
+        if (current.depth < 7 && child.key && !visited.has(child.key)) queue.push({ key: child.key, depth: current.depth + 1 });
       }
     }
     if (bestPartial) return bestPartial;
-    throw new Error(`Não encontrei “${category.name}” dentro de ${category.parentKey} (incluindo subcategorias).`);
+    throw new Error(`Não encontrei “${category.name}” nas categorias de vídeo conhecidas.`);
+  }
+  async collectMatchingSeriesMedia(category) {
+    var _a;
+    const wanted = ((_a = category.discoverNames) != null ? _a : []).map((name) => this.normalizeCategoryName(name));
+    const visited = /* @__PURE__ */ new Set();
+    const queue = this.discoveryRoots(category).map((key) => ({ key, depth: 0 }));
+    const found = /* @__PURE__ */ new Map();
+    while (queue.length > 0) {
+      const current = queue.shift();
+      if (!current || visited.has(current.key)) continue;
+      visited.add(current.key);
+      let response;
+      try {
+        response = await getCategory(current.key, 50, 0);
+      } catch (e) {
+        continue;
+      }
+      for (const media of response.category.media != null ? response.category.media : []) {
+        if (this.mediaMatchesSeries(media, wanted)) found.set(sourceId(media), media);
+      }
+      for (const child of response.category.subcategories != null ? response.category.subcategories : []) {
+        if (current.depth < 7 && child.key && !visited.has(child.key)) queue.push({ key: child.key, depth: current.depth + 1 });
+      }
+      if (queue.length > 0) await wait(60);
+    }
+    return [...found.values()];
   }
   async allMedia(category) {
     var _a, _b, _c;
-    const categoryKey = await this.resolveCategoryKey(category);
+    let categoryKey;
+    try {
+      categoryKey = await this.resolveCategoryKey(category);
+    } catch (e) {
+      throw e;
+    }
     const media = [];
     const limit = 50;
     let offset = 0;
@@ -2192,7 +2271,19 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     const legacyCategories = saved == null ? void 0 : saved.jwCategorySettings;
     const savedSelections = saved == null ? void 0 : saved.deviceSelections;
     this.selectionData = typeof savedSelections === "object" && savedSelections !== null ? { ...savedSelections } : {};
-    const categorySettings = (_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings;
+    const categorySettings = { ...((_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings) };
+    const seriesKeyMigrations = {
+      "discover:series-treasures": "SeriesDigForTreasures",
+      "discover:series-lessons": "SeriesLearnFromThem",
+      "discover:series-iron": "SeriesIronSharpens",
+      "discover:series-faith": "SeriesImitateFaith",
+      "discover:series-marriage": "SeriesHappyMarriage"
+    };
+    for (const [oldKey, newKey] of Object.entries(seriesKeyMigrations)) {
+      if (categorySettings[oldKey] && !categorySettings[newKey]) {
+        categorySettings[newKey] = { ...categorySettings[oldKey] };
+      }
+    }
     this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {}, categorySettings };
   }
 };
