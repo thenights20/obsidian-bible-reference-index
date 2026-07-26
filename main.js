@@ -1131,7 +1131,7 @@ function criarNotaTranscricao(media, vtt, thumbnailPath) {
     "",
     `# ${media.title}`,
     "",
-    ...thumbnailPath ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(hydratedMedia.naturalKey)}`})`, ""] : [],
+    ...thumbnailPath ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`, ""] : [],
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";
   return synchronizeMiniIndex(base).content;
