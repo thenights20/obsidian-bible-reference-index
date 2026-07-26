@@ -1863,3 +1863,106 @@
     line-height: 1.15;
   }
 }
+
+
+/* ============================================================
+   Índice Nights v0.8.3 — ações oficiais em linha própria
+   ============================================================ */
+
+.indice-nights-settings .bri-section-divider-official {
+  margin-bottom: 8px !important;
+}
+
+.indice-nights-settings .bri-official-actions-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 14px;
+}
+
+.indice-nights-settings .bri-official-action-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, #9b5cff 45%, var(--background-modifier-border));
+  border-radius: 10px;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, #7d45c7 20%, var(--background-secondary)),
+      color-mix(in srgb, #5e3c82 10%, var(--background-secondary))
+    );
+  color: var(--text-normal);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+  box-shadow: none;
+}
+
+.indice-nights-settings .bri-official-action-button:hover {
+  border-color: color-mix(in srgb, #a86cff 60%, var(--background-modifier-border));
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, #8d54d8 26%, var(--background-secondary)),
+      color-mix(in srgb, #68468d 14%, var(--background-secondary))
+    );
+}
+
+.indice-nights-settings .bri-official-action-button.is-loading {
+  opacity: .68;
+  cursor: wait;
+}
+
+/* iPad */
+@media (max-width: 1024px) {
+  .indice-nights-settings .bri-official-actions-row {
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+
+  .indice-nights-settings .bri-official-action-button {
+    min-height: 40px;
+    font-size: 11.5px;
+  }
+}
+
+/* iPad Split View */
+@media (max-width: 780px) {
+  .indice-nights-settings .bri-official-actions-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .indice-nights-settings .bri-official-action-button {
+    padding: 8px 9px;
+    font-size: 11px;
+  }
+}
+
+/* iPhone */
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-official-actions-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin-bottom: 11px;
+  }
+
+  .indice-nights-settings .bri-official-action-button {
+    min-height: 42px;
+    padding: 7px 6px;
+    border-radius: 9px;
+    font-size: 10.5px;
+  }
+}
+
+/* Neutraliza regras da v0.8.2 que colocavam ações dentro da faixa */
+.indice-nights-settings .bri-section-divider-with-actions,
+.indice-nights-settings .bri-section-divider-actions,
+.indice-nights-settings .bri-section-divider-action-official {
+  all: unset;
+}

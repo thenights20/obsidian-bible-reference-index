@@ -730,16 +730,16 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
       await this.plugin.transcriptService.ensureGeneralIndex(true, true);
     });
 
-    const officialDivider = containerEl.createDiv({ cls: "bri-section-divider bri-section-divider-official bri-section-divider-with-actions" });
+    const officialDivider = containerEl.createDiv({ cls: "bri-section-divider bri-section-divider-official" });
     officialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-left" });
     officialDivider.createSpan({ text: "Transcrições oficiais", cls: "bri-section-divider-label" });
     officialDivider.createDiv({ cls: "bri-section-divider-decoration bri-section-divider-decoration-right" });
 
-    const officialActions = officialDivider.createDiv({ cls: "bri-section-divider-actions" });
+    const officialActions = containerEl.createDiv({ cls: "bri-official-actions-row" });
 
     const officialDownloadAction = officialActions.createEl("button", {
       text: "Atualizar ou baixar",
-      cls: "bri-section-divider-action bri-section-divider-action-official",
+      cls: "bri-official-action-button",
       attr: { type: "button" }
     });
     officialDownloadAction.addEventListener("click", async (event) => {
@@ -757,7 +757,7 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
 
     const officialThumbnailAction = officialActions.createEl("button", {
       text: "Atualizar miniaturas",
-      cls: "bri-section-divider-action bri-section-divider-action-official",
+      cls: "bri-official-action-button",
       attr: { type: "button" }
     });
     officialThumbnailAction.addEventListener("click", async (event) => {
