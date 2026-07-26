@@ -1131,7 +1131,7 @@ function criarNotaTranscricao(media, vtt, thumbnailPath) {
     "",
     `# ${media.title}`,
     "",
-    ...thumbnailPath ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`, ""] : [],
+    ...thumbnailPath ? [`[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(hydratedMedia.naturalKey)}`})`, ""] : [],
     ...paragraphs.flatMap((paragraph) => [paragraph, ""])
   ].join("\n").trimEnd() + "\n";
   return synchronizeMiniIndex(base).content;
@@ -1143,17 +1143,30 @@ var LOCALE_PT_BR = "T";
 var GENERAL_INDEX_FOLDER = "00 - \xCDndice Geral";
 var LEGACY_GENERAL_INDEX_FOLDER = "\xCDndice Geral";
 var GENERAL_INDEX_FILENAME = "\xCDndice Geral de Textos B\xEDblicos.md";
-var THUMBNAIL_FOLDER = "Anexos/Indice Nights/Miniaturas";
+var THUMBNAIL_FOLDER = "Discursos/ZZZ - Anexos/Indice Nights/Miniaturas";
+var PREVIOUS_THUMBNAIL_FOLDER = "Discursos/99 - Anexos/Indice Nights/Miniaturas";
+var LEGACY_THUMBNAIL_FOLDER = "Anexos/Indice Nights/Miniaturas";
 function wait(milliseconds) {
   return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 }
 async function getCategory(key, limit = 50, offset = 0) {
-  const params = new URLSearchParams({ clientType: "www", limit: String(limit), offset: String(offset) });
+  const params = new URLSearchParams({ clientType: "www", detailed: "1", limit: String(limit), offset: String(offset) });
   const response = await (0, import_obsidian3.requestUrl)({
     url: `${API_BASE}/categories/${LOCALE_PT_BR}/${encodeURIComponent(key)}?${params.toString()}`,
     method: "GET"
   });
   return response.json;
+}
+async function getMediaItem(key) {
+  const params = new URLSearchParams({ clientType: "www" });
+  const response = await (0, import_obsidian3.requestUrl)({
+    url: `${API_BASE}/media-items/${LOCALE_PT_BR}/${encodeURIComponent(key)}?${params.toString()}`,
+    method: "GET"
+  });
+  const payload = response.json;
+  const media = Array.isArray(payload == null ? void 0 : payload.media) ? payload.media[0] : null;
+  if (!media) throw new Error(`Item de mídia não encontrado: ${key}`);
+  return media;
 }
 function cleanFolder(value) {
   const trimmed = value.trim().replace(/^\/+|\/+$/g, "");
@@ -1236,6 +1249,11 @@ var SourceTranscriptService = class {
         const folder = chosenFolder || category.defaultFolder;
         await ensureFolder(this.app, folder);
         const mediaItems = await this.allMedia(category);
+        if (mediaItems.length === 0) {
+          console.warn("Indice Nights: categoria sem mídias retornadas", category.name, category.key);
+          errors += 1;
+          continue;
+        }
         for (const [mediaIndex, media] of mediaItems.entries()) {
           const id = sourceId(media);
           progress.setMessage(`${category.name}: ${mediaIndex + 1}/${mediaItems.length} \u2014 ${media.title}`);
@@ -1245,20 +1263,30 @@ var SourceTranscriptService = class {
             skipped += 1;
             continue;
           }
-          const url = subtitleUrl(media);
+          let hydratedMedia = media;
+          let url = subtitleUrl(hydratedMedia);
+          if (!url) {
+            try {
+              hydratedMedia = await getMediaItem(media.naturalKey);
+              url = subtitleUrl(hydratedMedia);
+            } catch (e) {
+              console.warn("Indice Nights: falha ao carregar detalhes da mídia", media.naturalKey, e);
+            }
+          }
           if (!url) {
             withoutSubtitle += 1;
             continue;
           }
           try {
             const vtt = (await (0, import_obsidian3.requestUrl)({ url, method: "GET" })).text;
-            const thumbnailPath = await this.downloadThumbnail(media);
-            const note = criarNotaTranscricao(media, vtt, thumbnailPath != null ? thumbnailPath : void 0);
-            const filePath = await this.availablePath(folder, nomeArquivoSeguro(media.title));
+            const thumbnailPath = await this.downloadThumbnail(hydratedMedia);
+            const note = criarNotaTranscricao(hydratedMedia, vtt, thumbnailPath != null ? thumbnailPath : void 0);
+            const filePath = await this.availablePath(folder, nomeArquivoSeguro(hydratedMedia.title));
             const file = await this.app.vault.create(filePath, note);
-            existing.set(id, file);
+            existing.set(sourceId(hydratedMedia), file);
             created += 1;
           } catch (e) {
+            console.error("Indice Nights: erro ao baixar transcrição", category.name, media.title, e);
             errors += 1;
           }
           await wait(180);
@@ -1299,9 +1327,17 @@ var SourceTranscriptService = class {
         for (const media of await this.allMedia(category)) {
           const file = existing.get(sourceId(media));
           if (!file) continue;
+          let hydratedMedia = media;
+          if (!thumbnailUrl(hydratedMedia)) {
+            try {
+              hydratedMedia = await getMediaItem(media.naturalKey);
+            } catch (e) {
+              console.warn("Indice Nights: falha ao carregar detalhes para miniatura", media.naturalKey, e);
+            }
+          }
           const content = await this.app.vault.read(file);
           const hasThumbnail = /!\[Miniatura\]\(Anexos\/Índice(?:%20| )Nights\/Miniaturas\//.test(content);
-          const thumbnailPath = await this.downloadThumbnail(media, true);
+          const thumbnailPath = await this.downloadThumbnail(hydratedMedia, true);
           if (!thumbnailPath) continue;
           if (!hasThumbnail) {
             const image = `[![Miniatura](${encodeURI(thumbnailPath)})](${`https://www.jw.org/finder?wtlocale=T&lank=${encodeURIComponent(media.naturalKey)}`})`;
@@ -1416,10 +1452,28 @@ var SourceTranscriptService = class {
     }
     return path;
   }
+  async migrateThumbnailFolder() {
+    const targetFolder = this.app.vault.getAbstractFileByPath(THUMBNAIL_FOLDER);
+    if (targetFolder) return;
+
+    const candidates = [PREVIOUS_THUMBNAIL_FOLDER, LEGACY_THUMBNAIL_FOLDER];
+    for (const sourcePath of candidates) {
+      const sourceFolder = this.app.vault.getAbstractFileByPath(sourcePath);
+      if (!(sourceFolder instanceof import_obsidian3.TFolder)) continue;
+      await ensureFolder(this.app, "Discursos/ZZZ - Anexos/Indice Nights");
+      try {
+        await this.app.vault.rename(sourceFolder, THUMBNAIL_FOLDER);
+        return;
+      } catch (e) {
+        console.warn("Indice Nights: não foi possível mover a pasta antiga de miniaturas", sourcePath, e);
+      }
+    }
+  }
   async downloadThumbnail(media, replaceExisting = false) {
     var _a, _b, _c;
     const url = thumbnailUrl(media);
     if (!url) return null;
+    await this.migrateThumbnailFolder();
     await ensureFolder(this.app, THUMBNAIL_FOLDER);
     const extension = (_c = (_b = (_a = /\.(png|webp)(?:\?|$)/i.exec(url)) == null ? void 0 : _a[1]) == null ? void 0 : _b.toLocaleLowerCase("pt-BR")) != null ? _c : "jpg";
     const path = `${THUMBNAIL_FOLDER}/${nomeArquivoSeguro(sourceId(media))}.${extension}`;
