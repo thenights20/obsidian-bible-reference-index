@@ -1,3 +1,4 @@
+var INDICE_NIGHTS_RUNTIME_CSS = ".bri-root {\n  --bri-gap: 0.75rem;\n  width: 100%;\n}\n\n.bri-title {\n  margin-block: 0 1rem;\n}\n\n.bri-summary {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n  margin-bottom: 1rem;\n}\n\n.bri-summary-stats {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.4rem 1.25rem;\n  margin-top: 0.5rem;\n  color: var(--text-muted);\n}\n\n.bri-controls {\n  display: grid;\n  grid-template-columns: minmax(12rem, 0.8fr) minmax(14rem, 1.2fr);\n  gap: var(--bri-gap);\n  margin-bottom: 1.25rem;\n}\n\n.bri-control-group {\n  display: flex;\n  flex-direction: column;\n  gap: 0.35rem;\n}\n\n.bri-control-group label {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.bri-control-group select,\n.bri-control-group input {\n  width: 100%;\n  min-height: var(--input-height);\n}\n\n.bri-search-mode {\n  grid-column: 1 / -1;\n  display: flex;\n  align-items: flex-start;\n  gap: 0.6rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-s);\n  padding: 0.7rem 0.8rem;\n}\n\n.bri-search-mode input {\n  margin-top: 0.2rem;\n}\n\n.bri-search-mode label {\n  display: flex;\n  flex-direction: column;\n  gap: 0.15rem;\n  cursor: pointer;\n}\n\n.bri-search-mode small {\n  color: var(--text-muted);\n  font-weight: normal;\n}\n\n.bri-results h2 {\n  margin-block: 0.75rem;\n}\n\n.bri-search-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-bottom: 1rem;\n}\n\n.bri-reference-list,\n.bri-note-list {\n  padding-inline-start: 1.5rem;\n}\n\n.bri-reference {\n  margin-bottom: 0.65rem;\n}\n\n.bri-reference-title {\n  color: var(--text-accent);\n}\n\n.bri-note-list {\n  margin-block: 0.25rem 0;\n}\n\n.bri-note-list li {\n  margin-block: 0.2rem;\n}\n\n.bri-load-more {\n  display: block;\n  margin: 1rem auto;\n}\n\n.bri-empty {\n  color: var(--text-muted);\n  font-style: italic;\n}\n\n.bri-content-results {\n  display: grid;\n  gap: 0.75rem;\n}\n\n.bri-content-result {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 0.85rem 1rem;\n}\n\n.bri-content-section {\n  display: block;\n  color: var(--text-muted);\n  font-size: var(--font-ui-smaller);\n  margin-bottom: 0.2rem;\n}\n\n.bri-content-title {\n  font-weight: var(--font-semibold);\n}\n\n.bri-content-sentence {\n  margin: 0.5rem 0 0;\n  color: var(--text-normal);\n  line-height: 1.5;\n}\n\n.bri-catalog-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-block: 0.75rem;\n}\n\n.bri-catalog-settings {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  padding: 0.5rem 1rem;\n}\n\n.bri-catalog-settings .setting-item {\n  align-items: center;\n}\n\n.bri-catalog-settings .setting-item-control {\n  flex-wrap: wrap;\n}\n\n.bri-catalog-settings select {\n  max-width: min(24rem, 100%);\n}\n\n.callout[data-callout=\"bible-index\"] {\n  --callout-color: var(--interactive-accent-rgb);\n  --callout-icon: lucide-book-open-text;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary-alt);\n  box-shadow: none;\n  margin-block: 1rem 1.25rem;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-title {\n  color: var(--text-normal);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  line-height: 1.8;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content p {\n  margin: 0;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link {\n  color: var(--text-accent);\n  text-decoration: none;\n  white-space: nowrap;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link:hover {\n  text-decoration: underline;\n}\n\n.bri-category-heading {\n  margin-block: 1rem 0.35rem;\n}\n\n\n.indice-nights-scripture-link {\n  color: var(--link-color);\n  cursor: pointer;\n  text-decoration: underline;\n  text-decoration-thickness: from-font;\n}\n\n.indice-nights-verse-preview {\n  line-height: 1.65;\n}\n\n.indice-nights-verse-text {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n}\n\n.indice-nights-verse-text .verseNum {\n  color: var(--text-accent);\n  font-size: var(--font-ui-smaller);\n  font-weight: var(--font-semibold);\n  vertical-align: super;\n}\n\n.indice-nights-verse-citation {\n  display: block;\n  margin-top: 0.65rem;\n  color: var(--text-muted);\n}\n\n.indice-nights-verse-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.6rem;\n  margin-top: 1rem;\n}\n\n.indice-nights-verse-actions a {\n  display: inline-flex;\n  align-items: center;\n  border-radius: var(--button-radius);\n  padding: 0.45rem 0.75rem;\n  text-decoration: none;\n}\n\n/* Miniaturas de transcrições: layout integrado ao texto, semelhante a uma publicação. */\n.markdown-preview-view .indice-nights-thumbnail-link {\n  display: block;\n  float: right;\n  width: 43%;\n  max-width: 31rem;\n  margin: 0.35rem 0 1.35rem 1.75rem;\n  padding: 0;\n  background-image: none;\n  border-radius: var(--radius-m);\n  line-height: 0;\n}\n\n.markdown-preview-view .indice-nights-thumbnail-link img[alt=\"Miniatura\"],\n.markdown-preview-view img[alt=\"Miniatura\"] {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  height: auto;\n  max-height: none;\n  margin: 0;\n  border-radius: var(--radius-m);\n  object-fit: contain;\n}\n\n/* O ícone padrão de link externo do Obsidian fica solto quando o link envolve uma imagem. */\n.markdown-preview-view .indice-nights-thumbnail-link.external-link {\n  background-image: none;\n  padding-inline-end: 0;\n}\n\n@media (max-width: 900px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    width: 46%;\n    max-width: 24rem;\n    margin-left: 1.25rem;\n  }\n}\n\n@media (max-width: 600px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    float: none;\n    width: 100%;\n    max-width: none;\n    margin: 0.75rem 0 1.25rem;\n  }\n\n  .bri-controls {\n    grid-template-columns: 1fr;\n  }\n\n  .bri-summary-stats {\n    flex-direction: column;\n    gap: 0.2rem;\n  }\n\n  .bri-reference-list,\n  .bri-note-list {\n    padding-inline-start: 1.15rem;\n  }\n\n  .bri-catalog-settings {\n    padding-inline: 0.65rem;\n  }\n\n  .bri-catalog-settings .setting-item {\n    align-items: stretch;\n    flex-direction: column;\n  }\n\n  .bri-catalog-settings .setting-item-control {\n    justify-content: flex-start;\n    width: 100%;\n  }\n}\n\n/* v0.7.5 — catálogo visual inspirado em uma biblioteca de mídia */\n.bri-catalog-settings {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 0.85rem;\n  border: 0;\n  padding: 0;\n  background: transparent;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  min-width: 0;\n  min-height: 10.5rem;\n  padding: 1rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-l);\n  background: var(--background-secondary);\n  overflow: hidden;\n  transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item:hover {\n  border-color: var(--background-modifier-border-hover);\n  background: var(--background-secondary-alt);\n  transform: translateY(-1px);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled {\n  border-color: rgba(var(--interactive-accent-rgb), 0.55);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-info {\n  display: grid;\n  grid-template-columns: 2.55rem minmax(0, 1fr);\n  grid-template-rows: auto 1fr;\n  column-gap: 0.8rem;\n  width: 100%;\n  min-width: 0;\n  flex: 1 1 auto;\n  margin: 0;\n}\n\n.bri-catalog-card-icon {\n  grid-row: 1 / span 2;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 2.55rem;\n  height: 2.55rem;\n  border-radius: var(--radius-m);\n  background: var(--background-modifier-hover);\n  color: var(--text-accent);\n}\n\n.bri-catalog-card-icon svg {\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-name {\n  align-self: end;\n  min-width: 0;\n  margin: 0;\n  font-size: 1rem;\n  font-weight: var(--font-semibold);\n  line-height: 1.25;\n  color: var(--text-normal);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-description {\n  align-self: start;\n  min-width: 0;\n  margin-top: 0.25rem;\n  font-size: var(--font-ui-smaller);\n  line-height: 1.4;\n  color: var(--text-muted);\n  overflow-wrap: anywhere;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-control {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  gap: 0.65rem;\n  align-items: center;\n  width: 100%;\n  min-width: 0;\n  margin-top: 1rem;\n  padding-top: 0.8rem;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled .setting-item-control .checkbox-container {\n  justify-self: start;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control {\n  grid-template-columns: 1fr auto;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control .checkbox-container {\n  grid-column: 2;\n}\n\n.bri-catalog-settings .bri-catalog-card select {\n  width: 100%;\n  min-width: 0;\n  max-width: none;\n}\n\n@media (max-width: 1000px) {\n  .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\n@media (max-width: 620px) {\n  .bri-catalog-settings {\n    grid-template-columns: 1fr;\n    gap: 0.7rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card.setting-item {\n    min-height: 0;\n    padding: 0.9rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card .setting-item-control {\n    grid-template-columns: auto minmax(0, 1fr);\n  }\n}\n\n/* v0.7.6: Séries são exibidas como cartões individuais dentro do catálogo. */\n\n/* ============================================================\n   Índice Nights v0.7.8 — Biblioteca visual responsiva\n   Desktop, iPad e iPhone\n   ============================================================ */\n\n.indice-nights-settings {\n  --bri-panel-gap: 14px;\n  --bri-card-radius: 14px;\n  --bri-card-border: var(--background-modifier-border);\n  --bri-card-bg: var(--background-secondary);\n  --bri-card-bg-hover: var(--background-secondary-alt);\n  --bri-soft-accent: color-mix(in srgb, var(--interactive-accent) 13%, var(--background-secondary));\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  overflow-x: hidden;\n}\n\n.indice-nights-settings *,\n.indice-nights-settings *::before,\n.indice-nights-settings *::after {\n  box-sizing: border-box;\n}\n\n.indice-nights-settings .bri-library-intro {\n  margin: -2px 0 16px;\n  color: var(--text-muted);\n  line-height: 1.55;\n}\n\n/* Índice geral */\n.indice-nights-settings .bri-index-hero {\n  position: relative !important;\n  inset: auto !important;\n  z-index: 0 !important;\n  float: none !important;\n  clear: both !important;\n  width: 100% !important;\n  min-height: 86px;\n  display: grid !important;\n  grid-template-columns: 52px minmax(0, 1fr) 24px;\n  align-items: center;\n  gap: 14px;\n  margin: 0 0 18px !important;\n  padding: 15px 17px !important;\n  border: 1px solid #3893ff !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: linear-gradient(110deg, #073d8e 0%, #075dcc 52%, #0649a6 100%) !important;\n  color: #fff !important;\n  box-shadow: 0 8px 22px rgba(0, 84, 196, .16);\n  text-align: left;\n  cursor: pointer;\n  overflow: hidden;\n  transform: none !important;\n}\n\n.indice-nights-settings .bri-index-hero:hover {\n  background: linear-gradient(110deg, #08479f 0%, #0866dc 52%, #0754b8 100%) !important;\n}\n\n.indice-nights-settings .bri-index-hero-icon {\n  width: 52px;\n  height: 52px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid rgba(255,255,255,.34);\n  border-radius: 12px;\n  background: rgba(255,255,255,.08);\n}\n\n.indice-nights-settings .bri-index-hero-icon svg {\n  width: 28px;\n  height: 28px;\n}\n\n.indice-nights-settings .bri-index-hero-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-index-hero-title-row {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-index-hero-title {\n  font-size: 18px;\n  line-height: 1.25;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-index-hero-badge {\n  display: inline-flex;\n  padding: 3px 8px;\n  border-radius: 999px;\n  background: rgba(255,255,255,.17);\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 1.2;\n}\n\n.indice-nights-settings .bri-index-hero-description {\n  margin-top: 5px;\n  color: rgba(255,255,255,.84);\n  font-size: 13px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-index-hero-arrow {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: end;\n}\n\n/* Grade principal */\n.indice-nights-settings .bri-catalog-settings {\n  display: grid !important;\n  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;\n  grid-auto-flow: row !important;\n  align-items: stretch !important;\n  gap: var(--bri-panel-gap) !important;\n  width: 100% !important;\n  margin: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n  overflow: visible !important;\n}\n\n/* Cartões normais */\n.indice-nights-settings .bri-library-card {\n  position: relative;\n  min-width: 0;\n  min-height: 214px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr);\n  grid-template-rows: minmax(0, 1fr) auto;\n  gap: 12px 13px;\n  align-content: stretch;\n  padding: 16px !important;\n  margin: 0 !important;\n  border: 1px solid var(--bri-card-border) !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: var(--bri-card-bg) !important;\n  overflow: hidden;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-library-card:hover {\n  background: var(--bri-card-bg-hover) !important;\n  border-color: color-mix(in srgb, var(--interactive-accent) 36%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card-icon,\n.indice-nights-settings .bri-library-group-icon {\n  width: 48px;\n  height: 48px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex: 0 0 auto;\n  border-radius: 11px;\n  background: var(--bri-soft-accent);\n  color: var(--interactive-accent);\n}\n\n.indice-nights-settings .bri-library-card-icon svg,\n.indice-nights-settings .bri-library-group-icon svg {\n  width: 23px;\n  height: 23px;\n}\n\n.indice-nights-settings .bri-library-card-body {\n  min-width: 0;\n  display: flex;\n  flex-direction: column;\n}\n\n.indice-nights-settings .bri-library-card-title {\n  margin: 1px 0 0;\n  color: var(--text-normal);\n  font-size: 15px;\n  font-weight: 700;\n  line-height: 1.32;\n}\n\n.indice-nights-settings .bri-library-card-description {\n  margin-top: 6px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-library-card-path {\n  margin-top: auto;\n  padding-top: 12px;\n  color: var(--text-faint);\n  font-size: 11.5px;\n  line-height: 1.45;\n  overflow-wrap: anywhere;\n}\n\n.indice-nights-settings .bri-library-card-footer {\n  grid-column: 1 / -1;\n  min-width: 0;\n  min-height: 44px;\n  display: flex !important;\n  align-items: center;\n  justify-content: space-between;\n  gap: 10px;\n  margin-top: 0;\n  padding-top: 12px;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.indice-nights-settings .bri-library-card-status {\n  color: var(--text-faint);\n  font-size: 11.5px;\n}\n\n.indice-nights-settings .bri-library-card-select {\n  min-width: 0;\n  flex: 1 1 auto;\n}\n\n.indice-nights-settings .bri-library-card-select select {\n  width: 100%;\n  max-width: 100%;\n  min-width: 0;\n}\n\n/* Remove o espaçamento nativo de Setting dentro dos mini-controles */\n.indice-nights-settings .bri-library-card-select .setting-item,\n.indice-nights-settings .bri-library-card-toggle .setting-item,\n.indice-nights-settings .bri-library-group-option-select .setting-item,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item {\n  min-height: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-info,\n.indice-nights-settings .bri-library-card-toggle .setting-item-info,\n.indice-nights-settings .bri-library-group-option-select .setting-item-info,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-info {\n  display: none !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-control,\n.indice-nights-settings .bri-library-card-toggle .setting-item-control,\n.indice-nights-settings .bri-library-group-option-select .setting-item-control,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-control {\n  width: auto !important;\n  padding: 0 !important;\n  margin: 0 !important;\n}\n\n/* Congressos / Séries */\n.indice-nights-settings .bri-library-groups-wrap {\n  grid-column: 1 / -1;\n  display: grid !important;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: var(--bri-panel-gap);\n  width: 100%;\n  margin: 0;\n}\n\n.indice-nights-settings .bri-library-group {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  border: 1px solid var(--bri-card-border);\n  border-radius: var(--bri-card-radius);\n  background: var(--bri-card-bg);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-library-group[open] {\n  border-color: color-mix(in srgb, var(--interactive-accent) 44%, var(--bri-card-border));\n}\n\n.indice-nights-settings .bri-library-group-summary {\n  min-height: 108px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr) auto 24px;\n  align-items: center;\n  gap: 13px;\n  padding: 16px !important;\n  margin: 0 !important;\n  list-style: none;\n  cursor: pointer;\n  user-select: none;\n}\n\n.indice-nights-settings .bri-library-group-summary::-webkit-details-marker {\n  display: none;\n}\n\n.indice-nights-settings .bri-library-group-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-title {\n  color: var(--text-normal);\n  font-size: 15px;\n  line-height: 1.32;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-library-group-description {\n  margin-top: 5px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-library-group-count {\n  padding: 4px 8px;\n  border-radius: 999px;\n  background: var(--background-modifier-hover);\n  color: var(--text-muted);\n  font-size: 11px;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-library-group-chevron {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-muted);\n  transition: transform .18s ease;\n}\n\n.indice-nights-settings .bri-library-group[open] .bri-library-group-chevron {\n  transform: rotate(180deg);\n}\n\n.indice-nights-settings .bri-library-group-panel {\n  display: grid;\n  gap: 8px;\n  padding: 0 16px 16px;\n  animation: bri-panel-open .18s ease-out;\n}\n\n@keyframes bri-panel-open {\n  from { opacity: 0; transform: translateY(-5px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n.indice-nights-settings .bri-library-group-option {\n  min-width: 0;\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  padding: 11px 12px;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 10px;\n  background: var(--background-primary);\n}\n\n.indice-nights-settings .bri-library-group-option.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));\n}\n\n.indice-nights-settings .bri-library-group-option-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-title {\n  color: var(--text-normal);\n  font-size: 12.5px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-library-group-option-description {\n  margin-top: 2px;\n  color: var(--text-muted);\n  font-size: 11px;\n  line-height: 1.4;\n}\n\n.indice-nights-settings .bri-library-group-option-controls {\n  min-width: 0;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-library-group-option-select {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-select select {\n  width: min(220px, 30vw);\n  max-width: 220px;\n}\n\n/* Ação de download */\n.indice-nights-settings .bri-action-setting {\n  margin-top: 16px !important;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: var(--bri-card-radius);\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-control {\n  flex-shrink: 0;\n}\n\n/* ====================== TABLET / iPad ====================== */\n@media (max-width: 1024px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 206px;\n  }\n\n  .indice-nights-settings .bri-library-groups-wrap {\n    grid-template-columns: 1fr;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    min-height: 96px;\n  }\n}\n\n/* iPad em painel estreito / split view */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 46px minmax(0, 1fr) 20px;\n    min-height: 78px;\n    gap: 11px;\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 46px;\n    height: 46px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 16px;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: 1fr !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 0;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: inline-flex;\n  }\n}\n\n/* ====================== iPhone / celulares ====================== */\n@media (max-width: 560px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 10px;\n  }\n\n  .indice-nights-settings .bri-library-intro {\n    margin-bottom: 12px;\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 42px minmax(0, 1fr) 18px;\n    gap: 10px;\n    min-height: 72px;\n    margin-bottom: 12px !important;\n    padding: 12px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon svg {\n    width: 23px;\n    height: 23px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 15px;\n  }\n\n  .indice-nights-settings .bri-index-hero-badge {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    margin-top: 3px;\n    font-size: 11px;\n    line-height: 1.35;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    grid-template-columns: 42px minmax(0, 1fr);\n    gap: 10px 11px;\n    padding: 13px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-library-card-icon,\n  .indice-nights-settings .bri-library-group-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-title,\n  .indice-nights-settings .bri-library-group-title {\n    font-size: 14px;\n  }\n\n  .indice-nights-settings .bri-library-card-description,\n  .indice-nights-settings .bri-library-group-description {\n    font-size: 11.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    padding-top: 9px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    padding-top: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-select {\n    flex-basis: 100%;\n    order: 2;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    flex-wrap: wrap;\n  }\n\n  .indice-nights-settings .bri-library-group {\n    border-radius: 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    grid-template-columns: 42px minmax(0, 1fr) 20px;\n    min-height: 82px;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-library-group-panel {\n    padding: 0 12px 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-option {\n    grid-template-columns: 1fr;\n    gap: 8px;\n    padding: 10px;\n  }\n\n  .indice-nights-settings .bri-library-group-option-controls {\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select {\n    flex: 1 1 auto;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select select {\n    width: 100%;\n    max-width: none;\n  }\n\n  .indice-nights-settings .bri-action-setting {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-action-setting .setting-item-control,\n  .indice-nights-settings .bri-action-setting button {\n    width: 100%;\n  }\n}\n\n/* iPhone muito estreito */\n@media (max-width: 390px) {\n  .indice-nights-settings .bri-index-hero-description {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    min-height: 64px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    overflow-wrap: anywhere;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.7.9 — divisores e acabamento da área inferior\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  display: grid;\n  grid-template-columns: auto minmax(0, 1fr);\n  align-items: center;\n  gap: 12px;\n  width: 100%;\n  margin: 20px 0 12px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  font-size: 13px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .01em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  height: 1px;\n  width: 100%;\n  border-radius: 999px;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-label {\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent),\n    color-mix(in srgb, var(--interactive-accent) 18%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 82%, var(--interactive-accent));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--text-muted) 45%, transparent),\n    color-mix(in srgb, var(--text-muted) 10%, transparent)\n  );\n}\n\n/* Área inferior no mesmo padrão visual do catálogo */\n.indice-nights-settings .bri-unofficial-panel {\n  display: grid;\n  gap: 10px;\n  width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: 12px;\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  border-color: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border)) !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n  min-width: 0;\n  padding-right: 14px;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n  font-size: 14px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description {\n  margin-top: 3px;\n  font-size: 11.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n  min-width: min(260px, 38%);\n  justify-content: flex-end;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-panel > .setting-item select {\n  width: min(280px, 100%);\n  max-width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n  margin: 0;\n  padding: 4px 2px 2px;\n  color: var(--text-muted);\n  font-size: 11.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child {\n  margin-bottom: 0;\n}\n\n/* iPad / tablet */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    margin-top: 18px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    min-width: min(240px, 42%);\n  }\n}\n\n/* iPad em Split View e tablets estreitos */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n    width: 100%;\n    padding-right: 0;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control > * {\n    max-width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n  .indice-nights-settings .bri-unofficial-panel > .setting-item select,\n  .indice-nights-settings .bri-unofficial-panel > .setting-item button {\n    width: 100%;\n    max-width: 100%;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    grid-template-columns: auto minmax(24px, 1fr);\n    gap: 9px;\n    margin: 16px 0 10px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 12px !important;\n    border-radius: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n    font-size: 13px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description,\n  .indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n    font-size: 11px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.0 — títulos de seção em faixa elegante\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 100%;\n  min-height: 38px;\n  margin: 20px 0 12px;\n  padding: 0 14px;\n  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border));\n  border-radius: 10px;\n  overflow: hidden;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  content: \"\";\n  position: absolute;\n  inset: 0 auto 0 0;\n  width: 4px;\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--interactive-accent) 94%, white 6%),\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 1;\n  display: inline-flex;\n  align-items: center;\n  min-width: 0;\n  padding-left: 2px;\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n  font-size: 12.5px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .015em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  display: none !important;\n}\n\n/* Oficial: um pouco mais vivo, combinando com o Índice Geral */\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border));\n  box-shadow: inset 0 1px 0 color-mix(in srgb, white 5%, transparent);\n}\n\n/* Não oficial: mesma linguagem visual, porém mais neutra */\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n  border-color: color-mix(in srgb, var(--text-muted) 28%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--text-muted) 9%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--text-muted) 4%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--text-muted) 75%, var(--interactive-accent) 25%),\n    color-mix(in srgb, var(--text-muted) 45%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 78%, var(--text-normal));\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin-top: 18px;\n    padding-inline: 13px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 34px;\n    margin: 15px 0 10px;\n    padding-inline: 12px;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider::before {\n    width: 3px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.1 — acabamento aprovado\n   ============================================================ */\n\n/* Sem texto introdutório: aproxima o Índice Geral do cabeçalho. */\n.indice-nights-settings .bri-index-hero {\n  margin-top: 8px !important;\n}\n\n/* Faixas de seção: título branco centralizado e linhas laterais. */\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: grid !important;\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);\n  align-items: center;\n  gap: 14px;\n  width: 100%;\n  min-height: 40px;\n  margin: 20px 0 12px;\n  padding: 0 15px !important;\n  border-radius: 10px;\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  width: 4px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 2;\n  justify-self: center;\n  padding: 0 !important;\n  color: #fff !important;\n  font-size: 13px !important;\n  font-weight: 700 !important;\n  line-height: 1;\n  text-align: center;\n  letter-spacing: .01em;\n}\n\n.indice-nights-settings .bri-section-divider-decoration {\n  position: relative;\n  z-index: 1;\n  width: 100%;\n  height: 1px;\n  border-radius: 999px;\n  opacity: .65;\n}\n\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, #9b5cff 62%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7b45c7 26%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #5a387d 15%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #7b45c7 22%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official::before {\n  background: linear-gradient(180deg, #a86cff, #743ad0) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(214, 184, 255, .8));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(214, 184, 255, .8), transparent);\n}\n\n/* Não oficial: turquesa discreto, mas com a mesma identidade. */\n.indice-nights-settings .bri-section-divider-unofficial {\n  border-color: color-mix(in srgb, #00b8b8 58%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #007f80 24%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #006769 12%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #007f80 21%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(180deg, #00d1d1, #008e90) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(122, 235, 235, .74));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(122, 235, 235, .74), transparent);\n}\n\n/* Botão colocado na faixa de \"Transcrições não oficiais\". */\n.indice-nights-settings .bri-section-divider-with-action {\n  grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  position: relative;\n  z-index: 3;\n  justify-self: end;\n  min-height: 28px;\n  padding: 5px 11px;\n  border: 1px solid rgba(255,255,255,.22);\n  border-radius: 7px;\n  background: rgba(255,255,255,.10);\n  color: #fff;\n  font-size: 11.5px;\n  font-weight: 600;\n  line-height: 1;\n  white-space: nowrap;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-section-divider-action:hover {\n  background: rgba(255,255,255,.17);\n  border-color: rgba(255,255,255,.32);\n}\n\n.indice-nights-settings .bri-section-divider-action.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* Painel não oficial como um único bloco profissional. */\n.indice-nights-settings .bri-unofficial-panel {\n  display: block !important;\n  width: 100%;\n  padding: 0 !important;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 12px;\n  background: var(--background-secondary);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n  min-height: 72px;\n  margin: 0 !important;\n  padding: 12px 14px !important;\n  border: 0 !important;\n  border-bottom: 1px solid var(--background-modifier-border) !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row:last-child {\n  border-bottom: 0 !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  background: var(--background-modifier-hover) !important;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-info {\n  position: relative;\n  min-width: 0;\n  padding-left: 48px !important;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 36px;\n  height: 36px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  transform: translateY(-50%);\n  border-radius: 9px;\n  background: color-mix(in srgb, #00a8aa 22%, var(--background-modifier-hover));\n  color: #16c9cb;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon svg {\n  width: 19px;\n  height: 19px;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-name {\n  font-size: 13.5px !important;\n  font-weight: 600;\n  line-height: 1.3;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-description {\n  margin-top: 3px;\n  font-size: 11px !important;\n  line-height: 1.42;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-control {\n  min-width: 230px;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-row input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-row select {\n  width: min(290px, 100%);\n  max-width: 100%;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 38px;\n    gap: 11px;\n    padding-inline: 13px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    min-width: 210px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: minmax(14px, 1fr) auto minmax(14px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row {\n    display: flex !important;\n    flex-direction: column;\n    align-items: stretch !important;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n    padding-left: 48px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control input,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control select,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control button {\n    width: 100%;\n    max-width: none;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin: 15px 0 10px;\n    padding-inline: 10px !important;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title action\";\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    grid-area: action;\n    justify-self: end;\n    min-height: 27px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n    min-height: 0;\n    padding: 11px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    padding-left: 42px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row-icon {\n    width: 32px;\n    height: 32px;\n    border-radius: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    padding-left: 42px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.2 — ações na faixa de Transcrições oficiais\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-with-actions {\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-actions {\n  position: relative;\n  z-index: 3;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 7px;\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-section-divider-action-official {\n  border-color: rgba(255, 255, 255, .22);\n  background: rgba(255, 255, 255, .10);\n  color: #fff;\n}\n\n.indice-nights-settings .bri-section-divider-action-official:hover {\n  border-color: rgba(255, 255, 255, .34);\n  background: rgba(255, 255, 255, .18);\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  min-height: 29px;\n}\n\n/* Com a ação principal transferida para o cabeçalho,\n   remove qualquer margem residual da antiga linha de download. */\n.indice-nights-settings .bri-catalog-settings + .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPad em Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title actions\";\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    justify-self: end;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    min-height: 28px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n}\n\n/* iPhone: mantém os dois botões utilizáveis sem estourar a largura. */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    display: grid !important;\n    grid-template-columns: 1fr !important;\n    grid-template-areas:\n      \"title\"\n      \"actions\";\n    gap: 8px;\n    padding-block: 9px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: center;\n    text-align: center;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    width: 100%;\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    width: 100%;\n    min-width: 0;\n    min-height: 30px;\n    padding: 5px 6px;\n    font-size: 10px;\n    white-space: normal;\n    line-height: 1.15;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.3 — ações oficiais em linha própria\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-official {\n  margin-bottom: 8px !important;\n}\n\n.indice-nights-settings .bri-official-actions-row {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 10px;\n  width: 100%;\n  margin: 0 0 14px;\n}\n\n.indice-nights-settings .bri-official-action-button {\n  width: 100%;\n  min-width: 0;\n  min-height: 38px;\n  padding: 8px 12px;\n  border: 1px solid color-mix(in srgb, #9b5cff 45%, var(--background-modifier-border));\n  border-radius: 10px;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7d45c7 20%, var(--background-secondary)),\n      color-mix(in srgb, #5e3c82 10%, var(--background-secondary))\n    );\n  color: var(--text-normal);\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 1.2;\n  text-align: center;\n  white-space: normal;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-official-action-button:hover {\n  border-color: color-mix(in srgb, #a86cff 60%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #8d54d8 26%, var(--background-secondary)),\n      color-mix(in srgb, #68468d 14%, var(--background-secondary))\n    );\n}\n\n.indice-nights-settings .bri-official-action-button.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    gap: 9px;\n    margin-bottom: 12px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 40px;\n    font-size: 11.5px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    padding: 8px 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 7px;\n    margin-bottom: 11px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 42px;\n    padding: 7px 6px;\n    border-radius: 9px;\n    font-size: 10.5px;\n  }\n}\n\n/* Neutraliza regras da v0.8.2 que colocavam ações dentro da faixa */\n.indice-nights-settings .bri-section-divider-with-actions,\n.indice-nights-settings .bri-section-divider-actions,\n.indice-nights-settings .bri-section-divider-action-official {\n  all: unset;\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.7 — seleção em massa e ordem cronológica\n   ============================================================ */\n.indice-nights-settings .bri-bulk-controls {\n  display:flex; align-items:center; justify-content:space-between; gap:14px;\n  width:100%; margin:0 0 14px; padding:11px 14px;\n  border:1px solid var(--background-modifier-border); border-radius:11px;\n  background:var(--background-secondary);\n}\n.indice-nights-settings .bri-bulk-controls-copy { min-width:0; }\n.indice-nights-settings .bri-bulk-controls-title {\n  color:var(--text-normal); font-size:12.5px; font-weight:650; line-height:1.3;\n}\n.indice-nights-settings .bri-bulk-controls-description {\n  margin-top:2px; color:var(--text-muted); font-size:10.5px; line-height:1.35;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item,\n.indice-nights-settings .bri-publication-order-toggle .setting-item {\n  min-height:0 !important; padding:0 !important; border:0 !important; background:transparent !important;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-info,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-info { display:none !important; }\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-control,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-control {\n  padding:0 !important; margin:0 !important;\n}\n.indice-nights-settings .bri-library-card { height:auto !important; }\n.indice-nights-settings .bri-publication-order-row {\n  grid-column:1/-1; display:flex; align-items:center; justify-content:space-between;\n  gap:10px; padding:9px 0 0; border-top:1px solid var(--background-modifier-border);\n}\n.indice-nights-settings .bri-publication-order-copy { min-width:0; }\n.indice-nights-settings .bri-publication-order-title {\n  color:var(--text-normal); font-size:11.5px; font-weight:600; line-height:1.25;\n}\n.indice-nights-settings .bri-publication-order-description {\n  margin-top:2px; color:var(--text-faint); font-size:9.5px; line-height:1.3;\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-bulk-controls { gap:9px; padding:10px 11px; }\n  .indice-nights-settings .bri-bulk-controls-description,\n  .indice-nights-settings .bri-publication-order-description { display:none; }\n  .indice-nights-settings .bri-publication-order-row { gap:8px; }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.8 — ações compactas + recentes primeiro\n   ============================================================ */\n.indice-nights-settings .bri-official-actions-row {\n  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  align-items:stretch;\n}\n.indice-nights-settings .bri-official-action-button-compact {\n  width:auto !important;\n  min-width:122px;\n  padding-inline:14px;\n  white-space:nowrap;\n}\n.indice-nights-settings .bri-bulk-controls {\n  display:none !important;\n}\n@media (max-width:1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:108px;\n    padding-inline:10px;\n    font-size:10.5px;\n  }\n}\n@media (max-width:780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:96px;\n    padding-inline:8px;\n    font-size:10px;\n  }\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:repeat(2,minmax(0,1fr)) !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    grid-column:2;\n    justify-self:end;\n    width:auto !important;\n    min-width:112px;\n    min-height:30px;\n  }\n}\n";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -33,7 +34,8 @@ var DEFAULT_SETTINGS = {
   pageSize: 75,
   remoteDriveUrl: "",
   remoteDriveFolder: "",
-  categorySettings: {}
+  categorySettings: {},
+  publicationOrder: {}
 };
 function cleanPath(value) {
   return value.trim().replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
@@ -223,30 +225,9 @@ function isInsideFolder(path, folder) {
 function sectionFor(path, folder) {
   const relative = path.slice(folder.length + 1);
   const parts = relative.split("/").filter(Boolean);
-  if (parts[0] === "Congressos" && parts[1]) return `Congresso ${parts[1]}`;
-  if (parts[0] === "Séries" && parts[1]) return `Séries – ${parts[1]}`;
-  return parts.length <= 1 ? folder : parts[0];
-}
-function displayTitleFor(path, basename) {
-  if (path.includes("/Séries/Introdução aos livros da Bíblia/")) {
-    return basename.replace(/^\d{2}\s*-\s*/, "");
-  }
-  return basename;
-}
-function bibleIntroPathOrder(path) {
-  const match = /\/Séries\/Introdução aos livros da Bíblia\/(\d{2})\s*-/.exec(path);
-  return match ? Number.parseInt(match[1], 10) : null;
-}
-function compareIndexNotes(a, b) {
-  const sectionCompare = a.section.localeCompare(b.section, "pt-BR");
-  if (sectionCompare !== 0) return sectionCompare;
-  const leftOrder = bibleIntroPathOrder(a.path);
-  const rightOrder = bibleIntroPathOrder(b.path);
-  if (leftOrder != null || rightOrder != null) {
-    const orderCompare = (leftOrder != null ? leftOrder : 999) - (rightOrder != null ? rightOrder : 999);
-    if (orderCompare !== 0) return orderCompare;
-  }
-  return a.title.localeCompare(b.title, "pt-BR");
+  if (parts.length <= 1) return folder;
+  if (parts[0] === "Séries" && parts[1]) return `Séries - ${parts[1]}`;
+  return parts[0];
 }
 var BibleIndex = class {
   constructor(app, config) {
@@ -343,7 +324,7 @@ var BibleIndex = class {
       }
     }
     return matches.sort(
-      (a, b) => compareIndexNotes(a, b)
+      (a, b) => a.section.localeCompare(b.section, "pt-BR") || a.title.localeCompare(b.title, "pt-BR")
     );
   }
   sortedReferences(references) {
@@ -353,7 +334,7 @@ var BibleIndex = class {
       ...reference,
       notes: new Map(
         [...reference.notes.entries()].sort(
-          ([, a], [, b]) => compareIndexNotes(a, b)
+          ([, a], [, b]) => a.section.localeCompare(b.section, "pt-BR") || a.title.localeCompare(b.title, "pt-BR")
         )
       )
     }));
@@ -374,7 +355,7 @@ var BibleIndex = class {
     const references = extractReferences(rawReferences);
     const note = {
       path: file.path,
-      title: displayTitleFor(file.path, file.basename),
+      title: file.basename,
       section: sectionFor(file.path, this.config.folder)
     };
     const record = { file, note, references };
@@ -706,19 +687,19 @@ var import_obsidian2 = require("obsidian");
 // src/transcript-categories.ts
 var SUPPORTED_CATEGORIES = [
   { key: "StudioTalks", name: "Discursos", description: "Discursos proferidos no JW Broadcasting.", type: "ondemand", parentKey: "VODStudio", path: ["Discursos"], defaultFolder: "Discursos/Discursos" },
-  { key: "discover:studio-news", name: "Boletim do Corpo Governante", description: "Notícias, anúncios e assuntos apresentados no Boletim do Corpo Governante.", type: "ondemand", parentKey: "VODStudio", path: ["Boletim do Corpo Governante"], defaultFolder: "Discursos/Boletim do Corpo Governante", discoverNames: ["Notícias e Anúncios", "Notícias e anúncios", "News and Announcements"] },
+  { key: "discover:studio-news", name: "Boletim do Corpo Governante", description: "Notícias, anúncios e assuntos apresentados no Boletim do Corpo Governante.", type: "ondemand", parentKey: "VODStudio", path: ["Boletim do Corpo Governante"], defaultFolder: "Discursos/Boletim do Corpo Governante", discoverNames: ["Notícias e Anúncios", "Notícias e anúncios", "News and Announcements", "Boletim do Corpo Governante"] },
   { key: "VODPgmEvtMorningWorship", name: "Adorações Matinais", description: "Discursos e reflexões apresentados nas adorações matinais.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Adorações Matinais"], defaultFolder: "Discursos/Adorações Matinais" },
   { key: "VODPgmEvtGilead", name: "Formaturas", description: "Programas e discursos de formaturas.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Formaturas"], defaultFolder: "Discursos/Formaturas" },
   { key: "VODPgmEvtAnnMtg", name: "Reuniões Anuais", description: "Programas e discursos das reuniões anuais.", type: "ondemand", parentKey: "VODProgramsEvents", path: ["Programas e Eventos", "Reuniões Anuais"], defaultFolder: "Discursos/Reuniões Anuais" },
   { key: "2020Convention", name: "Congresso de 2020", description: "Transcrições do congresso de 2020.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2020"], defaultFolder: "Discursos/Congressos/2020" },
   { key: "2021Convention", name: "Congresso de 2021", description: "Transcrições do congresso de 2021.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2021"], defaultFolder: "Discursos/Congressos/2021" },
   { key: "2022Convention", name: "Congresso de 2022", description: "Transcrições do congresso de 2022.", type: "ondemand", parentKey: "VODProgramsEvents", group: "Congressos", path: ["Congressos", "2022"], defaultFolder: "Discursos/Congressos/2022" },
-  { key: "discover:series-bible-intros", name: "Introdução aos livros da Bíblia", description: "Vídeos de introdução aos livros da Bíblia.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Introdução aos livros da Bíblia"], defaultFolder: "Discursos/Séries/Introdução aos livros da Bíblia", discoverNames: ["Introdução aos Livros da Bíblia", "Introdução aos livros da Bíblia"] },
-  { key: "SeriesDigForTreasures", name: "Busque por Tesouros", description: "Série oficial Busque por Tesouros.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Busque por Tesouros"], defaultFolder: "Discursos/Séries/Busque por Tesouros" },
-  { key: "SeriesLearnFromThem", name: "Exemplos para Nós", description: "Série oficial Exemplos para Nós.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Exemplos para Nós"], defaultFolder: "Discursos/Séries/Exemplos para Nós" },
-  { key: "SeriesIronSharpens", name: "Ferro Afia o Ferro", description: "Série oficial Ferro Afia o Ferro.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Ferro Afia o Ferro"], defaultFolder: "Discursos/Séries/Ferro Afia o Ferro" },
-  { key: "SeriesImitateFaith", name: "Imite a Sua Fé", description: "Série oficial Imite a Sua Fé.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Imite a Sua Fé"], defaultFolder: "Discursos/Séries/Imite a Sua Fé" },
-  { key: "SeriesHappyMarriage", name: "Como Ser Feliz no Casamento?", description: "Série oficial Como Ser Feliz no Casamento?.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Como Ser Feliz no Casamento"], defaultFolder: "Discursos/Séries/Como Ser Feliz no Casamento" }
+  { key: "discover:series-bible-intros", name: "Introdução aos livros da Bíblia", description: "Vídeos de introdução aos livros da Bíblia.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Introdução aos livros da Bíblia"], defaultFolder: "Discursos/Séries/Introdução aos livros da Bíblia", discoverNames: ["Vídeos de Introdução aos Livros da Bíblia", "Introdução aos livros da Bíblia", "Bible Book Introductions"] },
+  { key: "discover:series-treasures", name: "Busque por Tesouros", description: "Série Busque por Tesouros.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Busque por Tesouros"], defaultFolder: "Discursos/Séries/Busque por Tesouros", discoverNames: ["À procura de tesouros", "A procura de tesouros", "Busque por Tesouros"] },
+  { key: "discover:series-iron", sourceKey: "SeriesIronSharpens", name: "O ferro afia o ferro", description: "Série O ferro afia o ferro.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "O ferro afia o ferro"], defaultFolder: "Discursos/Séries/O ferro afia o ferro", discoverNames: ["O ferro afia o ferro", "O Ferro Afia o Ferro"] },
+  { key: "discover:series-faith", sourceKey: "SeriesImitateFaith", name: "Imite a Sua Fé", description: "Série brasileira Imite a Sua Fé.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Imite a Sua Fé"], defaultFolder: "Discursos/Séries/Imite a Sua Fé", discoverNames: ["Imite a Sua Fé", "Imite a sua fé"] },
+  { key: "discover:series-learn-from-them", sourceKey: "SeriesLearnFromThem", name: "Exemplos para Nós", description: "Série Exemplos para Nós.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Exemplos para Nós"], defaultFolder: "Discursos/Séries/Exemplos para Nós", discoverNames: ["Exemplos para Nós", "Exemplos para nós"] },
+  { key: "discover:series-marriage", sourceKey: "SeriesHappyMarriage", name: "Como ser feliz no casamento?", description: "Série com princípios bíblicos para o casamento.", type: "ondemand", parentKey: "VODSeries", group: "Séries", path: ["Séries", "Como ser feliz no casamento"], defaultFolder: "Discursos/Séries/Como ser feliz no casamento", discoverNames: ["Como Ser Feliz no Casamento?", "Para ter um casamento feliz", "Para Ter Um Casamento Feliz", "Para Ter Um Casamento Feliz...", "Para Ter Um Casamento Feliz…"] }
 ]
 
 // src/settings.ts
@@ -794,6 +775,31 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
         officialThumbnailAction.disabled = false;
         officialThumbnailAction.removeClass("is-loading");
       }
+    });
+
+    const allCategoriesEnabled = SUPPORTED_CATEGORIES.length > 0 && SUPPORTED_CATEGORIES.every((item) => {
+      var _a;
+      return Boolean((_a = this.plugin.settings.categorySettings[item.key]) == null ? void 0 : _a.enabled);
+    });
+
+    const selectAllAction = officialActions.createEl("button", {
+      text: allCategoriesEnabled ? "Desmarcar todas" : "Selecionar todas",
+      cls: "bri-official-action-button bri-official-action-button-compact",
+      attr: { type: "button" }
+    });
+
+    selectAllAction.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const nextEnabled = !allCategoriesEnabled;
+      for (const item of SUPPORTED_CATEGORIES) {
+        const current = this.plugin.settings.categorySettings[item.key] ?? { enabled: false, folder: "" };
+        this.plugin.settings.categorySettings[item.key] = { ...current, enabled: nextEnabled };
+      }
+
+      await this.plugin.saveSettings();
+      this.display();
     });
 
     const catalog = containerEl.createDiv({ cls: "bri-catalog-settings" });
@@ -891,6 +897,26 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
         text: `Pasta automática: ${item.defaultFolder}`,
         cls: "bri-library-card-path"
       });
+
+      if (["StudioTalks", "VODPgmEvtMorningWorship"].includes(item.key)) {
+        const sortRow = card.createDiv({ cls: "bri-publication-order-row" });
+        const sortCopy = sortRow.createDiv({ cls: "bri-publication-order-copy" });
+        sortCopy.createDiv({ text: "Ordenar por publicação", cls: "bri-publication-order-title" });
+        sortCopy.createDiv({ text: "Ordena do mais recente ao mais antigo. Ao desligar, volta ao nome original.", cls: "bri-publication-order-description" });
+        const sortToggleHost = sortRow.createDiv({ cls: "bri-publication-order-toggle" });
+        const sortEnabled = Boolean((this.plugin.settings.publicationOrder ?? {})[item.key]);
+        new import_obsidian2.Setting(sortToggleHost).addToggle((toggle) => toggle
+          .setValue(sortEnabled)
+          .setTooltip("Ordenar arquivos pela data de publicação")
+          .onChange(async (enabled) => {
+            this.plugin.settings.publicationOrder = {
+              ...(this.plugin.settings.publicationOrder ?? {}),
+              [item.key]: enabled
+            };
+            await this.plugin.saveSettings();
+            await this.plugin.transcriptService.setPublicationOrder(item.key, enabled, true);
+          }));
+      }
 
       const footer = card.createDiv({ cls: "bri-library-card-footer" });
       if (current.enabled) {
@@ -1180,6 +1206,14 @@ async function getCategory(key, limit = 50, offset = 0) {
   });
   return response.json;
 }
+async function getCategoryLegacy(key, limit = 50, offset = 0) {
+  const params = new URLSearchParams({ clientType: "www", limit: String(limit), offset: String(offset) });
+  const response = await (0, import_obsidian3.requestUrl)({
+    url: `${API_BASE}/categories/${LOCALE_PT_BR}/${encodeURIComponent(key)}?${params.toString()}`,
+    method: "GET"
+  });
+  return response.json;
+}
 async function getMediaItem(key) {
   const params = new URLSearchParams({ clientType: "www" });
   const response = await (0, import_obsidian3.requestUrl)({
@@ -1187,7 +1221,16 @@ async function getMediaItem(key) {
     method: "GET"
   });
   const payload = response.json;
-  const media = Array.isArray(payload == null ? void 0 : payload.media) ? payload.media[0] : null;
+  let media = null;
+  if (Array.isArray(payload == null ? void 0 : payload.media)) {
+    media = payload.media[0] ?? null;
+  } else if ((payload == null ? void 0 : payload.media) && typeof payload.media === "object") {
+    media = payload.media;
+  } else if ((payload == null ? void 0 : payload.mediaItem) && typeof payload.mediaItem === "object") {
+    media = payload.mediaItem;
+  } else if (payload && typeof payload === "object" && payload.naturalKey) {
+    media = payload;
+  }
   if (!media) throw new Error(`Item de mídia não encontrado: ${key}`);
   return media;
 }
@@ -1203,12 +1246,24 @@ async function ensureFolder(app, folder) {
     if (!app.vault.getAbstractFileByPath(current)) await app.vault.createFolder(current);
   }
 }
+function subtitleCandidates(value, output = []) {
+  if (typeof value === "string" && /^https?:\/\//i.test(value) && /\.(?:vtt|srt)(?:\?|$)/i.test(value)) {
+    output.push(value);
+  } else if (Array.isArray(value)) {
+    for (const child of value) subtitleCandidates(child, output);
+  } else if (typeof value === "object" && value !== null) {
+    for (const child of Object.values(value)) subtitleCandidates(child, output);
+  }
+  return output;
+}
 function subtitleUrl(media) {
   var _a, _b, _c;
-  return (_c = (_b = (_a = media.files.find((file) => {
+  const direct = (_c = (_b = (_a = media.files.find((file) => {
     var _a2;
     return (_a2 = file.subtitles) == null ? void 0 : _a2.url;
   })) == null ? void 0 : _a.subtitles) == null ? void 0 : _b.url) != null ? _c : null;
+  if (direct) return direct;
+  return subtitleCandidates(media)[0] ?? null;
 }
 function imageCandidates(value, output = []) {
   if (typeof value === "string" && /^https?:\/\//i.test(value) && /\.(?:jpe?g|png|webp)(?:\?|$)/i.test(value)) {
@@ -1237,33 +1292,6 @@ function thumbnailUrl(media) {
   };
   return (_a = candidates.map((url, index) => ({ url, index, score: score(url) })).sort((a, b) => b.score - a.score || b.index - a.index)[0]) == null ? void 0 : _a.url;
 }
-const BIBLE_INTRO_FOLDER = "Discursos/Séries/Introdução aos livros da Bíblia";
-const OLD_GOVERNING_BODY_BULLETIN_FOLDER = "Discursos/Boletim Mensal";
-const GOVERNING_BODY_BULLETIN_FOLDER = "Discursos/Boletim do Corpo Governante";
-function normalizeOrderText(value) {
-  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").replace(/[^a-z0-9]+/g, " ").trim();
-}
-const BIBLE_INTRO_ALIASES = BIBLE_BOOKS.flatMap((book) => book.aliases.map((alias) => ({
-  alias: normalizeOrderText(alias),
-  order: book.order + 1
-}))).filter((item) => item.alias).sort((a, b) => b.alias.length - a.alias.length);
-function bibleIntroOrder(title) {
-  const normalized = normalizeOrderText(title);
-  if (/^introducao (?:a|à)? ?biblia$/.test(normalized) || normalized.includes("introducao a biblia")) return 0;
-  const padded = ` ${normalized} `;
-  for (const item of BIBLE_INTRO_ALIASES) {
-    if (padded.includes(` ${item.alias} `)) return item.order;
-  }
-  return 99;
-}
-function orderedBibleIntroBasename(title) {
-  const clean = nomeArquivoSeguro(title).replace(/^\d{2}\s*-\s*/, "");
-  const order = bibleIntroOrder(title);
-  return `${String(order).padStart(2, "0")} - ${clean}`;
-}
-function transcriptBasename(category, title) {
-  return category.key === "discover:series-bible-intros" ? orderedBibleIntroBasename(title) : nomeArquivoSeguro(title);
-}
 var SourceTranscriptService = class {
   constructor(app, settings, syncNote) {
     this.app = app;
@@ -1271,68 +1299,103 @@ var SourceTranscriptService = class {
     this.syncNote = syncNote;
     __publicField(this, "downloading", false);
   }
-  async migrateLibrary() {
-    try {
-      await this.migrateBulletinFolder();
-    } catch (e) {
-      console.warn("Indice Nights: não foi possível migrar a pasta do boletim", e);
+  async mergeFolder(sourcePath, targetPath) {
+    const source = this.app.vault.getAbstractFileByPath(sourcePath);
+    if (!(source instanceof import_obsidian3.TFolder) || sourcePath === targetPath) return;
+    const target = this.app.vault.getAbstractFileByPath(targetPath);
+    if (!target) {
+      await ensureFolder(this.app, targetPath.slice(0, targetPath.lastIndexOf("/")));
+      await this.app.vault.rename(source, targetPath);
+      return;
     }
-    try {
-      await this.migrateSeriesFolders();
-    } catch (e) {
-      console.warn("Indice Nights: não foi possível migrar as pastas das séries", e);
+    if (!(target instanceof import_obsidian3.TFolder)) return;
+    for (const child of [...source.children]) {
+      const destination = `${targetPath}/${child.name}`;
+      if (!this.app.vault.getAbstractFileByPath(destination)) {
+        await this.app.vault.rename(child, destination);
+      }
     }
-    try {
-      await this.migrateBibleIntroOrder();
-    } catch (e) {
-      console.warn("Indice Nights: não foi possível ordenar a série de introdução bíblica", e);
-    }
+    if (source.children.length === 0) await this.app.vault.delete(source);
   }
-  async migrateBulletinFolder() {
-    const oldFolder = this.app.vault.getAbstractFileByPath(OLD_GOVERNING_BODY_BULLETIN_FOLDER);
-    const newFolder = this.app.vault.getAbstractFileByPath(GOVERNING_BODY_BULLETIN_FOLDER);
-    if (oldFolder instanceof import_obsidian3.TFolder && !newFolder) {
-      await this.app.vault.rename(oldFolder, GOVERNING_BODY_BULLETIN_FOLDER);
-    }
-  }
-  async migrateSeriesFolders() {
-    const moves = [
-      ["Discursos/Séries/À procura de tesouros", "Discursos/Séries/Busque por Tesouros"],
-      ["Discursos/Séries/O ferro afia o ferro", "Discursos/Séries/Ferro Afia o Ferro"],
-      ["Discursos/Séries/Exemplos de fé", "Discursos/Séries/Imite a Sua Fé"],
-      ["Discursos/Séries/Para ter um casamento feliz", "Discursos/Séries/Como Ser Feliz no Casamento"]
+  async applySeriesMigrations() {
+    const marriageTarget = "Discursos/Séries/Como ser feliz no casamento";
+    const marriageSources = [
+      "Discursos/Séries/Para ter um casamento feliz",
+      "Discursos/Series/Para ter um casamento feliz"
     ];
-    for (const [oldPath, newPath] of moves) {
-      const oldFolder = this.app.vault.getAbstractFileByPath(oldPath);
-      const newFolder = this.app.vault.getAbstractFileByPath(newPath);
-      if (oldFolder instanceof import_obsidian3.TFolder && !newFolder) {
-        await this.app.vault.rename(oldFolder, newPath);
+    for (const sourcePath of marriageSources) {
+      try {
+        await this.mergeFolder(sourcePath, marriageTarget);
+      } catch (e) {
+        console.error("Indice Nights: falha ao renomear a pasta de casamento", sourcePath, e);
       }
     }
-  }
-  async migrateBibleIntroOrder() {
-    const configured = this.settings.categorySettings["discover:series-bible-intros"];
-    const folder = cleanFolder(configured == null ? void 0 : configured.folder) || BIBLE_INTRO_FOLDER;
-    const prefix = `${folder}/`;
-    const files = this.app.vault.getMarkdownFiles().filter((file) => file.path.startsWith(prefix));
-    for (const file of files) {
-      const title = file.basename.replace(/^\d{2}\s*-\s*/, "");
-      const targetBase = orderedBibleIntroBasename(title);
-      if (file.basename === targetBase) continue;
-      let target = `${folder}/${targetBase}.md`;
-      const existing = this.app.vault.getAbstractFileByPath(target);
-      if (existing && existing !== file) {
-        let counter = 2;
-        while (this.app.vault.getAbstractFileByPath(`${folder}/${targetBase} (${counter}).md`)) counter += 1;
-        target = `${folder}/${targetBase} (${counter}).md`;
+    const removedLessonsPaths = [
+      "Discursos/Séries/O que aprendemos",
+      "Discursos/Series/O que aprendemos"
+    ];
+    for (const removedPath of removedLessonsPaths) {
+      const removedFolder = this.app.vault.getAbstractFileByPath(removedPath);
+      if (removedFolder instanceof import_obsidian3.TFolder) {
+        try {
+          await this.app.vault.trash(removedFolder, false);
+        } catch (e) {
+          console.error("Indice Nights: falha ao mover a pasta removida para a lixeira", removedPath, e);
+        }
       }
-      await this.app.vault.rename(file, target);
+    }
+    const introCategory = SUPPORTED_CATEGORIES.find((item) => item.key === "discover:series-bible-intros");
+    if (!introCategory) return;
+    const introConfig = this.settings.categorySettings[introCategory.key] ?? { folder: "" };
+    const configuredFolder = cleanFolder(introConfig.folder ?? "");
+    const normalizedIntroName = this.normalizeCategoryName("Introdução aos livros da Bíblia");
+    const normalizedSeriesName = this.normalizeCategoryName("Séries");
+    const discoveredIntroFolders = this.app.vault.getAllLoadedFiles()
+      .filter((file) => file instanceof import_obsidian3.TFolder)
+      .filter((folder) => {
+        const parent = folder.parent;
+        return this.normalizeCategoryName(folder.name) === normalizedIntroName
+          && parent instanceof import_obsidian3.TFolder
+          && this.normalizeCategoryName(parent.name) === normalizedSeriesName;
+      })
+      .map((folder) => folder.path);
+    const introFolders = Array.from(new Set([
+      ...discoveredIntroFolders,
+      configuredFolder || introCategory.defaultFolder,
+      introCategory.defaultFolder,
+      "Discursos/Séries/Introdução aos Livros da Bíblia",
+      "Discursos/Series/Introdução aos livros da Bíblia",
+      "Discursos/Series/Introdução aos Livros da Bíblia"
+    ].filter(Boolean)));
+    for (const introFolder of introFolders) {
+      try {
+        const recovered = await this.recoverInterruptedBibleIntroFiles(introFolder);
+        if (recovered > 0) await wait(350);
+      } catch (e) {
+        console.error("Indice Nights: falha ao recuperar introduções bíblicas ocultas", introFolder, e);
+      }
     }
   }
   async downloadEnabled() {
     if (this.downloading) {
       new import_obsidian3.Notice("J\xE1 existe uma atualiza\xE7\xE3o de transcri\xE7\xF5es em andamento.");
       return;
+    }
+    try {
+      await this.applySeriesMigrations();
+    } catch (e) {
+      console.error("Indice Nights: falha ao aplicar ajustes das séries", e);
+    }
+    const seriesCategories = SUPPORTED_CATEGORIES.filter((item) => item.group === "Séries");
+    const anySeriesEnabled = seriesCategories.some((item) => {
+      const config = this.settings.categorySettings[item.key];
+      return config == null ? void 0 : config.enabled;
+    });
+    if (anySeriesEnabled) {
+      for (const item of seriesCategories) {
+        const current = this.settings.categorySettings[item.key] ?? { enabled: false, folder: "" };
+        this.settings.categorySettings[item.key] = { ...current, enabled: true };
+      }
     }
     const selected = SUPPORTED_CATEGORIES.filter((item) => {
       const config = this.settings.categorySettings[item.key];
@@ -1356,7 +1419,14 @@ var SourceTranscriptService = class {
         const chosenFolder = cleanFolder(this.settings.categorySettings[category.key].folder);
         const folder = chosenFolder || category.defaultFolder;
         await ensureFolder(this.app, folder);
-        const mediaItems = await this.allMedia(category);
+        let mediaItems;
+        try {
+          mediaItems = await this.allMedia(category);
+        } catch (e) {
+          console.error("Indice Nights: falha ao carregar categoria", category.name, category.key, e);
+          errors += 1;
+          continue;
+        }
         if (mediaItems.length === 0) {
           console.warn("Indice Nights: categoria sem mídias retornadas", category.name, category.key);
           errors += 1;
@@ -1389,7 +1459,10 @@ var SourceTranscriptService = class {
             const vtt = (await (0, import_obsidian3.requestUrl)({ url, method: "GET" })).text;
             const thumbnailPath = await this.downloadThumbnail(hydratedMedia);
             const note = criarNotaTranscricao(hydratedMedia, vtt, thumbnailPath != null ? thumbnailPath : void 0);
-            const filePath = await this.availablePath(folder, transcriptBasename(category, hydratedMedia.title));
+            const basename = category.key === "discover:series-bible-intros"
+              ? this.bibleIntroBasename(hydratedMedia)
+              : nomeArquivoSeguro(hydratedMedia.title);
+            const filePath = await this.availablePath(folder, basename);
             const file = await this.app.vault.create(filePath, note);
             existing.set(sourceId(hydratedMedia), file);
             created += 1;
@@ -1401,9 +1474,16 @@ var SourceTranscriptService = class {
         }
       }
     } finally {
+      try {
+        await this.applySeriesMigrations();
+        await this.applySavedPublicationOrder();
+      } catch (e) {
+        console.error("Indice Nights: falha ao finalizar a organização das transcrições", e);
+      }
       progress.hide();
       this.downloading = false;
     }
+
     const details = [
       `${created} nova(s)`,
       `${skipped} j\xE1 existente(s)`,
@@ -1505,112 +1585,299 @@ var SourceTranscriptService = class {
     }
   }
   normalizeCategoryName(value) {
-    return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR").replace(/[^a-z0-9]+/g, " ").trim();
-  }
-  discoveryRoots(category) {
-    if (category.group === "Séries" || category.key.startsWith("discover:series-")) {
-      return ["VODSeries"];
-    }
-    return [...new Set([category.parentKey].filter(Boolean))];
-  }
-  categoryNameMatches(name, wanted) {
-    if (!name) return false;
-    if (wanted.includes(name)) return true;
-    return wanted.some((candidate) => {
-      if (!candidate) return false;
-      if (name.includes(candidate) || candidate.includes(name)) return true;
-      const candidateWords = candidate.split(" ").filter((word) => word.length >= 4);
-      if (candidateWords.length < 2) return false;
-      const matches = candidateWords.filter((word) => name.includes(word)).length;
-      return matches >= Math.min(3, candidateWords.length);
-    });
-  }
-  mediaMatchesSeries(media, wanted) {
-    const title = this.normalizeCategoryName(media.title != null ? media.title : "");
-    if (!title) return false;
-    return wanted.some((candidate) => candidate && (title.includes(candidate) || candidate.includes(title)));
+    return normalizeText(value).replace(/[^a-z0-9]+/g, " ").trim();
   }
   async resolveCategoryKey(category) {
     var _a;
+    if (category.sourceKey) return category.sourceKey;
     if (!category.key.startsWith("discover:")) return category.key;
     if (!category.parentKey || !((_a = category.discoverNames) == null ? void 0 : _a.length)) throw new Error(`Categoria dinâmica sem origem configurada: ${category.name}`);
     const wanted = category.discoverNames.map((name) => this.normalizeCategoryName(name));
     const visited = /* @__PURE__ */ new Set();
-    const queue = this.discoveryRoots(category).map((key) => ({ key, depth: 0 }));
-    let bestPartial = null;
-    while (queue.length > 0) {
-      const current = queue.shift();
-      if (!current || visited.has(current.key)) continue;
-      visited.add(current.key);
-      let response;
-      try {
-        response = await getCategory(current.key, 50, 0);
-      } catch (e) {
-        console.warn("Indice Nights: falha ao explorar categoria", current.key, e);
-        continue;
-      }
-      const currentName = this.normalizeCategoryName(response.category.name != null ? response.category.name : "");
-      if (current.depth > 0 && this.categoryNameMatches(currentName, wanted)) return current.key;
-      const currentMedia = response.category.media != null ? response.category.media : [];
-      const matchingMedia = currentMedia.filter((media) => this.mediaMatchesSeries(media, wanted));
-      if (matchingMedia.length >= 2 && matchingMedia.length >= Math.ceil(currentMedia.length * 0.4)) return current.key;
-      const children = response.category.subcategories != null ? response.category.subcategories : [];
+    const searchTree = async (categoryKey, depth = 0) => {
+      if (!categoryKey || visited.has(categoryKey) || depth > 5) return null;
+      visited.add(categoryKey);
+      const response = await getCategory(categoryKey, 0, 0);
+      const children = response.category?.subcategories ?? [];
+      const exact = children.find((child) => wanted.includes(this.normalizeCategoryName(child.name ?? "")));
+      if (exact?.key) return exact.key;
+      const partial = children.find((child) => {
+        const name = this.normalizeCategoryName(child.name ?? "");
+        return name && wanted.some((candidate) => name.includes(candidate) || candidate.includes(name));
+      });
+      if (partial?.key) return partial.key;
       for (const child of children) {
-        const name = this.normalizeCategoryName(child.name != null ? child.name : "");
-        if (this.categoryNameMatches(name, wanted)) return child.key;
-        if (!bestPartial && wanted.some((candidate) => name.includes(candidate) || candidate.includes(name))) bestPartial = child.key;
-        if (current.depth < 7 && child.key && !visited.has(child.key)) queue.push({ key: child.key, depth: current.depth + 1 });
+        const childKey = typeof child === "string" ? child : child?.key ?? child?.categoryKey;
+        const found = await searchTree(childKey, depth + 1);
+        if (found) return found;
       }
-    }
-    if (bestPartial) return bestPartial;
-    throw new Error(`Não encontrei “${category.name}” nas categorias de vídeo conhecidas.`);
+      return null;
+    };
+    const found = await searchTree(category.parentKey);
+    if (found) return found;
+    throw new Error(`Não encontrei “${category.name}” dentro da árvore de ${category.parentKey}.`);
   }
-  async collectMatchingSeriesMedia(category) {
-    var _a;
-    const wanted = ((_a = category.discoverNames) != null ? _a : []).map((name) => this.normalizeCategoryName(name));
-    const visited = /* @__PURE__ */ new Set();
-    const queue = this.discoveryRoots(category).map((key) => ({ key, depth: 0 }));
-    const found = /* @__PURE__ */ new Map();
-    while (queue.length > 0) {
-      const current = queue.shift();
-      if (!current || visited.has(current.key)) continue;
-      visited.add(current.key);
-      let response;
-      try {
-        response = await getCategory(current.key, 50, 0);
-      } catch (e) {
-        continue;
-      }
-      for (const media of response.category.media != null ? response.category.media : []) {
-        if (this.mediaMatchesSeries(media, wanted)) found.set(sourceId(media), media);
-      }
-      for (const child of response.category.subcategories != null ? response.category.subcategories : []) {
-        if (current.depth < 7 && child.key && !visited.has(child.key)) queue.push({ key: child.key, depth: current.depth + 1 });
-      }
-      if (queue.length > 0) await wait(60);
-    }
-    return [...found.values()];
-  }
-  async allMedia(category) {
-    var _a, _b, _c;
-    let categoryKey;
-    try {
-      categoryKey = await this.resolveCategoryKey(category);
-    } catch (e) {
-      throw e;
-    }
-    const media = [];
+  async collectCategoryMedia(categoryKey, mediaById, visitedCategories) {
+    var _a, _b, _c, _d;
+    if (visitedCategories.has(categoryKey)) return;
+    visitedCategories.add(categoryKey);
+
     const limit = 50;
     let offset = 0;
     let total = 1;
+    let children = [];
+
     while (offset < total) {
       const response = await getCategory(categoryKey, limit, offset);
-      media.push(...(_a = response.category.media) != null ? _a : []);
-      total = (_c = (_b = response.pagination) == null ? void 0 : _b.totalCount) != null ? _c : media.length;
+      const currentCategory = response.category ?? {};
+      const items = (_a = currentCategory.media) != null ? _a : [];
+
+      for (const item of items) {
+        const id = sourceId(item);
+        if (!mediaById.has(id)) mediaById.set(id, item);
+      }
+
+      if (offset === 0) {
+        children = Array.isArray(currentCategory.subcategories) ? currentCategory.subcategories : [];
+      }
+
+      total = (_c = (_b = response.pagination) == null ? void 0 : _b.totalCount) != null ? _c : items.length;
       offset += limit;
-      if (offset < total) await wait(220);
+      if (offset < total) await wait(160);
     }
+
+    for (const child of children) {
+      const childKey = typeof child === "string"
+        ? child
+        : (_d = child == null ? void 0 : child.key) != null
+          ? _d
+          : child == null ? void 0 : child.categoryKey;
+      if (!childKey) continue;
+      await this.collectCategoryMedia(childKey, mediaById, visitedCategories);
+      await wait(100);
+    }
+  }
+  async allMediaLegacyDirect(categoryKey) {
+    const media = [];
+    const seen = new Set();
+    const limit = 50;
+    let offset = 0;
+    let total = 1;
+
+    while (offset < total) {
+      const response = await getCategoryLegacy(categoryKey, limit, offset);
+      const items = response.category?.media ?? [];
+
+      for (const item of items) {
+        const id = sourceId(item);
+        if (!seen.has(id)) {
+          seen.add(id);
+          media.push(item);
+        }
+      }
+
+      total = response.pagination?.totalCount ?? items.length;
+      offset += limit;
+      if (offset < total) await wait(180);
+    }
+
+    console.info("Indice Nights: carregamento legado direto", categoryKey, `${media.length} mídia(s)`);
     return media;
+  }
+
+  async allMedia(category) {
+    // Adorações Matinais usava esta chave fixa e funcionava antes das mudanças
+    // de descoberta/consulta detalhada. Mantemos o fluxo antigo exclusivamente aqui.
+    if (category.key === "VODPgmEvtMorningWorship") {
+      return this.allMediaLegacyDirect("VODPgmEvtMorningWorship");
+    }
+
+    const categoryKey = await this.resolveCategoryKey(category);
+    const mediaById = /* @__PURE__ */ new Map();
+    const visitedCategories = /* @__PURE__ */ new Set();
+    await this.collectCategoryMedia(categoryKey, mediaById, visitedCategories);
+    console.info(
+      "Indice Nights: categoria carregada",
+      category.name,
+      `${mediaById.size} mídia(s)`,
+      `${visitedCategories.size} categoria(s)/subcategoria(s)`
+    );
+    return Array.from(mediaById.values());
+  }
+  bibleIntroRank(title, naturalKey = "") {
+    const keyMatch = /^pub-nwtsv_T_(\d+)_VIDEO$/i.exec(naturalKey);
+    if (keyMatch) {
+      const value = Number(keyMatch[1]);
+      if (value === 1) return 0;
+      if (value >= 10 && value <= 660 && value % 10 === 0) return value / 10;
+    }
+    const normalizedBooks = names.map(([canonical, aliases]) => [canonical, ...aliases].map((name) => this.normalizeCategoryName(name)));
+    const clean = this.normalizeCategoryName(title
+      .replace(/^\d+\s*-\s*/, "")
+      .replace(/^\d{2}-\d{2}-\d{4}\s*-\s*/, "")
+      .replace(/^\d{4}-\d{2}-\d{2}\s*-\s*/, "")
+      .trim());
+    const subject = clean
+      .replace(/^introducao\s+(?:a|ao)\s+(?:o\s+|a\s+)?(?:livro\s+de\s+)?/, "")
+      .trim();
+    if (subject === "biblia") return 0;
+    for (let i = 0; i < normalizedBooks.length; i += 1) {
+      if (normalizedBooks[i].includes(subject)) return i + 1;
+    }
+    return 999;
+  }
+  bibleIntroBasename(media) {
+    const title = nomeArquivoSeguro(media.title);
+    const rank = this.bibleIntroRank(media.title, media.naturalKey ?? "");
+    return rank < 999 ? `${String(rank).padStart(2, "0")} - ${title}` : title;
+  }
+  async recoverInterruptedBibleIntroFiles(folderPath) {
+    const adapter = this.app.vault.adapter;
+    let listing;
+    try {
+      listing = await adapter.list(folderPath);
+    } catch (e) {
+      return 0;
+    }
+    const temporaryFiles = listing.files.filter((path) => {
+      const filename = path.slice(path.lastIndexOf("/") + 1);
+      return /^\.__indice_nights_bible_\d+_\d+\.md$/i.test(filename);
+    });
+    let recovered = 0;
+    for (const temporaryPath of temporaryFiles) {
+      try {
+        const content = await adapter.read(temporaryPath);
+        const titleMatch = /^#\s+(.+?)\s*$/m.exec(content);
+        const title = titleMatch?.[1]?.trim() || "Transcrição bíblica recuperada";
+        const basename = this.bibleIntroBasename({ title, naturalKey: "" });
+        let counter = 1;
+        let targetPath = `${folderPath}/${basename}.md`;
+        while (await adapter.exists(targetPath)) {
+          counter += 1;
+          targetPath = `${folderPath}/${basename} (${counter}).md`;
+        }
+        await adapter.rename(temporaryPath, targetPath);
+        recovered += 1;
+      } catch (e) {
+        console.error("Indice Nights: não foi possível recuperar arquivo temporário", temporaryPath, e);
+      }
+    }
+    return recovered;
+  }
+  stripPublicationPrefix(name) {
+    let clean = name;
+
+    // Formato atual: 0001 - DD-MM-AAAA - Título
+    clean = clean.replace(/^\d+\s*-\s*\d{2}-\d{2}-\d{4}\s*-\s*/, "");
+
+    // Compatibilidade com testes anteriores: 0001 - AAAA-MM-DD - Título
+    clean = clean.replace(/^\d+\s*-\s*\d{4}-\d{2}-\d{2}\s*-\s*/, "");
+
+    // Compatibilidade com nomes que tenham somente a data.
+    clean = clean.replace(/^\d{2}-\d{2}-\d{4}\s*-\s*/, "");
+    clean = clean.replace(/^\d{4}-\d{2}-\d{2}\s*-\s*/, "");
+
+    return clean.trim();
+  }
+  formatPublicationDateBR(date) {
+    if (typeof date !== "string") return date;
+    const match = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return match ? `${match[3]}-${match[2]}-${match[1]}` : date;
+  }
+  async setPublicationOrder(categoryKey, enabled, showNotice = true) {
+    const category = SUPPORTED_CATEGORIES.find((item) => item.key === categoryKey);
+    if (!category || !["StudioTalks", "VODPgmEvtMorningWorship"].includes(categoryKey)) return;
+
+    const config = this.settings.categorySettings[categoryKey];
+    const chosenFolder = cleanFolder((config == null ? void 0 : config.folder) ?? "");
+    const folderPath = chosenFolder || category.defaultFolder;
+    const folder = this.app.vault.getAbstractFileByPath(folderPath);
+
+    if (!(folder instanceof import_obsidian3.TFolder)) {
+      if (showNotice) new import_obsidian3.Notice(`A pasta ${folderPath} ainda não existe.`);
+      return;
+    }
+
+    const items = [];
+    let skipped = 0;
+
+    for (const child of folder.children) {
+      if (!(child instanceof import_obsidian3.TFile) || child.extension !== "md") continue;
+      const cache = this.app.metadataCache.getFileCache(child);
+      const frontmatter = cache == null ? void 0 : cache.frontmatter;
+      const dateValue = frontmatter == null ? void 0 : frontmatter.data_publicacao;
+      const date = typeof dateValue === "string" && /^\d{4}-\d{2}-\d{2}$/.test(dateValue.trim())
+        ? dateValue.trim()
+        : null;
+
+      items.push({
+        file: child,
+        cleanBase: this.stripPublicationPrefix(child.basename),
+        date
+      });
+    }
+
+    if (enabled) {
+      items.sort((a, b) => {
+        if (a.date && b.date) return b.date.localeCompare(a.date) || a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
+        if (a.date) return -1;
+        if (b.date) return 1;
+        return a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
+      });
+    } else {
+      items.sort((a, b) => a.cleanBase.localeCompare(b.cleanBase, "pt-BR"));
+    }
+
+    const staged = [];
+    const token = Date.now();
+
+    for (let index = 0; index < items.length; index += 1) {
+      const item = items[index];
+      if (enabled && !item.date) {
+        skipped += 1;
+        continue;
+      }
+
+      const tempPath = `${folderPath}/.__indice_nights_sort_${token}_${index}.md`;
+      await this.app.vault.rename(item.file, tempPath);
+      staged.push({ ...item, index });
+    }
+
+    let renamed = 0;
+    let rank = 1;
+
+    for (const item of staged) {
+      let targetBase;
+      if (enabled) {
+        const rankPrefix = String(rank).padStart(4, "0");
+        targetBase = `${rankPrefix} - ${this.formatPublicationDateBR(item.date)} - ${item.cleanBase}`;
+        rank += 1;
+      } else {
+        targetBase = item.cleanBase;
+      }
+
+      let targetPath = `${folderPath}/${targetBase}.md`;
+      if (this.app.vault.getAbstractFileByPath(targetPath)) {
+        let counter = 2;
+        while (this.app.vault.getAbstractFileByPath(`${folderPath}/${targetBase} (${counter}).md`)) counter += 1;
+        targetPath = `${folderPath}/${targetBase} (${counter}).md`;
+      }
+
+      await this.app.vault.rename(item.file, targetPath);
+      renamed += 1;
+    }
+
+    if (showNotice) {
+      const mode = enabled ? "mais recentes primeiro" : "ordem alfabética";
+      const extra = skipped ? ` ${skipped} nota(s) sem data foram mantidas como estão.` : "";
+      new import_obsidian3.Notice(`${renamed} arquivo(s) ajustado(s): ${mode}.${extra}`, 7000);
+    }
+  }
+  async applySavedPublicationOrder() {
+    const order = this.settings.publicationOrder ?? {};
+    for (const key of ["StudioTalks", "VODPgmEvtMorningWorship"]) {
+      if (order[key]) await this.setPublicationOrder(key, true, false);
+    }
   }
   existingNotes() {
     var _a, _b;
@@ -2177,8 +2444,22 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     __publicField(this, "noteSyncService");
     __publicField(this, "selections");
     __publicField(this, "selectionData", {});
+    __publicField(this, "runtimeStyleEl", null);
+  }
+  ensureRuntimeStyles() {
+    const existing = document.getElementById("indice-nights-runtime-styles");
+    if (existing) {
+      this.runtimeStyleEl = existing;
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "indice-nights-runtime-styles";
+    style.textContent = INDICE_NIGHTS_RUNTIME_CSS;
+    document.head.appendChild(style);
+    this.runtimeStyleEl = style;
   }
   async onload() {
+    this.ensureRuntimeStyles();
     await this.loadSettings();
     this.selections = new DeviceSelectionStore(this.selectionData, () => {
       void this.saveSettings();
@@ -2195,8 +2476,12 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
       this.settings,
       (file) => this.noteSyncService.syncFile(file)
     );
-    await this.transcriptService.migrateLibrary();
     this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
+    try {
+      await this.transcriptService.applySeriesMigrations();
+    } catch (e) {
+      console.error("Indice Nights: falha ao organizar as séries na inicialização", e);
+    }
     await this.transcriptService.ensureGeneralIndex();
     this.addCommand({
       id: "baixar-novas-transcricoes",
@@ -2254,6 +2539,8 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   onunload() {
     var _a;
     (_a = this.noteSyncService) == null ? void 0 : _a.unload();
+    if (this.runtimeStyleEl && this.runtimeStyleEl.parentElement) this.runtimeStyleEl.remove();
+    this.runtimeStyleEl = null;
   }
   prepareThumbnailLayout(element) {
     const thumbnails = element.querySelectorAll('img[alt="Miniatura"]');
@@ -2271,19 +2558,40 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     const legacyCategories = saved == null ? void 0 : saved.jwCategorySettings;
     const savedSelections = saved == null ? void 0 : saved.deviceSelections;
     this.selectionData = typeof savedSelections === "object" && savedSelections !== null ? { ...savedSelections } : {};
-    const categorySettings = { ...((_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings) };
-    const seriesKeyMigrations = {
-      "discover:series-treasures": "SeriesDigForTreasures",
-      "discover:series-lessons": "SeriesLearnFromThem",
-      "discover:series-iron": "SeriesIronSharpens",
-      "discover:series-faith": "SeriesImitateFaith",
-      "discover:series-marriage": "SeriesHappyMarriage"
-    };
-    for (const [oldKey, newKey] of Object.entries(seriesKeyMigrations)) {
-      if (categorySettings[oldKey] && !categorySettings[newKey]) {
-        categorySettings[newKey] = { ...categorySettings[oldKey] };
+    const categorySettings = (_a = saved == null ? void 0 : saved.categorySettings) != null ? _a : typeof legacyCategories === "object" && legacyCategories !== null ? legacyCategories : DEFAULT_SETTINGS.categorySettings;
+    if (categorySettings?.["discover:studio-news"]?.folder === "Discursos/Boletim Mensal") {
+      categorySettings["discover:studio-news"] = { ...categorySettings["discover:studio-news"], folder: "Discursos/Boletim do Corpo Governante" };
+    }
+    if (categorySettings?.["discover:series-treasures"]?.folder === "Discursos/Séries/À procura de tesouros") {
+      categorySettings["discover:series-treasures"] = { ...categorySettings["discover:series-treasures"], folder: "Discursos/Séries/Busque por Tesouros" };
+    }
+    if (categorySettings?.["discover:series-faith"]?.folder === "Discursos/Séries/Exemplos de fé") {
+      categorySettings["discover:series-faith"] = { ...categorySettings["discover:series-faith"], folder: "Discursos/Séries/Imite a Sua Fé" };
+    }
+    const marriageFolder = categorySettings?.["discover:series-marriage"]?.folder;
+    if (!marriageFolder || marriageFolder === "Discursos/Séries/Para ter um casamento feliz" || marriageFolder === "Discursos/Series/Para ter um casamento feliz") {
+      const currentMarriage = categorySettings?.["discover:series-marriage"] ?? { enabled: false, folder: "" };
+      categorySettings["discover:series-marriage"] = { ...currentMarriage, folder: "Discursos/Séries/Como ser feliz no casamento" };
+    }
+    delete categorySettings["discover:series-lessons"];
+    const seriesKeys = [
+      "discover:series-bible-intros",
+      "discover:series-treasures",
+      "discover:series-iron",
+      "discover:series-faith",
+      "discover:series-learn-from-them",
+      "discover:series-marriage"
+    ];
+    const shouldCompleteSeries = seriesKeys.some((key) => categorySettings?.[key]?.enabled);
+    if (shouldCompleteSeries) {
+      for (const key of seriesKeys) {
+        const current = categorySettings?.[key] ?? { enabled: false, folder: "" };
+        categorySettings[key] = { ...current, enabled: true };
       }
     }
-    this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {}, categorySettings };
+    this.settings = { ...DEFAULT_SETTINGS, ...saved != null ? saved : {}, categorySettings, seriesFoldersCompletedV0817: true };
+    if (shouldCompleteSeries || !(saved == null ? void 0 : saved.seriesFoldersCompletedV0817)) {
+      await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
+    }
   }
 };

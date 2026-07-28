@@ -877,52 +877,6 @@
   max-width: 220px;
 }
 
-
-/* v0.8.10 — Séries mais legíveis no desktop.
-   Aplica somente em telas de PC; os breakpoints de iPad/iPhone permanecem intactos. */
-@media (min-width: 900px) {
-  body:not(.is-mobile) .indice-nights-settings .bri-library-groups-wrap {
-    grid-template-columns: 1fr !important;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-summary {
-    min-height: 92px;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-panel {
-    gap: 10px;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option {
-    grid-template-columns: minmax(260px, 1fr) minmax(320px, 42%);
-    gap: 18px;
-    padding: 12px 14px;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-title {
-    font-size: 13.5px;
-    line-height: 1.35;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-description {
-    font-size: 11.5px;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-controls {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-select {
-    flex: 1 1 auto;
-  }
-
-  body:not(.is-mobile) .indice-nights-settings .bri-library-group-option-select select {
-    width: 100%;
-    max-width: 360px;
-  }
-}
-
 /* Ação de download */
 .indice-nights-settings .bri-action-setting {
   margin-top: 16px !important;
@@ -2011,4 +1965,100 @@
 .indice-nights-settings .bri-section-divider-actions,
 .indice-nights-settings .bri-section-divider-action-official {
   all: unset;
+}
+
+
+/* ============================================================
+   Índice Nights v0.8.7 — seleção em massa e ordem cronológica
+   ============================================================ */
+.indice-nights-settings .bri-bulk-controls {
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  width:100%; margin:0 0 14px; padding:11px 14px;
+  border:1px solid var(--background-modifier-border); border-radius:11px;
+  background:var(--background-secondary);
+}
+.indice-nights-settings .bri-bulk-controls-copy { min-width:0; }
+.indice-nights-settings .bri-bulk-controls-title {
+  color:var(--text-normal); font-size:12.5px; font-weight:650; line-height:1.3;
+}
+.indice-nights-settings .bri-bulk-controls-description {
+  margin-top:2px; color:var(--text-muted); font-size:10.5px; line-height:1.35;
+}
+.indice-nights-settings .bri-bulk-controls-toggle .setting-item,
+.indice-nights-settings .bri-publication-order-toggle .setting-item {
+  min-height:0 !important; padding:0 !important; border:0 !important; background:transparent !important;
+}
+.indice-nights-settings .bri-bulk-controls-toggle .setting-item-info,
+.indice-nights-settings .bri-publication-order-toggle .setting-item-info { display:none !important; }
+.indice-nights-settings .bri-bulk-controls-toggle .setting-item-control,
+.indice-nights-settings .bri-publication-order-toggle .setting-item-control {
+  padding:0 !important; margin:0 !important;
+}
+.indice-nights-settings .bri-library-card { height:auto !important; }
+.indice-nights-settings .bri-publication-order-row {
+  grid-column:1/-1; display:flex; align-items:center; justify-content:space-between;
+  gap:10px; padding:9px 0 0; border-top:1px solid var(--background-modifier-border);
+}
+.indice-nights-settings .bri-publication-order-copy { min-width:0; }
+.indice-nights-settings .bri-publication-order-title {
+  color:var(--text-normal); font-size:11.5px; font-weight:600; line-height:1.25;
+}
+.indice-nights-settings .bri-publication-order-description {
+  margin-top:2px; color:var(--text-faint); font-size:9.5px; line-height:1.3;
+}
+@media (max-width:560px) {
+  .indice-nights-settings .bri-bulk-controls { gap:9px; padding:10px 11px; }
+  .indice-nights-settings .bri-bulk-controls-description,
+  .indice-nights-settings .bri-publication-order-description { display:none; }
+  .indice-nights-settings .bri-publication-order-row { gap:8px; }
+}
+
+
+/* ============================================================
+   Índice Nights v0.8.8 — ações compactas + recentes primeiro
+   ============================================================ */
+.indice-nights-settings .bri-official-actions-row {
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;
+  align-items:stretch;
+}
+.indice-nights-settings .bri-official-action-button-compact {
+  width:auto !important;
+  min-width:122px;
+  padding-inline:14px;
+  white-space:nowrap;
+}
+.indice-nights-settings .bri-bulk-controls {
+  display:none !important;
+}
+@media (max-width:1024px) {
+  .indice-nights-settings .bri-official-actions-row {
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;
+  }
+  .indice-nights-settings .bri-official-action-button-compact {
+    min-width:108px;
+    padding-inline:10px;
+    font-size:10.5px;
+  }
+}
+@media (max-width:780px) {
+  .indice-nights-settings .bri-official-actions-row {
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;
+  }
+  .indice-nights-settings .bri-official-action-button-compact {
+    min-width:96px;
+    padding-inline:8px;
+    font-size:10px;
+  }
+}
+@media (max-width:560px) {
+  .indice-nights-settings .bri-official-actions-row {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  .indice-nights-settings .bri-official-action-button-compact {
+    grid-column:2;
+    justify-self:end;
+    width:auto !important;
+    min-width:112px;
+    min-height:30px;
+  }
 }
