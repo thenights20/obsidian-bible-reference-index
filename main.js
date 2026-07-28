@@ -1765,24 +1765,67 @@ var SourceTranscriptService = class {
     return recovered;
   }
   stripPublicationPrefix(name) {
-    let clean = name;
+    let clean = String(name ?? "").trim();
+    let previous;
 
-    // Formato atual: 0001 - DD-MM-AAAA - Título
-    clean = clean.replace(/^\d+\s*-\s*\d{2}-\d{2}-\d{4}\s*-\s*/, "");
+    // Limpa todas as camadas deixadas por versões anteriores. Isso também
+    // recupera arquivos que foram ordenados mais de uma vez antes de voltar
+    // ao nome original.
+    do {
+      previous = clean;
+      clean = clean
+        // 0001 - DD-MM-AAAA - Título
+        .replace(/^\d+\s*[-–—]\s*\d{2}[-–—]\d{2}[-–—]\d{4}\s*[-–—]\s*/, "")
+        // 0001 - AAAA-MM-DD - Título
+        .replace(/^\d+\s*[-–—]\s*\d{4}[-–—]\d{2}[-–—]\d{2}\s*[-–—]\s*/, "")
+        // DD-MM-AAAA - Título
+        .replace(/^\d{2}[-–—]\d{2}[-–—]\d{4}\s*[-–—]\s*/, "")
+        // AAAA-MM-DD - Título
+        .replace(/^\d{4}[-–—]\d{2}[-–—]\d{2}\s*[-–—]\s*/, "")
+        // Prefixo numérico isolado deixado por uma restauração interrompida.
+        .replace(/^\d{3,6}\s*[-–—]\s*/, "")
+        .trim();
+    } while (clean !== previous);
 
-    // Compatibilidade com testes anteriores: 0001 - AAAA-MM-DD - Título
-    clean = clean.replace(/^\d+\s*-\s*\d{4}-\d{2}-\d{2}\s*-\s*/, "");
-
-    // Compatibilidade com nomes que tenham somente a data.
-    clean = clean.replace(/^\d{2}-\d{2}-\d{4}\s*-\s*/, "");
-    clean = clean.replace(/^\d{4}-\d{2}-\d{2}\s*-\s*/, "");
-
-    return clean.trim();
+    return clean;
   }
   formatPublicationDateBR(date) {
     if (typeof date !== "string") return date;
     const match = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
     return match ? `${match[3]}-${match[2]}-${match[1]}` : date;
+  }
+  async recoverInterruptedPublicationSortFiles(folderPath) {
+    const folder = this.app.vault.getAbstractFileByPath(folderPath);
+    if (!(folder instanceof import_obsidian3.TFolder)) return 0;
+
+    let recovered = 0;
+    for (const child of [...folder.children]) {
+      if (!(child instanceof import_obsidian3.TFile) || child.extension !== "md") continue;
+      if (!/^\.__indice_nights_sort_\d+_\d+$/i.test(child.basename)) continue;
+
+      try {
+        const content = await this.app.vault.read(child);
+        const titleMatch = /^#\s+(.+?)\s*$/m.exec(content);
+        if (!titleMatch?.[1]) {
+          console.error("Indice Nights: arquivo temporário sem título", child.path);
+          continue;
+        }
+
+        const targetBase = nomeArquivoSeguro(titleMatch[1].trim());
+        let targetPath = `${folderPath}/${targetBase}.md`;
+        if (this.app.vault.getAbstractFileByPath(targetPath)) {
+          let counter = 2;
+          while (this.app.vault.getAbstractFileByPath(`${folderPath}/${targetBase} (${counter}).md`)) counter += 1;
+          targetPath = `${folderPath}/${targetBase} (${counter}).md`;
+        }
+
+        await this.app.vault.rename(child, targetPath);
+        recovered += 1;
+      } catch (e) {
+        console.error("Indice Nights: falha ao recuperar arquivo de ordenação", child.path, e);
+      }
+    }
+    return recovered;
   }
   async setPublicationOrder(categoryKey, enabled, showNotice = true) {
     const category = SUPPORTED_CATEGORIES.find((item) => item.key === categoryKey);
@@ -1798,6 +1841,7 @@ var SourceTranscriptService = class {
       return;
     }
 
+    const recovered = await this.recoverInterruptedPublicationSortFiles(folderPath);
     const items = [];
     let skipped = 0;
 
@@ -1817,23 +1861,94 @@ var SourceTranscriptService = class {
       });
     }
 
-    if (enabled) {
-      items.sort((a, b) => {
-        if (a.date && b.date) return b.date.localeCompare(a.date) || a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
-        if (a.date) return -1;
-        if (b.date) return 1;
-        return a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
-      });
-    } else {
-      items.sort((a, b) => a.cleanBase.localeCompare(b.cleanBase, "pt-BR"));
+    // Para voltar ao normal não é necessário colocar centenas de arquivos em
+    // nomes temporários. A listagem é feita pelo adaptador para não depender
+    // da árvore do Obsidian, que pode ficar momentaneamente incompleta depois
+    // de centenas de renomeações. A pasta é verificada novamente em etapas
+    // até que nenhum nome numerado permaneça.
+    if (!enabled) {
+      let renamed = 0;
+      let failures = 0;
+      let unresolved = 0;
+      let remaining = 0;
+      const adapter = this.app.vault.adapter;
+
+      for (let pass = 0; pass < 8; pass += 1) {
+        if (pass > 0) await wait(450);
+
+        const listing = await adapter.list(folderPath);
+        const pending = [];
+        unresolved = 0;
+
+        for (const path of listing.files) {
+          if (!/\.md$/i.test(path)) continue;
+          const filename = path.slice(path.lastIndexOf("/") + 1).replace(/\.md$/i, "");
+          const cleanBase = this.stripPublicationPrefix(filename);
+          if (cleanBase === filename) continue;
+
+          const file = this.app.vault.getAbstractFileByPath(path);
+          if (!(file instanceof import_obsidian3.TFile)) {
+            unresolved += 1;
+            continue;
+          }
+          pending.push({ file, cleanBase });
+        }
+
+        pending.sort((a, b) => a.cleanBase.localeCompare(b.cleanBase, "pt-BR"));
+        remaining = pending.length + unresolved;
+        if (remaining === 0) break;
+
+        for (const item of pending) {
+          let targetPath = `${folderPath}/${item.cleanBase}.md`;
+          if (await adapter.exists(targetPath)) {
+            let counter = 2;
+            while (await adapter.exists(`${folderPath}/${item.cleanBase} (${counter}).md`)) counter += 1;
+            targetPath = `${folderPath}/${item.cleanBase} (${counter}).md`;
+          }
+
+          try {
+            await this.app.vault.rename(item.file, targetPath);
+            renamed += 1;
+          } catch (e) {
+            failures += 1;
+            console.error("Indice Nights: falha ao restaurar nome original", item.file.path, e);
+          }
+          await wait(15);
+        }
+      }
+
+      const finalListing = await adapter.list(folderPath);
+      remaining = finalListing.files.filter((path) => {
+        if (!/\.md$/i.test(path)) return false;
+        const filename = path.slice(path.lastIndexOf("/") + 1).replace(/\.md$/i, "");
+        return this.stripPublicationPrefix(filename) !== filename;
+      }).length;
+
+      if (showNotice) {
+        const recoveryText = recovered ? ` ${recovered} temporário(s) recuperado(s).` : "";
+        const failureText = failures ? ` ${failures} falha(s); os demais arquivos foram preservados.` : "";
+        const remainingText = remaining ? ` Ainda restam ${remaining}; execute novamente.` : " Nenhum nome numerado restante.";
+        new import_obsidian3.Notice(
+          `${category.name}: ${renamed} arquivo(s) restaurado(s).${remainingText}${recoveryText}${failureText}`,
+          1e4
+        );
+      }
+      return;
     }
+
+    items.sort((a, b) => {
+      if (a.date && b.date) return b.date.localeCompare(a.date) || a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
+      if (a.date) return -1;
+      if (b.date) return 1;
+      return a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
+    });
 
     const staged = [];
     const token = Date.now();
 
     for (let index = 0; index < items.length; index += 1) {
       const item = items[index];
-      if (enabled && !item.date) {
+      if (!item.date) {
         skipped += 1;
         continue;
       }
@@ -1847,14 +1962,9 @@ var SourceTranscriptService = class {
     let rank = 1;
 
     for (const item of staged) {
-      let targetBase;
-      if (enabled) {
-        const rankPrefix = String(rank).padStart(4, "0");
-        targetBase = `${rankPrefix} - ${this.formatPublicationDateBR(item.date)} - ${item.cleanBase}`;
-        rank += 1;
-      } else {
-        targetBase = item.cleanBase;
-      }
+      const rankPrefix = String(rank).padStart(4, "0");
+      const targetBase = `${rankPrefix} - ${this.formatPublicationDateBR(item.date)} - ${item.cleanBase}`;
+      rank += 1;
 
       let targetPath = `${folderPath}/${targetBase}.md`;
       if (this.app.vault.getAbstractFileByPath(targetPath)) {
@@ -1868,15 +1978,15 @@ var SourceTranscriptService = class {
     }
 
     if (showNotice) {
-      const mode = enabled ? "mais recentes primeiro" : "ordem alfabética";
       const extra = skipped ? ` ${skipped} nota(s) sem data foram mantidas como estão.` : "";
-      new import_obsidian3.Notice(`${renamed} arquivo(s) ajustado(s): ${mode}.${extra}`, 7000);
+      const recoveryText = recovered ? ` ${recovered} temporário(s) recuperado(s).` : "";
+      new import_obsidian3.Notice(`${category.name}: ${renamed} arquivo(s) ajustado(s): mais recentes primeiro.${extra}${recoveryText}`, 7000);
     }
   }
   async applySavedPublicationOrder() {
     const order = this.settings.publicationOrder ?? {};
     for (const key of ["StudioTalks", "VODPgmEvtMorningWorship"]) {
-      if (order[key]) await this.setPublicationOrder(key, true, false);
+      await this.setPublicationOrder(key, Boolean(order[key]), false);
     }
   }
   existingNotes() {
