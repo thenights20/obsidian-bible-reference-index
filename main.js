@@ -229,6 +229,45 @@ function sectionFor(path, folder) {
   if (parts[0] === "Séries" && parts[1]) return `Séries - ${parts[1]}`;
   return parts[0];
 }
+async function citationBlockFor(app, path, reference) {
+  const file = app.vault.getAbstractFileByPath(path);
+  if (!(file instanceof import_obsidian6.TFile)) return null;
+  try {
+    const content = await app.vault.cachedRead(file);
+    const blockPattern = /([\s\S]*?)\n\^([A-Za-z0-9_-]+)(?=\n{2,}|$)/g;
+    for (const match of content.matchAll(blockPattern)) {
+      const blockText = match[1] ?? "";
+      const blockId = match[2] ?? "";
+      if (!blockId) continue;
+      const references = extractReferences(blockText);
+      if (references.some((item) => item.key === reference.key)) return blockId;
+    }
+  } catch (error) {
+    console.warn("Indice Nights: falha ao localizar bloco da citação", path, reference.display, error);
+  }
+  return null;
+}
+async function openCitationTarget(app, path, reference, sourcePath = "", modEvent = false) {
+  const blockId = await citationBlockFor(app, path, reference);
+  const target = blockId ? `${path}#^${blockId}` : path;
+  await app.workspace.openLinkText(target, sourcePath, modEvent);
+}
+function contextMetaFor(file, frontmatter = {}) {
+  const relative = file.path.startsWith("Discursos/") ? file.path.slice("Discursos/".length) : file.path;
+  const parts = relative.split("/").filter(Boolean);
+  const collection = parts[0] ?? "";
+  let series = "";
+  if ((collection === "Séries" || collection === "Congressos") && parts.length >= 3) {
+    series = parts[1] ?? "";
+  }
+  const date = typeof frontmatter.data_publicacao === "string" ? frontmatter.data_publicacao : "";
+  const speaker = typeof frontmatter.orador === "string" ? frontmatter.orador : "";
+  return { collection, series, date, speaker };
+}
+function formatContextDate(value) {
+  const match = typeof value === "string" ? /^(\d{4})-(\d{2})-(\d{2})$/.exec(value.trim()) : null;
+  return match ? `${match[3]}/${match[2]}/${match[1]}` : value || "—";
+}
 var BibleIndex = class {
   constructor(app, config) {
     this.app = app;
@@ -675,7 +714,13 @@ var BibleIndexView = class extends import_obsidian.MarkdownRenderChild {
       });
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        void this.app.workspace.openLinkText(note.path, this.sourcePath, import_obsidian.Keymap.isModEvent(event));
+        void openCitationTarget(
+          this.app,
+          note.path,
+          item.reference,
+          this.sourcePath,
+          import_obsidian.Keymap.isModEvent(event)
+        );
       });
     }
   }
@@ -732,6 +777,18 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
     (0, import_obsidian2.setIcon)(indexArrow, "chevron-right");
     indexHero.addEventListener("click", async () => {
       await this.plugin.transcriptService.ensureGeneralIndex(true, true);
+    });
+
+    const researchActions = containerEl.createDiv({ cls: "bri-research-actions" });
+    const contextButton = researchActions.createEl("button", {
+      text: "Contexto Bíblico",
+      cls: "bri-research-action",
+      attr: { type: "button" }
+    });
+    const contextIcon = contextButton.createSpan({ cls: "bri-research-action-icon" });
+    (0, import_obsidian2.setIcon)(contextIcon, "book-open-check");
+    contextButton.addEventListener("click", () => {
+      void this.plugin.activateContextView();
     });
 
     const officialDivider = containerEl.createDiv({ cls: "bri-section-divider bri-section-divider-official" });
@@ -2544,6 +2601,235 @@ var DeviceSelectionStore = class {
     this.persist();
   }
 };
+var INDICE_NIGHTS_CONTEXT_VIEW = "indice-nights-context";
+var ContextoBiblicoView = class extends import_obsidian6.ItemView {
+  constructor(leaf, plugin) {
+    super(leaf);
+    this.plugin = plugin;
+    this.unsubscribe = null;
+    this.mode = "list";
+    this.contextFilePath = "";
+    this.readerFilePath = "";
+    this.readerReference = null;
+    this.listScrollTop = 0;
+    this.openReferenceKeys = /* @__PURE__ */ new Set();
+  }
+  getViewType() {
+    return INDICE_NIGHTS_CONTEXT_VIEW;
+  }
+  getDisplayText() {
+    return "Contexto Bíblico";
+  }
+  getIcon() {
+    return "book-open-check";
+  }
+  async onOpen() {
+    const index = this.plugin.getDefaultBibleIndex();
+    this.unsubscribe = index.subscribe(() => {
+      if (this.mode === "reader" && this.readerFilePath) {
+        void this.renderReader(this.readerFilePath, this.readerReference);
+      } else {
+        void this.refresh();
+      }
+    });
+    await this.refresh();
+  }
+  async onClose() {
+    if (this.unsubscribe) this.unsubscribe();
+    this.unsubscribe = null;
+  }
+  rememberListState() {
+    const container = this.contentEl;
+    this.listScrollTop = container.scrollTop;
+    const openKeys = /* @__PURE__ */ new Set();
+    for (const details of container.querySelectorAll("details.in-context-reference[open]")) {
+      const key = details.getAttribute("data-reference-key");
+      if (key) openKeys.add(key);
+    }
+    this.openReferenceKeys = openKeys;
+  }
+  async openTranscriptInSidebar(path, reference = null) {
+    this.rememberListState();
+    this.mode = "reader";
+    this.readerFilePath = path;
+    this.readerReference = reference;
+    await this.renderReader(path, reference);
+  }
+  async backToContext() {
+    this.mode = "list";
+    this.readerFilePath = "";
+    this.readerReference = null;
+    const contextFile = this.contextFilePath
+      ? this.app.vault.getAbstractFileByPath(this.contextFilePath)
+      : this.app.workspace.getActiveFile();
+    await this.refresh(
+      contextFile instanceof import_obsidian6.TFile ? contextFile : this.app.workspace.getActiveFile(),
+      true
+    );
+  }
+  stripFrontmatter(content) {
+    if (!content.startsWith("---")) return content;
+    const match = content.match(/^---\s*\n[\s\S]*?\n---\s*(?:\n|$)/);
+    return match ? content.slice(match[0].length) : content;
+  }
+  async renderReader(path, reference = null) {
+    const file = this.app.vault.getAbstractFileByPath(path);
+    const container = this.contentEl;
+    container.empty();
+    container.addClass("indice-nights-context-view");
+    container.addClass("in-context-reader-mode");
+    const toolbar = container.createDiv({ cls: "in-context-reader-toolbar" });
+    const back = toolbar.createEl("button", {
+      cls: "in-context-reader-back",
+      attr: { type: "button", "aria-label": "Voltar ao Contexto Bíblico" }
+    });
+    const backIcon = back.createSpan({ cls: "in-context-reader-back-icon" });
+    (0, import_obsidian6.setIcon)(backIcon, "arrow-left");
+    back.createSpan({ text: "Voltar ao Contexto Bíblico" });
+    back.addEventListener("click", () => {
+      void this.backToContext();
+    });
+    if (!(file instanceof import_obsidian6.TFile) || file.extension !== "md") {
+      container.createDiv({
+        text: "Não foi possível abrir esta transcrição.",
+        cls: "in-context-empty"
+      });
+      return;
+    }
+    const titleBar = container.createDiv({ cls: "in-context-reader-heading" });
+    titleBar.createDiv({ text: file.basename, cls: "in-context-reader-title" });
+    const cache = this.app.metadataCache.getFileCache(file);
+    const frontmatter = cache?.frontmatter ?? {};
+    const meta = contextMetaFor(file, frontmatter);
+    const metaLine = titleBar.createDiv({ cls: "in-context-reader-meta" });
+    if (meta.collection) {
+      metaLine.createSpan({ text: meta.series ? `${meta.collection} · ${meta.series}` : meta.collection });
+    }
+    if (meta.date) metaLine.createSpan({ text: formatContextDate(meta.date) });
+    if (meta.speaker) metaLine.createSpan({ text: meta.speaker });
+    const reader = container.createDiv({ cls: "in-context-reader-markdown markdown-rendered" });
+    try {
+      const raw = await this.app.vault.cachedRead(file);
+      const content = this.stripFrontmatter(raw);
+      await import_obsidian6.MarkdownRenderer.render(
+        this.app,
+        content,
+        reader,
+        file.path,
+        this
+      );
+      this.plugin.prepareThumbnailLayout(reader);
+      linkBibleReferences(reader, this.app);
+      if (reference) {
+        const blockId = await citationBlockFor(this.app, file.path, reference);
+        if (blockId) {
+          window.requestAnimationFrame(() => {
+            const escapedId = typeof CSS !== "undefined" && typeof CSS.escape === "function"
+              ? CSS.escape(blockId)
+              : blockId.replace(/[^A-Za-z0-9_-]/g, "\\$&");
+            const target =
+              reader.querySelector(`[data-block-id="${escapedId}"]`) ||
+              reader.querySelector(`#${escapedId}`) ||
+              [...reader.querySelectorAll(".block-language-id, p, div")].find((el) =>
+                (el.textContent ?? "").trim() === `^${blockId}`
+              );
+            if (target instanceof HTMLElement) target.scrollIntoView({ block: "start" });
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Indice Nights: falha ao renderizar transcrição na sidebar", path, error);
+      reader.createDiv({
+        text: "Não foi possível renderizar a transcrição completa.",
+        cls: "in-context-empty"
+      });
+    }
+  }
+  async refresh(file = this.app.workspace.getActiveFile(), restoreState = false) {
+    if (this.mode === "reader" && !restoreState) return;
+    const container = this.contentEl;
+    container.empty();
+    container.addClass("indice-nights-context-view");
+    container.removeClass("in-context-reader-mode");
+    const heading = container.createDiv({ cls: "in-context-header" });
+    heading.createDiv({ text: "Contexto Bíblico", cls: "in-context-title" });
+    heading.createDiv({
+      text: "Veja onde os textos desta nota aparecem em outras transcrições.",
+      cls: "in-context-subtitle"
+    });
+    if (!file || !file.path.startsWith("Discursos/") || file.extension !== "md") {
+      container.createDiv({
+        text: "Abra uma transcrição da pasta Discursos para visualizar o contexto bíblico.",
+        cls: "in-context-empty"
+      });
+      return;
+    }
+    this.contextFilePath = file.path;
+    const cache = this.app.metadataCache.getFileCache(file);
+    const frontmatter = cache?.frontmatter ?? {};
+    const references = extractReferences(frontmatter.textos);
+    const noteCard = container.createDiv({ cls: "in-context-current-note" });
+    noteCard.createDiv({ text: file.basename, cls: "in-context-current-title" });
+    noteCard.createDiv({
+      text: references.length
+        ? `${references.length} texto${references.length === 1 ? "" : "s"} bíblico${references.length === 1 ? "" : "s"} nesta transcrição`
+        : "Nenhum texto bíblico indexado nesta transcrição.",
+      cls: "in-context-current-count"
+    });
+    if (!references.length) return;
+    const index = this.plugin.getDefaultBibleIndex();
+    for (const reference of references) {
+      const bookSnapshot = index.snapshot(reference.book);
+      const indexed = bookSnapshot.references.find((item) => item.key === reference.key);
+      const occurrences = indexed
+        ? [...indexed.notes.values()].filter((note) => note.path !== file.path)
+        : [];
+      const details = container.createEl("details", { cls: "in-context-reference" });
+      details.setAttribute("data-reference-key", reference.key);
+      if (this.openReferenceKeys.has(reference.key)) details.open = true;
+      const summary = details.createEl("summary", { cls: "in-context-reference-summary" });
+      const refCopy = summary.createDiv({ cls: "in-context-reference-copy" });
+      refCopy.createDiv({ text: reference.display, cls: "in-context-reference-name" });
+      refCopy.createDiv({
+        text: occurrences.length
+          ? `Também citado em ${occurrences.length} transcrição${occurrences.length === 1 ? "" : "ões"}`
+          : "Nenhuma outra ocorrência no acervo",
+        cls: "in-context-reference-count"
+      });
+      if (!occurrences.length) continue;
+      const grouped = /* @__PURE__ */ new Map();
+      for (const note of occurrences) {
+        if (!grouped.has(note.section)) grouped.set(note.section, []);
+        grouped.get(note.section).push(note);
+      }
+      const body = details.createDiv({ cls: "in-context-reference-body" });
+      for (const [section, notes] of grouped.entries()) {
+        const group = body.createDiv({ cls: "in-context-group" });
+        group.createDiv({ text: section, cls: "in-context-group-title" });
+        for (const note of notes) {
+          const link = group.createEl("button", {
+            text: note.title,
+            cls: "in-context-note-link",
+            attr: {
+              type: "button",
+              title: "Abrir a transcrição completa nesta lateral"
+            }
+          });
+          const arrow = link.createSpan({ cls: "in-context-note-arrow" });
+          (0, import_obsidian6.setIcon)(arrow, "chevron-right");
+          link.addEventListener("click", () => {
+            void this.openTranscriptInSidebar(note.path, reference);
+          });
+        }
+      }
+    }
+    if (restoreState) {
+      window.requestAnimationFrame(() => {
+        container.scrollTop = this.listScrollTop;
+      });
+    }
+  }
+};
 var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   constructor() {
     super(...arguments);
@@ -2555,6 +2841,24 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     __publicField(this, "selections");
     __publicField(this, "selectionData", {});
     __publicField(this, "runtimeStyleEl", null);
+  }
+  getDefaultBibleIndex() {
+    return this.indexManager.get({
+      folder: "Discursos",
+      property: "textos",
+      pageSize: 150,
+      title: "Índice de Textos Bíblicos",
+      showTitle: false
+    });
+  }
+  async activateContextView() {
+    let leaf = this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)[0];
+    if (!leaf) {
+      leaf = this.app.workspace.getRightLeaf(false) ?? this.app.workspace.getLeaf("tab");
+      await leaf.setViewState({ type: INDICE_NIGHTS_CONTEXT_VIEW, active: true });
+    }
+    this.app.workspace.revealLeaf(leaf);
+    if (leaf.view instanceof ContextoBiblicoView) await leaf.view.refresh();
   }
   ensureRuntimeStyles() {
     const existing = document.getElementById("indice-nights-runtime-styles");
@@ -2571,6 +2875,10 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   async onload() {
     this.ensureRuntimeStyles();
     await this.loadSettings();
+    this.registerView(
+      INDICE_NIGHTS_CONTEXT_VIEW,
+      (leaf) => new ContextoBiblicoView(leaf, this)
+    );
     this.selections = new DeviceSelectionStore(this.selectionData, () => {
       void this.saveSettings();
     });
@@ -2593,6 +2901,26 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
       console.error("Indice Nights: falha ao organizar as séries na inicialização", e);
     }
     await this.transcriptService.ensureGeneralIndex();
+    this.addRibbonIcon("book-open-check", "Contexto Bíblico", () => {
+      void this.activateContextView();
+    });
+    this.addCommand({
+      id: "abrir-contexto-biblico",
+      name: "Abrir Contexto Bíblico",
+      callback: () => {
+        void this.activateContextView();
+      }
+    });
+    this.registerEvent(this.app.workspace.on("file-menu", (menu, file) => {
+      if (!(file instanceof import_obsidian6.TFile) || file.extension !== "md" || !file.path.startsWith("Discursos/")) return;
+      menu.addSeparator();
+      menu.addItem((item) => item
+        .setTitle("Abrir Contexto Bíblico")
+        .setIcon("book-open-check")
+        .onClick(() => {
+          void this.app.workspace.openLinkText(file.path, "", false).then(() => this.activateContextView());
+        }));
+    }));
     this.addCommand({
       id: "baixar-novas-transcricoes",
       name: "Baixar novas transcri\xE7\xF5es selecionadas",
@@ -2642,6 +2970,14 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     }));
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
       if (file) this.noteSyncService.schedule(file);
+      if (file && file.extension === "md" && file.path.startsWith("Discursos/")) {
+        window.setTimeout(() => {
+          void this.activateContextView();
+        }, 150);
+      }
+      for (const leaf of this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)) {
+        if (leaf.view instanceof ContextoBiblicoView) void leaf.view.refresh(file);
+      }
     }));
     const activeFile = this.app.workspace.getActiveFile();
     if (activeFile) this.noteSyncService.schedule(activeFile);
