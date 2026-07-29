@@ -3,458 +3,6 @@
   width: 100%;
 }
 
-/* ============================================================
-   Indice Nights v0.9.0 — Contexto Bíblico
-   ============================================================ */
-
-.indice-nights-settings .bri-research-actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  width: 100%;
-  margin: 0 0 16px;
-}
-
-.indice-nights-settings .bri-research-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 8px 12px;
-  border: 1px solid color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--interactive-accent) 9%, var(--background-secondary));
-  color: var(--text-normal);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.indice-nights-settings .bri-research-action:hover {
-  background: color-mix(in srgb, var(--interactive-accent) 16%, var(--background-secondary));
-}
-
-.indice-nights-settings .bri-research-action-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-accent);
-}
-
-.indice-nights-settings .bri-research-action-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-.indice-nights-context-view {
-  --in-accent: var(--interactive-accent);
-  --in-border: var(--background-modifier-border);
-  --in-panel: var(--background-secondary);
-  width: 100%;
-  height: 100%;
-  padding: 16px 14px 30px !important;
-  box-sizing: border-box;
-  overflow-x: hidden !important;
-  overflow-y: auto;
-}
-
-.indice-nights-context-view > * {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.indice-nights-context-view .in-context-header {
-  width: 100%;
-  margin: 0 0 15px !important;
-}
-
-.indice-nights-context-view .in-context-title {
-  color: var(--text-normal);
-  font-size: 19px !important;
-  font-weight: 750 !important;
-  line-height: 1.2 !important;
-}
-
-.indice-nights-context-view .in-context-subtitle {
-  margin-top: 5px !important;
-  color: var(--text-muted);
-  font-size: 12px !important;
-  line-height: 1.5 !important;
-}
-
-.indice-nights-context-view .in-context-empty,
-.indice-nights-context-view .in-context-current-note {
-  width: 100%;
-  padding: 14px 15px !important;
-  border: 1px solid var(--in-border);
-  border-radius: 13px !important;
-  background: var(--in-panel);
-}
-
-.indice-nights-context-view .in-context-current-note {
-  margin-bottom: 15px !important;
-}
-
-.indice-nights-context-view .in-context-current-title {
-  color: var(--text-normal);
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  line-height: 1.45 !important;
-  overflow-wrap: anywhere;
-}
-
-.indice-nights-context-view .in-context-current-count {
-  margin-top: 5px !important;
-  color: var(--text-muted);
-  font-size: 11.5px !important;
-  line-height: 1.4 !important;
-}
-
-.indice-nights-context-view .in-context-reference {
-  width: 100%;
-  margin: 11px 0 !important;
-  border: 1px solid var(--in-border);
-  border-radius: 13px !important;
-  background: var(--in-panel);
-  overflow: visible !important;
-}
-
-.indice-nights-context-view .in-context-reference[open] {
-  border-color: color-mix(in srgb, var(--in-accent) 48%, var(--in-border));
-}
-
-.indice-nights-context-view .in-context-reference-summary {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  max-width: 100%;
-  padding: 13px 14px !important;
-  cursor: pointer;
-  list-style: none;
-}
-
-.indice-nights-context-view .in-context-reference-summary::-webkit-details-marker {
-  display: none;
-}
-
-.indice-nights-context-view .in-context-reference-copy {
-  min-width: 0;
-}
-
-.indice-nights-context-view .in-context-reference-name {
-  color: var(--text-accent);
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  line-height: 1.3 !important;
-  overflow-wrap: anywhere;
-}
-
-.indice-nights-context-view .in-context-reference-count {
-  margin-top: 4px !important;
-  color: var(--text-muted);
-  font-size: 11.5px !important;
-  line-height: 1.4 !important;
-}
-
-.indice-nights-context-view .in-context-reference-body {
-  min-width: 0;
-  max-width: 100%;
-  padding: 0 12px 13px !important;
-  overflow: visible !important;
-}
-
-.indice-nights-context-view .in-context-group {
-  min-width: 0;
-  max-width: 100%;
-  margin-top: 13px !important;
-  overflow: visible !important;
-}
-
-.indice-nights-context-view .in-context-group:first-child {
-  margin-top: 3px !important;
-}
-
-.indice-nights-context-view .in-context-group-title {
-  margin: 0 3px 7px !important;
-  color: var(--text-faint);
-  font-size: 10px !important;
-  font-weight: 700;
-  line-height: 1.3 !important;
-  letter-spacing: .055em !important;
-  text-transform: uppercase;
-}
-
-.indice-nights-context-view .in-context-note-link {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  min-height: 40px !important;
-  max-height: none !important;
-  margin: 0 0 7px !important;
-  padding: 10px 34px 10px 11px !important;
-  border: 1px solid var(--background-modifier-border) !important;
-  border-radius: 9px !important;
-  background: var(--background-primary-alt) !important;
-  color: var(--text-normal) !important;
-  font-size: 12px !important;
-  line-height: 1.5 !important;
-  text-align: left;
-  white-space: normal !important;
-  overflow: visible !important;
-  overflow-wrap: anywhere !important;
-  word-break: normal !important;
-  box-sizing: border-box !important;
-  cursor: pointer;
-}
-
-.indice-nights-context-view .in-context-note-link:last-child {
-  margin-bottom: 0 !important;
-}
-
-.indice-nights-context-view .in-context-note-link:hover {
-  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border)) !important;
-  background: var(--background-modifier-hover) !important;
-}
-
-.indice-nights-context-view .in-context-note-link:focus-visible {
-  outline: 2px solid var(--interactive-accent) !important;
-  outline-offset: 1px !important;
-}
-
-.indice-nights-context-view .in-context-note-arrow {
-  position: absolute;
-  top: 50%;
-  right: 9px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-  pointer-events: none;
-}
-
-.indice-nights-context-view .in-context-note-arrow svg {
-  width: 15px;
-  height: 15px;
-}
-
-.indice-nights-context-view.in-context-reader-mode {
-  padding: 0 12px 28px !important;
-}
-
-.in-context-reader-toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  margin: 0 -12px 12px;
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--background-modifier-border);
-  background: color-mix(in srgb, var(--background-primary) 94%, transparent);
-  backdrop-filter: blur(10px);
-}
-
-.in-context-reader-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  max-width: 100%;
-  padding: 6px 8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--text-accent);
-  font-size: 12.5px;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.in-context-reader-back:hover {
-  background: var(--background-modifier-hover);
-}
-
-.in-context-reader-back-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.in-context-reader-back-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.in-context-reader-heading {
-  margin: 2px 2px 14px;
-}
-
-.in-context-reader-title {
-  color: var(--text-normal);
-  font-size: 18px;
-  font-weight: 750;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-
-.in-context-reader-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px 9px;
-  margin-top: 7px;
-  color: var(--text-muted);
-  font-size: 10.5px;
-  line-height: 1.35;
-}
-
-.in-context-reader-meta span:not(:last-child)::after {
-  content: "•";
-  margin-left: 9px;
-  color: var(--text-faint);
-}
-
-.in-context-reader-markdown {
-  width: 100%;
-  max-width: 100%;
-  padding: 0 2px 24px;
-  box-sizing: border-box;
-  color: var(--text-normal);
-  font-size: 12.5px;
-  line-height: 1.58;
-  overflow-wrap: anywhere;
-}
-
-.in-context-reader-markdown > :first-child {
-  margin-top: 0;
-}
-
-.in-context-reader-markdown h1 {
-  font-size: 19px;
-  line-height: 1.3;
-}
-
-.in-context-reader-markdown h2 {
-  margin-top: 1.35em;
-  color: var(--text-accent);
-  font-size: 16px;
-  line-height: 1.35;
-}
-
-.in-context-reader-markdown h3 {
-  font-size: 14px;
-}
-
-.in-context-reader-markdown p,
-.in-context-reader-markdown li {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.in-context-reader-markdown img {
-  display: block;
-  width: auto;
-  max-width: 100% !important;
-  height: auto !important;
-  margin: 12px auto;
-  border-radius: 8px;
-}
-
-.in-context-reader-markdown img[alt="Miniatura"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  float: none !important;
-  margin: 12px 0 16px !important;
-  object-fit: contain !important;
-}
-
-.in-context-reader-markdown .indice-nights-thumbnail-link {
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  float: none !important;
-  margin: 0 !important;
-}
-
-.in-context-reader-markdown blockquote {
-  margin: 12px 0;
-  padding: 9px 11px;
-  border-left: 3px solid var(--interactive-accent);
-  border-radius: 0 7px 7px 0;
-  background: var(--background-secondary);
-}
-
-.in-context-reader-markdown table {
-  display: block;
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.in-context-reader-markdown .metadata-container,
-.in-context-reader-markdown .frontmatter,
-.in-context-reader-markdown .frontmatter-container {
-  display: none !important;
-}
-
-.in-context-reader-markdown .callout {
-  max-width: 100%;
-  margin: 10px 0;
-}
-
-@media (max-width: 700px) {
-  .indice-nights-context-view {
-    padding: 14px 11px 26px !important;
-  }
-
-  .indice-nights-context-view.in-context-reader-mode {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  .in-context-reader-toolbar {
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .in-context-reader-title {
-    font-size: 17px;
-  }
-
-  .in-context-reader-markdown {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .indice-nights-context-view {
-    padding: 12px 9px 24px !important;
-  }
-
-  .indice-nights-context-view .in-context-note-link {
-    min-height: 36px !important;
-    padding: 8px 32px 8px 9px !important;
-    font-size: 11.5px !important;
-  }
-
-  .in-context-reader-title {
-    font-size: 16px;
-  }
-
-  .in-context-reader-back {
-    font-size: 12px;
-  }
-
-  .in-context-reader-markdown {
-    font-size: 11.8px;
-    line-height: 1.55;
-  }
-}
-
 .bri-title {
   margin-block: 0 1rem;
 }
@@ -2512,5 +2060,1254 @@
     width:auto !important;
     min-width:112px;
     min-height:30px;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.0 — Contexto Bíblico + Biblioteca viva
+   ============================================================ */
+
+.indice-nights-context-view,
+.indice-nights-library-view,
+.indice-nights-bases-view {
+  --in-accent: var(--interactive-accent);
+  --in-border: var(--background-modifier-border);
+  --in-panel: var(--background-secondary);
+  --in-panel-alt: var(--background-secondary-alt);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.indice-nights-context-view {
+  padding: 14px 12px 28px;
+  overflow-y: auto;
+}
+
+.in-context-header {
+  margin-bottom: 14px;
+}
+
+.in-context-title,
+.in-library-title,
+.in-bases-title {
+  color: var(--text-normal);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.in-context-subtitle,
+.in-library-subtitle,
+.in-bases-subtitle {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.in-context-empty,
+.in-context-current-note {
+  padding: 12px;
+  border: 1px solid var(--in-border);
+  border-radius: 12px;
+  background: var(--in-panel);
+}
+
+.in-context-current-note {
+  margin-bottom: 12px;
+}
+
+.in-context-current-title {
+  color: var(--text-normal);
+  font-weight: 650;
+}
+
+.in-context-current-count {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.in-context-reference {
+  margin: 8px 0;
+  border: 1px solid var(--in-border);
+  border-radius: 11px;
+  background: var(--in-panel);
+  overflow: hidden;
+}
+
+.in-context-reference[open] {
+  border-color: color-mix(in srgb, var(--in-accent) 48%, var(--in-border));
+}
+
+.in-context-reference-summary {
+  display: flex;
+  align-items: center;
+  padding: 10px 11px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.in-context-reference-summary::-webkit-details-marker {
+  display: none;
+}
+
+.in-context-reference-copy {
+  min-width: 0;
+}
+
+.in-context-reference-name {
+  color: var(--text-accent);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.in-context-reference-count {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 10.5px;
+}
+
+.in-context-reference-body {
+  padding: 0 10px 10px;
+}
+
+.in-context-group {
+  margin-top: 8px;
+}
+
+.in-context-group-title {
+  margin-bottom: 4px;
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.in-context-note-link,
+.in-library-link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-accent);
+  cursor: pointer;
+  text-align: left;
+}
+
+.in-context-note-link {
+  display: block;
+  width: 100%;
+  padding: 6px 7px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.in-context-note-link:hover,
+.in-library-link:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-accent-hover);
+}
+
+.indice-nights-library-view,
+.indice-nights-bases-view {
+  padding: 18px;
+  overflow: auto;
+}
+
+.in-library-header {
+  margin-bottom: 14px;
+}
+
+.in-library-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.6fr) repeat(4, minmax(120px, .75fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.in-library-search,
+.in-library-filter {
+  width: 100%;
+  min-width: 0;
+}
+
+.in-library-search {
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--in-border);
+  border-radius: 8px;
+  background: var(--background-primary);
+  color: var(--text-normal);
+}
+
+.in-library-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 8px 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.in-library-live-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--interactive-success) 14%, transparent);
+  color: var(--text-success);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.in-library-table-wrap {
+  width: 100%;
+  overflow: auto;
+  border: 1px solid var(--in-border);
+  border-radius: 11px;
+  background: var(--background-primary);
+}
+
+.in-library-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+
+.in-library-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--in-border);
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 650;
+}
+
+.in-library-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--background-modifier-border-hover);
+  color: var(--text-normal);
+  vertical-align: top;
+}
+
+.in-library-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.in-library-link {
+  padding: 1px 2px;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.in-library-reference-link {
+  white-space: nowrap;
+}
+
+.in-library-limit {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 10.5px;
+}
+
+.in-bases-title {
+  margin-bottom: 2px;
+}
+
+.in-bases-subtitle {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1100px) {
+  .in-library-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .in-library-search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .indice-nights-library-view,
+  .indice-nights-bases-view {
+    padding: 12px 9px 24px;
+  }
+
+  .in-library-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .in-library-search {
+    grid-column: 1 / -1;
+  }
+
+  .in-library-table {
+    min-width: 760px;
+  }
+
+  .indice-nights-context-view {
+    padding: 10px 8px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .in-library-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .in-library-search {
+    grid-column: auto;
+  }
+
+  .in-library-status {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.1 — acesso visível às ferramentas de pesquisa
+   ============================================================ */
+.indice-nights-settings .bri-research-actions {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  width:100%;
+  margin:0 0 16px;
+}
+.indice-nights-settings .bri-research-action {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:40px;
+  padding:8px 12px;
+  border:1px solid color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));
+  border-radius:10px;
+  background:color-mix(in srgb, var(--interactive-accent) 9%, var(--background-secondary));
+  color:var(--text-normal);
+  font-weight:600;
+  cursor:pointer;
+}
+.indice-nights-settings .bri-research-action:hover {
+  background:color-mix(in srgb, var(--interactive-accent) 16%, var(--background-secondary));
+}
+.indice-nights-settings .bri-research-action-icon {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text-accent);
+}
+.indice-nights-settings .bri-research-action-icon svg {
+  width:18px;
+  height:18px;
+}
+@media (max-width:560px) {
+  .indice-nights-settings .bri-research-actions {
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.2 — refinamento do Contexto Bíblico
+   ============================================================ */
+
+.indice-nights-context-view {
+  padding: 16px 14px 28px !important;
+  overflow-x: hidden !important;
+}
+
+.indice-nights-context-view > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.indice-nights-context-view .in-context-header,
+.indice-nights-context-view .in-context-current-note,
+.indice-nights-context-view .in-context-reference {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.indice-nights-context-view .in-context-reference {
+  overflow: hidden;
+}
+
+.indice-nights-context-view .in-context-reference-summary,
+.indice-nights-context-view .in-context-reference-body,
+.indice-nights-context-view .in-context-group {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.indice-nights-context-view .in-context-note-link {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 7px 9px;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-overflow: clip;
+  line-height: 1.35;
+  box-sizing: border-box;
+}
+
+.indice-nights-context-view .in-context-current-title,
+.indice-nights-context-view .in-context-reference-name {
+  overflow-wrap: anywhere;
+}
+
+.indice-nights-context-view .in-context-group-title {
+  padding-left: 1px;
+}
+
+@media (max-width: 700px) {
+  .indice-nights-context-view {
+    padding: 12px 10px 24px !important;
+  }
+
+  .indice-nights-context-view .in-context-note-link {
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .indice-nights-context-view {
+    padding: 10px 8px 22px !important;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.3 — refinamento do painel Contexto Bíblico
+   ============================================================ */
+
+.indice-nights-context-view {
+  padding: 14px 12px 26px !important;
+}
+
+.indice-nights-context-view .in-context-header {
+  margin-bottom: 12px !important;
+}
+
+.indice-nights-context-view .in-context-title {
+  font-size: 17px !important;
+  line-height: 1.2 !important;
+}
+
+.indice-nights-context-view .in-context-subtitle {
+  margin-top: 3px !important;
+  font-size: 10.5px !important;
+  line-height: 1.45 !important;
+}
+
+.indice-nights-context-view .in-context-current-note {
+  padding: 11px 12px !important;
+  margin-bottom: 12px !important;
+  border-radius: 11px !important;
+}
+
+.indice-nights-context-view .in-context-current-title {
+  font-size: 12.5px !important;
+  line-height: 1.35 !important;
+}
+
+.indice-nights-context-view .in-context-current-count {
+  margin-top: 3px !important;
+  font-size: 10px !important;
+}
+
+.indice-nights-context-view .in-context-reference {
+  margin: 8px 0 !important;
+  border-radius: 11px !important;
+}
+
+.indice-nights-context-view .in-context-reference-summary {
+  padding: 10px 11px !important;
+}
+
+.indice-nights-context-view .in-context-reference-name {
+  font-size: 11.5px !important;
+  line-height: 1.3 !important;
+}
+
+.indice-nights-context-view .in-context-reference-count {
+  margin-top: 2px !important;
+  font-size: 9.5px !important;
+  line-height: 1.35 !important;
+}
+
+.indice-nights-context-view .in-context-reference-body {
+  padding: 0 9px 10px !important;
+}
+
+.indice-nights-context-view .in-context-group {
+  margin-top: 9px !important;
+}
+
+.indice-nights-context-view .in-context-group:first-child {
+  margin-top: 2px !important;
+}
+
+.indice-nights-context-view .in-context-group-title {
+  margin: 0 2px 5px !important;
+  font-size: 8.5px !important;
+  letter-spacing: .06em !important;
+}
+
+.indice-nights-context-view .in-context-note-link {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 0 5px !important;
+  padding: 7px 8px !important;
+
+  border: 1px solid var(--background-modifier-border) !important;
+  border-radius: 7px !important;
+  background: var(--background-primary-alt) !important;
+
+  color: var(--text-normal) !important;
+  font-size: 9.8px !important;
+  line-height: 1.35 !important;
+
+  white-space: normal !important;
+  overflow: hidden !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  text-overflow: clip !important;
+
+  box-sizing: border-box !important;
+}
+
+.indice-nights-context-view .in-context-note-link:last-child {
+  margin-bottom: 0 !important;
+}
+
+.indice-nights-context-view .in-context-note-link:hover {
+  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border)) !important;
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-normal) !important;
+}
+
+.indice-nights-context-view .in-context-note-link:focus-visible {
+  outline: 2px solid var(--interactive-accent) !important;
+  outline-offset: 1px !important;
+}
+
+/* Em painéis laterais muito estreitos, reduzimos mais um pouco sem perder legibilidade. */
+@media (max-width: 420px) {
+  .indice-nights-context-view {
+    padding: 12px 10px 22px !important;
+  }
+
+  .indice-nights-context-view .in-context-current-note,
+  .indice-nights-context-view .in-context-reference-summary {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .indice-nights-context-view .in-context-reference-body {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .indice-nights-context-view .in-context-note-link {
+    padding: 6px 7px !important;
+    font-size: 9.4px !important;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.4 — transcrições limpas + Contexto Bíblico
+   ============================================================ */
+
+/* Oculta o bloco visual de propriedades SOMENTE em notas da pasta Discursos/.
+   Os dados continuam existindo no frontmatter e continuam sendo usados pelo plugin. */
+.indice-nights-transcript-view .metadata-container,
+.indice-nights-transcript-view .metadata-properties,
+.indice-nights-transcript-view .metadata-properties-heading,
+.indice-nights-transcript-view .metadata-add-button {
+  display: none !important;
+}
+
+/* Contexto Bíblico — mais próximo do mockup aprovado */
+.indice-nights-context-view {
+  padding: 16px 14px 30px !important;
+  overflow-x: hidden !important;
+}
+
+.indice-nights-context-view .in-context-header {
+  margin-bottom: 15px !important;
+}
+
+.indice-nights-context-view .in-context-title {
+  font-size: 19px !important;
+  line-height: 1.2 !important;
+  font-weight: 750 !important;
+}
+
+.indice-nights-context-view .in-context-subtitle {
+  margin-top: 5px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+.indice-nights-context-view .in-context-current-note {
+  padding: 14px 15px !important;
+  margin-bottom: 15px !important;
+  border-radius: 13px !important;
+}
+
+.indice-nights-context-view .in-context-current-title {
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+}
+
+.indice-nights-context-view .in-context-current-count {
+  margin-top: 5px !important;
+  font-size: 11.5px !important;
+  line-height: 1.4 !important;
+}
+
+.indice-nights-context-view .in-context-reference {
+  margin: 11px 0 !important;
+  border-radius: 13px !important;
+  overflow: visible !important;
+}
+
+.indice-nights-context-view .in-context-reference[open] {
+  overflow: visible !important;
+}
+
+.indice-nights-context-view .in-context-reference-summary {
+  padding: 13px 14px !important;
+}
+
+.indice-nights-context-view .in-context-reference-name {
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+}
+
+.indice-nights-context-view .in-context-reference-count {
+  margin-top: 4px !important;
+  font-size: 11.5px !important;
+  line-height: 1.4 !important;
+}
+
+.indice-nights-context-view .in-context-reference-body {
+  padding: 0 12px 13px !important;
+  overflow: visible !important;
+}
+
+.indice-nights-context-view .in-context-group {
+  margin-top: 13px !important;
+  overflow: visible !important;
+}
+
+.indice-nights-context-view .in-context-group:first-child {
+  margin-top: 3px !important;
+}
+
+.indice-nights-context-view .in-context-group-title {
+  margin: 0 3px 7px !important;
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+  letter-spacing: .055em !important;
+}
+
+.indice-nights-context-view .in-context-note-link {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  height: auto !important;
+  min-height: 40px !important;
+  max-height: none !important;
+
+  margin: 0 0 7px !important;
+  padding: 10px 11px !important;
+
+  border: 1px solid var(--background-modifier-border) !important;
+  border-radius: 9px !important;
+  background: var(--background-primary-alt) !important;
+
+  color: var(--text-normal) !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-overflow: unset !important;
+
+  box-sizing: border-box !important;
+}
+
+.indice-nights-context-view .in-context-note-link:last-child {
+  margin-bottom: 0 !important;
+}
+
+.indice-nights-context-view .in-context-note-link:hover {
+  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border)) !important;
+  background: var(--background-modifier-hover) !important;
+}
+
+/* iPad / Split View */
+@media (max-width: 700px) {
+  .indice-nights-context-view {
+    padding: 14px 11px 26px !important;
+  }
+
+  .indice-nights-context-view .in-context-title {
+    font-size: 18px !important;
+  }
+
+  .indice-nights-context-view .in-context-current-title,
+  .indice-nights-context-view .in-context-reference-name {
+    font-size: 13.5px !important;
+  }
+
+  .indice-nights-context-view .in-context-note-link {
+    min-height: 38px !important;
+    padding: 9px 10px !important;
+    font-size: 11.8px !important;
+  }
+}
+
+/* iPhone */
+@media (max-width: 480px) {
+  .indice-nights-context-view {
+    padding: 12px 9px 24px !important;
+  }
+
+  .indice-nights-context-view .in-context-note-link {
+    min-height: 36px !important;
+    padding: 8px 9px !important;
+    font-size: 11.5px !important;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.5 — leitor completo dentro do Contexto Bíblico
+   ============================================================ */
+
+.indice-nights-context-view .in-context-note-link {
+  position: relative !important;
+  padding-right: 34px !important;
+}
+
+.indice-nights-context-view .in-context-note-arrow {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.indice-nights-context-view .in-context-note-arrow svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* A sidebar vira um leitor secundário limpo. */
+.indice-nights-context-view.in-context-reader-mode {
+  padding: 0 12px 28px !important;
+  overflow-x: hidden !important;
+}
+
+.in-context-reader-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0 -12px 12px;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: color-mix(in srgb, var(--background-primary) 94%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.in-context-reader-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-accent);
+  font-size: 12.5px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.in-context-reader-back:hover {
+  background: var(--background-modifier-hover);
+}
+
+.in-context-reader-back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.in-context-reader-back-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.in-context-reader-heading {
+  margin: 2px 2px 14px;
+}
+
+.in-context-reader-title {
+  color: var(--text-normal);
+  font-size: 18px;
+  font-weight: 750;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.in-context-reader-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 9px;
+  margin-top: 7px;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+
+.in-context-reader-meta span:not(:last-child)::after {
+  content: "•";
+  margin-left: 9px;
+  color: var(--text-faint);
+}
+
+.in-context-reader-markdown {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 2px 24px;
+  box-sizing: border-box;
+  color: var(--text-normal);
+  font-size: 12.5px;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+}
+
+.in-context-reader-markdown > :first-child {
+  margin-top: 0;
+}
+
+.in-context-reader-markdown h1 {
+  font-size: 19px;
+  line-height: 1.3;
+}
+
+.in-context-reader-markdown h2 {
+  margin-top: 1.35em;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--text-accent);
+}
+
+.in-context-reader-markdown h3 {
+  font-size: 14px;
+}
+
+.in-context-reader-markdown p,
+.in-context-reader-markdown li {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.in-context-reader-markdown img {
+  display: block;
+  width: auto;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 12px auto;
+  border-radius: 8px;
+}
+
+.in-context-reader-markdown img[alt="Miniatura"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  float: none !important;
+  margin: 12px 0 16px !important;
+  object-fit: contain !important;
+}
+
+.in-context-reader-markdown .indice-nights-thumbnail-link {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  float: none !important;
+  margin: 0 !important;
+}
+
+.in-context-reader-markdown blockquote {
+  margin: 12px 0;
+  padding: 9px 11px;
+  border-left: 3px solid var(--interactive-accent);
+  border-radius: 0 7px 7px 0;
+  background: var(--background-secondary);
+}
+
+.in-context-reader-markdown table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.in-context-reader-markdown .metadata-container,
+.in-context-reader-markdown .frontmatter,
+.in-context-reader-markdown .frontmatter-container {
+  display: none !important;
+}
+
+/* Os callouts/miníndice continuam cabendo na lateral. */
+.in-context-reader-markdown .callout {
+  max-width: 100%;
+  margin: 10px 0;
+}
+
+/* iPad / Split View */
+@media (max-width: 700px) {
+  .indice-nights-context-view.in-context-reader-mode {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .in-context-reader-toolbar {
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .in-context-reader-title {
+    font-size: 17px;
+  }
+
+  .in-context-reader-markdown {
+    font-size: 12px;
+  }
+}
+
+/* iPhone */
+@media (max-width: 480px) {
+  .in-context-reader-title {
+    font-size: 16px;
+  }
+
+  .in-context-reader-back {
+    font-size: 12px;
+  }
+
+  .in-context-reader-markdown {
+    font-size: 11.8px;
+    line-height: 1.55;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.6 — estabilidade + contexto refinado
+   ============================================================ */
+
+/* Propriedades continuam no arquivo, mas ficam ocultas visualmente em Discursos/. */
+.indice-nights-transcript-view .metadata-container,
+.indice-nights-transcript-view .metadata-properties,
+.indice-nights-transcript-view .metadata-properties-heading,
+.indice-nights-transcript-view .metadata-add-button,
+.indice-nights-metadata-hidden {
+  display: none !important;
+}
+
+/* Subtópicos internos (Adorações Matinais, Congressos, Discursos...) */
+.indice-nights-context-view .in-context-group {
+  position: relative;
+  margin-top: 13px !important;
+  padding: 10px !important;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+}
+
+.indice-nights-context-view .in-context-group:first-child {
+  margin-top: 5px !important;
+}
+
+.indice-nights-context-view .in-context-group-title {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  margin: -1px 0 8px !important;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--interactive-accent) 12%, var(--background-primary));
+  color: var(--text-accent) !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .045em !important;
+}
+
+/* O resultado interno mantém seu próprio contorno, criando dois níveis visuais claros. */
+.indice-nights-context-view .in-context-group .in-context-note-link {
+  margin-bottom: 7px !important;
+  background: var(--background-primary-alt) !important;
+}
+
+.indice-nights-context-view .in-context-group .in-context-note-link:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Destaque temporário ao abrir diretamente na citação no leitor lateral. */
+.in-context-reader-markdown .in-context-citation-anchor {
+  display: block;
+  position: relative;
+  top: -8px;
+  width: 1px;
+  height: 1px;
+}
+
+.in-context-reader-markdown .in-context-citation-highlight {
+  border-left: 3px solid var(--interactive-accent) !important;
+  padding-left: 10px !important;
+  background: color-mix(in srgb, var(--interactive-accent) 8%, transparent) !important;
+  border-radius: 4px;
+}
+
+/* Em painéis muito estreitos, preserva a separação sem consumir largura demais. */
+@media (max-width: 480px) {
+  .indice-nights-context-view .in-context-group {
+    padding: 8px !important;
+  }
+
+  .indice-nights-context-view .in-context-group-title {
+    font-size: 10px !important;
+    padding: 3px 7px;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.7 — citação centralizada + Índice destacado
+   ============================================================ */
+
+/* Quando o Índice Geral abre uma ocorrência, usa a mesma linguagem visual
+   do Contexto Bíblico: barra lateral roxa + fundo suave. */
+.in-index-citation-highlight {
+  position: relative;
+  border-left: 3px solid var(--interactive-accent) !important;
+  padding-left: 10px !important;
+  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;
+  border-radius: 4px !important;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+
+/* Cada referência do Índice passa a funcionar visualmente como um cartão. */
+.bri-root .bri-reference {
+  margin: 10px 0 14px !important;
+  padding: 12px 13px !important;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border)) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--interactive-accent) 5%, var(--background-secondary)) !important;
+  list-style: none !important;
+}
+
+.bri-root .bri-reference-title {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-accent) !important;
+  font-size: 1.02em;
+  font-weight: 700;
+}
+
+.bri-root .bri-note-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.bri-root .bri-note-result {
+  margin: 6px 0 !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--background-modifier-border) !important;
+  border-left: 3px solid color-mix(in srgb, var(--interactive-accent) 72%, var(--background-modifier-border)) !important;
+  border-radius: 8px !important;
+  background: var(--background-primary-alt) !important;
+  line-height: 1.4;
+  list-style: none !important;
+}
+
+.bri-root .bri-note-result:hover {
+  background: var(--background-modifier-hover) !important;
+  border-color: color-mix(in srgb, var(--interactive-accent) 52%, var(--background-modifier-border)) !important;
+  border-left-color: var(--interactive-accent) !important;
+}
+
+.bri-root .bri-note-result-section {
+  color: var(--text-muted);
+  font-size: .92em;
+}
+
+.bri-root .bri-note-result .internal-link {
+  color: var(--text-accent) !important;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.bri-root .bri-note-result .internal-link:hover {
+  text-decoration: underline;
+}
+
+/* Em telas estreitas mantém o mesmo destaque sem consumir espaço. */
+@media (max-width: 560px) {
+  .bri-root .bri-reference {
+    padding: 10px !important;
+  }
+
+  .bri-root .bri-note-result {
+    padding: 7px 8px !important;
+  }
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.8 — destaque do Índice igual ao Contexto
+   ============================================================ */
+
+/* Remove qualquer aparência amarela herdada de realce nativo na área alvo
+   e aplica o mesmo padrão roxo do leitor lateral. */
+.in-index-citation-highlight,
+.in-index-citation-highlight * {
+  --text-highlight-bg: transparent;
+}
+
+.in-index-citation-highlight {
+  border-left: 3px solid var(--interactive-accent) !important;
+  padding-left: 10px !important;
+  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;
+  border-radius: 4px !important;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.in-index-citation-highlight mark,
+.in-index-citation-highlight .search-highlight,
+.in-index-citation-highlight .is-flashing,
+.in-index-citation-highlight .mod-search-match {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.9 — destaque persistente do Índice
+   ============================================================ */
+
+.in-index-citation-highlight {
+  border-left: 3px solid var(--interactive-accent) !important;
+  padding-left: 10px !important;
+  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;
+  border-radius: 4px !important;
+  transition: none !important;
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.10 — Índice usando destaque nativo do Obsidian
+   ============================================================ */
+
+/* O Índice Geral volta a usar #^bloco e o realce padrão do Obsidian.
+   Estas regras neutralizam apenas o destaque customizado antigo. */
+.in-index-citation-highlight {
+  border-left: 0 !important;
+  padding-left: initial !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  transition: none !important;
+}
+
+
+/* ============================================================
+   Indice Nights v0.9.16 — revisão manual da renomeação
+   ============================================================ */
+
+.indice-nights-settings .bri-publication-order-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.indice-nights-settings .bri-publication-review-button {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary));
+  color: var(--text-normal);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.indice-nights-settings .bri-publication-review-button:hover {
+  background: color-mix(in srgb, var(--interactive-accent) 15%, var(--background-secondary));
+}
+
+.indice-nights-settings .bri-publication-review-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.indice-nights-settings .bri-publication-order-actions .bri-publication-order-toggle {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 560px) {
+  .indice-nights-settings .bri-publication-order-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .indice-nights-settings .bri-publication-review-button {
+    flex: 1 1 auto;
   }
 }

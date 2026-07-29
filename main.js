@@ -1,4 +1,4 @@
-var INDICE_NIGHTS_RUNTIME_CSS = ".bri-root {\n  --bri-gap: 0.75rem;\n  width: 100%;\n}\n\n.bri-title {\n  margin-block: 0 1rem;\n}\n\n.bri-summary {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n  margin-bottom: 1rem;\n}\n\n.bri-summary-stats {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.4rem 1.25rem;\n  margin-top: 0.5rem;\n  color: var(--text-muted);\n}\n\n.bri-controls {\n  display: grid;\n  grid-template-columns: minmax(12rem, 0.8fr) minmax(14rem, 1.2fr);\n  gap: var(--bri-gap);\n  margin-bottom: 1.25rem;\n}\n\n.bri-control-group {\n  display: flex;\n  flex-direction: column;\n  gap: 0.35rem;\n}\n\n.bri-control-group label {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.bri-control-group select,\n.bri-control-group input {\n  width: 100%;\n  min-height: var(--input-height);\n}\n\n.bri-search-mode {\n  grid-column: 1 / -1;\n  display: flex;\n  align-items: flex-start;\n  gap: 0.6rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-s);\n  padding: 0.7rem 0.8rem;\n}\n\n.bri-search-mode input {\n  margin-top: 0.2rem;\n}\n\n.bri-search-mode label {\n  display: flex;\n  flex-direction: column;\n  gap: 0.15rem;\n  cursor: pointer;\n}\n\n.bri-search-mode small {\n  color: var(--text-muted);\n  font-weight: normal;\n}\n\n.bri-results h2 {\n  margin-block: 0.75rem;\n}\n\n.bri-search-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-bottom: 1rem;\n}\n\n.bri-reference-list,\n.bri-note-list {\n  padding-inline-start: 1.5rem;\n}\n\n.bri-reference {\n  margin-bottom: 0.65rem;\n}\n\n.bri-reference-title {\n  color: var(--text-accent);\n}\n\n.bri-note-list {\n  margin-block: 0.25rem 0;\n}\n\n.bri-note-list li {\n  margin-block: 0.2rem;\n}\n\n.bri-load-more {\n  display: block;\n  margin: 1rem auto;\n}\n\n.bri-empty {\n  color: var(--text-muted);\n  font-style: italic;\n}\n\n.bri-content-results {\n  display: grid;\n  gap: 0.75rem;\n}\n\n.bri-content-result {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 0.85rem 1rem;\n}\n\n.bri-content-section {\n  display: block;\n  color: var(--text-muted);\n  font-size: var(--font-ui-smaller);\n  margin-bottom: 0.2rem;\n}\n\n.bri-content-title {\n  font-weight: var(--font-semibold);\n}\n\n.bri-content-sentence {\n  margin: 0.5rem 0 0;\n  color: var(--text-normal);\n  line-height: 1.5;\n}\n\n.bri-catalog-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-block: 0.75rem;\n}\n\n.bri-catalog-settings {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  padding: 0.5rem 1rem;\n}\n\n.bri-catalog-settings .setting-item {\n  align-items: center;\n}\n\n.bri-catalog-settings .setting-item-control {\n  flex-wrap: wrap;\n}\n\n.bri-catalog-settings select {\n  max-width: min(24rem, 100%);\n}\n\n.callout[data-callout=\"bible-index\"] {\n  --callout-color: var(--interactive-accent-rgb);\n  --callout-icon: lucide-book-open-text;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary-alt);\n  box-shadow: none;\n  margin-block: 1rem 1.25rem;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-title {\n  color: var(--text-normal);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  line-height: 1.8;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content p {\n  margin: 0;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link {\n  color: var(--text-accent);\n  text-decoration: none;\n  white-space: nowrap;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link:hover {\n  text-decoration: underline;\n}\n\n.bri-category-heading {\n  margin-block: 1rem 0.35rem;\n}\n\n\n.indice-nights-scripture-link {\n  color: var(--link-color);\n  cursor: pointer;\n  text-decoration: underline;\n  text-decoration-thickness: from-font;\n}\n\n.indice-nights-verse-preview {\n  line-height: 1.65;\n}\n\n.indice-nights-verse-text {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n}\n\n.indice-nights-verse-text .verseNum {\n  color: var(--text-accent);\n  font-size: var(--font-ui-smaller);\n  font-weight: var(--font-semibold);\n  vertical-align: super;\n}\n\n.indice-nights-verse-citation {\n  display: block;\n  margin-top: 0.65rem;\n  color: var(--text-muted);\n}\n\n.indice-nights-verse-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.6rem;\n  margin-top: 1rem;\n}\n\n.indice-nights-verse-actions a {\n  display: inline-flex;\n  align-items: center;\n  border-radius: var(--button-radius);\n  padding: 0.45rem 0.75rem;\n  text-decoration: none;\n}\n\n/* Miniaturas de transcrições: layout integrado ao texto, semelhante a uma publicação. */\n.markdown-preview-view .indice-nights-thumbnail-link {\n  display: block;\n  float: right;\n  width: 43%;\n  max-width: 31rem;\n  margin: 0.35rem 0 1.35rem 1.75rem;\n  padding: 0;\n  background-image: none;\n  border-radius: var(--radius-m);\n  line-height: 0;\n}\n\n.markdown-preview-view .indice-nights-thumbnail-link img[alt=\"Miniatura\"],\n.markdown-preview-view img[alt=\"Miniatura\"] {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  height: auto;\n  max-height: none;\n  margin: 0;\n  border-radius: var(--radius-m);\n  object-fit: contain;\n}\n\n/* O ícone padrão de link externo do Obsidian fica solto quando o link envolve uma imagem. */\n.markdown-preview-view .indice-nights-thumbnail-link.external-link {\n  background-image: none;\n  padding-inline-end: 0;\n}\n\n@media (max-width: 900px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    width: 46%;\n    max-width: 24rem;\n    margin-left: 1.25rem;\n  }\n}\n\n@media (max-width: 600px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    float: none;\n    width: 100%;\n    max-width: none;\n    margin: 0.75rem 0 1.25rem;\n  }\n\n  .bri-controls {\n    grid-template-columns: 1fr;\n  }\n\n  .bri-summary-stats {\n    flex-direction: column;\n    gap: 0.2rem;\n  }\n\n  .bri-reference-list,\n  .bri-note-list {\n    padding-inline-start: 1.15rem;\n  }\n\n  .bri-catalog-settings {\n    padding-inline: 0.65rem;\n  }\n\n  .bri-catalog-settings .setting-item {\n    align-items: stretch;\n    flex-direction: column;\n  }\n\n  .bri-catalog-settings .setting-item-control {\n    justify-content: flex-start;\n    width: 100%;\n  }\n}\n\n/* v0.7.5 — catálogo visual inspirado em uma biblioteca de mídia */\n.bri-catalog-settings {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 0.85rem;\n  border: 0;\n  padding: 0;\n  background: transparent;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  min-width: 0;\n  min-height: 10.5rem;\n  padding: 1rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-l);\n  background: var(--background-secondary);\n  overflow: hidden;\n  transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item:hover {\n  border-color: var(--background-modifier-border-hover);\n  background: var(--background-secondary-alt);\n  transform: translateY(-1px);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled {\n  border-color: rgba(var(--interactive-accent-rgb), 0.55);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-info {\n  display: grid;\n  grid-template-columns: 2.55rem minmax(0, 1fr);\n  grid-template-rows: auto 1fr;\n  column-gap: 0.8rem;\n  width: 100%;\n  min-width: 0;\n  flex: 1 1 auto;\n  margin: 0;\n}\n\n.bri-catalog-card-icon {\n  grid-row: 1 / span 2;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 2.55rem;\n  height: 2.55rem;\n  border-radius: var(--radius-m);\n  background: var(--background-modifier-hover);\n  color: var(--text-accent);\n}\n\n.bri-catalog-card-icon svg {\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-name {\n  align-self: end;\n  min-width: 0;\n  margin: 0;\n  font-size: 1rem;\n  font-weight: var(--font-semibold);\n  line-height: 1.25;\n  color: var(--text-normal);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-description {\n  align-self: start;\n  min-width: 0;\n  margin-top: 0.25rem;\n  font-size: var(--font-ui-smaller);\n  line-height: 1.4;\n  color: var(--text-muted);\n  overflow-wrap: anywhere;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-control {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  gap: 0.65rem;\n  align-items: center;\n  width: 100%;\n  min-width: 0;\n  margin-top: 1rem;\n  padding-top: 0.8rem;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled .setting-item-control .checkbox-container {\n  justify-self: start;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control {\n  grid-template-columns: 1fr auto;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control .checkbox-container {\n  grid-column: 2;\n}\n\n.bri-catalog-settings .bri-catalog-card select {\n  width: 100%;\n  min-width: 0;\n  max-width: none;\n}\n\n@media (max-width: 1000px) {\n  .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\n@media (max-width: 620px) {\n  .bri-catalog-settings {\n    grid-template-columns: 1fr;\n    gap: 0.7rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card.setting-item {\n    min-height: 0;\n    padding: 0.9rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card .setting-item-control {\n    grid-template-columns: auto minmax(0, 1fr);\n  }\n}\n\n/* v0.7.6: Séries são exibidas como cartões individuais dentro do catálogo. */\n\n/* ============================================================\n   Índice Nights v0.7.8 — Biblioteca visual responsiva\n   Desktop, iPad e iPhone\n   ============================================================ */\n\n.indice-nights-settings {\n  --bri-panel-gap: 14px;\n  --bri-card-radius: 14px;\n  --bri-card-border: var(--background-modifier-border);\n  --bri-card-bg: var(--background-secondary);\n  --bri-card-bg-hover: var(--background-secondary-alt);\n  --bri-soft-accent: color-mix(in srgb, var(--interactive-accent) 13%, var(--background-secondary));\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  overflow-x: hidden;\n}\n\n.indice-nights-settings *,\n.indice-nights-settings *::before,\n.indice-nights-settings *::after {\n  box-sizing: border-box;\n}\n\n.indice-nights-settings .bri-library-intro {\n  margin: -2px 0 16px;\n  color: var(--text-muted);\n  line-height: 1.55;\n}\n\n/* Índice geral */\n.indice-nights-settings .bri-index-hero {\n  position: relative !important;\n  inset: auto !important;\n  z-index: 0 !important;\n  float: none !important;\n  clear: both !important;\n  width: 100% !important;\n  min-height: 86px;\n  display: grid !important;\n  grid-template-columns: 52px minmax(0, 1fr) 24px;\n  align-items: center;\n  gap: 14px;\n  margin: 0 0 18px !important;\n  padding: 15px 17px !important;\n  border: 1px solid #3893ff !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: linear-gradient(110deg, #073d8e 0%, #075dcc 52%, #0649a6 100%) !important;\n  color: #fff !important;\n  box-shadow: 0 8px 22px rgba(0, 84, 196, .16);\n  text-align: left;\n  cursor: pointer;\n  overflow: hidden;\n  transform: none !important;\n}\n\n.indice-nights-settings .bri-index-hero:hover {\n  background: linear-gradient(110deg, #08479f 0%, #0866dc 52%, #0754b8 100%) !important;\n}\n\n.indice-nights-settings .bri-index-hero-icon {\n  width: 52px;\n  height: 52px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid rgba(255,255,255,.34);\n  border-radius: 12px;\n  background: rgba(255,255,255,.08);\n}\n\n.indice-nights-settings .bri-index-hero-icon svg {\n  width: 28px;\n  height: 28px;\n}\n\n.indice-nights-settings .bri-index-hero-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-index-hero-title-row {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-index-hero-title {\n  font-size: 18px;\n  line-height: 1.25;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-index-hero-badge {\n  display: inline-flex;\n  padding: 3px 8px;\n  border-radius: 999px;\n  background: rgba(255,255,255,.17);\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 1.2;\n}\n\n.indice-nights-settings .bri-index-hero-description {\n  margin-top: 5px;\n  color: rgba(255,255,255,.84);\n  font-size: 13px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-index-hero-arrow {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: end;\n}\n\n/* Grade principal */\n.indice-nights-settings .bri-catalog-settings {\n  display: grid !important;\n  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;\n  grid-auto-flow: row !important;\n  align-items: stretch !important;\n  gap: var(--bri-panel-gap) !important;\n  width: 100% !important;\n  margin: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n  overflow: visible !important;\n}\n\n/* Cartões normais */\n.indice-nights-settings .bri-library-card {\n  position: relative;\n  min-width: 0;\n  min-height: 214px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr);\n  grid-template-rows: minmax(0, 1fr) auto;\n  gap: 12px 13px;\n  align-content: stretch;\n  padding: 16px !important;\n  margin: 0 !important;\n  border: 1px solid var(--bri-card-border) !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: var(--bri-card-bg) !important;\n  overflow: hidden;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-library-card:hover {\n  background: var(--bri-card-bg-hover) !important;\n  border-color: color-mix(in srgb, var(--interactive-accent) 36%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card-icon,\n.indice-nights-settings .bri-library-group-icon {\n  width: 48px;\n  height: 48px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex: 0 0 auto;\n  border-radius: 11px;\n  background: var(--bri-soft-accent);\n  color: var(--interactive-accent);\n}\n\n.indice-nights-settings .bri-library-card-icon svg,\n.indice-nights-settings .bri-library-group-icon svg {\n  width: 23px;\n  height: 23px;\n}\n\n.indice-nights-settings .bri-library-card-body {\n  min-width: 0;\n  display: flex;\n  flex-direction: column;\n}\n\n.indice-nights-settings .bri-library-card-title {\n  margin: 1px 0 0;\n  color: var(--text-normal);\n  font-size: 15px;\n  font-weight: 700;\n  line-height: 1.32;\n}\n\n.indice-nights-settings .bri-library-card-description {\n  margin-top: 6px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-library-card-path {\n  margin-top: auto;\n  padding-top: 12px;\n  color: var(--text-faint);\n  font-size: 11.5px;\n  line-height: 1.45;\n  overflow-wrap: anywhere;\n}\n\n.indice-nights-settings .bri-library-card-footer {\n  grid-column: 1 / -1;\n  min-width: 0;\n  min-height: 44px;\n  display: flex !important;\n  align-items: center;\n  justify-content: space-between;\n  gap: 10px;\n  margin-top: 0;\n  padding-top: 12px;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.indice-nights-settings .bri-library-card-status {\n  color: var(--text-faint);\n  font-size: 11.5px;\n}\n\n.indice-nights-settings .bri-library-card-select {\n  min-width: 0;\n  flex: 1 1 auto;\n}\n\n.indice-nights-settings .bri-library-card-select select {\n  width: 100%;\n  max-width: 100%;\n  min-width: 0;\n}\n\n/* Remove o espaçamento nativo de Setting dentro dos mini-controles */\n.indice-nights-settings .bri-library-card-select .setting-item,\n.indice-nights-settings .bri-library-card-toggle .setting-item,\n.indice-nights-settings .bri-library-group-option-select .setting-item,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item {\n  min-height: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-info,\n.indice-nights-settings .bri-library-card-toggle .setting-item-info,\n.indice-nights-settings .bri-library-group-option-select .setting-item-info,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-info {\n  display: none !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-control,\n.indice-nights-settings .bri-library-card-toggle .setting-item-control,\n.indice-nights-settings .bri-library-group-option-select .setting-item-control,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-control {\n  width: auto !important;\n  padding: 0 !important;\n  margin: 0 !important;\n}\n\n/* Congressos / Séries */\n.indice-nights-settings .bri-library-groups-wrap {\n  grid-column: 1 / -1;\n  display: grid !important;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: var(--bri-panel-gap);\n  width: 100%;\n  margin: 0;\n}\n\n.indice-nights-settings .bri-library-group {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  border: 1px solid var(--bri-card-border);\n  border-radius: var(--bri-card-radius);\n  background: var(--bri-card-bg);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-library-group[open] {\n  border-color: color-mix(in srgb, var(--interactive-accent) 44%, var(--bri-card-border));\n}\n\n.indice-nights-settings .bri-library-group-summary {\n  min-height: 108px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr) auto 24px;\n  align-items: center;\n  gap: 13px;\n  padding: 16px !important;\n  margin: 0 !important;\n  list-style: none;\n  cursor: pointer;\n  user-select: none;\n}\n\n.indice-nights-settings .bri-library-group-summary::-webkit-details-marker {\n  display: none;\n}\n\n.indice-nights-settings .bri-library-group-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-title {\n  color: var(--text-normal);\n  font-size: 15px;\n  line-height: 1.32;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-library-group-description {\n  margin-top: 5px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-library-group-count {\n  padding: 4px 8px;\n  border-radius: 999px;\n  background: var(--background-modifier-hover);\n  color: var(--text-muted);\n  font-size: 11px;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-library-group-chevron {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-muted);\n  transition: transform .18s ease;\n}\n\n.indice-nights-settings .bri-library-group[open] .bri-library-group-chevron {\n  transform: rotate(180deg);\n}\n\n.indice-nights-settings .bri-library-group-panel {\n  display: grid;\n  gap: 8px;\n  padding: 0 16px 16px;\n  animation: bri-panel-open .18s ease-out;\n}\n\n@keyframes bri-panel-open {\n  from { opacity: 0; transform: translateY(-5px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n.indice-nights-settings .bri-library-group-option {\n  min-width: 0;\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  padding: 11px 12px;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 10px;\n  background: var(--background-primary);\n}\n\n.indice-nights-settings .bri-library-group-option.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));\n}\n\n.indice-nights-settings .bri-library-group-option-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-title {\n  color: var(--text-normal);\n  font-size: 12.5px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-library-group-option-description {\n  margin-top: 2px;\n  color: var(--text-muted);\n  font-size: 11px;\n  line-height: 1.4;\n}\n\n.indice-nights-settings .bri-library-group-option-controls {\n  min-width: 0;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-library-group-option-select {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-select select {\n  width: min(220px, 30vw);\n  max-width: 220px;\n}\n\n/* Ação de download */\n.indice-nights-settings .bri-action-setting {\n  margin-top: 16px !important;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: var(--bri-card-radius);\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-control {\n  flex-shrink: 0;\n}\n\n/* ====================== TABLET / iPad ====================== */\n@media (max-width: 1024px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 206px;\n  }\n\n  .indice-nights-settings .bri-library-groups-wrap {\n    grid-template-columns: 1fr;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    min-height: 96px;\n  }\n}\n\n/* iPad em painel estreito / split view */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 46px minmax(0, 1fr) 20px;\n    min-height: 78px;\n    gap: 11px;\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 46px;\n    height: 46px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 16px;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: 1fr !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 0;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: inline-flex;\n  }\n}\n\n/* ====================== iPhone / celulares ====================== */\n@media (max-width: 560px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 10px;\n  }\n\n  .indice-nights-settings .bri-library-intro {\n    margin-bottom: 12px;\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 42px minmax(0, 1fr) 18px;\n    gap: 10px;\n    min-height: 72px;\n    margin-bottom: 12px !important;\n    padding: 12px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon svg {\n    width: 23px;\n    height: 23px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 15px;\n  }\n\n  .indice-nights-settings .bri-index-hero-badge {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    margin-top: 3px;\n    font-size: 11px;\n    line-height: 1.35;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    grid-template-columns: 42px minmax(0, 1fr);\n    gap: 10px 11px;\n    padding: 13px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-library-card-icon,\n  .indice-nights-settings .bri-library-group-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-title,\n  .indice-nights-settings .bri-library-group-title {\n    font-size: 14px;\n  }\n\n  .indice-nights-settings .bri-library-card-description,\n  .indice-nights-settings .bri-library-group-description {\n    font-size: 11.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    padding-top: 9px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    padding-top: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-select {\n    flex-basis: 100%;\n    order: 2;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    flex-wrap: wrap;\n  }\n\n  .indice-nights-settings .bri-library-group {\n    border-radius: 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    grid-template-columns: 42px minmax(0, 1fr) 20px;\n    min-height: 82px;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-library-group-panel {\n    padding: 0 12px 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-option {\n    grid-template-columns: 1fr;\n    gap: 8px;\n    padding: 10px;\n  }\n\n  .indice-nights-settings .bri-library-group-option-controls {\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select {\n    flex: 1 1 auto;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select select {\n    width: 100%;\n    max-width: none;\n  }\n\n  .indice-nights-settings .bri-action-setting {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-action-setting .setting-item-control,\n  .indice-nights-settings .bri-action-setting button {\n    width: 100%;\n  }\n}\n\n/* iPhone muito estreito */\n@media (max-width: 390px) {\n  .indice-nights-settings .bri-index-hero-description {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    min-height: 64px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    overflow-wrap: anywhere;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.7.9 — divisores e acabamento da área inferior\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  display: grid;\n  grid-template-columns: auto minmax(0, 1fr);\n  align-items: center;\n  gap: 12px;\n  width: 100%;\n  margin: 20px 0 12px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  font-size: 13px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .01em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  height: 1px;\n  width: 100%;\n  border-radius: 999px;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-label {\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent),\n    color-mix(in srgb, var(--interactive-accent) 18%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 82%, var(--interactive-accent));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--text-muted) 45%, transparent),\n    color-mix(in srgb, var(--text-muted) 10%, transparent)\n  );\n}\n\n/* Área inferior no mesmo padrão visual do catálogo */\n.indice-nights-settings .bri-unofficial-panel {\n  display: grid;\n  gap: 10px;\n  width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: 12px;\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  border-color: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border)) !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n  min-width: 0;\n  padding-right: 14px;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n  font-size: 14px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description {\n  margin-top: 3px;\n  font-size: 11.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n  min-width: min(260px, 38%);\n  justify-content: flex-end;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-panel > .setting-item select {\n  width: min(280px, 100%);\n  max-width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n  margin: 0;\n  padding: 4px 2px 2px;\n  color: var(--text-muted);\n  font-size: 11.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child {\n  margin-bottom: 0;\n}\n\n/* iPad / tablet */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    margin-top: 18px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    min-width: min(240px, 42%);\n  }\n}\n\n/* iPad em Split View e tablets estreitos */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n    width: 100%;\n    padding-right: 0;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control > * {\n    max-width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n  .indice-nights-settings .bri-unofficial-panel > .setting-item select,\n  .indice-nights-settings .bri-unofficial-panel > .setting-item button {\n    width: 100%;\n    max-width: 100%;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    grid-template-columns: auto minmax(24px, 1fr);\n    gap: 9px;\n    margin: 16px 0 10px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 12px !important;\n    border-radius: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n    font-size: 13px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description,\n  .indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n    font-size: 11px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.0 — títulos de seção em faixa elegante\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 100%;\n  min-height: 38px;\n  margin: 20px 0 12px;\n  padding: 0 14px;\n  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border));\n  border-radius: 10px;\n  overflow: hidden;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  content: \"\";\n  position: absolute;\n  inset: 0 auto 0 0;\n  width: 4px;\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--interactive-accent) 94%, white 6%),\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 1;\n  display: inline-flex;\n  align-items: center;\n  min-width: 0;\n  padding-left: 2px;\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n  font-size: 12.5px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .015em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  display: none !important;\n}\n\n/* Oficial: um pouco mais vivo, combinando com o Índice Geral */\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border));\n  box-shadow: inset 0 1px 0 color-mix(in srgb, white 5%, transparent);\n}\n\n/* Não oficial: mesma linguagem visual, porém mais neutra */\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n  border-color: color-mix(in srgb, var(--text-muted) 28%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--text-muted) 9%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--text-muted) 4%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--text-muted) 75%, var(--interactive-accent) 25%),\n    color-mix(in srgb, var(--text-muted) 45%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 78%, var(--text-normal));\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin-top: 18px;\n    padding-inline: 13px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 34px;\n    margin: 15px 0 10px;\n    padding-inline: 12px;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider::before {\n    width: 3px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.1 — acabamento aprovado\n   ============================================================ */\n\n/* Sem texto introdutório: aproxima o Índice Geral do cabeçalho. */\n.indice-nights-settings .bri-index-hero {\n  margin-top: 8px !important;\n}\n\n/* Faixas de seção: título branco centralizado e linhas laterais. */\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: grid !important;\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);\n  align-items: center;\n  gap: 14px;\n  width: 100%;\n  min-height: 40px;\n  margin: 20px 0 12px;\n  padding: 0 15px !important;\n  border-radius: 10px;\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  width: 4px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 2;\n  justify-self: center;\n  padding: 0 !important;\n  color: #fff !important;\n  font-size: 13px !important;\n  font-weight: 700 !important;\n  line-height: 1;\n  text-align: center;\n  letter-spacing: .01em;\n}\n\n.indice-nights-settings .bri-section-divider-decoration {\n  position: relative;\n  z-index: 1;\n  width: 100%;\n  height: 1px;\n  border-radius: 999px;\n  opacity: .65;\n}\n\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, #9b5cff 62%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7b45c7 26%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #5a387d 15%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #7b45c7 22%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official::before {\n  background: linear-gradient(180deg, #a86cff, #743ad0) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(214, 184, 255, .8));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(214, 184, 255, .8), transparent);\n}\n\n/* Não oficial: turquesa discreto, mas com a mesma identidade. */\n.indice-nights-settings .bri-section-divider-unofficial {\n  border-color: color-mix(in srgb, #00b8b8 58%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #007f80 24%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #006769 12%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #007f80 21%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(180deg, #00d1d1, #008e90) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(122, 235, 235, .74));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(122, 235, 235, .74), transparent);\n}\n\n/* Botão colocado na faixa de \"Transcrições não oficiais\". */\n.indice-nights-settings .bri-section-divider-with-action {\n  grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  position: relative;\n  z-index: 3;\n  justify-self: end;\n  min-height: 28px;\n  padding: 5px 11px;\n  border: 1px solid rgba(255,255,255,.22);\n  border-radius: 7px;\n  background: rgba(255,255,255,.10);\n  color: #fff;\n  font-size: 11.5px;\n  font-weight: 600;\n  line-height: 1;\n  white-space: nowrap;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-section-divider-action:hover {\n  background: rgba(255,255,255,.17);\n  border-color: rgba(255,255,255,.32);\n}\n\n.indice-nights-settings .bri-section-divider-action.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* Painel não oficial como um único bloco profissional. */\n.indice-nights-settings .bri-unofficial-panel {\n  display: block !important;\n  width: 100%;\n  padding: 0 !important;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 12px;\n  background: var(--background-secondary);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n  min-height: 72px;\n  margin: 0 !important;\n  padding: 12px 14px !important;\n  border: 0 !important;\n  border-bottom: 1px solid var(--background-modifier-border) !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row:last-child {\n  border-bottom: 0 !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  background: var(--background-modifier-hover) !important;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-info {\n  position: relative;\n  min-width: 0;\n  padding-left: 48px !important;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 36px;\n  height: 36px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  transform: translateY(-50%);\n  border-radius: 9px;\n  background: color-mix(in srgb, #00a8aa 22%, var(--background-modifier-hover));\n  color: #16c9cb;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon svg {\n  width: 19px;\n  height: 19px;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-name {\n  font-size: 13.5px !important;\n  font-weight: 600;\n  line-height: 1.3;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-description {\n  margin-top: 3px;\n  font-size: 11px !important;\n  line-height: 1.42;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-control {\n  min-width: 230px;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-row input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-row select {\n  width: min(290px, 100%);\n  max-width: 100%;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 38px;\n    gap: 11px;\n    padding-inline: 13px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    min-width: 210px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: minmax(14px, 1fr) auto minmax(14px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row {\n    display: flex !important;\n    flex-direction: column;\n    align-items: stretch !important;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n    padding-left: 48px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control input,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control select,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control button {\n    width: 100%;\n    max-width: none;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin: 15px 0 10px;\n    padding-inline: 10px !important;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title action\";\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    grid-area: action;\n    justify-self: end;\n    min-height: 27px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n    min-height: 0;\n    padding: 11px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    padding-left: 42px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row-icon {\n    width: 32px;\n    height: 32px;\n    border-radius: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    padding-left: 42px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.2 — ações na faixa de Transcrições oficiais\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-with-actions {\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-actions {\n  position: relative;\n  z-index: 3;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 7px;\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-section-divider-action-official {\n  border-color: rgba(255, 255, 255, .22);\n  background: rgba(255, 255, 255, .10);\n  color: #fff;\n}\n\n.indice-nights-settings .bri-section-divider-action-official:hover {\n  border-color: rgba(255, 255, 255, .34);\n  background: rgba(255, 255, 255, .18);\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  min-height: 29px;\n}\n\n/* Com a ação principal transferida para o cabeçalho,\n   remove qualquer margem residual da antiga linha de download. */\n.indice-nights-settings .bri-catalog-settings + .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPad em Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title actions\";\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    justify-self: end;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    min-height: 28px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n}\n\n/* iPhone: mantém os dois botões utilizáveis sem estourar a largura. */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    display: grid !important;\n    grid-template-columns: 1fr !important;\n    grid-template-areas:\n      \"title\"\n      \"actions\";\n    gap: 8px;\n    padding-block: 9px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: center;\n    text-align: center;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    width: 100%;\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    width: 100%;\n    min-width: 0;\n    min-height: 30px;\n    padding: 5px 6px;\n    font-size: 10px;\n    white-space: normal;\n    line-height: 1.15;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.3 — ações oficiais em linha própria\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-official {\n  margin-bottom: 8px !important;\n}\n\n.indice-nights-settings .bri-official-actions-row {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 10px;\n  width: 100%;\n  margin: 0 0 14px;\n}\n\n.indice-nights-settings .bri-official-action-button {\n  width: 100%;\n  min-width: 0;\n  min-height: 38px;\n  padding: 8px 12px;\n  border: 1px solid color-mix(in srgb, #9b5cff 45%, var(--background-modifier-border));\n  border-radius: 10px;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7d45c7 20%, var(--background-secondary)),\n      color-mix(in srgb, #5e3c82 10%, var(--background-secondary))\n    );\n  color: var(--text-normal);\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 1.2;\n  text-align: center;\n  white-space: normal;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-official-action-button:hover {\n  border-color: color-mix(in srgb, #a86cff 60%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #8d54d8 26%, var(--background-secondary)),\n      color-mix(in srgb, #68468d 14%, var(--background-secondary))\n    );\n}\n\n.indice-nights-settings .bri-official-action-button.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    gap: 9px;\n    margin-bottom: 12px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 40px;\n    font-size: 11.5px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    padding: 8px 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 7px;\n    margin-bottom: 11px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 42px;\n    padding: 7px 6px;\n    border-radius: 9px;\n    font-size: 10.5px;\n  }\n}\n\n/* Neutraliza regras da v0.8.2 que colocavam ações dentro da faixa */\n.indice-nights-settings .bri-section-divider-with-actions,\n.indice-nights-settings .bri-section-divider-actions,\n.indice-nights-settings .bri-section-divider-action-official {\n  all: unset;\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.7 — seleção em massa e ordem cronológica\n   ============================================================ */\n.indice-nights-settings .bri-bulk-controls {\n  display:flex; align-items:center; justify-content:space-between; gap:14px;\n  width:100%; margin:0 0 14px; padding:11px 14px;\n  border:1px solid var(--background-modifier-border); border-radius:11px;\n  background:var(--background-secondary);\n}\n.indice-nights-settings .bri-bulk-controls-copy { min-width:0; }\n.indice-nights-settings .bri-bulk-controls-title {\n  color:var(--text-normal); font-size:12.5px; font-weight:650; line-height:1.3;\n}\n.indice-nights-settings .bri-bulk-controls-description {\n  margin-top:2px; color:var(--text-muted); font-size:10.5px; line-height:1.35;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item,\n.indice-nights-settings .bri-publication-order-toggle .setting-item {\n  min-height:0 !important; padding:0 !important; border:0 !important; background:transparent !important;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-info,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-info { display:none !important; }\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-control,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-control {\n  padding:0 !important; margin:0 !important;\n}\n.indice-nights-settings .bri-library-card { height:auto !important; }\n.indice-nights-settings .bri-publication-order-row {\n  grid-column:1/-1; display:flex; align-items:center; justify-content:space-between;\n  gap:10px; padding:9px 0 0; border-top:1px solid var(--background-modifier-border);\n}\n.indice-nights-settings .bri-publication-order-copy { min-width:0; }\n.indice-nights-settings .bri-publication-order-title {\n  color:var(--text-normal); font-size:11.5px; font-weight:600; line-height:1.25;\n}\n.indice-nights-settings .bri-publication-order-description {\n  margin-top:2px; color:var(--text-faint); font-size:9.5px; line-height:1.3;\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-bulk-controls { gap:9px; padding:10px 11px; }\n  .indice-nights-settings .bri-bulk-controls-description,\n  .indice-nights-settings .bri-publication-order-description { display:none; }\n  .indice-nights-settings .bri-publication-order-row { gap:8px; }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.8 — ações compactas + recentes primeiro\n   ============================================================ */\n.indice-nights-settings .bri-official-actions-row {\n  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  align-items:stretch;\n}\n.indice-nights-settings .bri-official-action-button-compact {\n  width:auto !important;\n  min-width:122px;\n  padding-inline:14px;\n  white-space:nowrap;\n}\n.indice-nights-settings .bri-bulk-controls {\n  display:none !important;\n}\n@media (max-width:1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:108px;\n    padding-inline:10px;\n    font-size:10.5px;\n  }\n}\n@media (max-width:780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:96px;\n    padding-inline:8px;\n    font-size:10px;\n  }\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:repeat(2,minmax(0,1fr)) !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    grid-column:2;\n    justify-self:end;\n    width:auto !important;\n    min-width:112px;\n    min-height:30px;\n  }\n}\n";
+var INDICE_NIGHTS_RUNTIME_CSS = ".bri-root {\n  --bri-gap: 0.75rem;\n  width: 100%;\n}\n\n.bri-title {\n  margin-block: 0 1rem;\n}\n\n.bri-summary {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n  margin-bottom: 1rem;\n}\n\n.bri-summary-stats {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.4rem 1.25rem;\n  margin-top: 0.5rem;\n  color: var(--text-muted);\n}\n\n.bri-controls {\n  display: grid;\n  grid-template-columns: minmax(12rem, 0.8fr) minmax(14rem, 1.2fr);\n  gap: var(--bri-gap);\n  margin-bottom: 1.25rem;\n}\n\n.bri-control-group {\n  display: flex;\n  flex-direction: column;\n  gap: 0.35rem;\n}\n\n.bri-control-group label {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.bri-control-group select,\n.bri-control-group input {\n  width: 100%;\n  min-height: var(--input-height);\n}\n\n.bri-search-mode {\n  grid-column: 1 / -1;\n  display: flex;\n  align-items: flex-start;\n  gap: 0.6rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-s);\n  padding: 0.7rem 0.8rem;\n}\n\n.bri-search-mode input {\n  margin-top: 0.2rem;\n}\n\n.bri-search-mode label {\n  display: flex;\n  flex-direction: column;\n  gap: 0.15rem;\n  cursor: pointer;\n}\n\n.bri-search-mode small {\n  color: var(--text-muted);\n  font-weight: normal;\n}\n\n.bri-results h2 {\n  margin-block: 0.75rem;\n}\n\n.bri-search-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-bottom: 1rem;\n}\n\n.bri-reference-list,\n.bri-note-list {\n  padding-inline-start: 1.5rem;\n}\n\n.bri-reference {\n  margin-bottom: 0.65rem;\n}\n\n.bri-reference-title {\n  color: var(--text-accent);\n}\n\n.bri-note-list {\n  margin-block: 0.25rem 0;\n}\n\n.bri-note-list li {\n  margin-block: 0.2rem;\n}\n\n.bri-load-more {\n  display: block;\n  margin: 1rem auto;\n}\n\n.bri-empty {\n  color: var(--text-muted);\n  font-style: italic;\n}\n\n.bri-content-results {\n  display: grid;\n  gap: 0.75rem;\n}\n\n.bri-content-result {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 0.85rem 1rem;\n}\n\n.bri-content-section {\n  display: block;\n  color: var(--text-muted);\n  font-size: var(--font-ui-smaller);\n  margin-bottom: 0.2rem;\n}\n\n.bri-content-title {\n  font-weight: var(--font-semibold);\n}\n\n.bri-content-sentence {\n  margin: 0.5rem 0 0;\n  color: var(--text-normal);\n  line-height: 1.5;\n}\n\n.bri-catalog-status {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  margin-block: 0.75rem;\n}\n\n.bri-catalog-settings {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  padding: 0.5rem 1rem;\n}\n\n.bri-catalog-settings .setting-item {\n  align-items: center;\n}\n\n.bri-catalog-settings .setting-item-control {\n  flex-wrap: wrap;\n}\n\n.bri-catalog-settings select {\n  max-width: min(24rem, 100%);\n}\n\n.callout[data-callout=\"bible-index\"] {\n  --callout-color: var(--interactive-accent-rgb);\n  --callout-icon: lucide-book-open-text;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary-alt);\n  box-shadow: none;\n  margin-block: 1rem 1.25rem;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-title {\n  color: var(--text-normal);\n  font-size: var(--font-ui-small);\n  font-weight: var(--font-semibold);\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content {\n  color: var(--text-muted);\n  font-size: var(--font-ui-small);\n  line-height: 1.8;\n}\n\n.callout[data-callout=\"bible-index\"] .callout-content p {\n  margin: 0;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link {\n  color: var(--text-accent);\n  text-decoration: none;\n  white-space: nowrap;\n}\n\n.callout[data-callout=\"bible-index\"] .internal-link:hover {\n  text-decoration: underline;\n}\n\n.bri-category-heading {\n  margin-block: 1rem 0.35rem;\n}\n\n\n.indice-nights-scripture-link {\n  color: var(--link-color);\n  cursor: pointer;\n  text-decoration: underline;\n  text-decoration-thickness: from-font;\n}\n\n.indice-nights-verse-preview {\n  line-height: 1.65;\n}\n\n.indice-nights-verse-text {\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-m);\n  background: var(--background-secondary);\n  padding: 1rem;\n}\n\n.indice-nights-verse-text .verseNum {\n  color: var(--text-accent);\n  font-size: var(--font-ui-smaller);\n  font-weight: var(--font-semibold);\n  vertical-align: super;\n}\n\n.indice-nights-verse-citation {\n  display: block;\n  margin-top: 0.65rem;\n  color: var(--text-muted);\n}\n\n.indice-nights-verse-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.6rem;\n  margin-top: 1rem;\n}\n\n.indice-nights-verse-actions a {\n  display: inline-flex;\n  align-items: center;\n  border-radius: var(--button-radius);\n  padding: 0.45rem 0.75rem;\n  text-decoration: none;\n}\n\n/* Miniaturas de transcrições: layout integrado ao texto, semelhante a uma publicação. */\n.markdown-preview-view .indice-nights-thumbnail-link {\n  display: block;\n  float: right;\n  width: 43%;\n  max-width: 31rem;\n  margin: 0.35rem 0 1.35rem 1.75rem;\n  padding: 0;\n  background-image: none;\n  border-radius: var(--radius-m);\n  line-height: 0;\n}\n\n.markdown-preview-view .indice-nights-thumbnail-link img[alt=\"Miniatura\"],\n.markdown-preview-view img[alt=\"Miniatura\"] {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  height: auto;\n  max-height: none;\n  margin: 0;\n  border-radius: var(--radius-m);\n  object-fit: contain;\n}\n\n/* O ícone padrão de link externo do Obsidian fica solto quando o link envolve uma imagem. */\n.markdown-preview-view .indice-nights-thumbnail-link.external-link {\n  background-image: none;\n  padding-inline-end: 0;\n}\n\n@media (max-width: 900px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    width: 46%;\n    max-width: 24rem;\n    margin-left: 1.25rem;\n  }\n}\n\n@media (max-width: 600px) {\n  .markdown-preview-view .indice-nights-thumbnail-link {\n    float: none;\n    width: 100%;\n    max-width: none;\n    margin: 0.75rem 0 1.25rem;\n  }\n\n  .bri-controls {\n    grid-template-columns: 1fr;\n  }\n\n  .bri-summary-stats {\n    flex-direction: column;\n    gap: 0.2rem;\n  }\n\n  .bri-reference-list,\n  .bri-note-list {\n    padding-inline-start: 1.15rem;\n  }\n\n  .bri-catalog-settings {\n    padding-inline: 0.65rem;\n  }\n\n  .bri-catalog-settings .setting-item {\n    align-items: stretch;\n    flex-direction: column;\n  }\n\n  .bri-catalog-settings .setting-item-control {\n    justify-content: flex-start;\n    width: 100%;\n  }\n}\n\n/* v0.7.5 — catálogo visual inspirado em uma biblioteca de mídia */\n.bri-catalog-settings {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 0.85rem;\n  border: 0;\n  padding: 0;\n  background: transparent;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  min-width: 0;\n  min-height: 10.5rem;\n  padding: 1rem;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: var(--radius-l);\n  background: var(--background-secondary);\n  overflow: hidden;\n  transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;\n}\n\n.bri-catalog-settings .bri-catalog-card.setting-item:hover {\n  border-color: var(--background-modifier-border-hover);\n  background: var(--background-secondary-alt);\n  transform: translateY(-1px);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled {\n  border-color: rgba(var(--interactive-accent-rgb), 0.55);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-info {\n  display: grid;\n  grid-template-columns: 2.55rem minmax(0, 1fr);\n  grid-template-rows: auto 1fr;\n  column-gap: 0.8rem;\n  width: 100%;\n  min-width: 0;\n  flex: 1 1 auto;\n  margin: 0;\n}\n\n.bri-catalog-card-icon {\n  grid-row: 1 / span 2;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 2.55rem;\n  height: 2.55rem;\n  border-radius: var(--radius-m);\n  background: var(--background-modifier-hover);\n  color: var(--text-accent);\n}\n\n.bri-catalog-card-icon svg {\n  width: 1.25rem;\n  height: 1.25rem;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-name {\n  align-self: end;\n  min-width: 0;\n  margin: 0;\n  font-size: 1rem;\n  font-weight: var(--font-semibold);\n  line-height: 1.25;\n  color: var(--text-normal);\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-description {\n  align-self: start;\n  min-width: 0;\n  margin-top: 0.25rem;\n  font-size: var(--font-ui-smaller);\n  line-height: 1.4;\n  color: var(--text-muted);\n  overflow-wrap: anywhere;\n}\n\n.bri-catalog-settings .bri-catalog-card .setting-item-control {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  gap: 0.65rem;\n  align-items: center;\n  width: 100%;\n  min-width: 0;\n  margin-top: 1rem;\n  padding-top: 0.8rem;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.bri-catalog-settings .bri-catalog-card.is-enabled .setting-item-control .checkbox-container {\n  justify-self: start;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control {\n  grid-template-columns: 1fr auto;\n}\n\n.bri-catalog-settings .bri-catalog-card:not(.is-enabled) .setting-item-control .checkbox-container {\n  grid-column: 2;\n}\n\n.bri-catalog-settings .bri-catalog-card select {\n  width: 100%;\n  min-width: 0;\n  max-width: none;\n}\n\n@media (max-width: 1000px) {\n  .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n\n@media (max-width: 620px) {\n  .bri-catalog-settings {\n    grid-template-columns: 1fr;\n    gap: 0.7rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card.setting-item {\n    min-height: 0;\n    padding: 0.9rem;\n  }\n\n  .bri-catalog-settings .bri-catalog-card .setting-item-control {\n    grid-template-columns: auto minmax(0, 1fr);\n  }\n}\n\n/* v0.7.6: Séries são exibidas como cartões individuais dentro do catálogo. */\n\n/* ============================================================\n   Índice Nights v0.7.8 — Biblioteca visual responsiva\n   Desktop, iPad e iPhone\n   ============================================================ */\n\n.indice-nights-settings {\n  --bri-panel-gap: 14px;\n  --bri-card-radius: 14px;\n  --bri-card-border: var(--background-modifier-border);\n  --bri-card-bg: var(--background-secondary);\n  --bri-card-bg-hover: var(--background-secondary-alt);\n  --bri-soft-accent: color-mix(in srgb, var(--interactive-accent) 13%, var(--background-secondary));\n  width: 100%;\n  max-width: 100%;\n  box-sizing: border-box;\n  overflow-x: hidden;\n}\n\n.indice-nights-settings *,\n.indice-nights-settings *::before,\n.indice-nights-settings *::after {\n  box-sizing: border-box;\n}\n\n.indice-nights-settings .bri-library-intro {\n  margin: -2px 0 16px;\n  color: var(--text-muted);\n  line-height: 1.55;\n}\n\n/* Índice geral */\n.indice-nights-settings .bri-index-hero {\n  position: relative !important;\n  inset: auto !important;\n  z-index: 0 !important;\n  float: none !important;\n  clear: both !important;\n  width: 100% !important;\n  min-height: 86px;\n  display: grid !important;\n  grid-template-columns: 52px minmax(0, 1fr) 24px;\n  align-items: center;\n  gap: 14px;\n  margin: 0 0 18px !important;\n  padding: 15px 17px !important;\n  border: 1px solid #3893ff !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: linear-gradient(110deg, #073d8e 0%, #075dcc 52%, #0649a6 100%) !important;\n  color: #fff !important;\n  box-shadow: 0 8px 22px rgba(0, 84, 196, .16);\n  text-align: left;\n  cursor: pointer;\n  overflow: hidden;\n  transform: none !important;\n}\n\n.indice-nights-settings .bri-index-hero:hover {\n  background: linear-gradient(110deg, #08479f 0%, #0866dc 52%, #0754b8 100%) !important;\n}\n\n.indice-nights-settings .bri-index-hero-icon {\n  width: 52px;\n  height: 52px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid rgba(255,255,255,.34);\n  border-radius: 12px;\n  background: rgba(255,255,255,.08);\n}\n\n.indice-nights-settings .bri-index-hero-icon svg {\n  width: 28px;\n  height: 28px;\n}\n\n.indice-nights-settings .bri-index-hero-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-index-hero-title-row {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-index-hero-title {\n  font-size: 18px;\n  line-height: 1.25;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-index-hero-badge {\n  display: inline-flex;\n  padding: 3px 8px;\n  border-radius: 999px;\n  background: rgba(255,255,255,.17);\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 1.2;\n}\n\n.indice-nights-settings .bri-index-hero-description {\n  margin-top: 5px;\n  color: rgba(255,255,255,.84);\n  font-size: 13px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-index-hero-arrow {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: end;\n}\n\n/* Grade principal */\n.indice-nights-settings .bri-catalog-settings {\n  display: grid !important;\n  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;\n  grid-auto-flow: row !important;\n  align-items: stretch !important;\n  gap: var(--bri-panel-gap) !important;\n  width: 100% !important;\n  margin: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n  overflow: visible !important;\n}\n\n/* Cartões normais */\n.indice-nights-settings .bri-library-card {\n  position: relative;\n  min-width: 0;\n  min-height: 214px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr);\n  grid-template-rows: minmax(0, 1fr) auto;\n  gap: 12px 13px;\n  align-content: stretch;\n  padding: 16px !important;\n  margin: 0 !important;\n  border: 1px solid var(--bri-card-border) !important;\n  border-radius: var(--bri-card-radius) !important;\n  background: var(--bri-card-bg) !important;\n  overflow: hidden;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-library-card:hover {\n  background: var(--bri-card-bg-hover) !important;\n  border-color: color-mix(in srgb, var(--interactive-accent) 36%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--bri-card-border)) !important;\n}\n\n.indice-nights-settings .bri-library-card-icon,\n.indice-nights-settings .bri-library-group-icon {\n  width: 48px;\n  height: 48px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex: 0 0 auto;\n  border-radius: 11px;\n  background: var(--bri-soft-accent);\n  color: var(--interactive-accent);\n}\n\n.indice-nights-settings .bri-library-card-icon svg,\n.indice-nights-settings .bri-library-group-icon svg {\n  width: 23px;\n  height: 23px;\n}\n\n.indice-nights-settings .bri-library-card-body {\n  min-width: 0;\n  display: flex;\n  flex-direction: column;\n}\n\n.indice-nights-settings .bri-library-card-title {\n  margin: 1px 0 0;\n  color: var(--text-normal);\n  font-size: 15px;\n  font-weight: 700;\n  line-height: 1.32;\n}\n\n.indice-nights-settings .bri-library-card-description {\n  margin-top: 6px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-library-card-path {\n  margin-top: auto;\n  padding-top: 12px;\n  color: var(--text-faint);\n  font-size: 11.5px;\n  line-height: 1.45;\n  overflow-wrap: anywhere;\n}\n\n.indice-nights-settings .bri-library-card-footer {\n  grid-column: 1 / -1;\n  min-width: 0;\n  min-height: 44px;\n  display: flex !important;\n  align-items: center;\n  justify-content: space-between;\n  gap: 10px;\n  margin-top: 0;\n  padding-top: 12px;\n  border-top: 1px solid var(--background-modifier-border);\n}\n\n.indice-nights-settings .bri-library-card-status {\n  color: var(--text-faint);\n  font-size: 11.5px;\n}\n\n.indice-nights-settings .bri-library-card-select {\n  min-width: 0;\n  flex: 1 1 auto;\n}\n\n.indice-nights-settings .bri-library-card-select select {\n  width: 100%;\n  max-width: 100%;\n  min-width: 0;\n}\n\n/* Remove o espaçamento nativo de Setting dentro dos mini-controles */\n.indice-nights-settings .bri-library-card-select .setting-item,\n.indice-nights-settings .bri-library-card-toggle .setting-item,\n.indice-nights-settings .bri-library-group-option-select .setting-item,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item {\n  min-height: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-info,\n.indice-nights-settings .bri-library-card-toggle .setting-item-info,\n.indice-nights-settings .bri-library-group-option-select .setting-item-info,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-info {\n  display: none !important;\n}\n\n.indice-nights-settings .bri-library-card-select .setting-item-control,\n.indice-nights-settings .bri-library-card-toggle .setting-item-control,\n.indice-nights-settings .bri-library-group-option-select .setting-item-control,\n.indice-nights-settings .bri-library-group-option-toggle .setting-item-control {\n  width: auto !important;\n  padding: 0 !important;\n  margin: 0 !important;\n}\n\n/* Congressos / Séries */\n.indice-nights-settings .bri-library-groups-wrap {\n  grid-column: 1 / -1;\n  display: grid !important;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: var(--bri-panel-gap);\n  width: 100%;\n  margin: 0;\n}\n\n.indice-nights-settings .bri-library-group {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  border: 1px solid var(--bri-card-border);\n  border-radius: var(--bri-card-radius);\n  background: var(--bri-card-bg);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-library-group[open] {\n  border-color: color-mix(in srgb, var(--interactive-accent) 44%, var(--bri-card-border));\n}\n\n.indice-nights-settings .bri-library-group-summary {\n  min-height: 108px;\n  display: grid !important;\n  grid-template-columns: 48px minmax(0, 1fr) auto 24px;\n  align-items: center;\n  gap: 13px;\n  padding: 16px !important;\n  margin: 0 !important;\n  list-style: none;\n  cursor: pointer;\n  user-select: none;\n}\n\n.indice-nights-settings .bri-library-group-summary::-webkit-details-marker {\n  display: none;\n}\n\n.indice-nights-settings .bri-library-group-copy {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-title {\n  color: var(--text-normal);\n  font-size: 15px;\n  line-height: 1.32;\n  font-weight: 700;\n}\n\n.indice-nights-settings .bri-library-group-description {\n  margin-top: 5px;\n  color: var(--text-muted);\n  font-size: 12.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-library-group-count {\n  padding: 4px 8px;\n  border-radius: 999px;\n  background: var(--background-modifier-hover);\n  color: var(--text-muted);\n  font-size: 11px;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-library-group-chevron {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-muted);\n  transition: transform .18s ease;\n}\n\n.indice-nights-settings .bri-library-group[open] .bri-library-group-chevron {\n  transform: rotate(180deg);\n}\n\n.indice-nights-settings .bri-library-group-panel {\n  display: grid;\n  gap: 8px;\n  padding: 0 16px 16px;\n  animation: bri-panel-open .18s ease-out;\n}\n\n@keyframes bri-panel-open {\n  from { opacity: 0; transform: translateY(-5px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n.indice-nights-settings .bri-library-group-option {\n  min-width: 0;\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  padding: 11px 12px;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 10px;\n  background: var(--background-primary);\n}\n\n.indice-nights-settings .bri-library-group-option.is-enabled {\n  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));\n}\n\n.indice-nights-settings .bri-library-group-option-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-title {\n  color: var(--text-normal);\n  font-size: 12.5px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-library-group-option-description {\n  margin-top: 2px;\n  color: var(--text-muted);\n  font-size: 11px;\n  line-height: 1.4;\n}\n\n.indice-nights-settings .bri-library-group-option-controls {\n  min-width: 0;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}\n\n.indice-nights-settings .bri-library-group-option-select {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-library-group-option-select select {\n  width: min(220px, 30vw);\n  max-width: 220px;\n}\n\n/* Ação de download */\n.indice-nights-settings .bri-action-setting {\n  margin-top: 16px !important;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: var(--bri-card-radius);\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-info {\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-action-setting .setting-item-control {\n  flex-shrink: 0;\n}\n\n/* ====================== TABLET / iPad ====================== */\n@media (max-width: 1024px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 206px;\n  }\n\n  .indice-nights-settings .bri-library-groups-wrap {\n    grid-template-columns: 1fr;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    min-height: 96px;\n  }\n}\n\n/* iPad em painel estreito / split view */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 46px minmax(0, 1fr) 20px;\n    min-height: 78px;\n    gap: 11px;\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 46px;\n    height: 46px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 16px;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-catalog-settings {\n    grid-template-columns: 1fr !important;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    min-height: 0;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: inline-flex;\n  }\n}\n\n/* ====================== iPhone / celulares ====================== */\n@media (max-width: 560px) {\n  .indice-nights-settings {\n    --bri-panel-gap: 10px;\n  }\n\n  .indice-nights-settings .bri-library-intro {\n    margin-bottom: 12px;\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    grid-template-columns: 42px minmax(0, 1fr) 18px;\n    gap: 10px;\n    min-height: 72px;\n    margin-bottom: 12px !important;\n    padding: 12px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-index-hero-icon svg {\n    width: 23px;\n    height: 23px;\n  }\n\n  .indice-nights-settings .bri-index-hero-title {\n    font-size: 15px;\n  }\n\n  .indice-nights-settings .bri-index-hero-badge {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero-description {\n    margin-top: 3px;\n    font-size: 11px;\n    line-height: 1.35;\n  }\n\n  .indice-nights-settings .bri-library-card {\n    grid-template-columns: 42px minmax(0, 1fr);\n    gap: 10px 11px;\n    padding: 13px !important;\n    border-radius: 12px !important;\n  }\n\n  .indice-nights-settings .bri-library-card-icon,\n  .indice-nights-settings .bri-library-group-icon {\n    width: 42px;\n    height: 42px;\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-title,\n  .indice-nights-settings .bri-library-group-title {\n    font-size: 14px;\n  }\n\n  .indice-nights-settings .bri-library-card-description,\n  .indice-nights-settings .bri-library-group-description {\n    font-size: 11.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    padding-top: 9px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    padding-top: 10px;\n  }\n\n  .indice-nights-settings .bri-library-card-select {\n    flex-basis: 100%;\n    order: 2;\n  }\n\n  .indice-nights-settings .bri-library-card-footer {\n    flex-wrap: wrap;\n  }\n\n  .indice-nights-settings .bri-library-group {\n    border-radius: 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-summary {\n    grid-template-columns: 42px minmax(0, 1fr) 20px;\n    min-height: 82px;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-library-group-count {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-library-group-panel {\n    padding: 0 12px 12px;\n  }\n\n  .indice-nights-settings .bri-library-group-option {\n    grid-template-columns: 1fr;\n    gap: 8px;\n    padding: 10px;\n  }\n\n  .indice-nights-settings .bri-library-group-option-controls {\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select {\n    flex: 1 1 auto;\n  }\n\n  .indice-nights-settings .bri-library-group-option-select select {\n    width: 100%;\n    max-width: none;\n  }\n\n  .indice-nights-settings .bri-action-setting {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n    padding: 13px !important;\n  }\n\n  .indice-nights-settings .bri-action-setting .setting-item-control,\n  .indice-nights-settings .bri-action-setting button {\n    width: 100%;\n  }\n}\n\n/* iPhone muito estreito */\n@media (max-width: 390px) {\n  .indice-nights-settings .bri-index-hero-description {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-index-hero {\n    min-height: 64px;\n  }\n\n  .indice-nights-settings .bri-library-card-path {\n    overflow-wrap: anywhere;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.7.9 — divisores e acabamento da área inferior\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  display: grid;\n  grid-template-columns: auto minmax(0, 1fr);\n  align-items: center;\n  gap: 12px;\n  width: 100%;\n  margin: 20px 0 12px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  font-size: 13px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .01em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  height: 1px;\n  width: 100%;\n  border-radius: 999px;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-label {\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent),\n    color-mix(in srgb, var(--interactive-accent) 18%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 82%, var(--interactive-accent));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-line {\n  background: linear-gradient(\n    90deg,\n    color-mix(in srgb, var(--text-muted) 45%, transparent),\n    color-mix(in srgb, var(--text-muted) 10%, transparent)\n  );\n}\n\n/* Área inferior no mesmo padrão visual do catálogo */\n.indice-nights-settings .bri-unofficial-panel {\n  display: grid;\n  gap: 10px;\n  width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item {\n  width: 100%;\n  min-width: 0;\n  margin: 0;\n  padding: 14px 16px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: 12px;\n  background: var(--background-secondary);\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  border-color: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border)) !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n  min-width: 0;\n  padding-right: 14px;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n  font-size: 14px;\n  font-weight: 600;\n  line-height: 1.35;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description {\n  margin-top: 3px;\n  font-size: 11.5px;\n  line-height: 1.45;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n  min-width: min(260px, 38%);\n  justify-content: flex-end;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-panel > .setting-item select {\n  width: min(280px, 100%);\n  max-width: 100%;\n}\n\n.indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n  margin: 0;\n  padding: 4px 2px 2px;\n  color: var(--text-muted);\n  font-size: 11.5px;\n  line-height: 1.5;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child {\n  margin-bottom: 0;\n}\n\n/* iPad / tablet */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    margin-top: 18px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 13px 14px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    min-width: min(240px, 42%);\n  }\n}\n\n/* iPad em Split View e tablets estreitos */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    display: flex;\n    flex-direction: column;\n    align-items: stretch;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-info {\n    width: 100%;\n    padding-right: 0;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-control > * {\n    max-width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item input[type=\"text\"],\n  .indice-nights-settings .bri-unofficial-panel > .setting-item select,\n  .indice-nights-settings .bri-unofficial-panel > .setting-item button {\n    width: 100%;\n    max-width: 100%;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    grid-template-columns: auto minmax(24px, 1fr);\n    gap: 9px;\n    margin: 16px 0 10px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item {\n    padding: 12px !important;\n    border-radius: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-name {\n    font-size: 13px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .setting-item .setting-item-description,\n  .indice-nights-settings .bri-unofficial-panel > p.setting-item-description {\n    font-size: 11px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.0 — títulos de seção em faixa elegante\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 100%;\n  min-height: 38px;\n  margin: 20px 0 12px;\n  padding: 0 14px;\n  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border));\n  border-radius: 10px;\n  overflow: hidden;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--interactive-accent) 18%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  content: \"\";\n  position: absolute;\n  inset: 0 auto 0 0;\n  width: 4px;\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--interactive-accent) 94%, white 6%),\n    color-mix(in srgb, var(--interactive-accent) 70%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 1;\n  display: inline-flex;\n  align-items: center;\n  min-width: 0;\n  padding-left: 2px;\n  color: color-mix(in srgb, var(--interactive-accent) 78%, var(--text-normal));\n  font-size: 12.5px;\n  font-weight: 700;\n  line-height: 1;\n  letter-spacing: .015em;\n  white-space: nowrap;\n}\n\n.indice-nights-settings .bri-section-divider-line {\n  display: none !important;\n}\n\n/* Oficial: um pouco mais vivo, combinando com o Índice Geral */\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border));\n  box-shadow: inset 0 1px 0 color-mix(in srgb, white 5%, transparent);\n}\n\n/* Não oficial: mesma linguagem visual, porém mais neutra */\n.indice-nights-settings .bri-section-divider-unofficial {\n  margin-top: 22px;\n  border-color: color-mix(in srgb, var(--text-muted) 28%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, var(--text-muted) 9%, var(--background-secondary)) 0%,\n      color-mix(in srgb, var(--text-muted) 4%, var(--background-secondary)) 55%,\n      var(--background-secondary) 100%\n    );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(\n    180deg,\n    color-mix(in srgb, var(--text-muted) 75%, var(--interactive-accent) 25%),\n    color-mix(in srgb, var(--text-muted) 45%, transparent)\n  );\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-label {\n  color: color-mix(in srgb, var(--text-muted) 78%, var(--text-normal));\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin-top: 18px;\n    padding-inline: 13px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 34px;\n    margin: 15px 0 10px;\n    padding-inline: 12px;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider::before {\n    width: 3px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.1 — acabamento aprovado\n   ============================================================ */\n\n/* Sem texto introdutório: aproxima o Índice Geral do cabeçalho. */\n.indice-nights-settings .bri-index-hero {\n  margin-top: 8px !important;\n}\n\n/* Faixas de seção: título branco centralizado e linhas laterais. */\n.indice-nights-settings .bri-section-divider {\n  position: relative;\n  display: grid !important;\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);\n  align-items: center;\n  gap: 14px;\n  width: 100%;\n  min-height: 40px;\n  margin: 20px 0 12px;\n  padding: 0 15px !important;\n  border-radius: 10px;\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-section-divider::before {\n  width: 4px;\n}\n\n.indice-nights-settings .bri-section-divider-label {\n  position: relative;\n  z-index: 2;\n  justify-self: center;\n  padding: 0 !important;\n  color: #fff !important;\n  font-size: 13px !important;\n  font-weight: 700 !important;\n  line-height: 1;\n  text-align: center;\n  letter-spacing: .01em;\n}\n\n.indice-nights-settings .bri-section-divider-decoration {\n  position: relative;\n  z-index: 1;\n  width: 100%;\n  height: 1px;\n  border-radius: 999px;\n  opacity: .65;\n}\n\n.indice-nights-settings .bri-section-divider-official {\n  border-color: color-mix(in srgb, #9b5cff 62%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7b45c7 26%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #5a387d 15%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #7b45c7 22%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official::before {\n  background: linear-gradient(180deg, #a86cff, #743ad0) !important;\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(214, 184, 255, .8));\n}\n\n.indice-nights-settings .bri-section-divider-official .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(214, 184, 255, .8), transparent);\n}\n\n/* Não oficial: turquesa discreto, mas com a mesma identidade. */\n.indice-nights-settings .bri-section-divider-unofficial {\n  border-color: color-mix(in srgb, #00b8b8 58%, var(--background-modifier-border)) !important;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #007f80 24%, var(--background-secondary)) 0%,\n      color-mix(in srgb, #006769 12%, var(--background-secondary)) 50%,\n      color-mix(in srgb, #007f80 21%, var(--background-secondary)) 100%\n    ) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial::before {\n  background: linear-gradient(180deg, #00d1d1, #008e90) !important;\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration {\n  background: linear-gradient(90deg, transparent, rgba(122, 235, 235, .74));\n}\n\n.indice-nights-settings .bri-section-divider-unofficial .bri-section-divider-decoration-right {\n  background: linear-gradient(90deg, rgba(122, 235, 235, .74), transparent);\n}\n\n/* Botão colocado na faixa de \"Transcrições não oficiais\". */\n.indice-nights-settings .bri-section-divider-with-action {\n  grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  position: relative;\n  z-index: 3;\n  justify-self: end;\n  min-height: 28px;\n  padding: 5px 11px;\n  border: 1px solid rgba(255,255,255,.22);\n  border-radius: 7px;\n  background: rgba(255,255,255,.10);\n  color: #fff;\n  font-size: 11.5px;\n  font-weight: 600;\n  line-height: 1;\n  white-space: nowrap;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-section-divider-action:hover {\n  background: rgba(255,255,255,.17);\n  border-color: rgba(255,255,255,.32);\n}\n\n.indice-nights-settings .bri-section-divider-action.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* Painel não oficial como um único bloco profissional. */\n.indice-nights-settings .bri-unofficial-panel {\n  display: block !important;\n  width: 100%;\n  padding: 0 !important;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 12px;\n  background: var(--background-secondary);\n  overflow: hidden;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n  min-height: 72px;\n  margin: 0 !important;\n  padding: 12px 14px !important;\n  border: 0 !important;\n  border-bottom: 1px solid var(--background-modifier-border) !important;\n  border-radius: 0 !important;\n  background: transparent !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:last-child,\n.indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row:last-child {\n  border-bottom: 0 !important;\n}\n\n.indice-nights-settings .bri-unofficial-panel > .setting-item:hover {\n  background: var(--background-modifier-hover) !important;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-info {\n  position: relative;\n  min-width: 0;\n  padding-left: 48px !important;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 36px;\n  height: 36px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  transform: translateY(-50%);\n  border-radius: 9px;\n  background: color-mix(in srgb, #00a8aa 22%, var(--background-modifier-hover));\n  color: #16c9cb;\n}\n\n.indice-nights-settings .bri-unofficial-row-icon svg {\n  width: 19px;\n  height: 19px;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-name {\n  font-size: 13.5px !important;\n  font-weight: 600;\n  line-height: 1.3;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-description {\n  margin-top: 3px;\n  font-size: 11px !important;\n  line-height: 1.42;\n}\n\n.indice-nights-settings .bri-unofficial-row .setting-item-control {\n  min-width: 230px;\n  flex-shrink: 0;\n}\n\n.indice-nights-settings .bri-unofficial-row input[type=\"text\"],\n.indice-nights-settings .bri-unofficial-row select {\n  width: min(290px, 100%);\n  max-width: 100%;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 38px;\n    gap: 11px;\n    padding-inline: 13px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    min-width: 210px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: minmax(14px, 1fr) auto minmax(14px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row {\n    display: flex !important;\n    flex-direction: column;\n    align-items: stretch !important;\n    gap: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    width: 100%;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    width: 100%;\n    min-width: 0;\n    justify-content: stretch;\n    padding-left: 48px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control input,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control select,\n  .indice-nights-settings .bri-unofficial-row .setting-item-control button {\n    width: 100%;\n    max-width: none;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider {\n    min-height: 36px;\n    margin: 15px 0 10px;\n    padding-inline: 10px !important;\n    border-radius: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-label {\n    font-size: 12px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title action\";\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-action .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-action {\n    grid-area: action;\n    justify-self: end;\n    min-height: 27px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel {\n    border-radius: 10px;\n  }\n\n  .indice-nights-settings .bri-unofficial-panel > .bri-unofficial-row {\n    min-height: 0;\n    padding: 11px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-info {\n    padding-left: 42px !important;\n  }\n\n  .indice-nights-settings .bri-unofficial-row-icon {\n    width: 32px;\n    height: 32px;\n    border-radius: 8px;\n  }\n\n  .indice-nights-settings .bri-unofficial-row .setting-item-control {\n    padding-left: 42px;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.2 — ações na faixa de Transcrições oficiais\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-with-actions {\n  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr) auto !important;\n}\n\n.indice-nights-settings .bri-section-divider-actions {\n  position: relative;\n  z-index: 3;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 7px;\n  min-width: 0;\n}\n\n.indice-nights-settings .bri-section-divider-action-official {\n  border-color: rgba(255, 255, 255, .22);\n  background: rgba(255, 255, 255, .10);\n  color: #fff;\n}\n\n.indice-nights-settings .bri-section-divider-action-official:hover {\n  border-color: rgba(255, 255, 255, .34);\n  background: rgba(255, 255, 255, .18);\n}\n\n.indice-nights-settings .bri-section-divider-action {\n  min-height: 29px;\n}\n\n/* Com a ação principal transferida para o cabeçalho,\n   remove qualquer margem residual da antiga linha de download. */\n.indice-nights-settings .bri-catalog-settings + .bri-section-divider-unofficial {\n  margin-top: 22px;\n}\n\n/* Tablet / iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr) auto !important;\n    gap: 9px;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    padding-inline: 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPad em Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    grid-template-columns: 1fr auto !important;\n    grid-template-areas:\n      \"title actions\";\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-decoration {\n    display: none;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: start;\n    text-align: left;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    justify-self: end;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    min-height: 28px;\n    padding: 5px 8px;\n    font-size: 10.5px;\n  }\n}\n\n/* iPhone: mantém os dois botões utilizáveis sem estourar a largura. */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-section-divider-with-actions {\n    display: grid !important;\n    grid-template-columns: 1fr !important;\n    grid-template-areas:\n      \"title\"\n      \"actions\";\n    gap: 8px;\n    padding-block: 9px !important;\n  }\n\n  .indice-nights-settings .bri-section-divider-with-actions .bri-section-divider-label {\n    grid-area: title;\n    justify-self: center;\n    text-align: center;\n  }\n\n  .indice-nights-settings .bri-section-divider-actions {\n    grid-area: actions;\n    width: 100%;\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 6px;\n  }\n\n  .indice-nights-settings .bri-section-divider-action-official {\n    width: 100%;\n    min-width: 0;\n    min-height: 30px;\n    padding: 5px 6px;\n    font-size: 10px;\n    white-space: normal;\n    line-height: 1.15;\n  }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.3 — ações oficiais em linha própria\n   ============================================================ */\n\n.indice-nights-settings .bri-section-divider-official {\n  margin-bottom: 8px !important;\n}\n\n.indice-nights-settings .bri-official-actions-row {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 10px;\n  width: 100%;\n  margin: 0 0 14px;\n}\n\n.indice-nights-settings .bri-official-action-button {\n  width: 100%;\n  min-width: 0;\n  min-height: 38px;\n  padding: 8px 12px;\n  border: 1px solid color-mix(in srgb, #9b5cff 45%, var(--background-modifier-border));\n  border-radius: 10px;\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #7d45c7 20%, var(--background-secondary)),\n      color-mix(in srgb, #5e3c82 10%, var(--background-secondary))\n    );\n  color: var(--text-normal);\n  font-size: 12px;\n  font-weight: 600;\n  line-height: 1.2;\n  text-align: center;\n  white-space: normal;\n  box-shadow: none;\n}\n\n.indice-nights-settings .bri-official-action-button:hover {\n  border-color: color-mix(in srgb, #a86cff 60%, var(--background-modifier-border));\n  background:\n    linear-gradient(\n      105deg,\n      color-mix(in srgb, #8d54d8 26%, var(--background-secondary)),\n      color-mix(in srgb, #68468d 14%, var(--background-secondary))\n    );\n}\n\n.indice-nights-settings .bri-official-action-button.is-loading {\n  opacity: .68;\n  cursor: wait;\n}\n\n/* iPad */\n@media (max-width: 1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    gap: 9px;\n    margin-bottom: 12px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 40px;\n    font-size: 11.5px;\n  }\n}\n\n/* iPad Split View */\n@media (max-width: 780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 8px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    padding: 8px 9px;\n    font-size: 11px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 7px;\n    margin-bottom: 11px;\n  }\n\n  .indice-nights-settings .bri-official-action-button {\n    min-height: 42px;\n    padding: 7px 6px;\n    border-radius: 9px;\n    font-size: 10.5px;\n  }\n}\n\n/* Neutraliza regras da v0.8.2 que colocavam ações dentro da faixa */\n.indice-nights-settings .bri-section-divider-with-actions,\n.indice-nights-settings .bri-section-divider-actions,\n.indice-nights-settings .bri-section-divider-action-official {\n  all: unset;\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.7 — seleção em massa e ordem cronológica\n   ============================================================ */\n.indice-nights-settings .bri-bulk-controls {\n  display:flex; align-items:center; justify-content:space-between; gap:14px;\n  width:100%; margin:0 0 14px; padding:11px 14px;\n  border:1px solid var(--background-modifier-border); border-radius:11px;\n  background:var(--background-secondary);\n}\n.indice-nights-settings .bri-bulk-controls-copy { min-width:0; }\n.indice-nights-settings .bri-bulk-controls-title {\n  color:var(--text-normal); font-size:12.5px; font-weight:650; line-height:1.3;\n}\n.indice-nights-settings .bri-bulk-controls-description {\n  margin-top:2px; color:var(--text-muted); font-size:10.5px; line-height:1.35;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item,\n.indice-nights-settings .bri-publication-order-toggle .setting-item {\n  min-height:0 !important; padding:0 !important; border:0 !important; background:transparent !important;\n}\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-info,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-info { display:none !important; }\n.indice-nights-settings .bri-bulk-controls-toggle .setting-item-control,\n.indice-nights-settings .bri-publication-order-toggle .setting-item-control {\n  padding:0 !important; margin:0 !important;\n}\n.indice-nights-settings .bri-library-card { height:auto !important; }\n.indice-nights-settings .bri-publication-order-row {\n  grid-column:1/-1; display:flex; align-items:center; justify-content:space-between;\n  gap:10px; padding:9px 0 0; border-top:1px solid var(--background-modifier-border);\n}\n.indice-nights-settings .bri-publication-order-copy { min-width:0; }\n.indice-nights-settings .bri-publication-order-title {\n  color:var(--text-normal); font-size:11.5px; font-weight:600; line-height:1.25;\n}\n.indice-nights-settings .bri-publication-order-description {\n  margin-top:2px; color:var(--text-faint); font-size:9.5px; line-height:1.3;\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-bulk-controls { gap:9px; padding:10px 11px; }\n  .indice-nights-settings .bri-bulk-controls-description,\n  .indice-nights-settings .bri-publication-order-description { display:none; }\n  .indice-nights-settings .bri-publication-order-row { gap:8px; }\n}\n\n\n/* ============================================================\n   Índice Nights v0.8.8 — ações compactas + recentes primeiro\n   ============================================================ */\n.indice-nights-settings .bri-official-actions-row {\n  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  align-items:stretch;\n}\n.indice-nights-settings .bri-official-action-button-compact {\n  width:auto !important;\n  min-width:122px;\n  padding-inline:14px;\n  white-space:nowrap;\n}\n.indice-nights-settings .bri-bulk-controls {\n  display:none !important;\n}\n@media (max-width:1024px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:108px;\n    padding-inline:10px;\n    font-size:10.5px;\n  }\n}\n@media (max-width:780px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    min-width:96px;\n    padding-inline:8px;\n    font-size:10px;\n  }\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-official-actions-row {\n    grid-template-columns:repeat(2,minmax(0,1fr)) !important;\n  }\n  .indice-nights-settings .bri-official-action-button-compact {\n    grid-column:2;\n    justify-self:end;\n    width:auto !important;\n    min-width:112px;\n    min-height:30px;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.0 — Contexto Bíblico + Biblioteca viva\n   ============================================================ */\n\n.indice-nights-context-view,\n.indice-nights-library-view,\n.indice-nights-bases-view {\n  --in-accent: var(--interactive-accent);\n  --in-border: var(--background-modifier-border);\n  --in-panel: var(--background-secondary);\n  --in-panel-alt: var(--background-secondary-alt);\n  height: 100%;\n  box-sizing: border-box;\n}\n\n.indice-nights-context-view {\n  padding: 14px 12px 28px;\n  overflow-y: auto;\n}\n\n.in-context-header {\n  margin-bottom: 14px;\n}\n\n.in-context-title,\n.in-library-title,\n.in-bases-title {\n  color: var(--text-normal);\n  font-size: 18px;\n  font-weight: 700;\n  line-height: 1.25;\n}\n\n.in-context-subtitle,\n.in-library-subtitle,\n.in-bases-subtitle {\n  margin-top: 4px;\n  color: var(--text-muted);\n  font-size: 12px;\n  line-height: 1.45;\n}\n\n.in-context-empty,\n.in-context-current-note {\n  padding: 12px;\n  border: 1px solid var(--in-border);\n  border-radius: 12px;\n  background: var(--in-panel);\n}\n\n.in-context-current-note {\n  margin-bottom: 12px;\n}\n\n.in-context-current-title {\n  color: var(--text-normal);\n  font-weight: 650;\n}\n\n.in-context-current-count {\n  margin-top: 3px;\n  color: var(--text-muted);\n  font-size: 11px;\n}\n\n.in-context-reference {\n  margin: 8px 0;\n  border: 1px solid var(--in-border);\n  border-radius: 11px;\n  background: var(--in-panel);\n  overflow: hidden;\n}\n\n.in-context-reference[open] {\n  border-color: color-mix(in srgb, var(--in-accent) 48%, var(--in-border));\n}\n\n.in-context-reference-summary {\n  display: flex;\n  align-items: center;\n  padding: 10px 11px;\n  cursor: pointer;\n  list-style: none;\n}\n\n.in-context-reference-summary::-webkit-details-marker {\n  display: none;\n}\n\n.in-context-reference-copy {\n  min-width: 0;\n}\n\n.in-context-reference-name {\n  color: var(--text-accent);\n  font-size: 13px;\n  font-weight: 650;\n}\n\n.in-context-reference-count {\n  margin-top: 2px;\n  color: var(--text-muted);\n  font-size: 10.5px;\n}\n\n.in-context-reference-body {\n  padding: 0 10px 10px;\n}\n\n.in-context-group {\n  margin-top: 8px;\n}\n\n.in-context-group-title {\n  margin-bottom: 4px;\n  color: var(--text-faint);\n  font-size: 10px;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: .04em;\n}\n\n.in-context-note-link,\n.in-library-link {\n  appearance: none;\n  border: 0;\n  background: transparent;\n  color: var(--text-accent);\n  cursor: pointer;\n  text-align: left;\n}\n\n.in-context-note-link {\n  display: block;\n  width: 100%;\n  padding: 6px 7px;\n  border-radius: 7px;\n  font-size: 11.5px;\n  line-height: 1.35;\n}\n\n.in-context-note-link:hover,\n.in-library-link:hover {\n  background: var(--background-modifier-hover);\n  color: var(--text-accent-hover);\n}\n\n.indice-nights-library-view,\n.indice-nights-bases-view {\n  padding: 18px;\n  overflow: auto;\n}\n\n.in-library-header {\n  margin-bottom: 14px;\n}\n\n.in-library-controls {\n  display: grid;\n  grid-template-columns: minmax(220px, 1.6fr) repeat(4, minmax(120px, .75fr));\n  gap: 8px;\n  margin-bottom: 10px;\n}\n\n.in-library-search,\n.in-library-filter {\n  width: 100%;\n  min-width: 0;\n}\n\n.in-library-search {\n  min-height: 34px;\n  padding: 6px 10px;\n  border: 1px solid var(--in-border);\n  border-radius: 8px;\n  background: var(--background-primary);\n  color: var(--text-normal);\n}\n\n.in-library-status {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 8px;\n  margin: 8px 0;\n  color: var(--text-muted);\n  font-size: 11px;\n}\n\n.in-library-live-badge {\n  display: inline-flex;\n  align-items: center;\n  padding: 3px 7px;\n  border-radius: 999px;\n  background: color-mix(in srgb, var(--interactive-success) 14%, transparent);\n  color: var(--text-success);\n  font-size: 10px;\n  font-weight: 600;\n}\n\n.in-library-table-wrap {\n  width: 100%;\n  overflow: auto;\n  border: 1px solid var(--in-border);\n  border-radius: 11px;\n  background: var(--background-primary);\n}\n\n.in-library-table {\n  width: 100%;\n  min-width: 920px;\n  border-collapse: collapse;\n  font-size: 11.5px;\n}\n\n.in-library-table th {\n  position: sticky;\n  top: 0;\n  z-index: 2;\n  padding: 9px 10px;\n  border-bottom: 1px solid var(--in-border);\n  background: var(--background-secondary);\n  color: var(--text-muted);\n  text-align: left;\n  font-size: 10.5px;\n  font-weight: 650;\n}\n\n.in-library-table td {\n  padding: 8px 10px;\n  border-bottom: 1px solid var(--background-modifier-border-hover);\n  color: var(--text-normal);\n  vertical-align: top;\n}\n\n.in-library-table tr:last-child td {\n  border-bottom: 0;\n}\n\n.in-library-link {\n  padding: 1px 2px;\n  font-size: inherit;\n  line-height: inherit;\n}\n\n.in-library-reference-link {\n  white-space: nowrap;\n}\n\n.in-library-limit {\n  margin-top: 8px;\n  color: var(--text-muted);\n  font-size: 10.5px;\n}\n\n.in-bases-title {\n  margin-bottom: 2px;\n}\n\n.in-bases-subtitle {\n  margin-bottom: 12px;\n}\n\n@media (max-width: 1100px) {\n  .in-library-controls {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n\n  .in-library-search {\n    grid-column: 1 / -1;\n  }\n}\n\n@media (max-width: 700px) {\n  .indice-nights-library-view,\n  .indice-nights-bases-view {\n    padding: 12px 9px 24px;\n  }\n\n  .in-library-controls {\n    grid-template-columns: 1fr 1fr;\n    gap: 6px;\n  }\n\n  .in-library-search {\n    grid-column: 1 / -1;\n  }\n\n  .in-library-table {\n    min-width: 760px;\n  }\n\n  .indice-nights-context-view {\n    padding: 10px 8px 22px;\n  }\n}\n\n@media (max-width: 480px) {\n  .in-library-controls {\n    grid-template-columns: 1fr;\n  }\n\n  .in-library-search {\n    grid-column: auto;\n  }\n\n  .in-library-status {\n    align-items: flex-start;\n    flex-direction: column;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.1 — acesso visível às ferramentas de pesquisa\n   ============================================================ */\n.indice-nights-settings .bri-research-actions {\n  display:grid;\n  grid-template-columns:repeat(2,minmax(0,1fr));\n  gap:10px;\n  width:100%;\n  margin:0 0 16px;\n}\n.indice-nights-settings .bri-research-action {\n  display:flex;\n  align-items:center;\n  justify-content:center;\n  gap:8px;\n  min-height:40px;\n  padding:8px 12px;\n  border:1px solid color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));\n  border-radius:10px;\n  background:color-mix(in srgb, var(--interactive-accent) 9%, var(--background-secondary));\n  color:var(--text-normal);\n  font-weight:600;\n  cursor:pointer;\n}\n.indice-nights-settings .bri-research-action:hover {\n  background:color-mix(in srgb, var(--interactive-accent) 16%, var(--background-secondary));\n}\n.indice-nights-settings .bri-research-action-icon {\n  display:inline-flex;\n  align-items:center;\n  justify-content:center;\n  color:var(--text-accent);\n}\n.indice-nights-settings .bri-research-action-icon svg {\n  width:18px;\n  height:18px;\n}\n@media (max-width:560px) {\n  .indice-nights-settings .bri-research-actions {\n    grid-template-columns:1fr;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.2 — refinamento do Contexto Bíblico\n   ============================================================ */\n\n.indice-nights-context-view {\n  padding: 16px 14px 28px !important;\n  overflow-x: hidden !important;\n}\n\n.indice-nights-context-view > * {\n  max-width: 100%;\n  box-sizing: border-box;\n}\n\n.indice-nights-context-view .in-context-header,\n.indice-nights-context-view .in-context-current-note,\n.indice-nights-context-view .in-context-reference {\n  width: 100%;\n  margin-left: 0;\n  margin-right: 0;\n}\n\n.indice-nights-context-view .in-context-reference {\n  overflow: hidden;\n}\n\n.indice-nights-context-view .in-context-reference-summary,\n.indice-nights-context-view .in-context-reference-body,\n.indice-nights-context-view .in-context-group {\n  min-width: 0;\n  max-width: 100%;\n}\n\n.indice-nights-context-view .in-context-note-link {\n  width: 100%;\n  max-width: 100%;\n  min-width: 0;\n  padding: 7px 9px;\n  white-space: normal !important;\n  overflow-wrap: anywhere;\n  word-break: normal;\n  text-overflow: clip;\n  line-height: 1.35;\n  box-sizing: border-box;\n}\n\n.indice-nights-context-view .in-context-current-title,\n.indice-nights-context-view .in-context-reference-name {\n  overflow-wrap: anywhere;\n}\n\n.indice-nights-context-view .in-context-group-title {\n  padding-left: 1px;\n}\n\n@media (max-width: 700px) {\n  .indice-nights-context-view {\n    padding: 12px 10px 24px !important;\n  }\n\n  .indice-nights-context-view .in-context-note-link {\n    padding: 7px 8px;\n  }\n}\n\n@media (max-width: 480px) {\n  .indice-nights-context-view {\n    padding: 10px 8px 22px !important;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.3 — refinamento do painel Contexto Bíblico\n   ============================================================ */\n\n.indice-nights-context-view {\n  padding: 14px 12px 26px !important;\n}\n\n.indice-nights-context-view .in-context-header {\n  margin-bottom: 12px !important;\n}\n\n.indice-nights-context-view .in-context-title {\n  font-size: 17px !important;\n  line-height: 1.2 !important;\n}\n\n.indice-nights-context-view .in-context-subtitle {\n  margin-top: 3px !important;\n  font-size: 10.5px !important;\n  line-height: 1.45 !important;\n}\n\n.indice-nights-context-view .in-context-current-note {\n  padding: 11px 12px !important;\n  margin-bottom: 12px !important;\n  border-radius: 11px !important;\n}\n\n.indice-nights-context-view .in-context-current-title {\n  font-size: 12.5px !important;\n  line-height: 1.35 !important;\n}\n\n.indice-nights-context-view .in-context-current-count {\n  margin-top: 3px !important;\n  font-size: 10px !important;\n}\n\n.indice-nights-context-view .in-context-reference {\n  margin: 8px 0 !important;\n  border-radius: 11px !important;\n}\n\n.indice-nights-context-view .in-context-reference-summary {\n  padding: 10px 11px !important;\n}\n\n.indice-nights-context-view .in-context-reference-name {\n  font-size: 11.5px !important;\n  line-height: 1.3 !important;\n}\n\n.indice-nights-context-view .in-context-reference-count {\n  margin-top: 2px !important;\n  font-size: 9.5px !important;\n  line-height: 1.35 !important;\n}\n\n.indice-nights-context-view .in-context-reference-body {\n  padding: 0 9px 10px !important;\n}\n\n.indice-nights-context-view .in-context-group {\n  margin-top: 9px !important;\n}\n\n.indice-nights-context-view .in-context-group:first-child {\n  margin-top: 2px !important;\n}\n\n.indice-nights-context-view .in-context-group-title {\n  margin: 0 2px 5px !important;\n  font-size: 8.5px !important;\n  letter-spacing: .06em !important;\n}\n\n.indice-nights-context-view .in-context-note-link {\n  display: block !important;\n  width: 100% !important;\n  max-width: 100% !important;\n  min-width: 0 !important;\n  margin: 0 0 5px !important;\n  padding: 7px 8px !important;\n\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: 7px !important;\n  background: var(--background-primary-alt) !important;\n\n  color: var(--text-normal) !important;\n  font-size: 9.8px !important;\n  line-height: 1.35 !important;\n\n  white-space: normal !important;\n  overflow: hidden !important;\n  overflow-wrap: anywhere !important;\n  word-break: break-word !important;\n  text-overflow: clip !important;\n\n  box-sizing: border-box !important;\n}\n\n.indice-nights-context-view .in-context-note-link:last-child {\n  margin-bottom: 0 !important;\n}\n\n.indice-nights-context-view .in-context-note-link:hover {\n  border-color: color-mix(in srgb, var(--interactive-accent) 42%, var(--background-modifier-border)) !important;\n  background: var(--background-modifier-hover) !important;\n  color: var(--text-normal) !important;\n}\n\n.indice-nights-context-view .in-context-note-link:focus-visible {\n  outline: 2px solid var(--interactive-accent) !important;\n  outline-offset: 1px !important;\n}\n\n/* Em painéis laterais muito estreitos, reduzimos mais um pouco sem perder legibilidade. */\n@media (max-width: 420px) {\n  .indice-nights-context-view {\n    padding: 12px 10px 22px !important;\n  }\n\n  .indice-nights-context-view .in-context-current-note,\n  .indice-nights-context-view .in-context-reference-summary {\n    padding-left: 10px !important;\n    padding-right: 10px !important;\n  }\n\n  .indice-nights-context-view .in-context-reference-body {\n    padding-left: 8px !important;\n    padding-right: 8px !important;\n  }\n\n  .indice-nights-context-view .in-context-note-link {\n    padding: 6px 7px !important;\n    font-size: 9.4px !important;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.4 — transcrições limpas + Contexto Bíblico\n   ============================================================ */\n\n/* Oculta o bloco visual de propriedades SOMENTE em notas da pasta Discursos/.\n   Os dados continuam existindo no frontmatter e continuam sendo usados pelo plugin. */\n.indice-nights-transcript-view .metadata-container,\n.indice-nights-transcript-view .metadata-properties,\n.indice-nights-transcript-view .metadata-properties-heading,\n.indice-nights-transcript-view .metadata-add-button {\n  display: none !important;\n}\n\n/* Contexto Bíblico — mais próximo do mockup aprovado */\n.indice-nights-context-view {\n  padding: 16px 14px 30px !important;\n  overflow-x: hidden !important;\n}\n\n.indice-nights-context-view .in-context-header {\n  margin-bottom: 15px !important;\n}\n\n.indice-nights-context-view .in-context-title {\n  font-size: 19px !important;\n  line-height: 1.2 !important;\n  font-weight: 750 !important;\n}\n\n.indice-nights-context-view .in-context-subtitle {\n  margin-top: 5px !important;\n  font-size: 12px !important;\n  line-height: 1.5 !important;\n}\n\n.indice-nights-context-view .in-context-current-note {\n  padding: 14px 15px !important;\n  margin-bottom: 15px !important;\n  border-radius: 13px !important;\n}\n\n.indice-nights-context-view .in-context-current-title {\n  font-size: 14px !important;\n  line-height: 1.45 !important;\n  font-weight: 700 !important;\n}\n\n.indice-nights-context-view .in-context-current-count {\n  margin-top: 5px !important;\n  font-size: 11.5px !important;\n  line-height: 1.4 !important;\n}\n\n.indice-nights-context-view .in-context-reference {\n  margin: 11px 0 !important;\n  border-radius: 13px !important;\n  overflow: visible !important;\n}\n\n.indice-nights-context-view .in-context-reference[open] {\n  overflow: visible !important;\n}\n\n.indice-nights-context-view .in-context-reference-summary {\n  padding: 13px 14px !important;\n}\n\n.indice-nights-context-view .in-context-reference-name {\n  font-size: 14px !important;\n  line-height: 1.3 !important;\n  font-weight: 700 !important;\n}\n\n.indice-nights-context-view .in-context-reference-count {\n  margin-top: 4px !important;\n  font-size: 11.5px !important;\n  line-height: 1.4 !important;\n}\n\n.indice-nights-context-view .in-context-reference-body {\n  padding: 0 12px 13px !important;\n  overflow: visible !important;\n}\n\n.indice-nights-context-view .in-context-group {\n  margin-top: 13px !important;\n  overflow: visible !important;\n}\n\n.indice-nights-context-view .in-context-group:first-child {\n  margin-top: 3px !important;\n}\n\n.indice-nights-context-view .in-context-group-title {\n  margin: 0 3px 7px !important;\n  font-size: 10px !important;\n  line-height: 1.3 !important;\n  letter-spacing: .055em !important;\n}\n\n.indice-nights-context-view .in-context-note-link {\n  display: block !important;\n  width: 100% !important;\n  max-width: 100% !important;\n  min-width: 0 !important;\n\n  height: auto !important;\n  min-height: 40px !important;\n  max-height: none !important;\n\n  margin: 0 0 7px !important;\n  padding: 10px 11px !important;\n\n  border: 1px solid var(--background-modifier-border) !important;\n  border-radius: 9px !important;\n  background: var(--background-primary-alt) !important;\n\n  color: var(--text-normal) !important;\n  font-size: 12px !important;\n  line-height: 1.5 !important;\n\n  white-space: normal !important;\n  overflow: visible !important;\n  overflow-wrap: anywhere !important;\n  word-break: normal !important;\n  text-overflow: unset !important;\n\n  box-sizing: border-box !important;\n}\n\n.indice-nights-context-view .in-context-note-link:last-child {\n  margin-bottom: 0 !important;\n}\n\n.indice-nights-context-view .in-context-note-link:hover {\n  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border)) !important;\n  background: var(--background-modifier-hover) !important;\n}\n\n/* iPad / Split View */\n@media (max-width: 700px) {\n  .indice-nights-context-view {\n    padding: 14px 11px 26px !important;\n  }\n\n  .indice-nights-context-view .in-context-title {\n    font-size: 18px !important;\n  }\n\n  .indice-nights-context-view .in-context-current-title,\n  .indice-nights-context-view .in-context-reference-name {\n    font-size: 13.5px !important;\n  }\n\n  .indice-nights-context-view .in-context-note-link {\n    min-height: 38px !important;\n    padding: 9px 10px !important;\n    font-size: 11.8px !important;\n  }\n}\n\n/* iPhone */\n@media (max-width: 480px) {\n  .indice-nights-context-view {\n    padding: 12px 9px 24px !important;\n  }\n\n  .indice-nights-context-view .in-context-note-link {\n    min-height: 36px !important;\n    padding: 8px 9px !important;\n    font-size: 11.5px !important;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.5 — leitor completo dentro do Contexto Bíblico\n   ============================================================ */\n\n.indice-nights-context-view .in-context-note-link {\n  position: relative !important;\n  padding-right: 34px !important;\n}\n\n.indice-nights-context-view .in-context-note-arrow {\n  position: absolute;\n  top: 50%;\n  right: 9px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 18px;\n  height: 18px;\n  transform: translateY(-50%);\n  color: var(--text-muted);\n  pointer-events: none;\n}\n\n.indice-nights-context-view .in-context-note-arrow svg {\n  width: 15px;\n  height: 15px;\n}\n\n/* A sidebar vira um leitor secundário limpo. */\n.indice-nights-context-view.in-context-reader-mode {\n  padding: 0 12px 28px !important;\n  overflow-x: hidden !important;\n}\n\n.in-context-reader-toolbar {\n  position: sticky;\n  top: 0;\n  z-index: 20;\n  display: flex;\n  align-items: center;\n  min-height: 44px;\n  margin: 0 -12px 12px;\n  padding: 6px 12px;\n  border-bottom: 1px solid var(--background-modifier-border);\n  background: color-mix(in srgb, var(--background-primary) 94%, transparent);\n  backdrop-filter: blur(10px);\n}\n\n.in-context-reader-back {\n  display: inline-flex;\n  align-items: center;\n  gap: 7px;\n  max-width: 100%;\n  padding: 6px 8px;\n  border: 0;\n  border-radius: 8px;\n  background: transparent;\n  color: var(--text-accent);\n  font-size: 12.5px;\n  font-weight: 650;\n  cursor: pointer;\n}\n\n.in-context-reader-back:hover {\n  background: var(--background-modifier-hover);\n}\n\n.in-context-reader-back-icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.in-context-reader-back-icon svg {\n  width: 16px;\n  height: 16px;\n}\n\n.in-context-reader-heading {\n  margin: 2px 2px 14px;\n}\n\n.in-context-reader-title {\n  color: var(--text-normal);\n  font-size: 18px;\n  font-weight: 750;\n  line-height: 1.3;\n  overflow-wrap: anywhere;\n}\n\n.in-context-reader-meta {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 5px 9px;\n  margin-top: 7px;\n  color: var(--text-muted);\n  font-size: 10.5px;\n  line-height: 1.35;\n}\n\n.in-context-reader-meta span:not(:last-child)::after {\n  content: \"•\";\n  margin-left: 9px;\n  color: var(--text-faint);\n}\n\n.in-context-reader-markdown {\n  width: 100%;\n  max-width: 100%;\n  padding: 0 2px 24px;\n  box-sizing: border-box;\n  color: var(--text-normal);\n  font-size: 12.5px;\n  line-height: 1.58;\n  overflow-wrap: anywhere;\n}\n\n.in-context-reader-markdown > :first-child {\n  margin-top: 0;\n}\n\n.in-context-reader-markdown h1 {\n  font-size: 19px;\n  line-height: 1.3;\n}\n\n.in-context-reader-markdown h2 {\n  margin-top: 1.35em;\n  font-size: 16px;\n  line-height: 1.35;\n  color: var(--text-accent);\n}\n\n.in-context-reader-markdown h3 {\n  font-size: 14px;\n}\n\n.in-context-reader-markdown p,\n.in-context-reader-markdown li {\n  font-size: inherit;\n  line-height: inherit;\n}\n\n.in-context-reader-markdown img {\n  display: block;\n  width: auto;\n  max-width: 100% !important;\n  height: auto !important;\n  margin: 12px auto;\n  border-radius: 8px;\n}\n\n.in-context-reader-markdown img[alt=\"Miniatura\"] {\n  width: 100% !important;\n  max-width: 100% !important;\n  float: none !important;\n  margin: 12px 0 16px !important;\n  object-fit: contain !important;\n}\n\n.in-context-reader-markdown .indice-nights-thumbnail-link {\n  display: block !important;\n  width: 100% !important;\n  max-width: 100% !important;\n  float: none !important;\n  margin: 0 !important;\n}\n\n.in-context-reader-markdown blockquote {\n  margin: 12px 0;\n  padding: 9px 11px;\n  border-left: 3px solid var(--interactive-accent);\n  border-radius: 0 7px 7px 0;\n  background: var(--background-secondary);\n}\n\n.in-context-reader-markdown table {\n  display: block;\n  max-width: 100%;\n  overflow-x: auto;\n}\n\n.in-context-reader-markdown .metadata-container,\n.in-context-reader-markdown .frontmatter,\n.in-context-reader-markdown .frontmatter-container {\n  display: none !important;\n}\n\n/* Os callouts/miníndice continuam cabendo na lateral. */\n.in-context-reader-markdown .callout {\n  max-width: 100%;\n  margin: 10px 0;\n}\n\n/* iPad / Split View */\n@media (max-width: 700px) {\n  .indice-nights-context-view.in-context-reader-mode {\n    padding-left: 10px !important;\n    padding-right: 10px !important;\n  }\n\n  .in-context-reader-toolbar {\n    margin-left: -10px;\n    margin-right: -10px;\n    padding-left: 10px;\n    padding-right: 10px;\n  }\n\n  .in-context-reader-title {\n    font-size: 17px;\n  }\n\n  .in-context-reader-markdown {\n    font-size: 12px;\n  }\n}\n\n/* iPhone */\n@media (max-width: 480px) {\n  .in-context-reader-title {\n    font-size: 16px;\n  }\n\n  .in-context-reader-back {\n    font-size: 12px;\n  }\n\n  .in-context-reader-markdown {\n    font-size: 11.8px;\n    line-height: 1.55;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.6 — estabilidade + contexto refinado\n   ============================================================ */\n\n/* Propriedades continuam no arquivo, mas ficam ocultas visualmente em Discursos/. */\n.indice-nights-transcript-view .metadata-container,\n.indice-nights-transcript-view .metadata-properties,\n.indice-nights-transcript-view .metadata-properties-heading,\n.indice-nights-transcript-view .metadata-add-button,\n.indice-nights-metadata-hidden {\n  display: none !important;\n}\n\n/* Subtópicos internos (Adorações Matinais, Congressos, Discursos...) */\n.indice-nights-context-view .in-context-group {\n  position: relative;\n  margin-top: 13px !important;\n  padding: 10px !important;\n  border: 1px solid var(--background-modifier-border);\n  border-radius: 11px;\n  background: color-mix(in srgb, var(--background-secondary) 72%, transparent);\n}\n\n.indice-nights-context-view .in-context-group:first-child {\n  margin-top: 5px !important;\n}\n\n.indice-nights-context-view .in-context-group-title {\n  display: inline-flex;\n  align-items: center;\n  width: auto;\n  margin: -1px 0 8px !important;\n  padding: 4px 8px;\n  border-radius: 999px;\n  background: color-mix(in srgb, var(--interactive-accent) 12%, var(--background-primary));\n  color: var(--text-accent) !important;\n  font-size: 10.5px !important;\n  font-weight: 700 !important;\n  letter-spacing: .045em !important;\n}\n\n/* O resultado interno mantém seu próprio contorno, criando dois níveis visuais claros. */\n.indice-nights-context-view .in-context-group .in-context-note-link {\n  margin-bottom: 7px !important;\n  background: var(--background-primary-alt) !important;\n}\n\n.indice-nights-context-view .in-context-group .in-context-note-link:last-child {\n  margin-bottom: 0 !important;\n}\n\n/* Destaque temporário ao abrir diretamente na citação no leitor lateral. */\n.in-context-reader-markdown .in-context-citation-anchor {\n  display: block;\n  position: relative;\n  top: -8px;\n  width: 1px;\n  height: 1px;\n}\n\n.in-context-reader-markdown .in-context-citation-highlight {\n  border-left: 3px solid var(--interactive-accent) !important;\n  padding-left: 10px !important;\n  background: color-mix(in srgb, var(--interactive-accent) 8%, transparent) !important;\n  border-radius: 4px;\n}\n\n/* Em painéis muito estreitos, preserva a separação sem consumir largura demais. */\n@media (max-width: 480px) {\n  .indice-nights-context-view .in-context-group {\n    padding: 8px !important;\n  }\n\n  .indice-nights-context-view .in-context-group-title {\n    font-size: 10px !important;\n    padding: 3px 7px;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.7 — citação centralizada + Índice destacado\n   ============================================================ */\n\n/* Quando o Índice Geral abre uma ocorrência, usa a mesma linguagem visual\n   do Contexto Bíblico: barra lateral roxa + fundo suave. */\n.in-index-citation-highlight {\n  position: relative;\n  border-left: 3px solid var(--interactive-accent) !important;\n  padding-left: 10px !important;\n  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;\n  border-radius: 4px !important;\n  transition: background-color .18s ease, border-color .18s ease;\n}\n\n/* Cada referência do Índice passa a funcionar visualmente como um cartão. */\n.bri-root .bri-reference {\n  margin: 10px 0 14px !important;\n  padding: 12px 13px !important;\n  border: 1px solid color-mix(in srgb, var(--interactive-accent) 34%, var(--background-modifier-border)) !important;\n  border-radius: 12px !important;\n  background: color-mix(in srgb, var(--interactive-accent) 5%, var(--background-secondary)) !important;\n  list-style: none !important;\n}\n\n.bri-root .bri-reference-title {\n  display: block;\n  margin-bottom: 8px;\n  color: var(--text-accent) !important;\n  font-size: 1.02em;\n  font-weight: 700;\n}\n\n.bri-root .bri-note-list {\n  margin: 0 !important;\n  padding: 0 !important;\n  list-style: none !important;\n}\n\n.bri-root .bri-note-result {\n  margin: 6px 0 !important;\n  padding: 8px 10px !important;\n  border: 1px solid var(--background-modifier-border) !important;\n  border-left: 3px solid color-mix(in srgb, var(--interactive-accent) 72%, var(--background-modifier-border)) !important;\n  border-radius: 8px !important;\n  background: var(--background-primary-alt) !important;\n  line-height: 1.4;\n  list-style: none !important;\n}\n\n.bri-root .bri-note-result:hover {\n  background: var(--background-modifier-hover) !important;\n  border-color: color-mix(in srgb, var(--interactive-accent) 52%, var(--background-modifier-border)) !important;\n  border-left-color: var(--interactive-accent) !important;\n}\n\n.bri-root .bri-note-result-section {\n  color: var(--text-muted);\n  font-size: .92em;\n}\n\n.bri-root .bri-note-result .internal-link {\n  color: var(--text-accent) !important;\n  font-weight: 550;\n  text-decoration: none;\n}\n\n.bri-root .bri-note-result .internal-link:hover {\n  text-decoration: underline;\n}\n\n/* Em telas estreitas mantém o mesmo destaque sem consumir espaço. */\n@media (max-width: 560px) {\n  .bri-root .bri-reference {\n    padding: 10px !important;\n  }\n\n  .bri-root .bri-note-result {\n    padding: 7px 8px !important;\n  }\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.8 — destaque do Índice igual ao Contexto\n   ============================================================ */\n\n/* Remove qualquer aparência amarela herdada de realce nativo na área alvo\n   e aplica o mesmo padrão roxo do leitor lateral. */\n.in-index-citation-highlight,\n.in-index-citation-highlight * {\n  --text-highlight-bg: transparent;\n}\n\n.in-index-citation-highlight {\n  border-left: 3px solid var(--interactive-accent) !important;\n  padding-left: 10px !important;\n  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;\n  border-radius: 4px !important;\n  box-decoration-break: clone;\n  -webkit-box-decoration-break: clone;\n}\n\n.in-index-citation-highlight mark,\n.in-index-citation-highlight .search-highlight,\n.in-index-citation-highlight .is-flashing,\n.in-index-citation-highlight .mod-search-match {\n  background: transparent !important;\n  color: inherit !important;\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.9 — destaque persistente do Índice\n   ============================================================ */\n\n.in-index-citation-highlight {\n  border-left: 3px solid var(--interactive-accent) !important;\n  padding-left: 10px !important;\n  background: color-mix(in srgb, var(--interactive-accent) 10%, transparent) !important;\n  border-radius: 4px !important;\n  transition: none !important;\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.10 — Índice usando destaque nativo do Obsidian\n   ============================================================ */\n\n/* O Índice Geral volta a usar #^bloco e o realce padrão do Obsidian.\n   Estas regras neutralizam apenas o destaque customizado antigo. */\n.in-index-citation-highlight {\n  border-left: 0 !important;\n  padding-left: initial !important;\n  background: transparent !important;\n  border-radius: 0 !important;\n  transition: none !important;\n}\n\n\n/* ============================================================\n   Indice Nights v0.9.16 — revisão manual da renomeação\n   ============================================================ */\n\n.indice-nights-settings .bri-publication-order-actions {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n\n.indice-nights-settings .bri-publication-review-button {\n  min-height: 32px;\n  padding: 5px 10px;\n  border: 1px solid color-mix(in srgb, var(--interactive-accent) 48%, var(--background-modifier-border));\n  border-radius: 8px;\n  background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary));\n  color: var(--text-normal);\n  font-size: 11px;\n  font-weight: 600;\n  cursor: pointer;\n}\n\n.indice-nights-settings .bri-publication-review-button:hover {\n  background: color-mix(in srgb, var(--interactive-accent) 15%, var(--background-secondary));\n}\n\n.indice-nights-settings .bri-publication-review-button:disabled {\n  opacity: .6;\n  cursor: wait;\n}\n\n.indice-nights-settings .bri-publication-order-actions .bri-publication-order-toggle {\n  display: flex;\n  align-items: center;\n}\n\n@media (max-width: 560px) {\n  .indice-nights-settings .bri-publication-order-actions {\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  .indice-nights-settings .bri-publication-review-button {\n    flex: 1 1 auto;\n  }\n}\n";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -229,42 +229,115 @@ function sectionFor(path, folder) {
   if (parts[0] === "Séries" && parts[1]) return `Séries - ${parts[1]}`;
   return parts[0];
 }
+
 async function citationBlockFor(app, path, reference) {
   const file = app.vault.getAbstractFileByPath(path);
   if (!(file instanceof import_obsidian6.TFile)) return null;
+
   try {
-    const content = await app.vault.cachedRead(file);
-    const blockPattern = /([\s\S]*?)\n\^([A-Za-z0-9_-]+)(?=\n{2,}|$)/g;
-    for (const match of content.matchAll(blockPattern)) {
-      const blockText = match[1] ?? "";
-      const blockId = match[2] ?? "";
+    let content = await app.vault.cachedRead(file);
+
+    // Algumas notas antigas podem conter "\n^citacao-XXX" como texto literal.
+    // Normalizamos apenas esse caso, sem alterar o arquivo salvo.
+    content = content.replace(/\\n(?=\^[A-Za-z0-9_-]+)/g, "\n");
+
+    const blockRegex = /(?:^|\n)\^([A-Za-z0-9_-]+)[ \t]*(?=\n|$)/g;
+    const matches = [...content.matchAll(blockRegex)];
+
+    for (let index = 0; index < matches.length; index += 1) {
+      const match = matches[index];
+      const blockId = match[1] ?? "";
       if (!blockId) continue;
-      const references = extractReferences(blockText);
-      if (references.some((item) => item.key === reference.key)) return blockId;
+
+      const markerStart = match.index ?? 0;
+
+      // O ID vem depois do parágrafo citado. Pegamos primeiro o bloco textual
+      // imediatamente anterior; se necessário ampliamos a janela.
+      const before = content.slice(0, markerStart);
+      let blockStart = before.lastIndexOf("\n\n");
+
+      // Também reconhece separadores usados nas transcrições.
+      const separatorStart = Math.max(
+        before.lastIndexOf("\n---\n"),
+        before.lastIndexOf("\n---\r\n")
+      );
+      if (separatorStart > blockStart) blockStart = separatorStart + 5;
+
+      const localText = before.slice(Math.max(0, blockStart + 2));
+      const localReferences = extractReferences(localText);
+
+      if (localReferences.some((item) => item.key === reference.key)) {
+        return blockId;
+      }
+
+      // Fallback: amplia para a região desde a citação anterior.
+      const previousMarkerEnd = index > 0
+        ? (matches[index - 1].index ?? 0) + matches[index - 1][0].length
+        : 0;
+      const widerText = content.slice(previousMarkerEnd, markerStart);
+      const widerReferences = extractReferences(widerText);
+
+      if (widerReferences.some((item) => item.key === reference.key)) {
+        return blockId;
+      }
+
+      // Último fallback para pequenas diferenças de normalização:
+      // procura a referência pela forma exibida.
+      const normalizedLocal = normalizeText(localText);
+      const normalizedDisplay = normalizeText(reference.display ?? "");
+      if (normalizedDisplay && normalizedLocal.includes(normalizedDisplay)) {
+        return blockId;
+      }
     }
+
+    console.warn(
+      "Indice Nights: referência indexada, mas bloco de citação não localizado",
+      path,
+      reference.display
+    );
   } catch (error) {
     console.warn("Indice Nights: falha ao localizar bloco da citação", path, reference.display, error);
   }
+
   return null;
 }
+
 async function openCitationTarget(app, path, reference, sourcePath = "", modEvent = false) {
   const blockId = await citationBlockFor(app, path, reference);
   const target = blockId ? `${path}#^${blockId}` : path;
+
+  // Usa a navegação nativa do Obsidian. Quando o bloco é localizado,
+  // o próprio Obsidian aplica o destaque amarelo/escuro padrão.
   await app.workspace.openLinkText(target, sourcePath, modEvent);
+
+  if (!blockId) {
+    new import_obsidian6.Notice(
+      `Abri a transcrição, mas não consegui localizar automaticamente o trecho de ${reference.display}.`,
+      5000
+    );
+  }
 }
-function contextMetaFor(file, frontmatter = {}) {
+
+function libraryMetaFor(file, frontmatter = {}) {
   const relative = file.path.startsWith("Discursos/") ? file.path.slice("Discursos/".length) : file.path;
   const parts = relative.split("/").filter(Boolean);
-  const collection = parts[0] ?? "";
+
+  let collection = parts[0] ?? "";
   let series = "";
-  if ((collection === "Séries" || collection === "Congressos") && parts.length >= 3) {
+
+  if (collection === "Séries" && parts.length >= 3) {
+    series = parts[1] ?? "";
+  } else if (collection === "Congressos" && parts.length >= 3) {
     series = parts[1] ?? "";
   }
+
   const date = typeof frontmatter.data_publicacao === "string" ? frontmatter.data_publicacao : "";
   const speaker = typeof frontmatter.orador === "string" ? frontmatter.orador : "";
+
   return { collection, series, date, speaker };
 }
-function formatContextDate(value) {
+
+function formatDatePtBR(value) {
   const match = typeof value === "string" ? /^(\d{4})-(\d{2})-(\d{2})$/.exec(value.trim()) : null;
   return match ? `${match[3]}/${match[2]}/${match[1]}` : value || "—";
 }
@@ -705,8 +778,8 @@ var BibleIndexView = class extends import_obsidian.MarkdownRenderChild {
     row.createEl("strong", { text: item.reference.display, cls: "bri-reference-title" });
     const notesList = row.createEl("ul", { cls: "bri-note-list" });
     for (const note of item.notes) {
-      const noteRow = notesList.createEl("li");
-      noteRow.createEl("strong", { text: `${note.section}: ` });
+      const noteRow = notesList.createEl("li", { cls: "bri-note-result" });
+      noteRow.createEl("strong", { text: `${note.section}: `, cls: "bri-note-result-section" });
       const link = noteRow.createEl("a", {
         text: note.title,
         cls: "internal-link",
@@ -780,6 +853,18 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
     });
 
     const researchActions = containerEl.createDiv({ cls: "bri-research-actions" });
+
+    const libraryButton = researchActions.createEl("button", {
+      text: "Biblioteca - Indice Nights",
+      cls: "bri-research-action",
+      attr: { type: "button" }
+    });
+    const libraryIcon = libraryButton.createSpan({ cls: "bri-research-action-icon" });
+    (0, import_obsidian2.setIcon)(libraryIcon, "library-big");
+    libraryButton.addEventListener("click", () => {
+      void this.plugin.activateLibraryView();
+    });
+
     const contextButton = researchActions.createEl("button", {
       text: "Contexto Bíblico",
       cls: "bri-research-action",
@@ -960,7 +1045,35 @@ var IndiceNightsSettingTab = class extends import_obsidian2.PluginSettingTab {
         const sortCopy = sortRow.createDiv({ cls: "bri-publication-order-copy" });
         sortCopy.createDiv({ text: "Ordenar por publicação", cls: "bri-publication-order-title" });
         sortCopy.createDiv({ text: "Ordena do mais recente ao mais antigo. Ao desligar, volta ao nome original.", cls: "bri-publication-order-description" });
-        const sortToggleHost = sortRow.createDiv({ cls: "bri-publication-order-toggle" });
+        const sortActions = sortRow.createDiv({ cls: "bri-publication-order-actions" });
+        const reviewButton = sortActions.createEl("button", {
+          text: "Revisar renomeação",
+          cls: "bri-publication-review-button",
+          attr: {
+            type: "button",
+            title: "Remove numeração e data residuais e deixa os nomes prontos para a ordem alfabética"
+          }
+        });
+        reviewButton.addEventListener("click", async () => {
+          reviewButton.disabled = true;
+          const originalText = reviewButton.textContent;
+          reviewButton.setText("Revisando…");
+
+          try {
+            this.plugin.settings.publicationOrder = {
+              ...(this.plugin.settings.publicationOrder ?? {}),
+              [item.key]: false
+            };
+            await this.plugin.saveSettings();
+            await this.plugin.transcriptService.reviewPublicationNames(item.key, true);
+          } finally {
+            reviewButton.disabled = false;
+            reviewButton.setText(originalText || "Revisar renomeação");
+            this.renderCatalog(container);
+          }
+        });
+
+        const sortToggleHost = sortActions.createDiv({ cls: "bri-publication-order-toggle" });
         const sortEnabled = Boolean((this.plugin.settings.publicationOrder ?? {})[item.key]);
         new import_obsidian2.Setting(sortToggleHost).addToggle((toggle) => toggle
           .setValue(sortEnabled)
@@ -1355,6 +1468,8 @@ var SourceTranscriptService = class {
     this.settings = settings;
     this.syncNote = syncNote;
     __publicField(this, "downloading", false);
+    __publicField(this, "publicationOrderRunning", /* @__PURE__ */ new Set());
+    __publicField(this, "publicationOrderDesired", /* @__PURE__ */ new Map());
   }
   async mergeFolder(sourcePath, targetPath) {
     const source = this.app.vault.getAbstractFileByPath(sourcePath);
@@ -1822,71 +1937,268 @@ var SourceTranscriptService = class {
     return recovered;
   }
   stripPublicationPrefix(name) {
-    let clean = String(name ?? "").trim();
-    let previous;
+    const original = String(name ?? "").trim();
 
-    // Limpa todas as camadas deixadas por versões anteriores. Isso também
-    // recupera arquivos que foram ordenados mais de uma vez antes de voltar
-    // ao nome original.
-    do {
-      previous = clean;
-      clean = clean
-        // 0001 - DD-MM-AAAA - Título
-        .replace(/^\d+\s*[-–—]\s*\d{2}[-–—]\d{2}[-–—]\d{4}\s*[-–—]\s*/, "")
-        // 0001 - AAAA-MM-DD - Título
-        .replace(/^\d+\s*[-–—]\s*\d{4}[-–—]\d{2}[-–—]\d{2}\s*[-–—]\s*/, "")
-        // DD-MM-AAAA - Título
-        .replace(/^\d{2}[-–—]\d{2}[-–—]\d{4}\s*[-–—]\s*/, "")
-        // AAAA-MM-DD - Título
-        .replace(/^\d{4}[-–—]\d{2}[-–—]\d{2}\s*[-–—]\s*/, "")
-        // Prefixo numérico isolado deixado por uma restauração interrompida.
-        .replace(/^\d{3,6}\s*[-–—]\s*/, "")
-        .trim();
-    } while (clean !== previous);
+    // Remove SOMENTE quando o nome começa exatamente com um prefixo
+    // criado pelo recurso de ordenação:
+    //
+    // 0099 - 25-10-2024 - Título
+    // 0099 - 2024-10-25 - Título
+    //
+    // Se o arquivo já estiver com o nome original, como:
+    // "Adoração Matinal para a Celebração — ..."
+    // ele permanece totalmente intacto.
+    const orderedPrefix = /^\s*\d{1,6}\s*[-–—]\s*(?:\d{2}[-/.]\d{2}[-/.]\d{4}|\d{4}[-/.]\d{2}[-/.]\d{2})\s*[-–—]\s*/;
 
-    return clean;
+    if (!orderedPrefix.test(original)) {
+      return original;
+    }
+
+    return original.replace(orderedPrefix, "").trim();
   }
+
+  async publicationCleanBase(file) {
+    const basename = file.basename;
+    const tempPrefix = /^\.__(?:indice_nights_sort|indice_nights_restore|indice_nights_repair)_/;
+
+    if (!tempPrefix.test(basename)) {
+      return this.stripPublicationPrefix(basename);
+    }
+
+    // Se o Obsidian/plugin foi fechado no meio da operação, o arquivo pode ter
+    // ficado com nome temporário. Recuperamos o nome pelo H1 da própria nota.
+    try {
+      const content = await this.app.vault.cachedRead(file);
+      const titleMatch = /^#\s+(.+?)\s*$/m.exec(content);
+      const title = titleMatch?.[1]?.trim();
+
+      if (title) {
+        return nomeArquivoSeguro(title);
+      }
+    } catch (error) {
+      console.warn("Indice Nights: falha ao recuperar nome de arquivo temporário", file.path, error);
+    }
+
+    return basename;
+  }
+
+  async restoreOriginalPublicationNames(folderPath, showNotice = true) {
+    const folder = this.app.vault.getAbstractFileByPath(folderPath);
+
+    if (!(folder instanceof import_obsidian3.TFolder)) {
+      if (showNotice) new import_obsidian3.Notice(`A pasta ${folderPath} ainda não existe.`);
+      return;
+    }
+
+    const orderedPrefix = /^\s*\d{1,6}\s*[-–—]\s*(?:\d{2}[-/.]\d{2}[-/.]\d{4}|\d{4}[-/.]\d{2}[-/.]\d{2})\s*[-–—]\s*/;
+    const tempPrefix = /^\.__(?:indice_nights_sort|indice_nights_restore)_/;
+    const candidates = [];
+
+    // Sempre avalia TODA a pasta. Arquivos já normais são ignorados.
+    for (const child of [...folder.children]) {
+      if (!(child instanceof import_obsidian3.TFile) || child.extension !== "md") continue;
+
+      const isOrdered = orderedPrefix.test(child.basename);
+      const isInterruptedTemp = tempPrefix.test(child.basename);
+
+      if (!isOrdered && !isInterruptedTemp) continue;
+
+      const cleanBase = await this.publicationCleanBase(child);
+      if (!cleanBase || cleanBase === child.basename) continue;
+
+      candidates.push({
+        file: child,
+        originalBase: child.basename,
+        cleanBase
+      });
+    }
+
+    if (candidates.length === 0) {
+      if (showNotice) {
+        new import_obsidian3.Notice("Todos os arquivos já estão com os nomes originais.", 5000);
+      }
+      return;
+    }
+
+    const token = Date.now();
+    const staged = [];
+
+    // Etapa 1 — staging seguro. Caso haja interrupção, a próxima execução
+    // reconhece esses temporários e os inclui novamente na avaliação.
+    for (let index = 0; index < candidates.length; index += 1) {
+      const item = candidates[index];
+      const tempPath = `${folderPath}/.__indice_nights_restore_${token}_${index}.md`;
+
+      try {
+        // Se já for um temporário de execução interrompida, pode ir diretamente
+        // para o novo staging sem perder a referência ao arquivo.
+        await this.app.vault.rename(item.file, tempPath);
+        staged.push({ ...item, file: this.app.vault.getAbstractFileByPath(tempPath) });
+      } catch (error) {
+        console.error("Indice Nights: falha ao preparar restauração do nome", item.originalBase, error);
+      }
+    }
+
+    let restored = 0;
+    let conflicts = 0;
+
+    // Etapa 2 — nome original.
+    for (const item of staged) {
+      if (!(item.file instanceof import_obsidian3.TFile)) continue;
+
+      const targetBase = item.cleanBase;
+      let targetPath = `${folderPath}/${targetBase}.md`;
+
+      if (this.app.vault.getAbstractFileByPath(targetPath)) {
+        conflicts += 1;
+        let counter = 2;
+        while (this.app.vault.getAbstractFileByPath(`${folderPath}/${targetBase} (${counter}).md`)) {
+          counter += 1;
+        }
+        targetPath = `${folderPath}/${targetBase} (${counter}).md`;
+      }
+
+      try {
+        await this.app.vault.rename(item.file, targetPath);
+        restored += 1;
+      } catch (error) {
+        console.error("Indice Nights: falha ao restaurar nome original", item.originalBase, error);
+      }
+    }
+
+    if (showNotice) {
+      const extra = conflicts
+        ? ` ${conflicts} conflito(s) de nome foram preservados com sufixo adicional.`
+        : "";
+      new import_obsidian3.Notice(
+        `${restored} arquivo(s) restaurado(s). A pasta inteira foi revisada.${extra}`,
+        7000
+      );
+    }
+  }
+  async reviewPublicationNames(categoryKey, showNotice = true) {
+    const category = SUPPORTED_CATEGORIES.find((item) => item.key === categoryKey);
+    if (!category || !["StudioTalks", "VODPgmEvtMorningWorship"].includes(categoryKey)) return;
+
+    const config = this.settings.categorySettings[categoryKey];
+    const chosenFolder = cleanFolder((config == null ? void 0 : config.folder) ?? "");
+    const folderPath = chosenFolder || category.defaultFolder;
+
+    const orderedPrefix = /^\s*\d{1,6}\s*[-–—]\s*(?:\d{2}[-/.]\d{2}[-/.]\d{4}|\d{4}[-/.]\d{2}[-/.]\d{2})\s*[-–—]\s*/;
+    const tempPrefix = /^\.__(?:indice_nights_sort|indice_nights_restore|indice_nights_repair)_/;
+
+    let totalReviewed = 0;
+    let passes = 0;
+
+    // Faz até 5 passadas porque o Obsidian pode atualizar a árvore de arquivos
+    // de forma assíncrona durante muitos renames. Cada passada reconsulta a pasta.
+    while (passes < 5) {
+      passes += 1;
+
+      const folder = this.app.vault.getAbstractFileByPath(folderPath);
+      if (!(folder instanceof import_obsidian3.TFolder)) {
+        if (showNotice) new import_obsidian3.Notice(`A pasta ${folderPath} ainda não existe.`);
+        return;
+      }
+
+      const affected = folder.children.filter(
+        (child) =>
+          child instanceof import_obsidian3.TFile &&
+          child.extension === "md" &&
+          (orderedPrefix.test(child.basename) || tempPrefix.test(child.basename))
+      );
+
+      if (affected.length === 0) break;
+
+      totalReviewed += affected.length;
+
+      await this.restoreOriginalPublicationNames(folderPath, false);
+      await wait(180);
+    }
+
+    const finalFolder = this.app.vault.getAbstractFileByPath(folderPath);
+    const leftovers = finalFolder instanceof import_obsidian3.TFolder
+      ? finalFolder.children.filter(
+          (child) =>
+            child instanceof import_obsidian3.TFile &&
+            child.extension === "md" &&
+            (orderedPrefix.test(child.basename) || tempPrefix.test(child.basename))
+        )
+      : [];
+
+    if (showNotice) {
+      if (leftovers.length === 0) {
+        new import_obsidian3.Notice(
+          `Revisão concluída. A pasta foi limpa e está pronta para ordem alfabética.`,
+          7000
+        );
+      } else {
+        new import_obsidian3.Notice(
+          `Revisão concluída, mas ${leftovers.length} arquivo(s) ainda precisam de atenção.`,
+          9000
+        );
+        console.warn(
+          "Indice Nights: arquivos ainda com prefixo após revisão",
+          leftovers.map((file) => file.path)
+        );
+      }
+    }
+  }
+
   formatPublicationDateBR(date) {
     if (typeof date !== "string") return date;
     const match = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
     return match ? `${match[3]}-${match[2]}-${match[1]}` : date;
   }
-  async recoverInterruptedPublicationSortFiles(folderPath) {
-    const folder = this.app.vault.getAbstractFileByPath(folderPath);
-    if (!(folder instanceof import_obsidian3.TFolder)) return 0;
-
-    let recovered = 0;
-    for (const child of [...folder.children]) {
-      if (!(child instanceof import_obsidian3.TFile) || child.extension !== "md") continue;
-      if (!/^\.__indice_nights_sort_\d+_\d+$/i.test(child.basename)) continue;
-
-      try {
-        const content = await this.app.vault.read(child);
-        const titleMatch = /^#\s+(.+?)\s*$/m.exec(content);
-        if (!titleMatch?.[1]) {
-          console.error("Indice Nights: arquivo temporário sem título", child.path);
-          continue;
-        }
-
-        const targetBase = nomeArquivoSeguro(titleMatch[1].trim());
-        let targetPath = `${folderPath}/${targetBase}.md`;
-        if (this.app.vault.getAbstractFileByPath(targetPath)) {
-          let counter = 2;
-          while (this.app.vault.getAbstractFileByPath(`${folderPath}/${targetBase} (${counter}).md`)) counter += 1;
-          targetPath = `${folderPath}/${targetBase} (${counter}).md`;
-        }
-
-        await this.app.vault.rename(child, targetPath);
-        recovered += 1;
-      } catch (e) {
-        console.error("Indice Nights: falha ao recuperar arquivo de ordenação", child.path, e);
-      }
-    }
-    return recovered;
-  }
   async setPublicationOrder(categoryKey, enabled, showNotice = true) {
     const category = SUPPORTED_CATEGORIES.find((item) => item.key === categoryKey);
     if (!category || !["StudioTalks", "VODPgmEvtMorningWorship"].includes(categoryKey)) return;
+
+    // Cada clique apenas registra o estado MAIS RECENTE desejado.
+    // Se já houver uma operação rodando, não inicia outra em paralelo.
+    const request = { enabled, showNotice };
+    this.publicationOrderDesired.set(categoryKey, request);
+
+    if (this.publicationOrderRunning.has(categoryKey)) {
+      if (showNotice) {
+        new import_obsidian3.Notice(
+          "A ordenação já está sendo processada. Vou concluir a etapa atual e aplicar automaticamente a última opção escolhida.",
+          5000
+        );
+      }
+      return;
+    }
+
+    this.publicationOrderRunning.add(categoryKey);
+
+    try {
+      while (true) {
+        const currentRequest = this.publicationOrderDesired.get(categoryKey);
+        if (!currentRequest) break;
+
+        await this.performPublicationOrder(
+          categoryKey,
+          currentRequest.enabled,
+          currentRequest.showNotice
+        );
+
+        // Se ninguém mudou o botão enquanto trabalhávamos, terminamos.
+        if (this.publicationOrderDesired.get(categoryKey) === currentRequest) {
+          this.publicationOrderDesired.delete(categoryKey);
+          break;
+        }
+
+        // Caso o usuário tenha ativado/desativado novamente, o loop recomeça
+        // avaliando toda a pasta no novo estado desejado.
+      }
+    } finally {
+      this.publicationOrderRunning.delete(categoryKey);
+    }
+  }
+
+  async performPublicationOrder(categoryKey, enabled, showNotice = true) {
+    const category = SUPPORTED_CATEGORIES.find((item) => item.key === categoryKey);
+    if (!category) return;
 
     const config = this.settings.categorySettings[categoryKey];
     const chosenFolder = cleanFolder((config == null ? void 0 : config.folder) ?? "");
@@ -1898,12 +2210,22 @@ var SourceTranscriptService = class {
       return;
     }
 
-    const recovered = await this.recoverInterruptedPublicationSortFiles(folderPath);
-    const items = [];
-    let skipped = 0;
+    // Desativado: restaura apenas quem realmente possui prefixo/temporário.
+    if (!enabled) {
+      await this.restoreOriginalPublicationNames(folderPath, showNotice);
+      return;
+    }
 
-    for (const child of folder.children) {
-      if (!(child instanceof import_obsidian3.TFile) || child.extension !== "md") continue;
+    const beforeFiles = folder.children.filter(
+      (child) => child instanceof import_obsidian3.TFile && child.extension === "md"
+    );
+    const beforeCount = beforeFiles.length;
+
+    const rows = [];
+    let withoutDate = 0;
+
+    // 1) VARRER TODA A PASTA antes de alterar qualquer nome.
+    for (const child of beforeFiles) {
       const cache = this.app.metadataCache.getFileCache(child);
       const frontmatter = cache == null ? void 0 : cache.frontmatter;
       const dateValue = frontmatter == null ? void 0 : frontmatter.data_publicacao;
@@ -1911,139 +2233,256 @@ var SourceTranscriptService = class {
         ? dateValue.trim()
         : null;
 
-      items.push({
+      const cleanBase = await this.publicationCleanBase(child);
+
+      if (!date) withoutDate += 1;
+
+      rows.push({
         file: child,
-        cleanBase: this.stripPublicationPrefix(child.basename),
-        date
+        currentBase: child.basename,
+        cleanBase,
+        date,
+        desiredBase: null,
+        desiredPath: null
       });
     }
 
-    // Para voltar ao normal não é necessário colocar centenas de arquivos em
-    // nomes temporários. A listagem é feita pelo adaptador para não depender
-    // da árvore do Obsidian, que pode ficar momentaneamente incompleta depois
-    // de centenas de renomeações. A pasta é verificada novamente em etapas
-    // até que nenhum nome numerado permaneça.
-    if (!enabled) {
-      let renamed = 0;
-      let failures = 0;
-      let unresolved = 0;
-      let remaining = 0;
-      const adapter = this.app.vault.adapter;
+    // 2) Calcular a ordem completa sem renomear nada.
+    const dated = rows.filter((row) => row.date);
+    dated.sort((a, b) => {
+      return b.date.localeCompare(a.date) ||
+        a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
+    });
 
-      for (let pass = 0; pass < 8; pass += 1) {
-        if (pass > 0) await wait(450);
+    let rank = 1;
+    for (const row of dated) {
+      const rankPrefix = String(rank).padStart(4, "0");
+      row.desiredBase = `${rankPrefix} - ${this.formatPublicationDateBR(row.date)} - ${row.cleanBase}`;
+      row.desiredPath = `${folderPath}/${row.desiredBase}.md`;
+      rank += 1;
+    }
 
-        const listing = await adapter.list(folderPath);
-        const pending = [];
-        unresolved = 0;
+    // 3) Só mexer em quem REALMENTE está diferente do nome desejado.
+    let pending = dated.filter((row) => row.currentBase !== row.desiredBase);
 
-        for (const path of listing.files) {
-          if (!/\.md$/i.test(path)) continue;
-          const filename = path.slice(path.lastIndexOf("/") + 1).replace(/\.md$/i, "");
-          const cleanBase = this.stripPublicationPrefix(filename);
-          if (cleanBase === filename) continue;
-
-          const file = this.app.vault.getAbstractFileByPath(path);
-          if (!(file instanceof import_obsidian3.TFile)) {
-            unresolved += 1;
-            continue;
-          }
-          pending.push({ file, cleanBase });
-        }
-
-        pending.sort((a, b) => a.cleanBase.localeCompare(b.cleanBase, "pt-BR"));
-        remaining = pending.length + unresolved;
-        if (remaining === 0) break;
-
-        for (const item of pending) {
-          let targetPath = `${folderPath}/${item.cleanBase}.md`;
-          if (await adapter.exists(targetPath)) {
-            let counter = 2;
-            while (await adapter.exists(`${folderPath}/${item.cleanBase} (${counter}).md`)) counter += 1;
-            targetPath = `${folderPath}/${item.cleanBase} (${counter}).md`;
-          }
-
-          try {
-            await this.app.vault.rename(item.file, targetPath);
-            renamed += 1;
-          } catch (e) {
-            failures += 1;
-            console.error("Indice Nights: falha ao restaurar nome original", item.file.path, e);
-          }
-          await wait(15);
-        }
-      }
-
-      const finalListing = await adapter.list(folderPath);
-      remaining = finalListing.files.filter((path) => {
-        if (!/\.md$/i.test(path)) return false;
-        const filename = path.slice(path.lastIndexOf("/") + 1).replace(/\.md$/i, "");
-        return this.stripPublicationPrefix(filename) !== filename;
-      }).length;
-
+    if (pending.length === 0) {
       if (showNotice) {
-        const recoveryText = recovered ? ` ${recovered} temporário(s) recuperado(s).` : "";
-        const failureText = failures ? ` ${failures} falha(s); os demais arquivos foram preservados.` : "";
-        const remainingText = remaining ? ` Ainda restam ${remaining}; execute novamente.` : " Nenhum nome numerado restante.";
         new import_obsidian3.Notice(
-          `${category.name}: ${renamed} arquivo(s) restaurado(s).${remainingText}${recoveryText}${failureText}`,
-          1e4
+          `${dated.length} arquivo(s) conferidos. A ordenação já está correta.`,
+          5000
         );
       }
       return;
     }
 
-    items.sort((a, b) => {
-      if (a.date && b.date) return b.date.localeCompare(a.date) || a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
-      if (a.date) return -1;
-      if (b.date) return 1;
-      return a.cleanBase.localeCompare(b.cleanBase, "pt-BR");
-    });
+    const progress = showNotice
+      ? new import_obsidian3.Notice(
+          `Reordenando ${pending.length} de ${beforeCount} arquivo(s)…`,
+          0
+        )
+      : null;
 
-    const staged = [];
-    const token = Date.now();
+    try {
+      // 4) STAGING APENAS DOS ARQUIVOS QUE PRECISAM MUDAR.
+      // Isso reduz muito as operações em acervos grandes.
+      const token = Date.now();
+      const staged = [];
 
-    for (let index = 0; index < items.length; index += 1) {
-      const item = items[index];
-      if (!item.date) {
-        skipped += 1;
-        continue;
+      for (let index = 0; index < pending.length; index += 1) {
+        const row = pending[index];
+        const currentFile = this.app.vault.getAbstractFileByPath(row.file.path);
+
+        if (!(currentFile instanceof import_obsidian3.TFile)) {
+          console.warn("Indice Nights: arquivo desapareceu antes do staging", row.file.path);
+          continue;
+        }
+
+        const tempPath = `${folderPath}/.__indice_nights_sort_${token}_${index}.md`;
+
+        try {
+          await this.app.vault.rename(currentFile, tempPath);
+          const tempFile = this.app.vault.getAbstractFileByPath(tempPath);
+          if (tempFile instanceof import_obsidian3.TFile) {
+            staged.push({ ...row, file: tempFile, tempPath });
+          }
+        } catch (error) {
+          console.error("Indice Nights: falha no staging da ordenação", row.file.path, error);
+        }
+
+        if (progress) {
+          progress.setMessage(
+            `Preparando reordenação: ${index + 1}/${pending.length}…`
+          );
+        }
       }
 
-      const tempPath = `${folderPath}/.__indice_nights_sort_${token}_${index}.md`;
-      await this.app.vault.rename(item.file, tempPath);
-      staged.push({ ...item, index });
-    }
+      // 5) Aplicar os nomes finais calculados.
+      let renamed = 0;
 
-    let renamed = 0;
-    let rank = 1;
+      for (let index = 0; index < staged.length; index += 1) {
+        const row = staged[index];
+        let targetPath = row.desiredPath;
 
-    for (const item of staged) {
-      const rankPrefix = String(rank).padStart(4, "0");
-      const targetBase = `${rankPrefix} - ${this.formatPublicationDateBR(item.date)} - ${item.cleanBase}`;
-      rank += 1;
+        // Se o destino já existir, verificamos se é justamente um arquivo que
+        // ficou fora do staging. Não sobrescrevemos nada.
+        const existing = this.app.vault.getAbstractFileByPath(targetPath);
+        if (existing && existing.path !== row.file.path) {
+          let counter = 2;
+          while (
+            this.app.vault.getAbstractFileByPath(
+              `${folderPath}/${row.desiredBase} (${counter}).md`
+            )
+          ) {
+            counter += 1;
+          }
+          targetPath = `${folderPath}/${row.desiredBase} (${counter}).md`;
+        }
 
-      let targetPath = `${folderPath}/${targetBase}.md`;
-      if (this.app.vault.getAbstractFileByPath(targetPath)) {
-        let counter = 2;
-        while (this.app.vault.getAbstractFileByPath(`${folderPath}/${targetBase} (${counter}).md`)) counter += 1;
-        targetPath = `${folderPath}/${targetBase} (${counter}).md`;
+        try {
+          await this.app.vault.rename(row.file, targetPath);
+          renamed += 1;
+        } catch (error) {
+          console.error("Indice Nights: falha ao aplicar nome final", row.tempPath, error);
+        }
+
+        if (progress) {
+          progress.setMessage(
+            `Aplicando ordem: ${index + 1}/${staged.length}…`
+          );
+        }
       }
 
-      await this.app.vault.rename(item.file, targetPath);
-      renamed += 1;
-    }
+      // 6) VALIDAÇÃO DE INTEGRIDADE.
+      const refreshedFolder = this.app.vault.getAbstractFileByPath(folderPath);
+      const afterFiles = refreshedFolder instanceof import_obsidian3.TFolder
+        ? refreshedFolder.children.filter(
+            (child) => child instanceof import_obsidian3.TFile && child.extension === "md"
+          )
+        : [];
+      const afterCount = afterFiles.length;
 
-    if (showNotice) {
-      const extra = skipped ? ` ${skipped} nota(s) sem data foram mantidas como estão.` : "";
-      const recoveryText = recovered ? ` ${recovered} temporário(s) recuperado(s).` : "";
-      new import_obsidian3.Notice(`${category.name}: ${renamed} arquivo(s) ajustado(s): mais recentes primeiro.${extra}${recoveryText}`, 7000);
+      if (afterCount !== beforeCount) {
+        console.error(
+          "Indice Nights: divergência de integridade após reordenação",
+          { beforeCount, afterCount, folderPath }
+        );
+        if (showNotice) {
+          new import_obsidian3.Notice(
+            `Atenção: havia ${beforeCount} arquivos antes e ${afterCount} depois. A operação foi interrompida para revisão.`,
+            12000
+          );
+        }
+        return;
+      }
+
+      // 7) SEGUNDA PASSADA DE AUTORREPARO.
+      // Reavalia toda a lista. Se algum arquivo não ficou com o nome esperado,
+      // corrige somente os remanescentes.
+      const currentFolder = this.app.vault.getAbstractFileByPath(folderPath);
+      const currentFiles = currentFolder instanceof import_obsidian3.TFolder
+        ? currentFolder.children.filter(
+            (child) => child instanceof import_obsidian3.TFile && child.extension === "md"
+          )
+        : [];
+
+      const byCleanAndDate = new Map();
+
+      for (const child of currentFiles) {
+        const cache = this.app.metadataCache.getFileCache(child);
+        const frontmatter = cache == null ? void 0 : cache.frontmatter;
+        const dateValue = frontmatter == null ? void 0 : frontmatter.data_publicacao;
+        const date = typeof dateValue === "string" && /^\d{4}-\d{2}-\d{2}$/.test(dateValue.trim())
+          ? dateValue.trim()
+          : null;
+        if (!date) continue;
+
+        const cleanBase = await this.publicationCleanBase(child);
+        const key = `${date}|||${cleanBase}`;
+        byCleanAndDate.set(key, child);
+      }
+
+      const repairs = [];
+
+      for (const row of dated) {
+        const key = `${row.date}|||${row.cleanBase}`;
+        const currentFile = byCleanAndDate.get(key);
+        if (!currentFile) continue;
+
+        if (currentFile.basename !== row.desiredBase) {
+          repairs.push({ file: currentFile, desiredBase: row.desiredBase });
+        }
+      }
+
+      if (repairs.length) {
+        const repairToken = Date.now();
+        const repairStaged = [];
+
+        for (let index = 0; index < repairs.length; index += 1) {
+          const item = repairs[index];
+          const tempPath = `${folderPath}/.__indice_nights_repair_${repairToken}_${index}.md`;
+
+          try {
+            await this.app.vault.rename(item.file, tempPath);
+            const tempFile = this.app.vault.getAbstractFileByPath(tempPath);
+            if (tempFile instanceof import_obsidian3.TFile) {
+              repairStaged.push({ ...item, file: tempFile });
+            }
+          } catch (error) {
+            console.error("Indice Nights: falha no staging de autorreparo", item.file.path, error);
+          }
+        }
+
+        for (const item of repairStaged) {
+          const targetPath = `${folderPath}/${item.desiredBase}.md`;
+          if (this.app.vault.getAbstractFileByPath(targetPath)) continue;
+
+          try {
+            await this.app.vault.rename(item.file, targetPath);
+          } catch (error) {
+            console.error("Indice Nights: falha no autorreparo", item.file.path, error);
+          }
+        }
+      }
+
+      // 8) Validação final: nenhum temporário deve sobrar.
+      const finalFolder = this.app.vault.getAbstractFileByPath(folderPath);
+      const temporaryLeft = finalFolder instanceof import_obsidian3.TFolder
+        ? finalFolder.children.filter(
+            (child) =>
+              child instanceof import_obsidian3.TFile &&
+              child.extension === "md" &&
+              /^\.__(?:indice_nights_sort|indice_nights_restore|indice_nights_repair)_/.test(child.basename)
+          )
+        : [];
+
+      if (temporaryLeft.length > 0) {
+        console.warn(
+          "Indice Nights: arquivos temporários restantes após operação",
+          temporaryLeft.map((file) => file.path)
+        );
+      }
+
+      if (showNotice) {
+        const repairedText = repairs.length
+          ? ` ${repairs.length} arquivo(s) precisaram de autorreparo.`
+          : "";
+        const noDateText = withoutDate
+          ? ` ${withoutDate} nota(s) sem data foram preservadas sem numeração.`
+          : "";
+
+        new import_obsidian3.Notice(
+          `${renamed} arquivo(s) precisaram ser renomeados de ${beforeCount} analisados.${repairedText}${noDateText}`,
+          9000
+        );
+      }
+    } finally {
+      if (progress) progress.hide();
     }
   }
   async applySavedPublicationOrder() {
     const order = this.settings.publicationOrder ?? {};
     for (const key of ["StudioTalks", "VODPgmEvtMorningWorship"]) {
-      await this.setPublicationOrder(key, Boolean(order[key]), false);
+      if (order[key]) await this.setPublicationOrder(key, true, false);
     }
   }
   existingNotes() {
@@ -2601,28 +3040,39 @@ var DeviceSelectionStore = class {
     this.persist();
   }
 };
+
 var INDICE_NIGHTS_CONTEXT_VIEW = "indice-nights-context";
+var INDICE_NIGHTS_LIBRARY_VIEW = "indice-nights-library";
+
 var ContextoBiblicoView = class extends import_obsidian6.ItemView {
   constructor(leaf, plugin) {
     super(leaf);
     this.plugin = plugin;
     this.unsubscribe = null;
+
+    // Modo principal da sidebar: "list" = contexto; "reader" = transcrição completa.
     this.mode = "list";
     this.contextFilePath = "";
     this.readerFilePath = "";
     this.readerReference = null;
+
+    // Estado visual da lista para voltar exatamente ao ponto anterior.
     this.listScrollTop = 0;
     this.openReferenceKeys = /* @__PURE__ */ new Set();
   }
+
   getViewType() {
     return INDICE_NIGHTS_CONTEXT_VIEW;
   }
+
   getDisplayText() {
     return "Contexto Bíblico";
   }
+
   getIcon() {
     return "book-open-check";
   }
+
   async onOpen() {
     const index = this.plugin.getDefaultBibleIndex();
     this.unsubscribe = index.subscribe(() => {
@@ -2634,13 +3084,16 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
     });
     await this.refresh();
   }
+
   async onClose() {
     if (this.unsubscribe) this.unsubscribe();
     this.unsubscribe = null;
   }
+
   rememberListState() {
     const container = this.contentEl;
     this.listScrollTop = container.scrollTop;
+
     const openKeys = /* @__PURE__ */ new Set();
     for (const details of container.querySelectorAll("details.in-context-reference[open]")) {
       const key = details.getAttribute("data-reference-key");
@@ -2648,6 +3101,7 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
     }
     this.openReferenceKeys = openKeys;
   }
+
   async openTranscriptInSidebar(path, reference = null) {
     this.rememberListState();
     this.mode = "reader";
@@ -2655,29 +3109,36 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
     this.readerReference = reference;
     await this.renderReader(path, reference);
   }
+
   async backToContext() {
     this.mode = "list";
     this.readerFilePath = "";
     this.readerReference = null;
+
     const contextFile = this.contextFilePath
       ? this.app.vault.getAbstractFileByPath(this.contextFilePath)
       : this.app.workspace.getActiveFile();
+
     await this.refresh(
       contextFile instanceof import_obsidian6.TFile ? contextFile : this.app.workspace.getActiveFile(),
       true
     );
   }
+
   stripFrontmatter(content) {
     if (!content.startsWith("---")) return content;
     const match = content.match(/^---\s*\n[\s\S]*?\n---\s*(?:\n|$)/);
     return match ? content.slice(match[0].length) : content;
   }
+
   async renderReader(path, reference = null) {
     const file = this.app.vault.getAbstractFileByPath(path);
     const container = this.contentEl;
+
     container.empty();
     container.addClass("indice-nights-context-view");
     container.addClass("in-context-reader-mode");
+
     const toolbar = container.createDiv({ cls: "in-context-reader-toolbar" });
     const back = toolbar.createEl("button", {
       cls: "in-context-reader-back",
@@ -2689,6 +3150,7 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
     back.addEventListener("click", () => {
       void this.backToContext();
     });
+
     if (!(file instanceof import_obsidian6.TFile) || file.extension !== "md") {
       container.createDiv({
         text: "Não foi possível abrir esta transcrição.",
@@ -2696,21 +3158,35 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
       });
       return;
     }
+
     const titleBar = container.createDiv({ cls: "in-context-reader-heading" });
     titleBar.createDiv({ text: file.basename, cls: "in-context-reader-title" });
+
     const cache = this.app.metadataCache.getFileCache(file);
     const frontmatter = cache?.frontmatter ?? {};
-    const meta = contextMetaFor(file, frontmatter);
+    const meta = libraryMetaFor(file, frontmatter);
+
     const metaLine = titleBar.createDiv({ cls: "in-context-reader-meta" });
-    if (meta.collection) {
-      metaLine.createSpan({ text: meta.series ? `${meta.collection} · ${meta.series}` : meta.collection });
-    }
-    if (meta.date) metaLine.createSpan({ text: formatContextDate(meta.date) });
+    if (meta.collection) metaLine.createSpan({ text: meta.series ? `${meta.collection} · ${meta.series}` : meta.collection });
+    if (meta.date) metaLine.createSpan({ text: formatDatePtBR(meta.date) });
     if (meta.speaker) metaLine.createSpan({ text: meta.speaker });
+
     const reader = container.createDiv({ cls: "in-context-reader-markdown markdown-rendered" });
+
     try {
       const raw = await this.app.vault.cachedRead(file);
-      const content = this.stripFrontmatter(raw);
+      let content = this.stripFrontmatter(raw);
+      let requestedBlockId = null;
+
+      if (reference) {
+        requestedBlockId = await citationBlockFor(this.app, file.path, reference);
+        if (requestedBlockId) {
+          const marker = `<span class="in-context-citation-anchor" data-citation-anchor="${requestedBlockId}"></span>`;
+          const blockLine = new RegExp(`(^|\\n)(\\^${requestedBlockId.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*(?:\\n|$))`);
+          content = content.replace(blockLine, `$1${marker}\\n$2`);
+        }
+      }
+
       await import_obsidian6.MarkdownRenderer.render(
         this.app,
         content,
@@ -2718,24 +3194,32 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
         file.path,
         this
       );
+
+      // O próprio frontmatter não é exibido; links bíblicos/miniatura continuam processados.
       this.plugin.prepareThumbnailLayout(reader);
       linkBibleReferences(reader, this.app);
-      if (reference) {
-        const blockId = await citationBlockFor(this.app, file.path, reference);
-        if (blockId) {
-          window.requestAnimationFrame(() => {
-            const escapedId = typeof CSS !== "undefined" && typeof CSS.escape === "function"
-              ? CSS.escape(blockId)
-              : blockId.replace(/[^A-Za-z0-9_-]/g, "\\$&");
-            const target =
-              reader.querySelector(`[data-block-id="${escapedId}"]`) ||
-              reader.querySelector(`#${escapedId}`) ||
-              [...reader.querySelectorAll(".block-language-id, p, div")].find((el) =>
-                (el.textContent ?? "").trim() === `^${blockId}`
-              );
-            if (target instanceof HTMLElement) target.scrollIntoView({ block: "start" });
-          });
-        }
+
+      // Mantém a transcrição inteira e posiciona com prioridade no parágrafo exato.
+      if (reference && requestedBlockId) {
+        window.setTimeout(() => {
+          const escaped = typeof CSS !== "undefined" && CSS.escape
+            ? CSS.escape(requestedBlockId)
+            : requestedBlockId;
+
+          const target =
+            reader.querySelector(`[data-citation-anchor="${escaped}"]`) ||
+            reader.querySelector(`[data-block-id="${escaped}"]`) ||
+            reader.querySelector(`#${escaped}`);
+
+          if (target instanceof HTMLElement) {
+            const paragraph =
+              target.closest("p, blockquote, li, .callout, div") ||
+              target.nextElementSibling ||
+              target;
+            paragraph.addClass("in-context-citation-highlight");
+            paragraph.scrollIntoView({ block: "center", behavior: "auto" });
+          }
+        }, 80);
       }
     } catch (error) {
       console.error("Indice Nights: falha ao renderizar transcrição na sidebar", path, error);
@@ -2745,18 +3229,26 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
       });
     }
   }
+
   async refresh(file = this.app.workspace.getActiveFile(), restoreState = false) {
-    if (this.mode === "reader" && !restoreState) return;
+    // Se o usuário está comparando uma transcrição na lateral, não substitui a leitura
+    // apenas porque o painel central disparou uma atualização.
+    if (this.mode === "reader" && !restoreState) {
+      return;
+    }
+
     const container = this.contentEl;
     container.empty();
     container.addClass("indice-nights-context-view");
     container.removeClass("in-context-reader-mode");
+
     const heading = container.createDiv({ cls: "in-context-header" });
     heading.createDiv({ text: "Contexto Bíblico", cls: "in-context-title" });
     heading.createDiv({
       text: "Veja onde os textos desta nota aparecem em outras transcrições.",
       cls: "in-context-subtitle"
     });
+
     if (!file || !file.path.startsWith("Discursos/") || file.extension !== "md") {
       container.createDiv({
         text: "Abra uma transcrição da pasta Discursos para visualizar o contexto bíblico.",
@@ -2764,10 +3256,13 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
       });
       return;
     }
+
     this.contextFilePath = file.path;
+
     const cache = this.app.metadataCache.getFileCache(file);
     const frontmatter = cache?.frontmatter ?? {};
     const references = extractReferences(frontmatter.textos);
+
     const noteCard = container.createDiv({ cls: "in-context-current-note" });
     noteCard.createDiv({ text: file.basename, cls: "in-context-current-title" });
     noteCard.createDiv({
@@ -2776,18 +3271,24 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
         : "Nenhum texto bíblico indexado nesta transcrição.",
       cls: "in-context-current-count"
     });
+
     if (!references.length) return;
+
     const index = this.plugin.getDefaultBibleIndex();
+
     for (const reference of references) {
       const bookSnapshot = index.snapshot(reference.book);
       const indexed = bookSnapshot.references.find((item) => item.key === reference.key);
       const occurrences = indexed
         ? [...indexed.notes.values()].filter((note) => note.path !== file.path)
         : [];
+
       const details = container.createEl("details", { cls: "in-context-reference" });
       details.setAttribute("data-reference-key", reference.key);
       if (this.openReferenceKeys.has(reference.key)) details.open = true;
+
       const summary = details.createEl("summary", { cls: "in-context-reference-summary" });
+
       const refCopy = summary.createDiv({ cls: "in-context-reference-copy" });
       refCopy.createDiv({ text: reference.display, cls: "in-context-reference-name" });
       refCopy.createDiv({
@@ -2796,16 +3297,21 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
           : "Nenhuma outra ocorrência no acervo",
         cls: "in-context-reference-count"
       });
+
       if (!occurrences.length) continue;
-      const grouped = /* @__PURE__ */ new Map();
+
+      const grouped = new Map();
       for (const note of occurrences) {
         if (!grouped.has(note.section)) grouped.set(note.section, []);
         grouped.get(note.section).push(note);
       }
+
       const body = details.createDiv({ cls: "in-context-reference-body" });
+
       for (const [section, notes] of grouped.entries()) {
         const group = body.createDiv({ cls: "in-context-group" });
         group.createDiv({ text: section, cls: "in-context-group-title" });
+
         for (const note of notes) {
           const link = group.createEl("button", {
             text: note.title,
@@ -2815,14 +3321,17 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
               title: "Abrir a transcrição completa nesta lateral"
             }
           });
+
           const arrow = link.createSpan({ cls: "in-context-note-arrow" });
           (0, import_obsidian6.setIcon)(arrow, "chevron-right");
+
           link.addEventListener("click", () => {
             void this.openTranscriptInSidebar(note.path, reference);
           });
         }
       }
     }
+
     if (restoreState) {
       window.requestAnimationFrame(() => {
         container.scrollTop = this.listScrollTop;
@@ -2830,6 +3339,287 @@ var ContextoBiblicoView = class extends import_obsidian6.ItemView {
     }
   }
 };
+
+
+var IndiceNightsLibraryView = class extends import_obsidian6.ItemView {
+  constructor(leaf, plugin) {
+    super(leaf);
+    this.plugin = plugin;
+    this.unsubscribe = null;
+    this.query = "";
+    this.collection = "";
+    this.series = "";
+    this.speaker = "";
+    this.year = "";
+  }
+
+  getViewType() {
+    return INDICE_NIGHTS_LIBRARY_VIEW;
+  }
+
+  getDisplayText() {
+    return "Biblioteca - Indice Nights";
+  }
+
+  getIcon() {
+    return "library-big";
+  }
+
+  async onOpen() {
+    const index = this.plugin.getDefaultBibleIndex();
+    this.unsubscribe = index.subscribe(() => this.render());
+    this.render();
+  }
+
+  async onClose() {
+    if (this.unsubscribe) this.unsubscribe();
+    this.unsubscribe = null;
+  }
+
+  collectRows() {
+    const index = this.plugin.getDefaultBibleIndex();
+    index.ensureInitialized();
+
+    const rows = [];
+
+    for (const record of index.notes.values()) {
+      const file = record.file;
+      const cache = this.app.metadataCache.getFileCache(file);
+      const frontmatter = cache?.frontmatter ?? {};
+      const meta = libraryMetaFor(file, frontmatter);
+
+      if (!record.references.length) {
+        rows.push({ file, reference: null, ...meta });
+        continue;
+      }
+
+      for (const reference of record.references) {
+        rows.push({ file, reference, ...meta });
+      }
+    }
+
+    rows.sort((a, b) => {
+      const dateCompare = String(b.date || "").localeCompare(String(a.date || ""));
+      if (dateCompare) return dateCompare;
+      return a.file.basename.localeCompare(b.file.basename, "pt-BR");
+    });
+
+    return rows;
+  }
+
+  render() {
+    const container = this.contentEl;
+    container.empty();
+    container.addClass("indice-nights-library-view");
+
+    const rows = this.collectRows();
+
+    const titleWrap = container.createDiv({ cls: "in-library-header" });
+    titleWrap.createDiv({ text: "Biblioteca - Indice Nights", cls: "in-library-title" });
+    titleWrap.createDiv({
+      text: "Explore o acervo por texto bíblico, coleção, série, orador e ano.",
+      cls: "in-library-subtitle"
+    });
+
+    const controls = container.createDiv({ cls: "in-library-controls" });
+
+    const search = controls.createEl("input", {
+      cls: "in-library-search",
+      attr: {
+        type: "search",
+        placeholder: "Pesquisar texto bíblico, título ou orador…",
+        value: this.query
+      }
+    });
+    search.addEventListener("input", () => {
+      this.query = search.value;
+      this.render();
+    });
+
+    const unique = (values) => [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+    const makeSelect = (label, values, current, onChange) => {
+      const select = controls.createEl("select", { cls: "dropdown in-library-filter", attr: { "aria-label": label } });
+      select.createEl("option", { text: `${label}: todos`, value: "" });
+      for (const value of values) select.createEl("option", { text: value, value });
+      select.value = current;
+      select.addEventListener("change", () => onChange(select.value));
+      return select;
+    };
+
+    makeSelect("Coleção", unique(rows.map((row) => row.collection)), this.collection, (value) => {
+      this.collection = value;
+      this.render();
+    });
+    makeSelect("Série", unique(rows.map((row) => row.series)), this.series, (value) => {
+      this.series = value;
+      this.render();
+    });
+    makeSelect("Orador", unique(rows.map((row) => row.speaker)), this.speaker, (value) => {
+      this.speaker = value;
+      this.render();
+    });
+    makeSelect("Ano", unique(rows.map((row) => row.date ? row.date.slice(0, 4) : "")), this.year, (value) => {
+      this.year = value;
+      this.render();
+    });
+
+    const query = normalizeText(this.query);
+    const filtered = rows.filter((row) => {
+      if (this.collection && row.collection !== this.collection) return false;
+      if (this.series && row.series !== this.series) return false;
+      if (this.speaker && row.speaker !== this.speaker) return false;
+      if (this.year && !String(row.date || "").startsWith(this.year)) return false;
+
+      if (!query) return true;
+
+      const haystack = normalizeText([
+        row.file.basename,
+        row.collection,
+        row.series,
+        row.speaker,
+        row.reference?.display ?? ""
+      ].join(" "));
+
+      return haystack.includes(query);
+    });
+
+    const status = container.createDiv({ cls: "in-library-status" });
+    status.createSpan({ text: `${filtered.length} resultado${filtered.length === 1 ? "" : "s"}` });
+    status.createSpan({ text: "Atualização automática", cls: "in-library-live-badge" });
+
+    const tableWrap = container.createDiv({ cls: "in-library-table-wrap" });
+    const table = tableWrap.createEl("table", { cls: "in-library-table" });
+    const thead = table.createEl("thead");
+    const head = thead.createEl("tr");
+    for (const label of ["Data", "Coleção", "Série", "Orador", "Título", "Texto bíblico"]) {
+      head.createEl("th", { text: label });
+    }
+
+    const tbody = table.createEl("tbody");
+    const visibleRows = filtered.slice(0, 1000);
+
+    for (const row of visibleRows) {
+      const tr = tbody.createEl("tr");
+      tr.createEl("td", { text: formatDatePtBR(row.date) });
+      tr.createEl("td", { text: row.collection || "—" });
+      tr.createEl("td", { text: row.series || "—" });
+      tr.createEl("td", { text: row.speaker || "—" });
+
+      const titleCell = tr.createEl("td");
+      const titleLink = titleCell.createEl("button", {
+        text: row.file.basename,
+        cls: "in-library-link",
+        attr: { type: "button" }
+      });
+      titleLink.addEventListener("click", () => {
+        void this.app.workspace.openLinkText(row.file.path, "", false);
+      });
+
+      const refCell = tr.createEl("td");
+      if (row.reference) {
+        const refLink = refCell.createEl("button", {
+          text: row.reference.display,
+          cls: "in-library-link in-library-reference-link",
+          attr: { type: "button" }
+        });
+        refLink.addEventListener("click", () => {
+          void openCitationTarget(this.app, row.file.path, row.reference, "", false);
+        });
+      } else {
+        refCell.setText("—");
+      }
+    }
+
+    if (filtered.length > visibleRows.length) {
+      container.createDiv({
+        text: `Mostrando os primeiros ${visibleRows.length} resultados. Use os filtros para refinar a pesquisa.`,
+        cls: "in-library-limit"
+      });
+    }
+  }
+};
+
+function registerIndiceNightsBasesView(plugin) {
+  if (typeof plugin.registerBasesView !== "function" || typeof import_obsidian6.BasesView !== "function") return;
+
+  const BasesViewClass = import_obsidian6.BasesView;
+
+  class IndiceNightsBasesView extends BasesViewClass {
+    constructor(controller, parentEl) {
+      super(controller);
+      this.plugin = plugin;
+      this.containerEl = parentEl.createDiv({ cls: "indice-nights-bases-view" });
+    }
+
+    get type() {
+      return "indice-nights-bases";
+    }
+
+    onDataUpdated() {
+      const container = this.containerEl;
+      container.empty();
+
+      container.createDiv({ text: "Biblioteca - Indice Nights", cls: "in-bases-title" });
+      container.createDiv({
+        text: "Visualização viva do acervo usando o mecanismo nativo Bases.",
+        cls: "in-bases-subtitle"
+      });
+
+      const tableWrap = container.createDiv({ cls: "in-library-table-wrap" });
+      const table = tableWrap.createEl("table", { cls: "in-library-table" });
+      const thead = table.createEl("thead");
+      const header = thead.createEl("tr");
+
+      for (const label of ["Data", "Coleção", "Série", "Orador", "Título", "Textos bíblicos"]) {
+        header.createEl("th", { text: label });
+      }
+
+      const tbody = table.createEl("tbody");
+      let rendered = 0;
+
+      for (const group of this.data.groupedData) {
+        for (const entry of group.entries) {
+          if (rendered >= 1000) break;
+
+          const file = entry.file;
+          if (!file?.path?.startsWith("Discursos/") || file.extension !== "md") continue;
+
+          const cache = this.app.metadataCache.getFileCache(file);
+          const frontmatter = cache?.frontmatter ?? {};
+          const meta = libraryMetaFor(file, frontmatter);
+          const refs = extractReferences(frontmatter.textos);
+
+          const tr = tbody.createEl("tr");
+          tr.createEl("td", { text: formatDatePtBR(meta.date) });
+          tr.createEl("td", { text: meta.collection || "—" });
+          tr.createEl("td", { text: meta.series || "—" });
+          tr.createEl("td", { text: meta.speaker || "—" });
+
+          const titleCell = tr.createEl("td");
+          const title = titleCell.createEl("button", {
+            text: file.basename,
+            cls: "in-library-link",
+            attr: { type: "button" }
+          });
+          title.addEventListener("click", () => {
+            void this.app.workspace.openLinkText(file.path, "", false);
+          });
+
+          tr.createEl("td", { text: refs.map((ref) => ref.display).join(" · ") || "—" });
+          rendered += 1;
+        }
+      }
+    }
+  }
+
+  plugin.registerBasesView("indice-nights-bases", {
+    name: "Indice Nights",
+    icon: "lucide-library-big",
+    factory: (controller, containerEl) => new IndiceNightsBasesView(controller, containerEl)
+  });
+}
+
 var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
   constructor() {
     super(...arguments);
@@ -2841,6 +3631,9 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     __publicField(this, "selections");
     __publicField(this, "selectionData", {});
     __publicField(this, "runtimeStyleEl", null);
+    __publicField(this, "workspaceReady", false);
+    __publicField(this, "startupTimer", null);
+    __publicField(this, "contextOpenTimer", null);
   }
   getDefaultBibleIndex() {
     return this.indexManager.get({
@@ -2852,33 +3645,93 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     });
   }
   async activateContextView() {
-    let leaf = this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)[0];
+    if (!this.workspaceReady) return;
+    try {
+      let leaf = this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)[0];
+      if (!leaf) {
+        leaf = this.app.workspace.getRightLeaf(false);
+        if (!leaf) {
+          console.warn("Indice Nights: painel lateral ainda não disponível.");
+          return;
+        }
+        await leaf.setViewState({ type: INDICE_NIGHTS_CONTEXT_VIEW, active: true });
+      }
+      this.app.workspace.revealLeaf(leaf);
+      if (leaf.view instanceof ContextoBiblicoView) {
+        await leaf.view.refresh();
+      }
+    } catch (error) {
+      console.error("Indice Nights: falha segura ao abrir Contexto Bíblico", error);
+    }
+  }
+  async activateLibraryView() {
+    let leaf = this.app.workspace.getLeavesOfType(INDICE_NIGHTS_LIBRARY_VIEW)[0];
     if (!leaf) {
-      leaf = this.app.workspace.getRightLeaf(false) ?? this.app.workspace.getLeaf("tab");
-      await leaf.setViewState({ type: INDICE_NIGHTS_CONTEXT_VIEW, active: true });
+      leaf = this.app.workspace.getLeaf("tab");
+      await leaf.setViewState({ type: INDICE_NIGHTS_LIBRARY_VIEW, active: true });
     }
     this.app.workspace.revealLeaf(leaf);
-    if (leaf.view instanceof ContextoBiblicoView) await leaf.view.refresh();
+  }
+  updateTranscriptViewClasses() {
+    for (const leaf of this.app.workspace.getLeavesOfType("markdown")) {
+      const view = leaf.view;
+      const container = view == null ? void 0 : view.containerEl;
+      const content = view == null ? void 0 : view.contentEl;
+      const file = view == null ? void 0 : view.file;
+      if (!container) continue;
+
+      const isTranscript = Boolean(
+        file &&
+        file.extension === "md" &&
+        file.path.startsWith("Discursos/")
+      );
+
+      container.toggleClass("indice-nights-transcript-view", isTranscript);
+      if (content) content.toggleClass("indice-nights-transcript-view", isTranscript);
+
+      // Reforço visual: os dados permanecem no frontmatter, apenas a interface some.
+      for (const metadataEl of container.querySelectorAll(
+        ".metadata-container, .metadata-properties, .metadata-properties-heading, .metadata-add-button"
+      )) {
+        metadataEl.toggleClass("indice-nights-metadata-hidden", isTranscript);
+      }
+    }
   }
   ensureRuntimeStyles() {
-    const existing = document.getElementById("indice-nights-runtime-styles");
-    if (existing) {
-      this.runtimeStyleEl = existing;
-      return;
+    try {
+      if (typeof document === "undefined" || !document.head) return;
+      const existing = document.getElementById("indice-nights-runtime-styles");
+      if (existing) {
+        this.runtimeStyleEl = existing;
+        return;
+      }
+      const style = document.createElement("style");
+      style.id = "indice-nights-runtime-styles";
+      style.textContent = INDICE_NIGHTS_RUNTIME_CSS;
+      document.head.appendChild(style);
+      this.runtimeStyleEl = style;
+    } catch (error) {
+      console.error("Indice Nights: falha ao aplicar estilos em runtime", error);
     }
-    const style = document.createElement("style");
-    style.id = "indice-nights-runtime-styles";
-    style.textContent = INDICE_NIGHTS_RUNTIME_CSS;
-    document.head.appendChild(style);
-    this.runtimeStyleEl = style;
   }
   async onload() {
     this.ensureRuntimeStyles();
     await this.loadSettings();
+
     this.registerView(
       INDICE_NIGHTS_CONTEXT_VIEW,
       (leaf) => new ContextoBiblicoView(leaf, this)
     );
+    this.registerView(
+      INDICE_NIGHTS_LIBRARY_VIEW,
+      (leaf) => new IndiceNightsLibraryView(leaf, this)
+    );
+    try {
+      registerIndiceNightsBasesView(this);
+    } catch (error) {
+      console.warn("Indice Nights: integração com Bases indisponível nesta inicialização", error);
+    }
+
     this.selections = new DeviceSelectionStore(this.selectionData, () => {
       void this.saveSettings();
     });
@@ -2895,14 +3748,56 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
       (file) => this.noteSyncService.syncFile(file)
     );
     this.addSettingTab(new IndiceNightsSettingTab(this.app, this));
-    try {
-      await this.transcriptService.applySeriesMigrations();
-    } catch (e) {
-      console.error("Indice Nights: falha ao organizar as séries na inicialização", e);
-    }
-    await this.transcriptService.ensureGeneralIndex();
+
+    this.app.workspace.onLayoutReady(() => {
+      this.workspaceReady = true;
+
+      if (this.startupTimer) window.clearTimeout(this.startupTimer);
+      this.startupTimer = window.setTimeout(() => {
+        void (async () => {
+          try {
+            await this.transcriptService.applySeriesMigrations();
+          } catch (e) {
+            console.error("Indice Nights: falha ao organizar as séries na inicialização", e);
+          }
+
+          try {
+            await this.transcriptService.ensureGeneralIndex();
+          } catch (e) {
+            console.error("Indice Nights: falha ao atualizar o Índice Geral na inicialização", e);
+          }
+
+          try {
+            this.updateTranscriptViewClasses();
+          } catch (e) {
+            console.error("Indice Nights: falha ao aplicar visual das transcrições", e);
+          }
+
+          const activeFile = this.app.workspace.getActiveFile();
+          if (activeFile) {
+            try {
+              this.noteSyncService.schedule(activeFile);
+            } catch (e) {
+              console.error("Indice Nights: falha ao sincronizar arquivo ativo", e);
+            }
+          }
+        })();
+      }, 400);
+    });
+
+    this.addRibbonIcon("library-big", "Biblioteca - Indice Nights", () => {
+      void this.activateLibraryView();
+    });
     this.addRibbonIcon("book-open-check", "Contexto Bíblico", () => {
       void this.activateContextView();
+    });
+
+    this.addCommand({
+      id: "abrir-biblioteca-indice-nights",
+      name: "Abrir Biblioteca - Indice Nights",
+      callback: () => {
+        void this.activateLibraryView();
+      }
     });
     this.addCommand({
       id: "abrir-contexto-biblico",
@@ -2911,8 +3806,10 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
         void this.activateContextView();
       }
     });
+
     this.registerEvent(this.app.workspace.on("file-menu", (menu, file) => {
       if (!(file instanceof import_obsidian6.TFile) || file.extension !== "md" || !file.path.startsWith("Discursos/")) return;
+
       menu.addSeparator();
       menu.addItem((item) => item
         .setTitle("Abrir Contexto Bíblico")
@@ -2920,16 +3817,23 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
         .onClick(() => {
           void this.app.workspace.openLinkText(file.path, "", false).then(() => this.activateContextView());
         }));
+      menu.addItem((item) => item
+        .setTitle("Abrir Biblioteca - Indice Nights")
+        .setIcon("library-big")
+        .onClick(() => {
+          void this.activateLibraryView();
+        }));
     }));
+
     this.addCommand({
-      id: "baixar-novas-transcricoes",
+      id: "baixar-novas-transcrições",
       name: "Baixar novas transcri\xE7\xF5es selecionadas",
       callback: () => {
         void this.transcriptService.downloadEnabled();
       }
     });
     this.addCommand({
-      id: "baixar-transcricoes-pasta-publica",
+      id: "baixar-transcrições-pasta-publica",
       name: "Baixar novas transcri\xE7\xF5es da pasta p\xFAblica",
       callback: () => {
         void this.remoteDriveService.downloadNew();
@@ -2959,6 +3863,12 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
       this.indexManager.updateFile(file);
     }));
+    this.registerEvent(this.app.workspace.on("layout-change", () => {
+      this.updateTranscriptViewClasses();
+    }));
+    window.setTimeout(() => {
+      this.updateTranscriptViewClasses();
+    }, 0);
     this.registerEvent(this.app.vault.on("modify", (file) => {
       if (file instanceof import_obsidian6.TFile) this.noteSyncService.schedule(file);
     }));
@@ -2969,23 +3879,63 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
       if (file instanceof import_obsidian6.TFile) this.indexManager.renameFile(file, oldPath);
     }));
     this.registerEvent(this.app.workspace.on("file-open", (file) => {
-      if (file) this.noteSyncService.schedule(file);
-      if (file && file.extension === "md" && file.path.startsWith("Discursos/")) {
-        window.setTimeout(() => {
-          void this.activateContextView();
-        }, 150);
+      if (file) {
+        try {
+          this.noteSyncService.schedule(file);
+        } catch (error) {
+          console.error("Indice Nights: falha ao agendar sincronização", error);
+        }
       }
-      for (const leaf of this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)) {
-        if (leaf.view instanceof ContextoBiblicoView) void leaf.view.refresh(file);
+
+      window.setTimeout(() => {
+        try {
+          this.updateTranscriptViewClasses();
+        } catch (error) {
+          console.error("Indice Nights: falha ao atualizar visual da transcrição", error);
+        }
+      }, 0);
+
+      if (
+        this.workspaceReady &&
+        file &&
+        file.extension === "md" &&
+        file.path.startsWith("Discursos/")
+      ) {
+        if (this.contextOpenTimer) window.clearTimeout(this.contextOpenTimer);
+        this.contextOpenTimer = window.setTimeout(() => {
+          void this.activateContextView();
+        }, 250);
+      }
+
+      if (this.workspaceReady) {
+        for (const leaf of this.app.workspace.getLeavesOfType(INDICE_NIGHTS_CONTEXT_VIEW)) {
+          if (leaf.view instanceof ContextoBiblicoView) {
+            void leaf.view.refresh(file).catch((error) => {
+              console.error("Indice Nights: falha ao atualizar Contexto Bíblico", error);
+            });
+          }
+        }
       }
     }));
-    const activeFile = this.app.workspace.getActiveFile();
-    if (activeFile) this.noteSyncService.schedule(activeFile);
   }
   onunload() {
     var _a;
+    this.workspaceReady = false;
+
+    if (this.startupTimer) {
+      window.clearTimeout(this.startupTimer);
+      this.startupTimer = null;
+    }
+    if (this.contextOpenTimer) {
+      window.clearTimeout(this.contextOpenTimer);
+      this.contextOpenTimer = null;
+    }
+
     (_a = this.noteSyncService) == null ? void 0 : _a.unload();
-    if (this.runtimeStyleEl && this.runtimeStyleEl.parentElement) this.runtimeStyleEl.remove();
+
+    if (this.runtimeStyleEl && this.runtimeStyleEl.parentElement) {
+      this.runtimeStyleEl.remove();
+    }
     this.runtimeStyleEl = null;
   }
   prepareThumbnailLayout(element) {
