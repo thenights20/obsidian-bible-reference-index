@@ -1,0 +1,48 @@
+name: Build beta botão voltar ao índice
+
+on:
+  push:
+    branches:
+      - beta
+    paths:
+      - "tools/apply-beta-back-button.mjs"
+      - ".github/workflows/build-beta-back-button.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout beta
+        uses: actions/checkout@v4
+        with:
+          ref: beta
+
+      - name: Aplicar beta
+        run: node tools/apply-beta-back-button.mjs
+
+      - name: Validar JavaScript
+        run: node --check main.js
+
+      - name: Validar botão beta
+        shell: bash
+        run: |
+          grep -q 'indice-nights-back-to-index' main.js
+          grep -q '0.9.34-beta.1' manifest.json
+
+      - name: Commitar beta compilada
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add main.js styles.css manifest.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para commitar."
+            exit 0
+          fi
+          git commit -m "0.9.34-beta.1: botão voltar ao índice com posição preservada"
+          git push origin beta
