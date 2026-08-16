@@ -301,10 +301,11 @@ function indiceNightsActiveScrollContainer() {
     document.querySelector('.workspace-leaf.mod-active .view-content');
 }
 
-function indiceNightsCaptureIndexReturn(sourcePath) {
+function indiceNightsCaptureIndexReturn(app, sourcePath) {
   const scroller = indiceNightsActiveScrollContainer();
+  const activePath = app.workspace.getActiveFile()?.path || "";
   return {
-    sourcePath,
+    sourcePath: sourcePath || activePath,
     scrollTop: scroller instanceof HTMLElement ? scroller.scrollTop : 0
   };
 }
@@ -332,6 +333,22 @@ function indiceNightsInstallBackButton(app, context) {
   button.type = 'button';
   button.setAttribute('aria-label', 'Voltar ao índice na posição anterior');
   button.textContent = '← Voltar ao índice';
+  Object.assign(button.style, {
+    position: 'fixed',
+    top: '58px',
+    right: '22px',
+    zIndex: '2147483647',
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: '9px 13px',
+    borderRadius: '999px',
+    border: '1px solid var(--background-modifier-border-hover)',
+    background: 'var(--background-primary-alt)',
+    color: 'var(--text-normal)',
+    boxShadow: '0 6px 20px rgba(0,0,0,.28)',
+    fontWeight: '600',
+    cursor: 'pointer'
+  });
   button.addEventListener('click', async () => {
     button.disabled = true;
     try {
@@ -347,12 +364,14 @@ function indiceNightsInstallBackButton(app, context) {
 }
 
 async function openCitationTarget(app, path, reference, sourcePath = "", modEvent = false) {
-  const returnContext = indiceNightsCaptureIndexReturn(sourcePath);
+  const returnContext = indiceNightsCaptureIndexReturn(app, sourcePath);
   const blockId = await citationBlockFor(app, path, reference, true);
   const target = blockId ? `${path}#^${blockId}` : path;
 
   await app.workspace.openLinkText(target, sourcePath, modEvent);
   indiceNightsInstallBackButton(app, returnContext);
+  window.setTimeout(() => indiceNightsInstallBackButton(app, returnContext), 80);
+  window.setTimeout(() => indiceNightsInstallBackButton(app, returnContext), 250);
 
   if (!blockId) {
     new import_obsidian6.Notice(
