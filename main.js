@@ -4618,6 +4618,14 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
         void this.remoteDriveService.downloadNew();
       }
     });
+    this.addCommand({
+      id: "atualizar-versao-de-teste",
+      name: "Atualizar versão de teste",
+      callback: () => {
+        void this.updateTestVersion();
+      }
+    });
+
     this.registerMarkdownCodeBlockProcessor("indice-biblico", (source, el, context) => {
       var _a;
       const config = parseBlockConfig(source, this.settings);
@@ -4774,6 +4782,51 @@ var IndiceNightsPlugin = class extends import_obsidian6.Plugin {
 
     return { total: books.length, updated };
   }
+  async updateTestVersion() {
+    const files = ["main.js", "manifest.json", "styles.css"];
+    const baseUrl = "https://raw.githubusercontent.com/thenights20/obsidian-bible-reference-index/dev";
+    const cacheBust = Date.now();
+
+    try {
+      new import_obsidian6.Notice("Índice Nights: verificando a versão de teste…", 2500);
+      const downloaded = {};
+
+      for (const fileName of files) {
+        const response = await fetch(baseUrl + "/" + fileName + "?v=" + cacheBust, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Falha ao baixar " + fileName + ": HTTP " + response.status);
+        }
+        downloaded[fileName] = await response.text();
+      }
+
+      const nextManifest = JSON.parse(downloaded["manifest.json"]);
+      if (nextManifest.id !== this.manifest.id) {
+        throw new Error("O manifest da versão de teste pertence a outro plugin.");
+      }
+
+      if (!downloaded["main.js"].includes("IndiceNightsPlugin") && !downloaded["main.js"].includes("Índice Nights")) {
+        throw new Error("main.js da versão de teste não passou na validação básica.");
+      }
+
+      const pluginDir = this.app.vault.configDir + "/plugins/" + this.manifest.id;
+      for (const fileName of files) {
+        await this.app.vault.adapter.write(pluginDir + "/" + fileName, downloaded[fileName]);
+      }
+
+      const version = nextManifest.version ?? "nova";
+      new import_obsidian6.Notice(
+        "Índice Nights " + version + " de teste instalada. Recarregue o Obsidian para aplicar.",
+        7000
+      );
+    } catch (error) {
+      console.error("Índice Nights: falha ao atualizar versão de teste", error);
+      new import_obsidian6.Notice(
+        "Não foi possível atualizar a versão de teste: " + (error instanceof Error ? error.message : String(error)),
+        8000
+      );
+    }
+  }
+
   async saveSettings() {
     await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
   }
