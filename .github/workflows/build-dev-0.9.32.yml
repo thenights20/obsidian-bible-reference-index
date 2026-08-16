@@ -1,11 +1,11 @@
-name: Aplicar ajustes dev 0.9.32
+name: Aplicar ajustes dev
 
 on:
   push:
     branches:
       - dev
     paths:
-      - "tools/apply-dev-0.9.32.mjs"
+      - "tools/apply-dev-0.9.33.mjs"
       - ".github/workflows/build-dev-0.9.32.yml"
   workflow_dispatch:
 
@@ -23,14 +23,17 @@ jobs:
           ref: dev
 
       - name: Aplicar patch no plugin compilado
-        run: node tools/apply-dev-0.9.32.mjs
+        run: node tools/apply-dev-0.9.33.mjs
 
       - name: Validar JavaScript
         run: node --check main.js
 
-      - name: Validar remoção dos links JW Library
+      - name: Validar versão de teste
         shell: bash
         run: |
+          grep -q 'atualizar-versao-de-teste' main.js
+          grep -q 'raw.githubusercontent.com/thenights20/obsidian-bible-reference-index/dev' main.js
+          grep -q '"version": "0.9.33"' manifest.json
           if grep -Eq 'VersePreviewModal|linkBibleReferences|jwlibrary:///|registerObsidianProtocolHandler\("indice-nights-bible"|scriptureObserver' main.js; then
             echo "Ainda existem rotinas antigas de link bíblico/JW Library em main.js"
             exit 1
@@ -41,10 +44,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add main.js styles.css manifest.json
+          git add main.js manifest.json
           if git diff --cached --quiet; then
             echo "Nenhuma alteração para commitar."
             exit 0
           fi
-          git commit -m "v0.9.32: corrige salto para parágrafo e remove links JW Library"
+          git commit -m "v0.9.33: adiciona atualizador da versão de teste"
           git push origin dev
