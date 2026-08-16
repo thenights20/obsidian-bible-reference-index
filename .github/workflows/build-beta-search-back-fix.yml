@@ -22,7 +22,7 @@ jobs:
         with:
           ref: beta
 
-      - name: Aplicar beta
+      - name: Aplicar beta corrigida
         run: node tools/apply-beta-search-back-fix.mjs
 
       - name: Validar JavaScript
