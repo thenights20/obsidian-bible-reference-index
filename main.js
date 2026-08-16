@@ -326,34 +326,32 @@ function indiceNightsRestoreIndexPosition(app, context) {
 
 function indiceNightsInstallBackButton(app, context) {
   indiceNightsRemoveBackButton();
-  if (!context?.sourcePath) return;
+  if (!context?.sourcePath) {
+    console.warn('Indice Nights: sem caminho de retorno para o índice');
+    return;
+  }
 
+  window.__indiceNightsReturnContext = context;
   const button = document.createElement('button');
   button.className = 'indice-nights-back-to-index';
   button.type = 'button';
   button.setAttribute('aria-label', 'Voltar ao índice na posição anterior');
   button.textContent = '← Voltar ao índice';
   Object.assign(button.style, {
-    position: 'fixed',
-    top: '58px',
-    right: '22px',
-    zIndex: '2147483647',
-    display: 'inline-flex',
-    alignItems: 'center',
-    padding: '9px 13px',
-    borderRadius: '999px',
-    border: '1px solid var(--background-modifier-border-hover)',
-    background: 'var(--background-primary-alt)',
-    color: 'var(--text-normal)',
-    boxShadow: '0 6px 20px rgba(0,0,0,.28)',
-    fontWeight: '600',
-    cursor: 'pointer'
+    position: 'fixed', top: '54px', right: '22px', zIndex: '2147483647',
+    display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 14px',
+    borderRadius: '999px', border: '1px solid var(--interactive-accent)',
+    background: 'var(--background-primary)', color: 'var(--text-accent)',
+    boxShadow: '0 8px 28px rgba(0,0,0,.35)', fontWeight: '700', fontSize: '13px',
+    cursor: 'pointer', opacity: '1', visibility: 'visible', pointerEvents: 'auto'
   });
+
   button.addEventListener('click', async () => {
     button.disabled = true;
     try {
       await app.workspace.openLinkText(context.sourcePath, '', false);
       indiceNightsRestoreIndexPosition(app, context);
+      window.__indiceNightsReturnContext = null;
       indiceNightsRemoveBackButton();
     } catch (error) {
       button.disabled = false;
@@ -368,10 +366,17 @@ async function openCitationTarget(app, path, reference, sourcePath = "", modEven
   const blockId = await citationBlockFor(app, path, reference, true);
   const target = blockId ? `${path}#^${blockId}` : path;
 
+  window.__indiceNightsReturnContext = returnContext;
   await app.workspace.openLinkText(target, sourcePath, modEvent);
-  indiceNightsInstallBackButton(app, returnContext);
-  window.setTimeout(() => indiceNightsInstallBackButton(app, returnContext), 80);
-  window.setTimeout(() => indiceNightsInstallBackButton(app, returnContext), 250);
+  const reinstall = () => {
+    const saved = window.__indiceNightsReturnContext || returnContext;
+    indiceNightsInstallBackButton(app, saved);
+  };
+  reinstall();
+  window.requestAnimationFrame(reinstall);
+  window.setTimeout(reinstall, 100);
+  window.setTimeout(reinstall, 350);
+  window.setTimeout(reinstall, 900);
 
   if (!blockId) {
     new import_obsidian6.Notice(
@@ -480,27 +485,67 @@ var BibleIndex = class {
     );
     return this.createSnapshot(references);
   }
-  async searchNoteContents(search, limit = 100) {
+  async searchNoteContents(search, limit = 500) {
     this.ensureInitialized();
     const query = normalizeText(search);
     if (!query) return [];
-    const records = [...this.notes.values()];
+    const terms = query.split(/\s+/).map((term) => term.trim()).filter(Boolean);
+    const recordsByPath = new Map(this.notes);
+
+    for (const file of this.app.vault.getMarkdownFiles()) {
+      if (!this.accepts(file.path) || recordsByPath.has(file.path)) continue;
+      recordsByPath.set(file.path, {
+        file,
+        note: { path: file.path, title: file.basename, section: sectionFor(file.path, this.config.folder) },
+        references: []
+      });
+    }
+
+    const records = [...recordsByPath.values()];
     const matches = [];
-    const batchSize = 24;
+    const batchSize = 20;
     for (let start = 0; start < records.length && matches.length < limit; start += batchSize) {
       const batch = records.slice(start, start + batchSize);
-      const contents = await Promise.all(batch.map((record) => this.sentencesFor(record.file)));
+      const contents = await Promise.all(batch.map(async (record) => {
+        const markdown = await this.app.vault.cachedRead(record.file);
+        const clean = markdown
+          .replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, '')
+          .replace(/<!-- mini-indice-inicio -->[\s\S]*?<!-- mini-indice-fim -->/g, '')
+          .replace(new RegExp('\x60{3}[\\s\\S]*?\x60{3}', 'g'), ' ')
+          .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+          .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+          .replace(/\[\[[^\]|]+\|([^\]]+)\]\]/g, '$1')
+          .replace(/\[\[([^\]]+)\]\]/g, '$1')
+          .replace(/^\^[-\w]+\s*$/gm, '')
+          .replace(/^#{1,6}\s+/gm, '')
+          .replace(/^>\s?/gm, '')
+          .replace(/[\*_~\x60]/g, '')
+          .replace(/\s+/g, ' ')
+          .trim();
+        return { clean, normalized: normalizeText(clean) };
+      }));
+
       for (let index = 0; index < batch.length && matches.length < limit; index += 1) {
         const record = batch[index];
-        const sentences = contents[index];
-        if (!record || !sentences) continue;
-        const sentence = sentences.find((item) => normalizeText(item).includes(query));
-        if (sentence) matches.push({ ...record.note, sentence });
+        const content = contents[index];
+        if (!record || !content) continue;
+        if (!terms.every((term) => content.normalized.includes(term))) continue;
+
+        const rawSentences = content.clean.match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g) || [content.clean];
+        let bestSentence = rawSentences.find((sentence) => {
+          const normalized = normalizeText(sentence);
+          return terms.every((term) => normalized.includes(term));
+        });
+        if (!bestSentence) {
+          bestSentence = rawSentences.find((sentence) => terms.some((term) => normalizeText(sentence).includes(term))) || content.clean;
+        }
+        bestSentence = bestSentence.trim();
+        if (bestSentence.length > 360) bestSentence = bestSentence.slice(0, 357).trimEnd() + '…';
+        matches.push({ ...record.note, sentence: bestSentence });
       }
     }
-    return matches.sort(
-      (a, b) => a.section.localeCompare(b.section, "pt-BR") || a.title.localeCompare(b.title, "pt-BR")
-    );
+
+    return matches.sort((a, b) => a.section.localeCompare(b.section, 'pt-BR') || a.title.localeCompare(b.title, 'pt-BR'));
   }
   sortedReferences(references) {
     return [...references].sort(
@@ -1237,7 +1282,7 @@ var BibleIndexView = class extends import_obsidian.MarkdownRenderChild {
       return;
     }
     this.resultsEl.createEl("p", { text: "Pesquisando no conte\xFAdo das notas\u2026", cls: "bri-empty" });
-    const matches = await this.index.searchNoteContents(query, 100);
+    const matches = await this.index.searchNoteContents(query, 500);
     if (request !== this.contentSearchRequest || !this.resultsEl) return;
     this.resultsEl.empty();
     this.resultsEl.createDiv({
@@ -1257,9 +1302,6 @@ var BibleIndexView = class extends import_obsidian.MarkdownRenderChild {
         cls: "internal-link bri-content-title",
         attr: { href: match.path, "data-href": match.path }
       });
-      const arrow = noteRow.createSpan({ cls: "bri-note-arrow" });
-      (0, import_obsidian.setIcon)(arrow, "chevron-right");
-
       link.addEventListener("click", (event) => {
         event.preventDefault();
         void this.app.workspace.openLinkText(match.path, this.sourcePath, import_obsidian.Keymap.isModEvent(event));

@@ -5480,3 +5480,7 @@
 .indice-nights-back-to-index:hover { background: var(--background-modifier-hover); color: var(--text-accent); }
 .indice-nights-back-to-index:disabled { opacity:.6; cursor:wait; }
 @media (max-width: 600px) { .indice-nights-back-to-index { top:54px; right:12px; padding:.5rem .7rem; } }
+
+
+/* Beta 0.9.34-beta.3: botão voltar reforçado no desktop. */
+.indice-nights-back-to-index { position:fixed !important; top:54px !important; right:22px !important; z-index:2147483647 !important; display:inline-flex !important; visibility:visible !important; opacity:1 !important; }
