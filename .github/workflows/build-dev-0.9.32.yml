@@ -51,3 +51,5 @@ jobs:
           fi
           git commit -m "v0.9.33: adiciona atualizador da versão de teste"
           git push origin dev
+
+# fluxo de desenvolvimento do Índice Nights
