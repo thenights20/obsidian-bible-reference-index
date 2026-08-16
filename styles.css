@@ -207,54 +207,6 @@
 .bri-category-heading {
   margin-block: 1rem 0.35rem;
 }
-
-
-.indice-nights-scripture-link {
-  color: var(--link-color);
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-thickness: from-font;
-}
-
-.indice-nights-verse-preview {
-  line-height: 1.65;
-}
-
-.indice-nights-verse-text {
-  border: 1px solid var(--background-modifier-border);
-  border-radius: var(--radius-m);
-  background: var(--background-secondary);
-  padding: 1rem;
-}
-
-.indice-nights-verse-text .verseNum {
-  color: var(--text-accent);
-  font-size: var(--font-ui-smaller);
-  font-weight: var(--font-semibold);
-  vertical-align: super;
-}
-
-.indice-nights-verse-citation {
-  display: block;
-  margin-top: 0.65rem;
-  color: var(--text-muted);
-}
-
-.indice-nights-verse-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1rem;
-}
-
-.indice-nights-verse-actions a {
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--button-radius);
-  padding: 0.45rem 0.75rem;
-  text-decoration: none;
-}
-
 /* Miniaturas de transcrições: layout integrado ao texto, semelhante a uma publicação. */
 .markdown-preview-view .indice-nights-thumbnail-link {
   display: block;
