@@ -1,0 +1,48 @@
+name: Publicar versão estável
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "manifest.json"
+      - "main.js"
+      - "styles.css"
+      - ".github/workflows/release-stable.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ler versão
+        id: version
+        shell: bash
+        run: echo "version=$(node -p \"require('./manifest.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Validar arquivos
+        run: |
+          node --check main.js
+          test -f manifest.json
+          test -f styles.css
+
+      - name: Criar release se ainda não existir
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: bash
+        run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION já existe."
+            exit 0
+          fi
+          gh release create "$VERSION" main.js manifest.json styles.css \
+            --target main \
+            --title "$VERSION" \
+            --notes "Índice Nights $VERSION"
