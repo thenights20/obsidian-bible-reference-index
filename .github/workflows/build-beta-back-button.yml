@@ -32,7 +32,8 @@ jobs:
         shell: bash
         run: |
           grep -q 'indice-nights-back-to-index' main.js
-          grep -q '0.9.34-beta.1' manifest.json
+          grep -q 'indiceNightsCaptureIndexReturn(app, sourcePath)' main.js
+          grep -q '0.9.34-beta.2' manifest.json
 
       - name: Commitar beta compilada
         shell: bash
@@ -44,5 +45,5 @@ jobs:
             echo "Nenhuma alteração para commitar."
             exit 0
           fi
-          git commit -m "0.9.34-beta.1: botão voltar ao índice com posição preservada"
+          git commit -m "0.9.34-beta.2: corrige botão voltar ao índice no PC"
           git push origin beta
