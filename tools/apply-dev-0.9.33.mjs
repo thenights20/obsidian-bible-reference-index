@@ -40,9 +40,9 @@ const updaterMethod = `  async updateTestVersion() {
       const downloaded = {};
 
       for (const fileName of files) {
-        const response = await fetch(\`${baseUrl}/\${fileName}?v=\${cacheBust}\`, { cache: "no-store" });
+        const response = await fetch(baseUrl + "/" + fileName + "?v=" + cacheBust, { cache: "no-store" });
         if (!response.ok) {
-          throw new Error(\`Falha ao baixar \${fileName}: HTTP \${response.status}\`);
+          throw new Error("Falha ao baixar " + fileName + ": HTTP " + response.status);
         }
         downloaded[fileName] = await response.text();
       }
@@ -56,20 +56,20 @@ const updaterMethod = `  async updateTestVersion() {
         throw new Error("main.js da versão de teste não passou na validação básica.");
       }
 
-      const pluginDir = \`${this.app.vault.configDir}/plugins/\${this.manifest.id}\`;
+      const pluginDir = this.app.vault.configDir + "/plugins/" + this.manifest.id;
       for (const fileName of files) {
-        await this.app.vault.adapter.write(\`${pluginDir}/\${fileName}\`, downloaded[fileName]);
+        await this.app.vault.adapter.write(pluginDir + "/" + fileName, downloaded[fileName]);
       }
 
       const version = nextManifest.version ?? "nova";
       new import_obsidian6.Notice(
-        \`Índice Nights \${version} de teste instalada. Recarregue o Obsidian para aplicar.\`,
+        "Índice Nights " + version + " de teste instalada. Recarregue o Obsidian para aplicar.",
         7000
       );
     } catch (error) {
       console.error("Índice Nights: falha ao atualizar versão de teste", error);
       new import_obsidian6.Notice(
-        \`Não foi possível atualizar a versão de teste: \${error instanceof Error ? error.message : String(error)}\`,
+        "Não foi possível atualizar a versão de teste: " + (error instanceof Error ? error.message : String(error)),
         8000
       );
     }
