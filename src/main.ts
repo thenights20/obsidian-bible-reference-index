@@ -6,7 +6,6 @@ import { IndiceNightsSettingTab } from "./settings";
 import { SourceTranscriptService } from "./transcript-source-service";
 import { NoteSyncService } from "./note-sync";
 import { RemoteDriveTranscriptService } from "./remote-drive";
-import { linkBibleReferences } from "./scripture-links";
 import type { PluginSettings } from "./types";
 
 class DeviceSelectionStore implements SelectionStore {
@@ -85,10 +84,6 @@ export default class IndiceNightsPlugin extends Plugin {
       ));
     });
 
-    this.registerMarkdownPostProcessor((element) => {
-      linkBibleReferences(element, this.app);
-    });
-
     this.registerEvent(this.app.metadataCache.on("changed", (file) => {
       this.indexManager.updateFile(file);
     }));
@@ -120,7 +115,6 @@ export default class IndiceNightsPlugin extends Plugin {
   async saveSettings(): Promise<void> {
     await this.saveData({ ...this.settings, deviceSelections: this.selectionData });
   }
-
 
   private async loadSettings(): Promise<void> {
     const saved = await this.loadData() as (Partial<PluginSettings> & Record<string, unknown>) | null;
