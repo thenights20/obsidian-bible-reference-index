@@ -1,0 +1,48 @@
+name: Build beta transcrição sem quebra por vírgula
+
+on:
+  push:
+    branches:
+      - beta
+    paths:
+      - "tools/apply-beta-transcript-paragraph-fix.mjs"
+      - ".github/workflows/build-beta-transcript-paragraph-fix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout beta
+        uses: actions/checkout@v4
+        with:
+          ref: beta
+
+      - name: Aplicar ajuste
+        run: node tools/apply-beta-transcript-paragraph-fix.mjs
+
+      - name: Validar JavaScript
+        run: node --check main.js
+
+      - name: Validar versão
+        shell: bash
+        run: |
+          grep -q '0.9.34-beta.4' manifest.json
+          grep -q 'Nunca cria quebra no meio de uma frase' main.js
+
+      - name: Commitar beta compilada
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add main.js manifest.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para commitar."
+            exit 0
+          fi
+          git commit -m "0.9.34-beta.4: evita quebra de parágrafo no meio de frases"
+          git push origin beta
