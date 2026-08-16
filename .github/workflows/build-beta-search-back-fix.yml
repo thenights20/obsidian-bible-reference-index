@@ -1,0 +1,49 @@
+name: Build beta busca global e botão voltar
+
+on:
+  push:
+    branches:
+      - beta
+    paths:
+      - "tools/apply-beta-search-back-fix.mjs"
+      - ".github/workflows/build-beta-search-back-fix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout beta
+        uses: actions/checkout@v4
+        with:
+          ref: beta
+
+      - name: Aplicar beta
+        run: node tools/apply-beta-search-back-fix.mjs
+
+      - name: Validar JavaScript
+        run: node --check main.js
+
+      - name: Validar recursos
+        shell: bash
+        run: |
+          grep -q '0.9.34-beta.3' manifest.json
+          grep -q 'window.__indiceNightsReturnContext' main.js
+          grep -q 'searchNoteContents(search, limit = 500)' main.js
+
+      - name: Commitar beta compilada
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add main.js styles.css manifest.json
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para commitar."
+            exit 0
+          fi
+          git commit -m "0.9.34-beta.3: busca global e botão voltar reforçado"
+          git push origin beta
