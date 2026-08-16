@@ -5455,3 +5455,28 @@
     gap: 8px !important;
   }
 }
+
+
+/* Beta 0.9.34: botão flutuante para voltar ao índice mantendo a posição. */
+.indice-nights-back-to-index {
+  position: fixed;
+  top: calc(var(--header-height, 40px) + 14px);
+  right: 22px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--background-modifier-border-hover);
+  border-radius: 999px;
+  background: var(--background-primary-alt);
+  color: var(--text-normal);
+  box-shadow: 0 6px 20px rgba(0,0,0,.22);
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.indice-nights-back-to-index:hover { background: var(--background-modifier-hover); color: var(--text-accent); }
+.indice-nights-back-to-index:disabled { opacity:.6; cursor:wait; }
+@media (max-width: 600px) { .indice-nights-back-to-index { top:54px; right:12px; padding:.5rem .7rem; } }

@@ -296,11 +296,63 @@ async function citationBlockFor(app, path, reference, repairIfNeeded = true) {
   return null;
 }
 
+function indiceNightsActiveScrollContainer() {
+  return document.querySelector('.workspace-leaf.mod-active .markdown-preview-view') ||
+    document.querySelector('.workspace-leaf.mod-active .view-content');
+}
+
+function indiceNightsCaptureIndexReturn(sourcePath) {
+  const scroller = indiceNightsActiveScrollContainer();
+  return {
+    sourcePath,
+    scrollTop: scroller instanceof HTMLElement ? scroller.scrollTop : 0
+  };
+}
+
+function indiceNightsRemoveBackButton() {
+  document.querySelectorAll('.indice-nights-back-to-index').forEach((el) => el.remove());
+}
+
+function indiceNightsRestoreIndexPosition(app, context) {
+  const restore = () => {
+    const scroller = indiceNightsActiveScrollContainer();
+    if (scroller instanceof HTMLElement) scroller.scrollTop = context.scrollTop || 0;
+  };
+  window.setTimeout(restore, 40);
+  window.setTimeout(restore, 180);
+  window.setTimeout(restore, 420);
+}
+
+function indiceNightsInstallBackButton(app, context) {
+  indiceNightsRemoveBackButton();
+  if (!context?.sourcePath) return;
+
+  const button = document.createElement('button');
+  button.className = 'indice-nights-back-to-index';
+  button.type = 'button';
+  button.setAttribute('aria-label', 'Voltar ao índice na posição anterior');
+  button.textContent = '← Voltar ao índice';
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    try {
+      await app.workspace.openLinkText(context.sourcePath, '', false);
+      indiceNightsRestoreIndexPosition(app, context);
+      indiceNightsRemoveBackButton();
+    } catch (error) {
+      button.disabled = false;
+      console.warn('Indice Nights: falha ao voltar ao índice', error);
+    }
+  });
+  document.body.appendChild(button);
+}
+
 async function openCitationTarget(app, path, reference, sourcePath = "", modEvent = false) {
+  const returnContext = indiceNightsCaptureIndexReturn(sourcePath);
   const blockId = await citationBlockFor(app, path, reference, true);
   const target = blockId ? `${path}#^${blockId}` : path;
 
   await app.workspace.openLinkText(target, sourcePath, modEvent);
+  indiceNightsInstallBackButton(app, returnContext);
 
   if (!blockId) {
     new import_obsidian6.Notice(
